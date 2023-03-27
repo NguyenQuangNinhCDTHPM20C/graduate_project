@@ -565,6 +565,7 @@ a:focus {
 }
 
 .about_section {
+    margin: 10px 10px 10px 10px;
     background-color: #3a4468;
     color: #ffffff;
 }
