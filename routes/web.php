@@ -34,3 +34,6 @@ Route::get('/contact', function () {
 Route::get('/cart', function () {
     return view('frontend.pages.cart');
 })->name('cart');
+Route::get('/test', function () {
+    return view('frontend.pages.test');
+})->name('test');
