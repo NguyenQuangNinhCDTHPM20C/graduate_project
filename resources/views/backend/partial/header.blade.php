@@ -2,7 +2,7 @@
 
     <div class="header-left active">
         <a href="https://dreamspos.dreamguystech.com/laravel/template/public/index" class="logo logo-normal">
-            <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/logo.png" alt="">
+            <img src="images/logoshop.png" alt="">
         </a>
         <a href="https://dreamspos.dreamguystech.com/laravel/template/public/index" class="logo logo-white">
             <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/logo-white.png" alt="">
@@ -98,7 +98,8 @@
                                     </span>
                                     <div class="media-body flex-grow-1">
                                         <p class="noti-details"><span class="noti-title">John Doe</span> added new task
-                                            <span class="noti-title">Patient appointment booking</span></p>
+                                            <span class="noti-title">Patient appointment booking</span>
+                                        </p>
                                         <p class="noti-time"><span class="notification-time">4 mins ago</span></p>
                                     </div>
                                 </div>
@@ -195,16 +196,6 @@
             </a>
             <div class="dropdown-menu menu-drop-user">
                 <div class="profilename">
-                    <div class="profileset">
-                        <span class="user-img"><img
-                                src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/profiles/avator1.jpg"
-                                alt="">
-                            <span class="status online"></span></span>
-                        <div class="profilesets">
-                            <h6>John Smilga</h6>
-                            <h5>Super Admin</h5>
-                        </div>
-                    </div>
                     <hr class="m-0">
                     <a class="dropdown-item" href="https://dreamspos.dreamguystech.com/laravel/template/public/profile">
                         <i class="me-2" data-feather="user"></i> My Profile</a>

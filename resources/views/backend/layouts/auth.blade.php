@@ -45,10 +45,6 @@
         <div class="whirly-loader"> </div>
     </div>
     <div class="main-wrapper">
-        @include('backend.partial.header')
-
-        @include('backend.partial.sidebar')
-
         @yield('content')
     </div>
     {{--Scripts js custom--}}
@@ -91,7 +87,7 @@
         src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/plugins/sweetalert/sweetalerts.min.js">
     </script>
 
-    <script src="backend/js/script.js"></script>
+    <script src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/js/script.js"></script>
     @yield('scripts')
 
 </body>
