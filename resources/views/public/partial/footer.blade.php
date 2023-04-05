@@ -66,21 +66,21 @@
                          <form action="">
                              <div class="input-group">
                                  <input type="text" class="form-control" placeholder="Your Email Address" />
-                                 <div class="input-group-append">
-                                     <button class="btn btn-primary">
-                                         Sign Up
-                                     </button>
-                                 </div>
+                                 <button class="btn btn-send">
+                                     <i class="fas fa-paper-plane"></i>
+                                 </button>
+
                              </div>
                          </form>
                          <h6 class="text-secondary text-uppercase mt-4 mb-3">
                              Follow Us
                          </h6>
                          <div class="d-flex">
-                             <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-twitter"></i></a>
-                             <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-facebook-f"></i></a>
-                             <a class="btn btn-primary btn-square mr-2" href="#"><i class="fab fa-linkedin-in"></i></a>
-                             <a class="btn btn-primary btn-square" href="#"><i class="fab fa-instagram"></i></a>
+                             <a class="btn btn-square mr-2 btn-link twitter" href="#"><i class="fab fa-twitter"></i></a>
+                             <a class="btn btn-square mr-2 btn-link facebook" href="#"><i
+                                     class="fab fa-facebook-f"></i></a>
+                             <a class="btn btn-square mr-2 btn-link instagram" href="#"><i
+                                     class="fab fa-instagram"></i></a>
                          </div>
                      </div>
                  </div>

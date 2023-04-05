@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/', function () {
         return view('Public.pages.index');
-    })->name('index');
+    })->name('home');
     Route::get('/products', function () {
         return view('Public.pages.products');
     })->name('products');
