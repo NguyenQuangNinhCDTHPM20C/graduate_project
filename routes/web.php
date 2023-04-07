@@ -32,6 +32,12 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/checkout', function () {
         return view('Public.pages.checkout');
     })->name('checkout');
+    Route::get('/login', function () {
+        return view('Public.pages.login');
+    })->name('login');
+    Route::get('/logup', function () {
+        return view('Public.pages.logup');
+    })->name('logup');
 });
 //This is Routes for Admin
 Route::group(['domain' => env('APP_ADMIN_URL')], function () {

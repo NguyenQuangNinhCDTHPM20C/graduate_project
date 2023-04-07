@@ -76,10 +76,9 @@
                              Follow Us
                          </h6>
                          <div class="d-flex">
-                             <a class="btn btn-square mr-2 btn-link twitter" href="#"><i class="fab fa-twitter"></i></a>
-                             <a class="btn btn-square mr-2 btn-link facebook" href="#"><i
-                                     class="fab fa-facebook-f"></i></a>
-                             <a class="btn btn-square mr-2 btn-link instagram" href="#"><i
+                             <a class=" btn-square mr-2 btn-link twitter" href="#"><i class="fab fa-twitter"></i></a>
+                             <a class="btn-square mr-2 btn-link facebook" href="#"><i class="fab fa-facebook-f"></i></a>
+                             <a class=" btn-square mr-2 btn-link instagram" href="#"><i
                                      class="fab fa-instagram"></i></a>
                          </div>
                      </div>
@@ -102,4 +101,4 @@
      <!-- Footer End -->
 
      <!-- Back to Top -->
-     <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+     <a href="#" class="btn back-to-top"><i class="fa fa-angle-up"></i></a>

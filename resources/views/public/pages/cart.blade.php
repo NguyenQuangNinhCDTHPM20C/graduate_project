@@ -145,9 +145,9 @@
             <form class="mb-30" action="">
                 <div class="input-group">
                     <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary">Apply Coupon</button>
-                    </div>
+
+                    <button class="btn btn-send">Apply</button>
+
                 </div>
             </form>
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart

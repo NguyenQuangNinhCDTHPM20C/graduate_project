@@ -12,25 +12,25 @@
     <div class="row px-xl-5 pb-3">
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
             <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px">
-                <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
-                <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
+                <h1 class="far fa fa-clipboard-check text-primary m-0 mr-3 fa-p"></h1>
+                <h5 class="font-weight-semi-bold m-0">Genuine Product</h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
             <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px">
-                <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
+                <h1 class="fal fa fa-motorcycle text-primary m-0 mr-2 fa-p"></h1>
                 <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
             <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px">
-                <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-                <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+                <h1 class="far fa fa-sync-alt text-primary m-0 mr-3 fa-p"></h1>
+                <h5 class="font-weight-semi-bold m-0">Easy Return</h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
             <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px">
-                <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+                <h1 class="fas fa fa-headset text-primary m-0 mr-3 fa-p"></h1>
                 <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
             </div>
         </div>
@@ -207,11 +207,11 @@
 <!-- Products Start -->
 <div class="container-fluid pt-5 pb-3">
     <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
-        <span class="bg-secondary pr-3">Featured Products</span>
+        <span class="bg-secondary pr-3">Recent Products</span>
     </h2>
     <div class="row px-xl-5">
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-1.jpg" alt="" />
                     <div class="product-action">
@@ -241,7 +241,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-2.jpg" alt="" />
                     <div class="product-action">
@@ -271,7 +271,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-3.jpg" alt="" />
                     <div class="product-action">
@@ -300,8 +300,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1 ">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-4.jpg" alt="" />
                     <div class="product-action">
@@ -331,7 +331,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-5.jpg" alt="" />
                     <div class="product-action">
@@ -361,7 +361,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-6.jpg" alt="" />
                     <div class="product-action">
@@ -391,7 +391,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-7.jpg" alt="" />
                     <div class="product-action">
@@ -421,7 +421,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-8.jpg" alt="" />
                     <div class="product-action">
@@ -463,7 +463,7 @@
                 <div class="offer-text">
                     <h6 class="text-white text-uppercase">Save 20%</h6>
                     <h3 class="text-white mb-3">Special Offer</h3>
-                    <a href="" class="btn btn-primary">Shop Now</a>
+                    <a href="" class="btn btn-slide">Shop Now</a>
                 </div>
             </div>
         </div>
@@ -473,7 +473,7 @@
                 <div class="offer-text">
                     <h6 class="text-white text-uppercase">Save 20%</h6>
                     <h3 class="text-white mb-3">Special Offer</h3>
-                    <a href="" class="btn btn-primary">Shop Now</a>
+                    <a href="" class="btn btn-slide">Shop Now</a>
                 </div>
             </div>
         </div>
@@ -488,7 +488,7 @@
     </h2>
     <div class="row px-xl-5">
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-1.jpg" alt="" />
                     <div class="product-action">
@@ -518,7 +518,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-2.jpg" alt="" />
                     <div class="product-action">
@@ -548,7 +548,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-3.jpg" alt="" />
                     <div class="product-action">
@@ -577,8 +577,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+        <div class="col-lg-3 col-md-4 col-sm-6 pb-1 ">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-4.jpg" alt="" />
                     <div class="product-action">
@@ -608,7 +608,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-5.jpg" alt="" />
                     <div class="product-action">
@@ -638,7 +638,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-6.jpg" alt="" />
                     <div class="product-action">
@@ -668,7 +668,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-7.jpg" alt="" />
                     <div class="product-action">
@@ -698,7 +698,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
-            <div class="product-item bg-light mb-4">
+            <div class="product-item bg-light mb-4 item-p">
                 <div class="product-img position-relative overflow-hidden">
                     <img class="img-fluid w-100" src="images/product-8.jpg" alt="" />
                     <div class="product-action">
