@@ -10,7 +10,7 @@
                         <li data-target="#header-carousel" data-slide-to="1"></li>
                         <li data-target="#header-carousel" data-slide-to="2"></li>
                     </ol>
-                    <div class="carousel-inner">
+                    <div class="carousel-inner carousel-slide bg-radius">
                         <div class="carousel-item position-relative active" style="height: 430px">
                             <img class="position-absolute w-100 h-100" src="images/carousel-1.jpg"
                                 style="object-fit: cover" />
@@ -24,7 +24,7 @@
                                         erat diam stet. Sadips duo stet amet
                                         amet ndiam elitr ipsum diam
                                     </p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp btn-slide"
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp bg-radius btn-slide"
                                         href="#">Shop Now</a>
                                 </div>
                             </div>
@@ -42,7 +42,7 @@
                                         erat diam stet. Sadips duo stet amet
                                         amet ndiam elitr ipsum diam
                                     </p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp btn-slide"
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp bg-radius btn-slide"
                                         href="#">Shop Now</a>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                         erat diam stet. Sadips duo stet amet
                                         amet ndiam elitr ipsum diam
                                     </p>
-                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp btn-slide"
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp bg-radius btn-slide"
                                         href="#">Shop Now</a>
                                 </div>
                             </div>
@@ -70,20 +70,20 @@
             </div>
         </div>
         <div class="col-lg-4">
-            <div class="product-offer mb-30" style="height: 200px">
+            <div class="product-offer mb-30 bg-radius" style="height: 200px">
                 <img class="img-fluid" src="images/offer-1.jpg" alt="" />
                 <div class="offer-text">
                     <h6 class="text-white text-uppercase">Save 20%</h6>
                     <h3 class="text-white mb-3">Special Offer</h3>
-                    <a href="" class="btn btn-slide">Shop Now</a>
+                    <a href="" class="btn btn-outline-light bg-radius btn-slide">Shop Now</a>
                 </div>
             </div>
-            <div class="product-offer mb-30" style="height: 200px">
+            <div class="product-offer mb-30 bg-radius " style="height: 200px">
                 <img class="img-fluid" src="images/offer-2.jpg" alt="" />
                 <div class="offer-text">
                     <h6 class="text-white text-uppercase">Save 20%</h6>
                     <h3 class="text-white mb-3">Special Offer</h3>
-                    <a href="" class="btn btn-slide">Shop Now</a>
+                    <a href="" class="btn btn-outline-light bg-radius btn-slide">Shop Now</a>
                 </div>
             </div>
         </div>
