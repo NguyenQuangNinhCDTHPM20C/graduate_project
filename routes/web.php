@@ -38,6 +38,9 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/logup', function () {
         return view('Public.pages.logup');
     })->name('logup');
+    Route::get('/account', function () {
+        return view('Public.pages.account');
+    })->name('account');
 });
 //This is Routes for Admin
 Route::group(['domain' => env('APP_ADMIN_URL')], function () {

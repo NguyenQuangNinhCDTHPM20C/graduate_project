@@ -53,9 +53,9 @@
         <div class="col-lg-4 col-6 text-left">
             <form action="">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for products" />
-                    <span class="input-group-text bg-transparent text-primary bg-search">
-                        <i class="fa fa-search"></i>
+                    <input type="text" class="form-control bg-search" placeholder="Search for products" />
+                    <span class="input-group-text bg-transparent text-primary search-bar">
+                        <button class="btn-search"><i class="fa fa-search"></i></button>
                     </span>
                 </div>
             </form>

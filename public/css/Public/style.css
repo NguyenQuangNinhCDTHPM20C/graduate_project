@@ -1997,8 +1997,8 @@ pre code {
     color: #495057;
     background-color: #fff;
     background-clip: padding-box;
-    border: none;
-    border-radius: 0;
+    border: solid 0.5px grey;
+    border-radius: 5px;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -3473,6 +3473,8 @@ input[type="button"].btn-block {
 }
 
 .dropdown-menu.show {
+    border-radius: 5px !important;
+    background-color: var(--white) !important;
     display: block;
 }
 
@@ -10132,6 +10134,8 @@ h6 {
 }
 
 .back-to-top {
+    color: var(--white);
+    border-radius: 5px;
     border: none;
     background-color: #7a9d99;
     position: fixed;
@@ -10141,7 +10145,9 @@ h6 {
     z-index: 11;
     animation: action 1s infinite alternate;
 }
-
+.back-to-top:hover {
+    color: var(--white);
+}
 @keyframes action {
     0% {
         transform: translateY(0);
@@ -10184,4 +10190,30 @@ h6 {
 .btn-lan {
     padding-left: 20px;
     color: var(--white);
+}
+.btn-lan:hover {
+    color: var(--white);
+}
+.bg-search {
+    border: none;
+    margin-right: 30px;
+}
+.btn-search {
+    box-shadow: 0 4px 6px #ccc;
+    position: absolute;
+    right: 4px;
+    top: -5px;
+    background: #00483d;
+    background-image: linear-gradient(#00917a, #00483d);
+    border: none;
+    border-radius: 17px;
+    width: 42px;
+    height: 42px;
+    outline: none !important;
+    font-size: 17px;
+    color: #fff;
+}
+.input-send {
+    border-top-left-radius: 5px !important;
+    border-bottom-left-radius: 5px !important;
 }
