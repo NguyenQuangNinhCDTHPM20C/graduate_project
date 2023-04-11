@@ -1,0 +1,90 @@
+section.account {
+    height: 100%;
+    flex-basis: 100%;
+    display: flex;
+}
+section.account .sidebar {
+    width: 300px;
+    min-width: 300px;
+    height: 100%;
+    flex-grow: 1;
+    overflow-y: auto;
+    padding-right: 3px;
+}
+section.account .sidebar .ctn {
+    min-height: 680px;
+    height: 100%;
+    position: relative;
+    background: #fff;
+}
+div {
+    display: block;
+}
+section.account .sidebar .header {
+    padding: 60px 30px 30px 30px;
+}
+section.account .sidebar .header .logo {
+    padding-bottom: 30px;
+}
+a.account,
+a.account:link,
+a.account:visited {
+    text-decoration: none;
+    color: #00483d;
+}
+section.account .sidebar .header .logo img {
+    max-width: 50% !important;
+}
+img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
+section.account .sidebar .header .info {
+    display: flex;
+}
+section.account .sidebar .header .info .avt {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+section.account .sidebar .header .info .avt img {
+    border-radius: 20px;
+}
+section.account .sidebar .header .info .summer {
+    padding: 10px 0;
+}
+section.account .sidebar .header .info p {
+    margin: 0 0 3px 0;
+    padding: 0;
+}
+section.account .sidebar .header .info p strong {
+    font-size: 16px;
+}
+strong.account {
+    font-weight: bold;
+}
+section.account .sidebar .header .info p {
+    margin: 0 0 3px 0;
+    padding: 0;
+}
+section.account .sidebar nav ul li a i {
+    margin-right: 30px;
+    font-size: 25px;
+    display: block;
+}
+i.account {
+    font-style: italic;
+}
+section.account .sidebar nav ul li a {
+    display: flex;
+    padding: 12px 0 12px 30px;
+    font-size: 15px;
+    color: #c5c5d1;
+}
+section.account .body-content {
+    flex-basis: 100%;
+    overflow-y: auto;
+    padding-left: 10px;
+}
