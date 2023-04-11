@@ -12,22 +12,22 @@
     {{--Styles css common--}}
     <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/color/1x/shop.png" />
     <!-- bootstrap core css -->
-    <link rel="stylesheet" href="css/Admin/bootstrap.min.css">
-    <link rel="stylesheet" href="css/Admin/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="css/Admin/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/Admin/owl.theme.default.min.css">
-    <link rel="stylesheet" href="css/Admin/select2.min.css">
-    <link rel="stylesheet" href="css/Admin/dragula.min.css">
-    <link rel="stylesheet" href="css/Admin/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{{asset('css/Admin/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/Admin/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" href="{{asset('css/Admin/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{asset('css/Admin/owl.theme.default.min.css') }}">
+    <link rel="stylesheet" href="{{asset('css/Admin/select2.min.css') }}">
+    <link rel="stylesheet" href="{{asset('css/Admin/dragula.min.css') }}">
+    <link rel="stylesheet" href="{{asset('css/Admin/dataTables.bootstrap4.min.css') }}">
     <!-- fonts style -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
     <!-- font awesome style -->
-    <link rel="stylesheet" href="css/Admin/fontawesome.min.css">
-    <link rel="stylesheet" href="css/Admin/all.min.css">
+    <link rel="stylesheet" href="{{asset('css/Admin/fontawesome.min.css') }}">
+    <link rel="stylesheet" href="{{asset('css/Admin/all.min.css') }}">
     <!--css custome-->
-    <link rel="stylesheet" href="css/Admin/animate.css">
-    <link rel="stylesheet" href="css/Admin/style.css">
+    <link rel="stylesheet" href="{{asset('css/Admin/animate.css') }}">
+    <link rel="stylesheet" href="{{asset('css/Admin/style.css') }}">
     <!--defaut-->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">

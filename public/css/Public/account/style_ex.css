@@ -485,5 +485,24 @@ section.account .body-content {
     padding-left: 10px;
 }
 section.account {
-    margin: 0;
+    margin-top: -30px;
+    margin-bottom: -60px;
+}
+.row-acc {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.col-acc {
+    flex: 1;
+    margin: 0 10px;
+}
+section.account .body-content h1 {
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+section.account {
+    max-height: 100vh; /* đặt chiều cao tối thiểu của thẻ cha là 100% chiều cao của viewport */
 }

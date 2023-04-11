@@ -670,7 +670,7 @@ button:focus {
 }
 
 a {
-    color: #ff9f43;
+    color: #00483d;
     cursor: pointer;
     text-decoration: none;
     -webkit-transition: all 0.2s ease;
@@ -678,7 +678,7 @@ a {
     transition: all 0.2s ease;
 }
 a:hover {
-    color: #fe820e;
+    color: #009981;
     -webkit-transition: all 0.2s ease;
     -ms-transition: all 0.2s ease;
     transition: all 0.2s ease;
@@ -1904,7 +1904,7 @@ div#global-loader,
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #ff9f43;
+    background: #00483d;
 }
 
 ::-webkit-scrollbar-thumb:hover {

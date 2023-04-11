@@ -20,16 +20,15 @@
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/Public/fontawesome.min.css">
+    <link rel="stylesheet" href="{{ asset('css/Public/fontawesome.min.css') }}">
     <!-- Libraries Stylesheet -->
-    <link href="css/Public/animate.min.css" rel="stylesheet">
-    <link href="css/Public/owl.carousel.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/Public/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/Public/owl.carousel.min.css') }}">
 
     @yield('style-libraries')
     {{--Styles custom--}}
     <!-- Custom styles for this template -->
-    <link href="css/Public/style.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="{{ asset('css/Public/style.css') }}">
     @yield('styles')
 </head>
 

@@ -1,14 +1,14 @@
 <div class="header">
 
     <div class="header-left active">
-        <a href="https://dreamspos.dreamguystech.com/laravel/template/public/index" class="logo logo-normal">
-            <img src="images/logoshop.png" alt="">
+        <a href="{{route('index')}}" class="logo logo-normal">
+            <img src="{{asset('images/logoshop1.png')}}" alt="">
         </a>
         <a href="https://dreamspos.dreamguystech.com/laravel/template/public/index" class="logo logo-white">
             <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/logo-white.png" alt="">
         </a>
-        <a href="https://dreamspos.dreamguystech.com/laravel/template/public/index" class="logo-small">
-            <img src="images/logosmall.png" alt="">
+        <a href="{{route('index')}}" class="logo-small">
+            <img src="{{asset('images/logosmall.png')}}" alt="">
         </a>
         <a id="toggle_btn" href="javascript:void(0);">
             <i data-feather="chevrons-left" class="feather-16"></i>
@@ -197,16 +197,13 @@
             <div class="dropdown-menu menu-drop-user">
                 <div class="profilename">
                     <hr class="m-0">
-                    <a class="dropdown-item" href="https://dreamspos.dreamguystech.com/laravel/template/public/profile">
+                    <a class="dropdown-item" href="{{route('profile')}}">
                         <i class="me-2" data-feather="user"></i> My Profile</a>
-                    <a class="dropdown-item"
-                        href="https://dreamspos.dreamguystech.com/laravel/template/public/generalsettings"><i
-                            class="me-2" data-feather="settings"></i>Settings</a>
+                    <a class="dropdown-item" href="{{route('setting')}}"><i class="me-2"
+                            data-feather="settings"></i>Settings</a>
                     <hr class="m-0">
-                    <a class="dropdown-item logout pb-0"
-                        href="https://dreamspos.dreamguystech.com/laravel/template/public/signin"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/log-out.svg"
-                            class="me-2" alt="img">Logout</a>
+                    <a class="dropdown-item logout pb-0" href="{{route('login')}}"><img
+                            src="{{asset('images/log-out.svg')}}" class="me-2" alt="img">Logout</a>
                 </div>
             </div>
         </li>
@@ -215,14 +212,12 @@
 
     <div class="dropdown mobile-user-menu">
         <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-            aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+            aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="https://dreamspos.dreamguystech.com/laravel/template/public/profile">My
+            <a class="dropdown-item" href="{{route('profile')}}">My
                 Profile</a>
-            <a class="dropdown-item"
-                href="https://dreamspos.dreamguystech.com/laravel/template/public/generalsettings">Settings</a>
-            <a class="dropdown-item"
-                href="https://dreamspos.dreamguystech.com/laravel/template/public/signin">Logout</a>
+            <a class="dropdown-item" href="{{route('setting')}}">Settings</a>
+            <a class="dropdown-item" href="{{route('login')}}">Logout</a>
         </div>
     </div>
 

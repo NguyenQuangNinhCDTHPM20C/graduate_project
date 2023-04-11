@@ -143,6 +143,8 @@ input {
 
 /*-- form styling --*/
 .w3l-hotair-form {
+    margin-top: -30px;
+    margin-bottom: -30px;
     position: relative;
     min-height: 100vh;
     z-index: 0;

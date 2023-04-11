@@ -15,43 +15,7 @@
 
 @section('content')
 <section class="account">
-    <div class="sidebar">
-        <div class="ctn">
-            <div class="header">
-                <div class="logo">
-                    <a href="/"><img src="images/logoshop.png" alt="Hoàng Hà Mobile"></a>
-                </div>
-
-                <div class="info">
-                    <div class="avt" id="myAvatar">
-                        <img
-                            src="https://hoanghamobile.com/avatar/Uploads/Avatar/63128-ninhnguyen1239-638164809348787755.jpg">
-                    </div>
-
-                    <div class="summer">
-                        <p><strong>Nguyễn Quang Ninh</strong></p>
-                        <p class="change-avatar"><a href="javascript:;"
-                                onclick="$('#avtImage').trigger('click'); return false;"><i
-                                    class="icon-change-avatar"></i> Thay đổi ảnh đại diện</a></p>
-                        <input type="file" name="upfile" id="avtImage" accept="image/*" style="display: none;">
-                    </div>
-                </div>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="/account/index" class="actived"><i class="icon-controls"></i><span>Bảng điều
-                                khiển</span></a></li>
-                    <li><a href="/account/info"><i class="icon-account"></i><span>Thông tin tài khoản</span></a></li>
-                    <li><a href="/account/order"><i class="icon-order-mgr"></i><span>Đơn hàng của bạn</span></a></li>
-                    <li><a href="/account/wishlist"><i class="icon-love"></i><span>Sản phẩm yêu thích</span></a></li>
-                    <li><a href="/account/comment"><i class="icon-comment"></i><span>Quản lý bình luận</span></a></li>
-                    <li><a href="/account/review"><i class="icon-edit-squad"></i><span>Quản lý đánh giá</span></a></li>
-                    <li><a href="javascript:document.getElementById('logoutForm').submit()"><i
-                                class="icon-logout"></i><span>Đăng xuất</span></a></li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+    @include('Public.partial.sidebar')
     <div class="body-content">
         <h1>Bảng điều khiển</h1>
         <div class="header">
@@ -62,18 +26,18 @@
                 </div>
             </div>
             <div class="icon">
-                <img src="https://hoanghamobile.com/Content/web/content-icon/icon-account-home.png">
+                <img src="{{asset('images/icon-account-home.png')}}">
             </div>
         </div>
         <div class="account-layout">
-            <div class="row equaHeight" data-obj=".col .box-bg-white">
-                <div class="col">
+            <div class="row-acc equaHeight" data-obj=".col .box-bg-white">
+                <div class="col-acc">
                     <h3>Thông tin cá nhân</h3>
-                    <div class="box-bg-white" style="height: 376px;">
-                        <div class="account-info">
+                    <div class="box-bg-white" style="height: 100%;">
+                        <div class=" account-info">
                             <div class="tools">
                                 <a href="/account/info" title="Thay đổi thông tin cá nhân"><i
-                                        class="icon-edit-squad"></i></a>
+                                        class="fal fa fa-edit"></i></a>
                             </div>
 
                             <p><strong>Họ tên:</strong> <i>Nguyễn Quang Ninh</i></p>
@@ -91,9 +55,9 @@
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col-acc">
                     <h3>Đơn hàng đã đặt</h3>
-                    <div class="box-bg-white" style="height: 376px;">
+                    <div class="box-bg-white" style="height: 100%;">
                         <div style="padding:25px;">
                             <table class="table table-border table-lgpading">
                                 <tbody>
@@ -105,7 +69,14 @@
                                         <th>Giảm giá</th>
                                         <th>Sản phẩm đặt hàng</th>
                                     </tr>
-
+                                    <tr>
+                                        <td>1</td>
+                                        <td>123</td>
+                                        <td>9/4/2023</td>
+                                        <td>100.000d</td>
+                                        <td>10%</td>
+                                        <td>Laptop gaming MSI</td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -120,7 +91,7 @@
 
                         <div class="tools">
                             <a href="/account/wishlist" title="Chỉnh sửa danh sách sản phẩm yêu thích"><i
-                                    class="icon-edit-squad"></i></a>
+                                    class="fal fa fa-edit"></i></a>
                         </div>
 
                         <div style="max-width:100%; padding:0 30px;">
@@ -154,7 +125,7 @@
 
                         <div class="tools">
                             <a href="/account/review" title="Xem tất cả các đánh giá bạn đã gửi"><i
-                                    class="icon-eye"></i></a>
+                                    class="fal fa fa-eye"></i></a>
                         </div>
 
                         <div class="review-content comment-content" style="max-width:100%; padding:0 30px;">
@@ -172,7 +143,7 @@
 
                         <div class="tools">
                             <a href="/account/comment" title="Xem tất cả các bình luận bạn đã gửi"><i
-                                    class="icon-eye"></i></a>
+                                    class="fal fa fa-eye"></i></a>
                         </div>
 
                         <div class="review-content comment-content" style="max-width:100%; padding:0 30px;">

@@ -38,9 +38,26 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/logup', function () {
         return view('Public.pages.logup');
     })->name('logup');
-    Route::get('/account', function () {
-        return view('Public.pages.account');
-    })->name('account');
+    Route::group(['prefix' => 'account'], function () {
+        Route::get('/', function () {
+            return view('Public.pages.account.index');
+        })->name('account.index');
+        Route::get('/account-infor', function () {
+            return view('Public.pages.account.infor');
+        })->name('account.infor');
+        Route::get('/order', function () {
+            return view('Public.pages.account.order');
+        })->name('account.order');
+        Route::get('/wishlist', function () {
+            return view('Public.pages.account.wishlist');
+        })->name('account.wishlist');
+        Route::get('/comment', function () {
+            return view('Public.pages.account.comment');
+        })->name('account.comment');
+        Route::get('/review', function () {
+            return view('Public.pages.account.review');
+        })->name('account.review');
+    });
 });
 //This is Routes for Admin
 Route::group(['domain' => env('APP_ADMIN_URL')], function () {
@@ -89,4 +106,10 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
     Route::get('/signin', function () {
         return view('Admin.pages.login');
     })->name('signin');
+    Route::get('/profile', function () {
+        return view('Admin.pages.profile');
+    })->name('profile');
+    Route::get('/setting', function () {
+        return view('Admin.pages.setting');
+    })->name('setting');
 });

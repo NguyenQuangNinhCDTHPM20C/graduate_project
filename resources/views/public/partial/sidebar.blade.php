@@ -1,41 +1,46 @@
-<div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-<aside class="app-sidebar">
-    <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="/images/hay.jpg" width="50px"
-            alt="User Image">
-        <div>
-            <p class="app-sidebar__user-name"><b>Võ Trường</b></p>
-            <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+<div class="sidebar">
+    <div class="ctn">
+        <div class="header">
+            <div class="logo">
+                <a href="{{route('home')}}"><img src="{{asset('images/logoshop1.png')}}" alt="Hoàng Hà Mobile"></a>
+            </div>
+
+            <div class="info">
+                <div class="avt" id="myAvatar">
+                    <img
+                        src="https://hoanghamobile.com/avatar/Uploads/Avatar/63128-ninhnguyen1239-638164809348787755.jpg">
+                </div>
+
+                <div class="summer">
+                    <p><strong>Nguyễn Quang Ninh</strong></p>
+                    <p class="change-avatar"><a href="javascript:;"
+                            onclick="$('#avtImage').trigger('click'); return false;"><i class="fal fa fa-user"></i>
+                            Thay đổi ảnh đại diện</a></p>
+                    <input type="file" name="upfile" id="avtImage" accept="image/*" style="display: none;">
+                </div>
+            </div>
         </div>
+        <nav>
+            <ul>
+                <li><a href="{{route('account.index')}}" class="actived"><i
+                            class="fas fa fa-tachometer-alt"></i><span>Bảng điều
+                            khiển</span></a></li>
+                <li><a href="{{route('account.infor')}}"><i class="fal fa fa-user-circle"></i><span>Thông tin tài
+                            khoản</span></a></li>
+                <li><a href="{{route('account.order')}}"><i class="fal fa fa-box-open"></i><span>Đơn hàng của
+                            bạn</span></a>
+                </li>
+                <li><a href="{{route('account.wishlist')}}"><i class="fal fa fa-heart"></i><span>Sản phẩm yêu
+                            thích</span></a>
+                </li>
+                <li><a href="{{route('account.comment')}}"><i class="fal fa fa-comment"></i><span>Quản lý bình
+                            luận</span></a>
+                </li>
+                <li><a href="{{route('account.review')}}"><i class="fal fa fa-edit"></i><span>Quản lý đánh
+                            giá</span></a></li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i
+                            class="fal fa fa-sign-out-alt"></i><span>Đăng xuất</span></a></li>
+            </ul>
+        </nav>
     </div>
-    <hr>
-    <ul class="app-menu">
-        <li><a class="app-menu__item haha" href="phan-mem-ban-hang.html"><i class='app-menu__icon bx bx-cart-alt'></i>
-                <span class="app-menu__label">POS Bán Hàng</span></a></li>
-        <li><a class="app-menu__item active" href="index.html"><i class='app-menu__icon bx bx-tachometer'></i><span
-                    class="app-menu__label">Bảng điều khiển</span></a></li>
-        <li><a class="app-menu__item " href="table-data-table.html"><i class='app-menu__icon bx bx-id-card'></i>
-                <span class="app-menu__label">Quản lý nhân viên</span></a></li>
-        <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
-                    class="app-menu__label">Quản lý khách hàng</span></a></li>
-        <li><a class="app-menu__item" href="table-data-product.html"><i
-                    class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản
-                    phẩm</span></a>
-        </li>
-        <li><a class="app-menu__item" href="table-data-oder.html"><i class='app-menu__icon bx bx-task'></i><span
-                    class="app-menu__label">Quản lý đơn hàng</span></a></li>
-        <li><a class="app-menu__item" href="table-data-banned.html"><i class='app-menu__icon bx bx-run'></i><span
-                    class="app-menu__label">Quản lý nội bộ
-                </span></a></li>
-        <li><a class="app-menu__item" href="table-data-money.html"><i class='app-menu__icon bx bx-dollar'></i><span
-                    class="app-menu__label">Bảng kê lương</span></a></li>
-        <li><a class="app-menu__item" href="quan-ly-bao-cao.html"><i
-                    class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh
-                    thu</span></a>
-        </li>
-        <li><a class="app-menu__item" href="page-calendar.html"><i class='app-menu__icon bx bx-calendar-check'></i><span
-                    class="app-menu__label">Lịch công tác
-                </span></a></li>
-        <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-cog'></i><span class="app-menu__label">Cài
-                    đặt hệ thống</span></a></li>
-    </ul>
-</aside>
+</div>

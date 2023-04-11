@@ -42,10 +42,10 @@
             </div>
         </div>
     </div>
-    <div class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+    <div class="row align-items-center py-3 px-xl-5 d-none d-lg-flex">
         <div class="col-lg-4">
             <a href="{{route('home')}}" class="logo">
-                <img src="images/logoshop1.png" style="  width: 50%;
+                <img src="{{asset('images/logoshop1.png')}}" style="  width: 50%;
         padding-right: 10px;
         object-fit: cover;" alt="double-n shop">
             </a>
