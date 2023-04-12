@@ -25,7 +25,7 @@ class Products extends Migration
             $table->string('tag');
             $table->float('selling_price');
             $table->float('discount_price');
-            $table->string('desription');
+            $table->string('description');
             $table->string('image');
             $table->tinyInteger('status')->nullable()->default(1);
             $table->timestamps(); // creawted_at, updated_at

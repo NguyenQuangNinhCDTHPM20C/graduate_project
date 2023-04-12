@@ -129,17 +129,17 @@
                                     </label>
                                 </th>
                                 <th>Product Name</th>
-                                <th>SKU</th>
                                 <th>Category </th>
+                                <th>Sub Category </th>
                                 <th>Brand</th>
-                                <th>price</th>
-                                <th>Unit</th>
+                                <th>Price</th>
+                                <th>Code</th>
                                 <th>Qty</th>
-                                <th>Created By</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($products as $product)
                             <tr>
                                 <td>
                                     <label class="checkboxs">
@@ -152,7 +152,48 @@
                                         <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/product/product1.jpg"
                                             alt="product">
                                     </a>
-                                    <a href="javascript:void(0);">Macbook pro</a>
+                                    <a href="javascript:void(0);">{{$product->name}}</a>
+                                </td>
+                                <td>{{$product->category->name}}</td>
+                                <td>{{$product->sub_category->name}}</td>
+                                <td>{{$product->brand->name}}</td>
+                                <td>{{$product->selling_price}}</td>
+                                <td>{{$product->code}}</td>
+                                <td>{{$product->quantity}}</td>
+                                <td>
+                                    <a class="me-3"
+                                        href="https://dreamspos.dreamguystech.com/laravel/template/public/product-details">
+                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/eye.svg"
+                                            alt="img">
+                                    </a>
+                                    <a class="me-3"
+                                        href="https://dreamspos.dreamguystech.com/laravel/template/public/editproduct">
+                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/edit.svg"
+                                            alt="img">
+                                    </a>
+                                    <a class="confirm-text" href="javascript:void(0);">
+                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/delete.svg"
+                                            alt="img">
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+
+                            {{ $products->links() }}
+                            <!-- 
+                            <tr>
+                                <td>
+                                    <label class="checkboxs">
+                                        <input type="checkbox">
+                                        <span class="checkmarks"></span>
+                                    </label>
+                                </td>
+                                <td class="productimgname">
+                                    <a href="javascript:void(0);" class="product-img">
+                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/product/product1.jpg"
+                                            alt="product">
+                                    </a>
+                                    <a href="javascript:void(0);"></a>
                                 </td>
                                 <td>PT001</td>
                                 <td>Computers</td>
@@ -557,7 +598,7 @@
                                             alt="img">
                                     </a>
                                 </td>
-                            </tr>
+                            </tr> -->
                         </tbody>
                     </table>
                 </div>

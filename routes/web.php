@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -70,9 +70,11 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
     Route::get('/email', function () {
         return view('Admin.pages.email');
     })->name('email');
-    Route::get('/product-list', function () {
-        return view('Admin.pages.products');
-    })->name('product-list');
+    // Route::get('/product-list', function () {
+    //     return view('Admin.pages.products', [ProductController::class, 'index']);
+    // })
+    Route::get('/product-list', [ProductController::class, 'index'])->name('product-list');
+
     Route::get('/add-product', function () {
         return view('Admin.pages.add-product');
     })->name('add-product');

@@ -1,0 +1,53 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+
+class InvoiceDetailSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //
+        DB::table('invoice_detail')->insert([
+            [
+                'invoice_id' => 1,
+                'product_id' => 1,
+                'quantity' => 2,
+                'price' => 2000.00,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'invoice_id' => 1,
+                'product_id' => 3,
+                'quantity' => 1,
+                'price' => 3000.00,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'invoice_id' => 2,
+                'product_id' => 2,
+                'quantity' => 1,
+                'price' => 1500.00,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'invoice_id' => 2,
+                'product_id' => 4,
+                'quantity' => 2,
+                'price' => 3500.00,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+        
+    }
+}

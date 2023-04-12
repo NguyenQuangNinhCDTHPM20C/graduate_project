@@ -1,0 +1,114 @@
+Please add sample data on the field of selling laptops and computer components to the following tables using seeder :
+Schema::create('accounts', function (Blueprint $table) {
+$table->increments('id');
+$table->string('name',200);
+$table->string('username',200);
+$table->string('email')->unique();
+$table->string('password');
+$table->string('photo');
+$table->string('address');
+$table->integer('role');
+$table->tinyInteger('status')->nullable()->default(1);
+$table->rememberToken();
+$table->timestamps(); // creawted_at, updated_at
+});
+Schema::create('brands', function (Blueprint $table) {
+$table->increments('id');
+$table->string('name',200);
+$table->string('slug')->unique();
+$table->string('image');
+$table->timestamps(); // creawted_at, updated_at
+});
+Schema::create('category', function (Blueprint $table) {
+$table->increments('id');
+$table->string('name',200);
+$table->string('slug')->unique();
+$table->tinyInteger('status')->nullable()->default(1);
+$table->timestamps(); // creawted_at, updated_at
+});
+Schema::create('sub_category', function (Blueprint $table) {
+$table->increments('id');
+$table->integer('category_id')->unsigned();
+$table->string('name',200);
+$table->string('slug')->unique();
+$table->tinyInteger('status')->nullable()->default(1);
+$table->timestamps(); // creawted_at, updated_at
+$table->foreign('category_id')->references('id')->on('category');
+});
+Schema::create('products', function (Blueprint $table) {
+$table->increments('id');
+$table->integer('brand_id')->unsigned();
+$table->integer('category_id')->unsigned();
+$table->integer('sub_category_id')->unsigned();
+$table->string('name',200);
+$table->string('slug')->unique();
+$table->string('code');
+$table->integer('quantity');
+$table->string('tag');
+$table->float('selling_price');
+$table->float('discount_price');
+$table->string('desription');
+$table->string('image');
+$table->tinyInteger('status')->nullable()->default(1);
+$table->timestamps(); // creawted_at, updated_at
+$table->foreign('brand_id')->references('id')->on('brands');
+$table->foreign('category_id')->references('id')->on('category');
+$table->foreign('sub_category_id')->references('id')->on('sub_category');
+});
+Schema::create('invoices', function (Blueprint $table) {
+$table->increments('id');
+$table->integer('code');
+$table->integer('account_id')->unsigned();
+$table->dateTime('order_date');
+$table->string('name',200);
+$table->string('address');
+$table->string('phone');
+$table->string('email')->unique();
+$table->string('notes');
+$table->float('total');
+$table->string('payment_method');
+$table->tinyInteger('status')->nullable()->default(1);
+$table->rememberToken();
+$table->timestamps(); // created_at, updated_at
+$table->foreign('account_id')->references('id')->on('accounts');
+});
+Schema::create('invoice_detail', function (Blueprint $table) {
+$table->increments('id');
+$table->integer('invoice_id')->unsigned();
+$table->integer('product_id')->unsigned();
+$table->integer('quantity');
+$table->float('price');
+$table->timestamps(); // creawted_at, updated_at
+
+$table->foreign('invoice_id')->references('id')->on('invoices');
+$table->foreign('product_id')->references('id')->on('products');
+
+});
+Schema::create('carts', function (Blueprint $table) {
+$table->increments('id');
+$table->integer('account_id')->unsigned();
+$table->float('total');
+$table->timestamps(); // creawted_at, updated_at
+$table->foreign('account_id')->references('id')->on('accounts');
+});
+Schema::create('cart_detail', function (Blueprint $table) {
+$table->increments('id');
+$table->integer('product_id')->unsigned();
+$table->integer('cart_id')->unsigned();
+$table->integer('quantity');
+$table->float('price');
+$table->timestamps(); // creawted_at, updated_at
+$table->foreign('product_id')->references('id')->on('products');
+$table->foreign('cart_id')->references('id')->on('carts');
+});
+Schema::create('reviews', function (Blueprint $table) {
+$table->increments('id');
+$table->integer('account_id')->unsigned();
+$table->integer('product_id')->unsigned();
+$table->string('comment');
+$table->string('rating');
+$table->tinyInteger('status')->nullable()->default(1);
+$table->timestamps(); // created_at, updated_at
+$table->foreign('account_id')->references('id')->on('accounts');
+$table->foreign('product_id')->references('id')->on('products');
+});

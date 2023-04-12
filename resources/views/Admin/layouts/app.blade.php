@@ -70,8 +70,7 @@
     <script src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/js/moment.min.js"></script>
     <script src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/js/bootstrap-datetimepicker.min.js">
     </script>
-    <script
-        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/plugins/apexchart/apexcharts.min.js">
+    <script src="{{asset('js/apexcharts.min.js')}}">
     </script>
     <script src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/plugins/apexchart/chart-data.js">
     </script>
