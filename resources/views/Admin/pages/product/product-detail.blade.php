@@ -1,0 +1,106 @@
+@extends('Admin.layouts.app')
+
+@section('title', 'Double-N shop | Admin Management')
+
+@section('content')
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="page-header">
+            <div class="page-title">
+                <h4>Product Details</h4>
+                <h6>Full details of a product</h6>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-8 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="bar-code-view">
+                            <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/barcode1.png"
+                                alt="barcode">
+                            <a class="printimg">
+                                <img src="{{asset('images/printer.svg')}}" alt="print">
+                            </a>
+                        </div>
+                        <div class="productdetails">
+                            <ul class="product-bar">
+                                <li>
+                                    <h4>Product</h4>
+                                    <h6>{{ $product->name }}</h6>
+                                </li>
+                                <li>
+                                    <h4>Category</h4>
+                                    <h6>{{$product->category->name}}</h6>
+                                </li>
+                                <li>
+                                    <h4>Sub Category</h4>
+                                    <h6>{{$product->sub_category->name}}</h6>
+                                </li>
+                                <li>
+                                    <h4>Brand</h4>
+                                    <h6>{{$product->brand->name}}</h6>
+                                </li>
+                                <li>
+                                    <h4>Code</h4>
+                                    <h6>{{ $product->code }}</h6>
+                                </li>
+                                <li>
+                                    <h4>Quantity</h4>
+                                    <h6>{{ $product->quantity }}</h6>
+                                </li>
+                                <li>
+                                    <h4>Price</h4>
+                                    <h6>{{$product->selling_price}}</h6>
+                                </li>
+                                @if($product->discount_price)
+                                <li>
+                                    <h4>Discounted price</h4>
+                                    <h6>{{$product->discount_price}}</h6>
+                                </li>
+                                @endif
+                                <li>
+                                    <h4>Status</h4>
+                                    @if($product->status == 1)
+                                    <h6>Active</h6>
+                                    @else
+                                    <h6>Active</h6>
+                                    @endif
+                                </li>
+                                <li>
+                                    <h4>Description</h4>
+                                    <h6>{{ $product->description }}</h6>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="slider-product-details">
+                            <div class="owl-carousel owl-theme product-slide">
+                                <div class="slider-product">
+                                    <img src="{{ asset('assets/' . $product->image) }}" alt="{{ $product->name }}">
+                                    <h4>{{ $product->name }}</h4>
+                                    <h6>581kb</h6>
+                                </div>
+                                <div class="slider-product">
+                                    <img src="{{ asset('assets/' . $product->image) }}" alt="{{ $product->name }}">
+                                    <h4>{{ $product->name }}</h4>
+                                    <h6>581kb</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{{-- Debugging output --}}
+{{ dd($product) }}
+@endsection

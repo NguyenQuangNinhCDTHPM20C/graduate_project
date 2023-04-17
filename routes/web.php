@@ -70,20 +70,22 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
     Route::get('/email', function () {
         return view('Admin.pages.email');
     })->name('email');
-    // Route::get('/product-list', function () {
-    //     return view('Admin.pages.products', [ProductController::class, 'index']);
-    // })
-    Route::get('/product-list', [ProductController::class, 'index'])->name('product-list');
-
-    Route::get('/add-product', function () {
-        return view('Admin.pages.add-product');
-    })->name('add-product');
-    Route::get('/category-list', function () {
-        return view('Admin.pages.categorys');
-    })->name('category-list');
+    //Routes for product
+    Route::get('/product-list', [ProductController::class, 'index'])->name('product.list');
+    Route::post('/add-product', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/add-product', [ProductController::class, 'create'])->name('product.add');
+    Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.detail');
+    Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+    //Routes for category
+    Route::get('/category-list', [CategoryController::class, 'index'])->name('category.list');
+    Route::get('/brand-list', function () {
+        return view('Admin.pages.brands');
+    })->name('brand.list');
     Route::get('/subcategory-list', function () {
         return view('Admin.pages.subcategory');
-    })->name('subcategory-list');
+    })->name('subcategory.list');
     Route::get('sales-list', function () {
         return view('Admin.pages.sales');
     })->name('sales-list');

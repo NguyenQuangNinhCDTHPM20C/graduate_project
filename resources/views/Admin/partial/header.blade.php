@@ -2,13 +2,13 @@
 
     <div class="header-left active">
         <a href="{{route('index')}}" class="logo logo-normal">
-            <img src="{{asset('images/logoshop1.png')}}" alt="">
+            <img src="{{asset('images/logoshop1.png')}}" alt="Double-N shop">
         </a>
-        <a href="https://dreamspos.dreamguystech.com/laravel/template/public/index" class="logo logo-white">
-            <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/logo-white.png" alt="">
+        <a href="{{route('index')}}" class="logo logo-white">
+            <img src="{{asset('images/logoshop1.png')}}" alt="Double-N shop">
         </a>
         <a href="{{route('index')}}" class="logo-small">
-            <img src="{{asset('images/logosmall.png')}}" alt="">
+            <img src="{{asset('images/logosmall.png')}}" alt="Double-N shop">
         </a>
         <a id="toggle_btn" href="javascript:void(0);">
             <i data-feather="chevrons-left" class="feather-16"></i>

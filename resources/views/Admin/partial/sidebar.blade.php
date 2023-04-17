@@ -24,14 +24,13 @@
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Products</h6>
                     <ul>
-                        <li class=""><a href="{{ route('product-list') }}"><i
+                        <li class=""><a href="{{ route('product.list') }}"><i
                                     data-feather="box"></i><span>Products</span></a></li>
-                        <li class=""><a href="{{ route('add-product') }}"><i data-feather="plus-square"></i><span>Create
-                                    Product</span></a></li>
-                        <li class=""><a href="{{ route('category-list') }}"><i
+                        <li class=""><a href="{{ route('category.list') }}"><i
                                     data-feather="codepen"></i><span>Category</span></a></li>
-                        <li class=""><a href="brand-list"><i data-feather="tag"></i><span>Brands</span></a></li>
-                        <li class=""><a href="{{ route('subcategory-list') }}"><i data-feather="speaker"></i><span>Sub
+                        <li class=""><a href="{{ route('brand.list') }}"><i
+                                    data-feather="tag"></i><span>Brands</span></a></li>
+                        <li class=""><a href="{{ route('subcategory.list') }}"><i data-feather="speaker"></i><span>Sub
                                     Category</span></a></li>
                         <!-- <li class=""><a href="#"><i data-feather="align-justify"></i><span>Print
                                     Barcode</span></a></li>

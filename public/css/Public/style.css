@@ -10216,8 +10216,14 @@ h6 {
 .input-send {
     border-top-left-radius: 5px !important;
     border-bottom-left-radius: 5px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border: none;
 }
-
+.input-send-gp:focus {
+    border: 1px solid;
+    border-color: var(--white);
+}
 .bg-radius {
     border-radius: 5px;
 }
