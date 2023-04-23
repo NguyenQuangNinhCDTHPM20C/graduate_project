@@ -9,9 +9,27 @@
         <div class="whirly-loader"> </div>
     </div>
     <div class="main-wrapper">
-        <Form action="https://dreamspos.dreamguystech.com/laravel/template/public/custom-login" method="POST"
+        <Form action="{{route('adminLoginPost')}}" method=""
             class="account-content">
-            <input type="hidden" name="_token" value="ssZZWhzm9uZat9PBPxiE0kP7M5PdK4136kXE9pG0">
+            @csrf
+            <input type="hidden" name="_token" placeholder="email" name="email">
+            @if(\Session::get('success'))
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <div class="alert-body">
+                    {{ \Session::get('success') }}
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+            {{ \Session::forget('success') }}
+            @if(\Session::get('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <div class="alert-body">
+                    {{ \Session::get('error') }}
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
             <div class="login-wrapper">
                 <div class="login-content">
                     <div class="login-userset">
@@ -31,7 +49,12 @@
                         <div class="form-login">
                             <label>Email</label>
                             <div class="form-addons">
-                                <input type="text" name="email" id="Email" value="admin@example.com">
+                                <input type="text" placeholder="email" name="email" id="email">
+                                @if ($errors->has('email'))
+                            <span class="help-block font-red-mint">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                            @endif
                                 <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/mail.svg"
                                     alt="img">
                             </div>
@@ -41,11 +64,16 @@
                         <div class="form-login">
                             <label>Password</label>
                             <div class="pass-group">
-                                <input type="password" class="pass-input" name="password" id="password" value="123456">
+                                <input type="password" class="pass-input" name="password" id="password">
                                 <span class="fas toggle-password fa-eye-slash"></span>
                             </div>
                             <div class="text-danger pt-2">
                             </div>
+                            @if ($errors->has('password'))
+                            <span class="help-block font-red-mint">
+                                <strong>{{ $errors->first('password') }}</strong>
+                            </span>
+                            @endif
                         </div>
                         <div class="form-login">
                             <div class="alreadyuser">
@@ -58,7 +86,6 @@
                         </div>
                         <div class="signinform text-center">
                             <h4>Don’t have an account? <a
-                                    href="https://dreamspos.dreamguystech.com/laravel/template/public/signup"
                                     class="hover-a">Sign Up</a></h4>
                         </div>
                         <div class="form-setlogin">

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Middleware\AdminAuthenticated;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,9 +63,6 @@ Route::group(['domain' => env('APP_URL')], function () {
 });
 //This is Routes for Admin
 Route::group(['domain' => env('APP_ADMIN_URL')], function () {
-    Route::get('/', function () {
-        return view('Admin.pages.index');
-    })->name('index');
     Route::get('/chat', function () {
         return view('Admin.pages.chat');
     })->name('chat');
@@ -97,19 +96,25 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
     Route::get('/user-list', function () {
         return view('Admin.pages.users');
     })->name('user-list');
-     Route::get('/sales-report', function () {
+    Route::get('/sales-report', function () {
         return view('Admin.pages.sales-report');
     })->name('sales-report');
-     Route::get('/invoice-report', function () {
+    Route::get('/invoice-report', function () {
         return view('Admin.pages.invoice-report');
     })->name('invoice-report');
-    Route::get('/signin', function () {
-        return view('Admin.pages.login');
-    })->name('signin');
     Route::get('/profile', function () {
         return view('Admin.pages.profile');
     })->name('profile');
     Route::get('/setting', function () {
         return view('Admin.pages.setting');
     })->name('setting');
+});
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function () {
+    Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('adminLogin');
+    Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
+
+    Route::group(['middleware' => 'adminauth'], function () {
+        Route::get('/', [AdminAuthController::class, 'dashboard'])->name('adminDashboard');
+    });
+
 });
