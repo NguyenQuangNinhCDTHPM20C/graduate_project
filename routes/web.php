@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -80,6 +81,10 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
     Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.delete');
     //Routes for category
     Route::get('/category-list', [CategoryController::class, 'index'])->name('category.list');
+    Route::post('/add-category', [CategoryController::class, 'store'])->name('category.store');
+    Route::get('/add-category', [CategoryController::class, 'create'])->name('category.add');
+    Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
     Route::get('/brand-list', function () {
         return view('Admin.pages.brands');
     })->name('brand.list');

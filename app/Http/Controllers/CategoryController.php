@@ -14,8 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categorys = Category::paginate(10);
-        return view('Admin.pages.category.category-list', compact('categorys'));
+        $category = Category::paginate(10);
+        return view('Admin.pages.category.category-list', compact('category'));
     }
 
     /**
@@ -25,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('Admin.pages.category.add-category');
     }
 
     /**
@@ -36,7 +36,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = new Category;
+    
+        $category->name = $request->input('name');
+        $category->slug = Str::slug($request->input('name'), '-');
+        $category->status = $request->input('status');
+       
+        $category->save();
+        return redirect()->route('category.list')->with('success', 'Category has been added successfully');
     }
 
     /**
@@ -56,9 +63,10 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit($id)
     {
-        //
+        $category = Category::findOrFail($id); 
+        return view('Admin.pages.category.edit-category', compact( 'category'));
     }
 
     /**
@@ -68,9 +76,15 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->name = $request->input('name');
+        $category->slug = Str::slug($request->input('name'), '-');
+        $category->status = $request->input('status');
+       
+        $category->save();
+        return redirect()->route('category.list')->with('success', 'Category updateed successfully');
     }
 
     /**
