@@ -7,14 +7,13 @@
     <div class="content">
         <div class="page-header">
             <div class="page-title">
-                <h4>Brand List</h4>
-                <h6>Manage your Brand</h6>
+                <h4>Product Sub Category list</h4>
+                <h6>View/Search product Category</h6>
             </div>
             <div class="page-btn">
-                <a href="https://dreamspos.dreamguystech.com/laravel/template/public/addbrand"
-                    class="btn btn-added"><img
+                <a href="{{route('subcategory.add')}}" class="btn btn-added"><img
                         src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
-                        class="me-2" alt="img">Add Brand</a>
+                        class="me-2" alt="img"> Add Sub Category</a>
             </div>
         </div>
 
@@ -61,18 +60,36 @@
                 <div class="card" id="filter_inputs">
                     <div class="card-body pb-0">
                         <div class="row">
-                            <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="col-lg-2 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Enter Brand Name">
+                                    <label>Category</label>
+                                    <select class="select">
+                                        <option>Choose Category</option>
+                                        <option>Computers</option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="col-lg-2 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <input type="text" placeholder="Enter Brand Description">
+                                    <label>Sub Category</label>
+                                    <select class="select">
+                                        <option>Choose Sub Category</option>
+                                        <option>Fruits</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Category Code</label>
+                                    <select class="select">
+                                        <option>CT001</option>
+                                        <option>CT002</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-lg-1 col-sm-6 col-12 ms-auto">
                                 <div class="form-group">
+                                    <label>&nbsp;</label>
                                     <a class="btn btn-filters ms-auto"><img
                                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/search-whites.svg"
                                             alt="img"></a>
@@ -83,7 +100,7 @@
                 </div>
 
                 <div class="table-responsive">
-                    <table class="table datanew">
+                    <table class="table  datanew">
                         <thead>
                             <tr>
                                 <th>
@@ -92,13 +109,14 @@
                                         <span class="checkmarks"></span>
                                     </label>
                                 </th>
-                                <th>Image</th>
-                                <th>Brand Name</th>
-                                <th>Brand Description</th>
+                                <th>SubCategory</th>
+                                <th>Category</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($sub_category as $_sub_category)
                             <tr>
                                 <td>
                                     <label class="checkboxs">
@@ -106,17 +124,13 @@
                                         <span class="checkmarks"></span>
                                     </label>
                                 </td>
-                                <td>
-                                    <a class="product-img">
-                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/brand/adidas.png"
-                                            alt="product">
-                                    </a>
+                                <td>{{$_sub_category->name}}</td>
+                                <td>{{$_sub_category->category->name}}</td>
+                                <td>{{$_sub_category->status == '1' ? 'Active' : 'Inactive'}}</td>
                                 </td>
-                                <td>Adidas</td>
-                                <td>Shoes, sportswear</td>
                                 <td>
                                     <a class="me-3"
-                                        href="https://dreamspos.dreamguystech.com/laravel/template/public/editbrand">
+                                        href="{{ route('subcategory.edit', ['id' => $_sub_category->id]) }}">
                                         <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/edit.svg"
                                             alt="img">
                                     </a>
@@ -126,60 +140,7 @@
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>
-                                    <a class="product-img">
-                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/brand/colgate.png"
-                                            alt="product">
-                                    </a>
-                                </td>
-                                <td>Colgate</td>
-                                <td>Oral hygiene. Toothbrushes</td>
-                                <td>
-                                    <a class="me-3"
-                                        href="https://dreamspos.dreamguystech.com/laravel/template/public/editbrand">
-                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/edit.svg"
-                                            alt="img">
-                                    </a>
-                                    <a class="me-3 confirm-text" href="javascript:void(0);">
-                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/delete.svg"
-                                            alt="img">
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>
-                                    <a class="product-img">
-                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/brand/samsung.png"
-                                            alt="product">
-                                    </a>
-                                </td>
-                                <td>samsung</td>
-                                <td>Electronics</td>
-                                <td>
-                                    <a class="me-3"
-                                        href="https://dreamspos.dreamguystech.com/laravel/template/public/editbrand">
-                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/edit.svg"
-                                            alt="img">
-                                    </a>
-                                    <a class="me-3 confirm-text" href="javascript:void(0);">
-                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/delete.svg"
-                                            alt="img">
-                                    </a>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

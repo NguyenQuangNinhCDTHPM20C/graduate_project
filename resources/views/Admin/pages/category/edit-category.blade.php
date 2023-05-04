@@ -44,6 +44,4 @@
         </form>
     </div>
 </div>
-{{-- Debugging output --}}
-{{ dd($category) }}
 @endsection

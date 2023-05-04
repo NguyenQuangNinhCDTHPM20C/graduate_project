@@ -59,7 +59,7 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = Str::slug($product->name) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $file->move(public_path('assets/'), $fileName);
+            $file->move(public_path('assets/product/'), $fileName);
             $product->image = $fileName;
         }
 
@@ -146,7 +146,7 @@ class ProductController extends Controller
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = Str::slug($product->name) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $file->move(public_path('assets/'), $fileName);
+            $file->move(public_path('assets/product/'), $fileName);
             $product->image = $fileName;
         }
     
@@ -190,7 +190,7 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
         $product = Product::findOrFail($id);
         $product->delete();

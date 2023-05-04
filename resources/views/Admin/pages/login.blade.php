@@ -9,20 +9,16 @@
         <div class="whirly-loader"> </div>
     </div>
     <div class="main-wrapper">
-        <Form action="https://dreamspos.dreamguystech.com/laravel/template/public/custom-login" method="POST"
-            class="account-content">
-            <input type="hidden" name="_token" value="ssZZWhzm9uZat9PBPxiE0kP7M5PdK4136kXE9pG0">
+        <Form method="POST" class="account-content">
+            <input type="hidden" name="_token" value="SV0UaU0xg8fFRcqF0gZnbekx7i4TU5mAgQL2o89A">
             <div class="login-wrapper">
                 <div class="login-content">
                     <div class="login-userset">
                         <div class="login-logo logo-normal">
-                            <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/logo.png"
-                                alt="img">
+                            <img src="{{asset('images/logoshop.png')}}" alt="img">
                         </div>
-                        <a href="https://dreamspos.dreamguystech.com/laravel/template/public/index"
-                            class="login-logo logo-white">
-                            <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/logo-white.png"
-                                alt="">
+                        <a href="{{route('index')}}" class="login-logo logo-white">
+                            <img src="{{asset('images/logoshop1.png')}}" alt="">
                         </a>
                         <div class="login-userheading">
                             <h3>Sign In</h3>
@@ -32,8 +28,7 @@
                             <label>Email</label>
                             <div class="form-addons">
                                 <input type="text" name="email" id="Email" value="admin@example.com">
-                                <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/mail.svg"
-                                    alt="img">
+                                <img src="{{asset('images/mail.svg')}}" alt="img">
                             </div>
                             <div class="text-danger pt-2">
                             </div>

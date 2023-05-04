@@ -11,8 +11,17 @@
         <div class="col-lg-6 text-center text-lg-right">
             <div class="d-inline-flex align-items-center">
                 <div class="btn-group">
-                    <a class="text-body" href="{{route('login')}}">Login</a>
+                    @if(session()->has('username'))
+
+                    <img src="{{ asset('assets/user/' . session('photo')) }}" alt="Avatar"
+                        style="width: 50px; height: 50px;">
+                    <a class="text-body" href="#">Welcome, {{ session('username') }}</a>
+                    @else
+                    <a class="text-body" href="{{ route('login') }}">Login</a>
+                    @endif
                 </div>
+
+
                 <div class="btn-group">
                     <button type="button" class="btn btn-sm dropdown-toggle btn-lan" data-toggle="dropdown">
                         EN

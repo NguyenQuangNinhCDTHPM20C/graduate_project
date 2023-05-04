@@ -101,6 +101,4 @@
 
     </div>
 </div>
-{{-- Debugging output --}}
-{{ dd($product) }}
 @endsection

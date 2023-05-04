@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\SubCategoryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,9 +36,12 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/checkout', function () {
         return view('Public.pages.checkout');
     })->name('checkout');
-    Route::get('/login', function () {
-        return view('Public.pages.login');
-    })->name('login');
+    // Login
+    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    // Logout
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    //Logup
     Route::get('/logup', function () {
         return view('Public.pages.logup');
     })->name('logup');
@@ -85,12 +91,19 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
     Route::get('/add-category', [CategoryController::class, 'create'])->name('category.add');
     Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
     Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
-    Route::get('/brand-list', function () {
-        return view('Admin.pages.brands');
-    })->name('brand.list');
-    Route::get('/subcategory-list', function () {
-        return view('Admin.pages.subcategory');
-    })->name('subcategory.list');
+    //Routes for brand
+    Route::get('/brand-list',[BrandController::class, 'index'])->name('brand.list');
+    Route::post('/add-brand', [BrandController::class, 'store'])->name('brand.store');
+    Route::get('/add-brand', [BrandController::class, 'create'])->name('brand.add');
+    Route::get('/brand/{id}/edit', [BrandController::class, 'edit'])->name('brand.edit');
+    Route::put('/brand/{id}', [BrandController::class, 'update'])->name('brand.update');
+    //Routes for sub category
+    Route::get('/subcategory-list', [SubCategoryController::class, 'index'])->name('subcategory.list');
+    Route::post('/add-subcategory', [SubCategoryController::class, 'store'])->name('subcategory.store');
+    Route::get('/add-subcategory', [SubCategoryController::class, 'create'])->name('subcategory.add');
+    Route::get('/subcategory/{id}/edit', [SubCategoryController::class, 'edit'])->name('subcategory.edit');
+    Route::put('/subcategory/{id}', [SubCategoryController::class, 'update'])->name('subcategory.update');
+
     Route::get('sales-list', function () {
         return view('Admin.pages.sales');
     })->name('sales-list');

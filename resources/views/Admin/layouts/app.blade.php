@@ -45,7 +45,7 @@
         @yield('content')
     </div>
     {{--Scripts js custom--}}
-    <script src="js/Admin/main.js"></script>
+    <script src="{{asset('js/Admin/main.js')}}"></script>
     {{--Scripts js common--}}
     <script src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/js/jquery-3.6.0.min.js">
     </script>
@@ -78,10 +78,9 @@
     <script
         src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/plugins/sweetalert/sweetalert2.all.min.js">
     </script>
-    <script
-        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/plugins/sweetalert/sweetalerts.min.js">
+    <script src="{{asset('js/Admin/sweetalerts.min.js')}}">
     </script>
-    <script src="js/Admin/script.js"></script>
+    <script src="{{asset('js/Admin/script.js')}}"></script>
     @yield('scripts')
 
 </body>
