@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\InvoiceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -103,10 +104,12 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
     Route::get('/add-subcategory', [SubCategoryController::class, 'create'])->name('subcategory.add');
     Route::get('/subcategory/{id}/edit', [SubCategoryController::class, 'edit'])->name('subcategory.edit');
     Route::put('/subcategory/{id}', [SubCategoryController::class, 'update'])->name('subcategory.update');
-
+    
     Route::get('sales-list', function () {
         return view('Admin.pages.sales');
     })->name('sales-list');
+    //Routes for invoice
+    Route::get('/invoice-list',[InvoiceController::class, 'index'])->name('invoice.list');
     Route::get('/invoice-report', function () {
         return view('Admin.pages.invoices');
     })->name('invoice-report');
@@ -123,7 +126,7 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         return view('Admin.pages.sales-report');
     })->name('sales-report');
      Route::get('/invoice-report', function () {
-        return view('Admin.pages.invoice-report');
+        return view('Admin.pages.invoices-report');
     })->name('invoice-report');
     Route::get('/signin', function () {
         return view('Admin.pages.login');

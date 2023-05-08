@@ -39,7 +39,7 @@
                     <ul>
                         <li class=""><a href="{{ route('sales-list') }}"><i
                                     data-feather="shopping-cart"></i><span>Sales</span></a></li>
-                        <li class=""><a href="{{ route('invoice-report') }}"><i
+                        <li class=""><a href="{{ route('invoice.list') }}"><i
                                     data-feather="file-text"></i><span>Invoices</span></a></li>
                     </ul>
                 </li>

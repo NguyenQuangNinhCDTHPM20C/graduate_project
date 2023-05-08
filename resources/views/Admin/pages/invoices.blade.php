@@ -18,35 +18,27 @@
                     <div class="search-set">
                         <div class="search-path">
                             <a class="btn btn-filter" id="filter_search">
-                                <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/filter.svg"
-                                    alt="img">
-                                <span><img
-                                        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/closes.svg"
-                                        alt="img"></span>
+                                <img src="{{asset('images/filter.svg')}}" alt="img">
+                                <span><img src="{{asset('images/closes.svg')}}" alt="img"></span>
                             </a>
                         </div>
                         <div class="search-input">
-                            <a class="btn btn-searchset"><img
-                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/search-white.svg"
-                                    alt="img"></a>
+                            <a class="btn btn-searchset"><img src="{{asset('images/search-white.svg')}}" alt="img"></a>
                         </div>
                     </div>
                     <div class="wordset">
                         <ul>
                             <li>
                                 <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/pdf.svg"
-                                        alt="img"></a>
+                                        src="{{asset('images/pdf.svg')}}" alt="img"></a>
                             </li>
                             <li>
                                 <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/excel.svg"
-                                        alt="img"></a>
+                                        src="{{asset('images/excel.svg')}}" alt="img"></a>
                             </li>
                             <li>
                                 <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/printer.svg"
-                                        alt="img"></a>
+                                        src="{{asset('images/printer.svg')}}" alt="img"></a>
                             </li>
                         </ul>
                     </div>
@@ -100,14 +92,14 @@
                                 </th>
                                 <th>Invoice number </th>
                                 <th>Customer name </th>
-                                <th>Due date</th>
-                                <th>Amount</th>
-                                <th>Paid</th>
-                                <th>Amount due</th>
+                                <th>Order date</th>
+                                <th>Total</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach($invoices as $_invoices)
                             <tr>
                                 <td>
                                     <label class="checkboxs">
@@ -115,209 +107,27 @@
                                         <span class="checkmarks"></span>
                                     </label>
                                 </td>
-                                <td>INV001</td>
-                                <td>Thomas21</td>
-                                <td>29-03-2022</td>
-                                <td>1500.00</td>
-                                <td>1500.00</td>
-                                <td>1500.00</td>
-                                <td><span class="badges bg-lightgreen">Paid</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
+                                <td>{{$_invoices->code}}</td>
+                                <td>{{$_invoices->name}}</td>
+                                <td>{{$_invoices->order_date}}</td>
+                                <td>{{$_invoices->total}}</td>
+                                <td>{!! $_invoices->status == 1 ? '<span class="badges bg-lightgreen">completed</span>'
+                                    : '<span class="badges bg-lightred">unfinished</span>' !!}</td>
+
                                 </td>
-                                <td>INV002</td>
-                                <td>504Benjamin</td>
-                                <td>29-03-2022</td>
-                                <td>10.00</td>
-                                <td>10.00</td>
-                                <td>10.00</td>
-                                <td><span class="badges bg-lightred">Overdue</span></td>
-                            </tr>
-                            <tr>
                                 <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
+                                    <a class="me-3" href="#">
+                                        <img src="{{asset('images/eye.svg')}}" alt="img">
+                                    </a>
+                                    <a class="me-3" href="#">
+                                        <img src="{{asset('images/edit.svg')}}" alt="img">
+                                    </a>
+                                    <a class="confirm-text" href="javascript:void(0);">
+                                        <img src="{{asset('images/delete.svg')}}" alt="img">
+                                    </a>
                                 </td>
-                                <td>INV003</td>
-                                <td>James 524</td>
-                                <td>29-03-2022</td>
-                                <td>10.00</td>
-                                <td>10.00</td>
-                                <td>10.00</td>
-                                <td><span class="badges bg-lightred">Overdue</span></td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>INV004</td>
-                                <td>Bruklin2022</td>
-                                <td>29-03-2022</td>
-                                <td>10.00</td>
-                                <td>10.00</td>
-                                <td>10.00</td>
-                                <td><span class="badges bg-lightgreen">Paid</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>INV005</td>
-                                <td>BeverlyWIN25</td>
-                                <td>29-03-2022</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td><span class="badges bg-lightred">Overdue</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>INV006</td>
-                                <td>BHR256</td>
-                                <td>29-03-2022</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td><span class="badges bg-lightgreen">Paid</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>INV007</td>
-                                <td>BHR256</td>
-                                <td>29-03-2022</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td><span class="badges bg-lightgreen">Paid</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>INV008</td>
-                                <td>BHR256</td>
-                                <td>29-03-2022</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td><span class="badges bg-lightgrey">Unpaid</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>INV009</td>
-                                <td>BHR256</td>
-                                <td>29-03-2022</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td><span class="badges bg-lightgrey">Unpaid</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>INV0010</td>
-                                <td>BHR256</td>
-                                <td>29-03-2022</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td><span class="badges bg-lightgrey">Unpaid</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>INV007</td>
-                                <td>BHR256</td>
-                                <td>29-03-2022</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td><span class="badges bg-lightgreen">Paid</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>INV008</td>
-                                <td>BHR256</td>
-                                <td>29-03-2022</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td><span class="badges bg-lightgrey">Unpaid</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>INV009</td>
-                                <td>BHR256</td>
-                                <td>29-03-2022</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td><span class="badges bg-lightgrey">Unpaid</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label class="checkboxs">
-                                        <input type="checkbox">
-                                        <span class="checkmarks"></span>
-                                    </label>
-                                </td>
-                                <td>INV0010</td>
-                                <td>BHR256</td>
-                                <td>29-03-2022</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td>150.00</td>
-                                <td><span class="badges bg-lightgrey">Unpaid</span></td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
