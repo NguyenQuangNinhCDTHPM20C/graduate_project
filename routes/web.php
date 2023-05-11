@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,15 +20,12 @@ use App\Http\Controllers\InvoiceController;
 */
 //This is Routes for Public
 Route::group(['domain' => env('APP_URL')], function () {
-    Route::get('/', function () {
-        return view('Public.pages.index');
-    })->name('home');
+    Route::get('/',[UserController::class, 'index'])->name('home');
     Route::get('/products', function () {
-        return view('Public.pages.products');
+        return view('Public.pages.product.product-list');
     })->name('products');
-    Route::get('/product-detail', function () {
-        return view('Public.pages.product-detail');
-    })->name('product-detail');
+    Route::get('/product/{id}', [UserController::class, 'product_detail'])->name('product-detail');
+    // Route::post('/add-to-cart/{id}', UserController::class, 'addToCart')->name('add-to-cart');
     Route::get('/contact', function () {
         return view('Public.pages.contact');
     })->name('contact');
@@ -38,7 +36,7 @@ Route::group(['domain' => env('APP_URL')], function () {
         return view('Public.pages.checkout');
     })->name('checkout');
     // Login
-    Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+    Route::get('/login', [AuthController::class, 'showLoginFormPublic'])->name('public.login');
     Route::post('/login', [AuthController::class, 'login']);
     // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -110,6 +108,11 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
     })->name('sales-list');
     //Routes for invoice
     Route::get('/invoice-list',[InvoiceController::class, 'index'])->name('invoice.list');
+    // Login
+    Route::get('/login', [AuthController::class, 'showLoginFormAdmin'])->name('admin.login');
+    Route::post('/login', [AuthController::class, 'login']);
+    // Logout
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/invoice-report', function () {
         return view('Admin.pages.invoices');
     })->name('invoice-report');
@@ -128,9 +131,9 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
      Route::get('/invoice-report', function () {
         return view('Admin.pages.invoices-report');
     })->name('invoice-report');
-    Route::get('/signin', function () {
-        return view('Admin.pages.login');
-    })->name('signin');
+    // Route::get('/signin', function () {
+    //     return view('Admin.pages.login');
+    // })->name('signin');
     Route::get('/profile', function () {
         return view('Admin.pages.profile');
     })->name('profile');

@@ -126,7 +126,8 @@
                                 </td>
                                 <td class="productimgname">
                                     <a href="javascript:void(0);" class="product-img">
-                                        <img src="{{ asset('assets/' . $product->image) }}" alt="{{$product->name}}">
+                                        <img src="{{ asset('assets/product/' . $product->image) }}"
+                                            alt="{{$product->name}}">
                                     </a>
                                     <a href="javascript:void(0);">{{$product->name}}</a>
                                 </td>

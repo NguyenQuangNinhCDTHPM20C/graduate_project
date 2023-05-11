@@ -10267,3 +10267,11 @@ h6 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+.overflow-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.img-p {
+    height: 300px;
+}

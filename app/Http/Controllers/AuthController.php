@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Account;
 class AuthController extends Controller
 {
-
-    public function showLoginForm()
+    //Auth for Admin
+    public function showLoginFormAdmin()
+    {
+        return view('Admin.pages.login');
+    }
+    //Auth for Public
+    public function showLoginFormPublic()
     {
         return view('public.pages.login');
     }
@@ -18,12 +23,12 @@ class AuthController extends Controller
         $account = Account::where('username', $request->username)->first();
     
         if (!$account || !Hash::check($request->password, $account->password) || $account->role != 2) {
-            return false;
+            return 1;
         }
     
         Auth::login($account, $request->remember);
     
-        return true;
+        return 2;
     }
 
     public function login(Request $request)
@@ -35,14 +40,22 @@ class AuthController extends Controller
         ]);
     
         // Attempt login
-        if ($this->attemptLogin($request)) {
+        if ($this->attemptLogin($request) == 2) {
             $account = auth()->user();
             $username = $account->username;
             $photo = $account->photo;
             session(['username' => $username]); // Lưu tên người dùng vào session
             session(['photo' => $photo]);
-            dd(session('photo'));
+           
             return redirect()->route('home');
+        }elseif ($this->attemptLogin($request) == 1) {
+            $account = auth()->user();
+            $username = $account->username;
+            $photo = $account->photo;
+            session(['username' => $username]); // Lưu tên người dùng vào session
+            session(['photo' => $photo]);
+            
+            return redirect()->route('index');
         }
         
     

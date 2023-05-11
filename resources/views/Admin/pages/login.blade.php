@@ -5,8 +5,9 @@
 @section('content')
 
 <div class="main-wrapper">
-    <Form method="POST" class="account-content">
-        <input type="hidden" name="_token" value="SV0UaU0xg8fFRcqF0gZnbekx7i4TU5mAgQL2o89A">
+    <Form method="POST" class="account-content" action="{{ route('admin.login') }}">
+        @csrf
+        <input type="hidden" name="role" id="role" value="1">
         <div class="login-wrapper">
             <div class="login-content">
                 <div class="login-userset">
@@ -23,7 +24,8 @@
                     <div class="form-login">
                         <label>Email</label>
                         <div class="form-addons">
-                            <input type="text" name="email" id="Email" value="admin@example.com">
+                            <input type="text" name="username" id="username" placeholder="User Name" required=""
+                                autofocus>
                             <img src="{{asset('images/mail.svg')}}" alt="img">
                         </div>
                         <div class="text-danger pt-2">
@@ -32,7 +34,8 @@
                     <div class="form-login">
                         <label>Password</label>
                         <div class="pass-group">
-                            <input type="password" class="pass-input" name="password" id="password" value="123456">
+                            <input type="password" class="pass-input" name="password" id="password"
+                                placeholder="Password" required="" autofocus>
                             <span class="fas toggle-password fa-eye-slash"></span>
                         </div>
                         <div class="text-danger pt-2">

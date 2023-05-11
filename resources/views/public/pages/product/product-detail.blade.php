@@ -10,16 +10,20 @@
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner bg-light">
                     <div class="carousel-item active">
-                        <img class="w-100 h-100" src="images/product-1.jpg" alt="Image">
+                        <img class="w-100 h-100" src="{{asset('assets/product/' .$product->image)}}"
+                            alt="$product->name">
                     </div>
                     <div class="carousel-item">
-                        <img class="w-100 h-100" src="images/product-2.jpg" alt="Image">
+                        <img class="w-100 h-100" src="{{asset('assets/product/' .$product->image)}}"
+                            alt="$product->name">
                     </div>
                     <div class="carousel-item">
-                        <img class="w-100 h-100" src="images/product-3.jpg" alt="Image">
+                        <img class="w-100 h-100" src="{{asset('assets/product/' .$product->image)}}"
+                            alt="$product->name">
                     </div>
                     <div class="carousel-item">
-                        <img class="w-100 h-100" src="images/product-4.jpg" alt="Image">
+                        <img class="w-100 h-100" src="{{asset('assets/product/' .$product->image)}}"
+                            alt="$product->name">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#product-carousel" data-slide="prev">
@@ -33,7 +37,7 @@
 
         <div class="col-lg-7 h-auto mb-30">
             <div class="h-100 bg-light p-30">
-                <h3>Product Name Goes Here</h3>
+                <h3>{{$product->name}}</h3>
                 <div class="d-flex mb-3">
                     <div class="text-primary mr-2">
                         <small class="fas fa-star"></small>
@@ -44,7 +48,7 @@
                     </div>
                     <small class="pt-1">(99 Reviews)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">$150.00</h3>
+                <h3 class="font-weight-semi-bold mb-4">{{$product->selling_price}}VNĐ</h3>
                 <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit
                     clita ea. Sanc ipsum et, labore clita lorem magna duo dolor no sea
                     Nonumy</p>
@@ -112,22 +116,25 @@
                             </button>
                         </div>
                     </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
-                        Cart</button>
+                    <form action="{{ route('add-to-cart', $product->id) }}" method="post">
+                        @csrf
+                        <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
+                            Cart</button>
+                    </form>
                 </div>
                 <div class="d-flex pt-2">
-                    <strong class="text-dark mr-2">Share on:</strong>
+                    <strong class="mr-2">Share on:</strong>
                     <div class="d-inline-flex">
-                        <a class="text-dark px-2" href="">
+                        <a class="px-2" href="">
                             <i class="fab fa-facebook-f"></i>
                         </a>
-                        <a class="text-dark px-2" href="">
+                        <a class="px-2" href="">
                             <i class="fab fa-twitter"></i>
                         </a>
-                        <a class="text-dark px-2" href="">
+                        <a class="px-2" href="">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a class="text-dark px-2" href="">
+                        <a class="px-2" href="">
                             <i class="fab fa-pinterest"></i>
                         </a>
                     </div>
@@ -146,17 +153,7 @@
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
                         <h4 class="mb-3">Product Description</h4>
-                        <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam
-                            invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod
-                            consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam.
-                            Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos
-                            dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod
-                            nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt
-                            tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                        <p>Dolore magna est eirmod sanctus dolor, amet diam et eirmod et ipsum. Amet dolore tempor
-                            consetetur sed lorem dolor sit lorem tempor. Gubergren amet amet labore sadipscing clita
-                            clita diam clita. Sea amet et sed ipsum lorem elitr et, amet et labore voluptua sit rebum.
-                            Ea erat sed et diam takimata sed justo. Magna takimata justo et amet magna et.</p>
+                        <p>{{$product->description}}</p>
                     </div>
                     <div class="tab-pane fade" id="tab-pane-2">
                         <h4 class="mb-3">Additional Information</h4>
@@ -406,4 +403,29 @@
     </div>
 </div>
 <!-- Products End -->
+@stop
+@section('scripts')
+<script>
+// Lấy các phần tử cần thiết
+const input = document.querySelector('.quantity input');
+const btnMinus = document.querySelector('.quantity .btn-minus');
+const btnPlus = document.querySelector('.quantity .btn-plus');
+
+// Thêm sự kiện "click" cho nút "tăng"
+btnPlus.addEventListener('click', () => {
+    let value = parseInt(input.value);
+    value += 1;
+    input.value = value;
+});
+
+// Thêm sự kiện "click" cho nút "giảm"
+btnMinus.addEventListener('click', () => {
+    let value = parseInt(input.value);
+    value -= 1;
+    if (value < 1) {
+        value = 1;
+    }
+    input.value = value;
+});
+</script>
 @stop

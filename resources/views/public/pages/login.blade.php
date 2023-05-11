@@ -14,8 +14,9 @@
             <div class="main-hotair">
                 <div class="content-wthree">
                     <h2>LOG IN</h2>
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('public.login') }}">
                         @csrf
+                        <input type="hidden" name="role" id="role" value="2">
                         <input type="text" class="text" name="username" id="username" placeholder="User Name"
                             required="" autofocus>
                         <input type="password" class="password" name="password" id="password" placeholder="Password"

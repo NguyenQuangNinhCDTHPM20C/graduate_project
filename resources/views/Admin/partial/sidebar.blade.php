@@ -67,7 +67,7 @@
                     <h6 class="submenu-hdr">Settings</h6>
                     <ul>
                         <li>
-                            <a href="{{ route('signin') }}"><i data-feather="log-out"></i><span>Logout</span>
+                            <a href="{{ route('admin.login') }}"><i data-feather="log-out"></i><span>Logout</span>
                             </a>
                         </li>
                     </ul>

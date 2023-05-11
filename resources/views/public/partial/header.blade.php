@@ -14,10 +14,10 @@
                     @if(session()->has('username'))
 
                     <img src="{{ asset('assets/user/' . session('photo')) }}" alt="Avatar"
-                        style="width: 50px; height: 50px;">
+                        style="width: 25px; border-radius: 50%; margin-right: 10px;">
                     <a class="text-body" href="#">Welcome, {{ session('username') }}</a>
                     @else
-                    <a class="text-body" href="{{ route('login') }}">Login</a>
+                    <a class="text-body" href="{{ route('public.login') }}">Login</a>
                     @endif
                 </div>
 
@@ -123,7 +123,6 @@
                     <div class="navbar-nav mr-auto py-0">
                         <a href="{{ route('home') }}" class="nav-item nav-link active">Home</a>
                         <a href="{{ route('products') }}" class="nav-item nav-link">Products</a>
-                        <a href="{{ route('product-detail') }}" class="nav-item nav-link">Product Detail</a>
                         <div class="nav-item dropdown">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages
                                 <i class="fa fa-angle-down mt-1"></i></a>

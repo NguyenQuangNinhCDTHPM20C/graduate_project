@@ -202,7 +202,7 @@
                     <a class="dropdown-item" href="{{route('setting')}}"><i class="me-2"
                             data-feather="settings"></i>Settings</a>
                     <hr class="m-0">
-                    <a class="dropdown-item logout pb-0" href="{{route('login')}}"><img
+                    <a class="dropdown-item logout pb-0" href="{{route('admin.login')}}"><img
                             src="{{asset('images/log-out.svg')}}" class="me-2" alt="img">Logout</a>
                 </div>
             </div>
@@ -217,7 +217,7 @@
             <a class="dropdown-item" href="{{route('profile')}}">My
                 Profile</a>
             <a class="dropdown-item" href="{{route('setting')}}">Settings</a>
-            <a class="dropdown-item" href="{{route('login')}}">Logout</a>
+            <a class="dropdown-item" href="{{route('admin.login')}}">Logout</a>
         </div>
     </div>
 
