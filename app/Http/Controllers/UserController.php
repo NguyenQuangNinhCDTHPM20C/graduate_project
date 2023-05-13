@@ -34,46 +34,4 @@ class UserController extends Controller
         return view('public.pages.product.product-detail', compact('product'));
     }
 
-    // Add product to cart
-    public function addToCart(Request $request, $id) {
-        $product = Product::find($id);
-        $cart = session()->get('cart');
-        
-        // If the product is not in the cart, please add it to the cart
-        if(!$cart) {
-            $cart = [$id => ["name" => $product->name,"quantity" => 1,"price" => $product->price,"photo" => $product->photo]
-            ];
-            session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
-        }
-        
-        // If the cart already contains this product, increase the product quantity by 1
-        if(isset($cart[$id])) {
-            $cart[$id]['quantity']++;
-            session()->put('cart', $cart);
-            return redirect()->back()->with('success', 'Product added to cart successfully!');
-        }
-        
-        //If the cart does not have this product, add a new product to the cart
-        $cart[$id] = ["name" => $product->name, "quantity" => 1, "price" => $product->price, "photo" => $product->photo];
-        session()->put('cart', $cart);
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
-    }
-    
-    //Remove cart
-    public function removeFromCart($id)
-    {
-        $cart = session()->get('cart', []);
-
-        // Search product in the cart
-        foreach($cart as $key => $item) {
-            if ($item['id'] == $id) {
-                // Remove product in the cart
-                unset($cart[$key]);
-                session()->put('cart', $cart);
-                return;
-            }
-        }
-    }
-
 }

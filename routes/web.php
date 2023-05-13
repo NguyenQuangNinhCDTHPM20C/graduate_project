@@ -8,6 +8,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,13 +26,18 @@ Route::group(['domain' => env('APP_URL')], function () {
         return view('Public.pages.product.product-list');
     })->name('products');
     Route::get('/product/{id}', [UserController::class, 'product_detail'])->name('product-detail');
-    // Route::post('/add-to-cart/{id}', UserController::class, 'addToCart')->name('add-to-cart');
+    //Routes for shopping cart
+    Route::get('cart', [CartController::class, 'index'])->name('cart.list');
+    Route::post('cart', [CartController::class, 'add'])->name('cart.add');
+    Route::post('update-cart', [CartController::class, 'update'])->name('cart.update');
+    Route::post('remove', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('clear', [CartController::class, 'clear'])->name('cart.clear');
     Route::get('/contact', function () {
         return view('Public.pages.contact');
     })->name('contact');
-    Route::get('/cart', function () {
-        return view('Public.pages.cart');
-    })->name('cart');
+    // Route::get('/cart', function () {
+    //     return view('Public.pages.cart');
+    // })->name('cart');
     Route::get('/checkout', function () {
         return view('Public.pages.checkout');
     })->name('checkout');
