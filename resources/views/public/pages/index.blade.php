@@ -12,25 +12,25 @@
     <div class="row px-xl-5 pb-3">
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1 ">
             <div class="d-flex align-items-center bg-light mb-4 bg-radius bg-shadow" style="padding: 30px">
-                <h1 class="far fa fa-clipboard-check fa-icon m-0 mr-3 fa-p"></h1>
+                <h1 class="fas fa-solid fa-clipboard-check fa-icon m-0 mr-3 fa-p"></h1>
                 <h5 class="font-weight-semi-bold m-0">Genuine Product</h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1 ">
             <div class="d-flex align-items-center bg-light mb-4 bg-radius bg-shadow" style="padding: 30px">
-                <h1 class="fal fa fa-motorcycle fa-icon m-0 mr-2 fa-p"></h1>
+                <h1 class="fa fa-cart-flatbed-suitcase fa-icon m-0 mr-2 fa-p"></h1>
                 <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
             <div class="d-flex align-items-center bg-light mb-4 bg-radius bg-shadow" style="padding: 30px">
-                <h1 class="far fa fa-sync-alt fa-icon m-0 mr-3 fa-p"></h1>
+                <h1 class="fa fa-rotate fa-icon m-0 mr-3 fa-p"></h1>
                 <h5 class="font-weight-semi-bold m-0">Easy Return</h5>
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
             <div class="d-flex align-items-center bg-light mb-4 bg-radius bg-shadow" style="padding: 30px">
-                <h1 class="fas fa fa-headset fa-icon m-0 mr-3 fa-p"></h1>
+                <h1 class="fa fa-headset fa-icon m-0 mr-3 "></h1>
                 <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
             </div>
         </div>
@@ -74,12 +74,7 @@
                     <div class="product-img position-relative overflow-hidden">
                         <img class="img-fluid w-100 img-p" src="{{ asset('assets/product/' . $product->image) }}"
                             alt="{{$product->name}}" />
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
+
                     </div>
                     <div class="text-center py-4 px-4 overflow-text">
                         <a class="h6 text-decoration-none text-truncate"

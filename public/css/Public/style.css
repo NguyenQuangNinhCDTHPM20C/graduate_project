@@ -10224,8 +10224,17 @@ h6 {
     border: 1px solid;
     border-color: var(--white);
 }
+.bg-menu {
+    margin: 0 45px;
+    border-radius: 10px;
+}
+@media screen and (max-width: 768px) {
+    .bg-menu {
+        margin: 5px;
+    }
+}
 .bg-radius {
-    border-radius: 5px;
+    border-radius: 10px;
 }
 .btn-slide:hover {
     background-image: linear-gradient(#00917a, #00483d);
@@ -10273,5 +10282,86 @@ h6 {
     text-overflow: ellipsis;
 }
 .img-p {
+    padding-top: 10px;
     height: 300px;
+}
+.right-search {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    align-items: center;
+}
+.right-search a {
+    margin: 0 10px;
+}
+.itemCheckOrder {
+    display: flex;
+    align-items: center; /* căn giữa theo chiều dọc */
+    justify-content: center; /* căn giữa theo chiều ngang */
+    background: #00483e;
+    border-radius: 10px;
+    padding: 6px 8px;
+    box-shadow: 0 4px 6px #ccc;
+    color: #fff;
+    border: none;
+    font-size: 12px;
+    width: 110px;
+    position: relative;
+}
+.itemCheckOrder .icon {
+    display: flex;
+    align-items: center; /* căn giữa theo chiều dọc */
+    justify-content: center; /* căn giữa theo chiều ngang */
+    font-size: 24px;
+}
+
+.itemCheckOrder .text {
+    display: flex;
+    flex-direction: column; /* chuyển sang kiểu cột */
+    align-items: flex-start; /* căn trái */
+    justify-content: center;
+    width: 80%;
+    text-align: left; /* căn trái cho văn bản */
+    margin-left: 10px;
+}
+.itemCheckOrder:hover {
+    text-decoration: none;
+    background-color: #00917a;
+    color: var(--white);
+}
+.itemCart {
+    text-decoration: none;
+    align-items: center; /* căn giữa theo chiều dọc */
+    font-size: 38px;
+    color: #00483e;
+    display: flex;
+}
+.itemCart:hover {
+    text-decoration: none;
+    color: #00917a;
+}
+.itemCart label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.cart-total {
+    position: absolute;
+    top: -30px;
+    right: -12px;
+    color: #ff6801;
+    width: 16px;
+    height: 16px;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+span.cart-total-text {
+    font-size: 10px;
+    color: var(--white) !important;
 }

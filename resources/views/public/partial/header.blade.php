@@ -69,14 +69,34 @@
                 </div>
             </form>
         </div>
+        <div class="col-lg-4 col-6 text-right right-search">
+            <a class="itemCheckOrder" id="btnCheckOrder" href="/order/check">
+                <span><i class="icon fa fa-truck-fast"></i></span>
+                <span class="text">Kiểm tra đơn hàng</span>
+            </a>
+            <a class="itemCart" href="/gio-hang">
+                <i class="fas fa-light fa-cart-shopping"></i>
+                <label>
+                    <i class="cart-total fas fa fa-comment"></i>
+                    <span class="cart-total cart-total-text">{{ Cart::getTotalQuantity()}}</span>
+                </label>
+            </a>
+            <a class="itemCart" href="/gio-hang">
+                <i class="fas fa-light fa-heart"></i>
+                <label>
+                    <i class="cart-total fas fa fa-comment"></i>
+                    <span class="cart-total cart-total-text">0</span>
+                </label>
+            </a>
+        </div>
 
     </div>
 </div>
 <!-- Topbar End -->
 
 <!-- Navbar Start -->
-<div class="container-fluid bg-dark mb-30">
-    <div class="row px-xl-5">
+<div class="container-fluid mb-30">
+    <div class="row px-xl-5 bg-dark bg-menu">
         <div class="col-lg-3 d-none d-lg-block">
             <a class="btn d-flex align-items-center justify-content-between bg-category w-100" data-toggle="collapse"
                 href="#navbar-vertical" style="height: 65px; padding: 0 30px">
@@ -88,7 +108,7 @@
             <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
                 id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999">
                 <div class="navbar-nav w-100">
-                    <div class="nav-item dropdown dropright">
+                    <div class="nav-item dropdown dropright nav-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses
                             <i class="fa fa-angle-right float-right mt-1"></i></a>
                         <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">

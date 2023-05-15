@@ -18,8 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/Public/fontawesome.min.css') }}">
+    <link href="{{ asset('css/Public/all.min.css') }}" rel="stylesheet">
     <!-- Libraries Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/Public/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Public/owl.carousel.min.css') }}">
