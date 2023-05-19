@@ -10365,3 +10365,36 @@ span.cart-total-text {
     font-size: 10px;
     color: var(--white) !important;
 }
+.love-this-button {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 99;
+}
+.love-this-button a {
+    display: block;
+    border-radius: 17px;
+    padding: 8px 8px 3px 8px;
+    visibility: visible;
+    background: #fff7f8 0% 0% no-repeat padding-box;
+    box-shadow: 0 4px 6px #00000029;
+}
+.love-this-button i.fa-heart {
+    font-size: 25px;
+    line-height: 25px;
+    width: 25px;
+    color: #fd475a;
+}
+.hidden {
+    display: none;
+}
+.love-this-button a:hover {
+    text-decoration: none;
+}
+.text-tab-p-d{
+    background-color: #00917a;
+    color: var(--white);
+}
+.tab-p-d-active{
+    background-color: #00483d;
+}

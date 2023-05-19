@@ -17,52 +17,32 @@ class AuthController extends Controller
     {
         return view('public.pages.login');
     }
-    
-    protected function attemptLogin(Request $request)
-    {
-        $account = Account::where('username', $request->username)->first();
-    
-        if (!$account || !Hash::check($request->password, $account->password) || $account->role != 2) {
-            return 1;
-        }
-    
-        Auth::login($account, $request->remember);
-    
-        return 2;
-    }
 
     public function login(Request $request)
     {
         // Validate request data
         $validatedData = $request->validate([
-            'username' => 'required',
+            'email' => 'required',
             'password' => 'required',
         ]);
-    
-        // Attempt login
-        if ($this->attemptLogin($request) == 2) {
-            $account = auth()->user();
-            $username = $account->username;
-            $photo = $account->photo;
-            session(['username' => $username]); // Lưu tên người dùng vào session
-            session(['photo' => $photo]);
-           
-            return redirect()->route('home');
-        }elseif ($this->attemptLogin($request) == 1) {
-            $account = auth()->user();
-            $username = $account->username;
-            $photo = $account->photo;
-            session(['username' => $username]); // Lưu tên người dùng vào session
-            session(['photo' => $photo]);
-            
+        $idForm = $request->input('id_form');
+        $account = Account::where('email', $request->email)->first();
+        $username = $account->username;
+        $photo = $account->photo;
+        session(['username' => $username]); // Lưu tên người dùng vào session
+        session(['photo' => $photo]);
+        if ($account->role != 2) {
+            if($idForm != 1) {
+                return back()->withErrors([
+                    'email' => 'Email hoặc mật khẩu không đúng.',
+                ]);
+            }
             return redirect()->route('index');
-        }
-        
-    
-        return back()->withErrors([
-            'username' => 'Tên đăng nhập hoặc mật khẩu không đúng.',
-        ]);
+        }   
+       
+            return redirect()->route('home');
     }
+
     
 
     

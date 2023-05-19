@@ -9,6 +9,14 @@
         <div class="col-lg-5 mb-30">
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner bg-light">
+                    <div class="love-this-button">
+
+
+                        <a href="#" class="favorite-toggle">
+                            <i class="fa-regular fa-heart"></i>
+                            <i class="fa fa-heart hidden"></i>
+                        </a>
+                    </div>
                     <div class="carousel-item active">
                         <img class="w-100 h-100" src="{{asset('assets/product/' .$product->image)}}"
                             alt="$product->name">
@@ -48,7 +56,13 @@
                     </div>
                     <small class="pt-1">(99 Reviews)</small>
                 </div>
-                <h3 class="font-weight-semi-bold mb-4">{{$product->selling_price}}VNĐ</h3>
+                <div class="d-flex align-items-center justify-content-center mt-2">
+                    <h5>{{$product->discount_price}}VNĐ</h5>
+                    <h6 class="text-muted ml-2">
+                        <del>{{$product->selling_price}}VNĐ</del>
+                    </h6>
+                </div>
+
                 <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit
                     clita ea. Sanc ipsum et, labore clita lorem magna duo dolor no sea
                     Nonumy</p>
@@ -120,7 +134,7 @@
                         @csrf
                         <input type="hidden" name="id" value="{{ $product->id }}">
                         <input type="hidden" name="name" value="{{ $product->name }}">
-                        <input type="hidden" name="price" value="{{ $product->selling_price }}">
+                        <input type="hidden" name="price" value="{{ $product->discount_price }}">
                         <input type="hidden" name="image" value="{{ $product->image }}">
                         <input type="hidden" name="quantity" value="1">
                         <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To
@@ -151,9 +165,10 @@
         <div class="col">
             <div class="bg-light p-30">
                 <div class="nav nav-tabs mb-4">
-                    <a class="nav-item nav-link text-dark active" data-toggle="tab" href="#tab-pane-1">Description</a>
-                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-2">Information</a>
-                    <a class="nav-item nav-link text-dark" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
+                    <a class="nav-item nav-link text-tab-p-d text-tab-p-d-active" data-toggle="tab"
+                        href="#tab-pane-1">Description</a>
+                    <a class="nav-item nav-link text-tab-p-d" data-toggle="tab" href="#tab-pane-2">Information</a>
+                    <a class="nav-item nav-link text-tab-p-d" data-toggle="tab" href="#tab-pane-3">Reviews (0)</a>
                 </div>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" id="tab-pane-1">
@@ -431,6 +446,18 @@ btnMinus.addEventListener('click', () => {
         value = 1;
     }
     input.value = value;
+});
+//==========================
+document.addEventListener('DOMContentLoaded', function() {
+    var favoriteToggle = document.querySelector('.favorite-toggle');
+    var heartRegular = favoriteToggle.querySelector('.fa-regular.fa-heart');
+    var heartHidden = favoriteToggle.querySelector('.fa.fa-heart.hidden');
+
+    favoriteToggle.addEventListener('click', function(event) {
+        event.preventDefault();
+        heartRegular.classList.toggle('hidden');
+        heartHidden.classList.toggle('hidden');
+    });
 });
 </script>
 @stop

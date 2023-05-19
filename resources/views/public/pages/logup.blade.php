@@ -22,7 +22,7 @@
                             required="" autofocus>
                         <button class="btnlog" type="submit">Log In</button>
                     </form>
-                    <p class="account">Do have an account? <a href="{{route('login')}}">Login</a></p>
+                    <p class="account">Do have an account? <a href="{{route('public.login')}}">Login</a></p>
                 </div>
                 <div class="w3l_form align-self">
                     <div class="left_grid_info">

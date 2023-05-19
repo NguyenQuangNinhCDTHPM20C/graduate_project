@@ -22,8 +22,8 @@
         </div>
         <nav>
             <ul>
-                <li><a href="{{route('account.index')}}" class="actived"><i
-                            class="fas fa fa-tachometer-alt"></i><span>Bảng điều
+                <li><a href="{{route('account.index')}}" class="actived"><i class="fas fa fa-sliders"></i><span>Bảng
+                            điều
                             khiển</span></a></li>
                 <li><a href="{{route('account.infor')}}"><i class="fal fa fa-user-circle"></i><span>Thông tin tài
                             khoản</span></a></li>

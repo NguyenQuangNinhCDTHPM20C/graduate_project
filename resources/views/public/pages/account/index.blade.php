@@ -3,7 +3,7 @@
 @section('title', 'Double-N shop')
 
 @section('styles')
-<link href="css/Public/account/style_ex.css" rel="stylesheet">
+<link href="css/Public/account/style.css" rel="stylesheet">
 <link rel="preload" as="style" href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css">
 <link href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css" rel="stylesheet" type="text/css">
 <style>

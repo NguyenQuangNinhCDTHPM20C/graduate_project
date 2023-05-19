@@ -74,20 +74,22 @@
                 <span><i class="icon fa fa-truck-fast"></i></span>
                 <span class="text">Kiểm tra đơn hàng</span>
             </a>
-            <a class="itemCart" href="/gio-hang">
+            <a class="itemCart" href="{{route('cart.list')}}">
                 <i class="fas fa-light fa-cart-shopping"></i>
                 <label>
                     <i class="cart-total fas fa fa-comment"></i>
                     <span class="cart-total cart-total-text">{{ Cart::getTotalQuantity()}}</span>
                 </label>
             </a>
-            <a class="itemCart" href="/gio-hang">
+            <a class="itemCart" href="{{route('account.wishlist')}}">
                 <i class="fas fa-light fa-heart"></i>
                 <label>
                     <i class="cart-total fas fa fa-comment"></i>
-                    <span class="cart-total cart-total-text">0</span>
+                    <div id="favorite-count"></div>
+                    <span class="cart-total cart-total-text">{{ $favorite_count }}</span>
                 </label>
             </a>
+
         </div>
 
     </div>
@@ -141,17 +143,25 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="{{ route('home') }}" class="nav-item nav-link active">Home</a>
-                        <a href="{{ route('products') }}" class="nav-item nav-link">Products</a>
-                        <div class="nav-item dropdown">
+                        <a href="{{ route('home') }}"
+                            class="nav-item nav-link{{ request()->is('/') ? ' active' : '' }}">Home</a>
+                        <a href="{{ route('products') }}"
+                            class="nav-item nav-link{{ request()->is('products*') ? ' active' : '' }}">Products</a>
+                        <div class="nav-item dropdown{{ request()->is('cart.list', 'checkout') ? ' active' : '' }}">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages
-                                <i class="fa fa-angle-down mt-1"></i></a>
+                                <i class="fa fa-angle-down mt-1"></i>
+                            </a>
                             <div class="dropdown-menu bg-primary rounded-0 border-0 m-0 bg-drop">
-                                <a href="{{ route('cart.list') }}" class="dropdown-item">Shopping Cart</a>
-                                <a href="{{ route('checkout') }}" class="dropdown-item">Checkout</a>
+                                <a href="{{ route('cart.list') }}"
+                                    class="dropdown-item{{ request()->is('cart.list') ? ' active' : '' }}">Shopping
+                                    Cart</a>
+                                <a href="{{ route('checkout') }}"
+                                    class="dropdown-item{{ request()->is('checkout') ? ' active' : '' }}">Checkout</a>
                             </div>
                         </div>
-                        <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
+                        <a href="{{ route('contact') }}"
+                            class="nav-item nav-link{{ request()->is('contact') ? ' active' : '' }}">Contact</a>
+
                     </div>
                     <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                         <a href="" class="btn px-0">

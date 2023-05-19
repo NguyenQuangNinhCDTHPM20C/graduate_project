@@ -9,6 +9,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\FavoriteController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,9 +36,10 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/contact', function () {
         return view('Public.pages.contact');
     })->name('contact');
-    // Route::get('/cart', function () {
-    //     return view('Public.pages.cart');
-    // })->name('cart');
+    //Route for add product to favorite
+    Route::post('/favorite/add', [UserController::class, 'add_to_favorite'])->name('favorite.add');
+
+
     Route::get('/checkout', function () {
         return view('Public.pages.checkout');
     })->name('checkout');
@@ -60,9 +62,8 @@ Route::group(['domain' => env('APP_URL')], function () {
         Route::get('/order', function () {
             return view('Public.pages.account.order');
         })->name('account.order');
-        Route::get('/wishlist', function () {
-            return view('Public.pages.account.wishlist');
-        })->name('account.wishlist');
+        Route::get('/wishlist', [FavoriteController::class, 'index'])->name('account.wishlist');
+        Route::delete('/wishlist/{id}', [FavoriteController::class, 'destroy'])->name('wishlist.delete');
         Route::get('/comment', function () {
             return view('Public.pages.account.comment');
         })->name('account.comment');

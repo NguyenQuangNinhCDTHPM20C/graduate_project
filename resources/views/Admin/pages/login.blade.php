@@ -7,7 +7,7 @@
 <div class="main-wrapper">
     <Form method="POST" class="account-content" action="{{ route('admin.login') }}">
         @csrf
-        <input type="hidden" name="role" id="role" value="1">
+        <input type="hidden" name="id_form" id="id_form" value="1">
         <div class="login-wrapper">
             <div class="login-content">
                 <div class="login-userset">
@@ -24,8 +24,7 @@
                     <div class="form-login">
                         <label>Email</label>
                         <div class="form-addons">
-                            <input type="text" name="username" id="username" placeholder="User Name" required=""
-                                autofocus>
+                            <input type="text" name="email" id="email" placeholder="Email" required="" autofocus>
                             <img src="{{asset('images/mail.svg')}}" alt="img">
                         </div>
                         <div class="text-danger pt-2">

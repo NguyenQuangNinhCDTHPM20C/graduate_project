@@ -44,7 +44,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="js/Public/easing.min.js"></script>
-    <script src="ljs/Public/owl.carousel.min.js"></script>
+    <script src="js/Public/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
     <script src="js/Public/jqBootstrapValidation.min.js"></script>

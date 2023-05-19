@@ -380,6 +380,9 @@
 
     <!-- Vendor Start -->
     <div class="container-fluid py-5">
+        <h5 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+            <span class="bg-secondary pr-3">Brands</span>
+        </h5>
         <div class="row px-xl-5">
             <div class="col">
                 <div class="owl-carousel vendor-carousel">
