@@ -38,7 +38,7 @@ Route::group(['domain' => env('APP_URL')], function () {
     })->name('contact');
     //Route for add product to favorite
     Route::post('/favorite/add', [UserController::class, 'add_to_favorite'])->name('favorite.add');
-
+    
 
     Route::get('/checkout', function () {
         return view('Public.pages.checkout');
@@ -47,7 +47,7 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/login', [AuthController::class, 'showLoginFormPublic'])->name('public.login');
     Route::post('/login', [AuthController::class, 'login']);
     // Logout
-    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('public.logout');
     //Logup
     Route::get('/logup', function () {
         return view('Public.pages.logup');

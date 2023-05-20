@@ -10,12 +10,16 @@
             <div id="product-carousel" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner bg-light">
                     <div class="love-this-button">
-
-
-                        <a href="#" class="favorite-toggle">
+                        <form action="{{route('favorite.add')}}" method="post">
+                            @csrf
+                            @method('POST')
+                            <input type="hidden" id="product_id" name="product_id" value="{{$product->id}}">
+                            <button type="submit"> <i class="fa-regular fa-heart"></i></button>
+                        </form>
+                        <!-- <a href="#" class="favorite-toggle">
                             <i class="fa-regular fa-heart"></i>
                             <i class="fa fa-heart hidden"></i>
-                        </a>
+                        </a> -->
                     </div>
                     <div class="carousel-item active">
                         <img class="w-100 h-100" src="{{asset('assets/product/' .$product->image)}}"
@@ -56,8 +60,9 @@
                     </div>
                     <small class="pt-1">(99 Reviews)</small>
                 </div>
-                <div class="d-flex align-items-center justify-content-center mt-2">
-                    <h5>{{$product->discount_price}}VNĐ</h5>
+                <div class="d-flex align-items-center  mt-2">
+
+                    <h5> {{$product->discount_price}}VNĐ</h5>
                     <h6 class="text-muted ml-2">
                         <del>{{$product->selling_price}}VNĐ</del>
                     </h6>
@@ -67,7 +72,7 @@
                     clita ea. Sanc ipsum et, labore clita lorem magna duo dolor no sea
                     Nonumy</p>
                 <div class="d-flex mb-3">
-                    <strong class="text-dark mr-3">Sizes:</strong>
+                    <strong class="text-grey mr-3">Sizes:</strong>
                     <form>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="size-1" name="size">
@@ -92,7 +97,7 @@
                     </form>
                 </div>
                 <div class="d-flex mb-4">
-                    <strong class="text-dark mr-3">Colors:</strong>
+                    <strong class="text-grey mr-3">Colors:</strong>
                     <form>
                         <div class="custom-control custom-radio custom-control-inline">
                             <input type="radio" class="custom-control-input" id="color-1" name="color">

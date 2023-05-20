@@ -5,16 +5,9 @@ use App\Models\Favorite;
 use App\Models\Product;
 use App\Models\FavoriteDetail;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class FavoriteController extends Controller
 {
-
-    public function getCount()
-    {
-       
-
-        return $count;
-    }
 
     /**
      * Display a listing of the resource.
@@ -35,39 +28,43 @@ class FavoriteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+
+public function create(Request $request)
+{
+    // Kiểm tra xem người dùng đã đăng nhập hay chưa
+    if (Auth::check()) {
         $productId = $request->input('product_id');
-        $accountId = 2;
+        $accountId = Auth()->user()->id;
 
         // Get favorite of user
         $favorite = Favorite::where('account_id', $accountId)->first();
 
         if ($favorite) {
             // Get ID favorite
-             $favoriteId = $favorite->id;
+            $favoriteId = $favorite->id;
 
-              // Check if the product already exists in favorite_detail
-                $existingFavoriteDetail = FavoriteDetail::where('favorite_id', $favoriteId)
+            // Kiểm tra xem sản phẩm đã tồn tại trong favorite_detail hay chưa
+            $existingFavoriteDetail = FavoriteDetail::where('favorite_id', $favoriteId)
                 ->where('product_id', $productId)
                 ->first();
 
             if (!$existingFavoriteDetail) {
-                // Add product to favorite_detail
+                // Thêm sản phẩm vào favorite_detail
                 $favoriteDetail = new FavoriteDetail();
                 $favoriteDetail->favorite_id = $favoriteId;
                 $favoriteDetail->product_id = $productId;
-                $favoriteDetail->save();}
+                $favoriteDetail->save();
+            }
         } else {
-            // Create new favorit and add account
+            // Tạo mới favorite và thêm account
             $favorite = new Favorite();
             $favorite->account_id = $accountId;
             $favorite->save();
 
             // Get ID favorite
             $favoriteId = $favorite->id;
-            
-            // Add product to favorite_detail
+
+            // Thêm sản phẩm vào favorite_detail
             $favoriteDetail = new FavoriteDetail();
             $favoriteDetail->favorite_id = $favoriteId;
             $favoriteDetail->product_id = $productId;
@@ -75,7 +72,12 @@ class FavoriteController extends Controller
         }
 
         return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào mục yêu thích.');
+    } else {
+        // Người dùng chưa đăng nhập, thông báo yêu cầu đăng nhập
+        return redirect()->back()->with('error', 'Vui lòng đăng nhập để thêm sản phẩm vào mục yêu thích.');
     }
+}
+
 
     /**
      * Store a newly created resource in storage.

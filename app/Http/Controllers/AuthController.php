@@ -27,8 +27,10 @@ class AuthController extends Controller
         ]);
         $idForm = $request->input('id_form');
         $account = Account::where('email', $request->email)->first();
+        $id_user = $account->id;
         $username = $account->username;
         $photo = $account->photo;
+        session(['id_user' => $id_user]);
         session(['username' => $username]); // Lưu tên người dùng vào session
         session(['photo' => $photo]);
         if ($account->role != 2) {
@@ -54,7 +56,7 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        return redirect()->route('public.login');
     }
 
 }

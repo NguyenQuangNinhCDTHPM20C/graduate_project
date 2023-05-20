@@ -6,16 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Brand;
 use App\Models\Favorite;
 use App\Models\FavoriteDetail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Carbon;
 class UserController extends Controller
 {
     // Show home
     public function index(){
-        // $favorite_count = FavoriteController::getCount();
-        // Get all products and count the number of products of each type
         $products = Product::all();
+        $newProducts = Product::where('created_at', '>=', Carbon::now()->subDays(7))->get();
+        $brands = Brand::all();
         $category = \DB::table('category')
         ->leftJoin('products', 'category.id', '=', 'products.category_id')
         ->select('category.id', 'category.name', \DB::raw('count(products.id) as total'))
@@ -25,7 +27,8 @@ class UserController extends Controller
          return view('Public.pages.index', [
             'products' => $products,
             'category' => $category,
-            // 'favorite_count' => $favorite_count
+            'brands' => $brands,
+            'new_products' => $newProducts
         ]);
     }
     
