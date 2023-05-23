@@ -53,62 +53,7 @@ class AuthController extends Controller
             return redirect()->route('home');}
             return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng.']);
     }
-    
-    public function login(Request $request)
-    {
-        // Validate request data
-        $validatedData = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
-        $idForm = $request->input('id_form');
-        $account = Account::where('email', $request->email)->first();
-        $id_user = $account->id;
-        $username = $account->username;
-        $photo = $account->photo;
-        session(['id_user' => $id_user]);
-        session(['username' => $username]); // Lưu tên người dùng vào session
-        session(['photo' => $photo]);
-        if($idForm){
-            if($account->role === 1) {
-                session(['auth_check'=>true]);
-                return redirect()->route('index');
-            }
-                return back()->withErrors([
-                    'email' => 'Email hoặc mật khẩu không đúng.', 
-                ]);
-        }else{
-            if($account->role === 2) {
-                session(['auth_check_admin'=>true]);
-                return redirect()->route('home');
-            }
-                return back()->withErrors([
-                    'email' => 'Email hoặc mật khẩu không đúng.', 
-                ]);
-        }
-        // if ($account->role != 2) {
-        //     if($idForm != 1) {
-        //         session(['auth_check_admin'=> false]);
-        //         return back()->withErrors([
-        //             'email' => 'Email hoặc mật khẩu không đúng.',
-                    
-        //         ]);
-        //     }
-        //     return redirect()->route('index');
-        // }
-        // if($idForm !=2){
-        //     session(['auth_check'=> false]);
-        //     return back()->withErrors([
-        //         'email' => 'Email hoặc mật khẩu không đúng.',
-                
-        //     ]);
-        // }
-        //     return redirect()->route('home');
-    }
 
-    
-
-    
     public function logout_public(Request $request)
     {
         Auth::logout();
