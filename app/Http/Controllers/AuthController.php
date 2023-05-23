@@ -17,7 +17,43 @@ class AuthController extends Controller
     {
         return view('public.pages.login');
     }
+    
+    public function login_admin(Request $request){
+        $validatedData = $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        $account = Account::where('email', $request->email)->first();
+        $id_user = $account->id;
+        $username = $account->username;
+        $photo = $account->photo;
+        if($account->role == 1)
+        {session(['id_user' => $id_user]);
+        session(['username' => $username]); // Lưu tên người dùng vào session
+        session(['photo' => $photo]);
+        session(['auth_check_admin'=>true]);
+            return redirect()->route('index');}
+            return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng.']);
+    }
 
+    public function login_public(Request $request){
+        $validatedData = $request->validate([
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        $account = Account::where('email', $request->email)->first();
+        $id_user = $account->id;
+        $username = $account->username;
+        $photo = $account->photo;
+        if($account->role == 2)
+        {session(['id_user' => $id_user]);
+        session(['username' => $username]); // Lưu tên người dùng vào session
+        session(['photo' => $photo]);
+        session(['auth_check'=>true]);
+            return redirect()->route('home');}
+            return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng.']);
+    }
+    
     public function login(Request $request)
     {
         // Validate request data
@@ -33,22 +69,47 @@ class AuthController extends Controller
         session(['id_user' => $id_user]);
         session(['username' => $username]); // Lưu tên người dùng vào session
         session(['photo' => $photo]);
-        if ($account->role != 2) {
-            if($idForm != 1) {
-                return back()->withErrors([
-                    'email' => 'Email hoặc mật khẩu không đúng.',
-                ]);
+        if($idForm){
+            if($account->role === 1) {
+                session(['auth_check'=>true]);
+                return redirect()->route('index');
             }
-            return redirect()->route('index');
-        }   
-       
-            return redirect()->route('home');
+                return back()->withErrors([
+                    'email' => 'Email hoặc mật khẩu không đúng.', 
+                ]);
+        }else{
+            if($account->role === 2) {
+                session(['auth_check_admin'=>true]);
+                return redirect()->route('home');
+            }
+                return back()->withErrors([
+                    'email' => 'Email hoặc mật khẩu không đúng.', 
+                ]);
+        }
+        // if ($account->role != 2) {
+        //     if($idForm != 1) {
+        //         session(['auth_check_admin'=> false]);
+        //         return back()->withErrors([
+        //             'email' => 'Email hoặc mật khẩu không đúng.',
+                    
+        //         ]);
+        //     }
+        //     return redirect()->route('index');
+        // }
+        // if($idForm !=2){
+        //     session(['auth_check'=> false]);
+        //     return back()->withErrors([
+        //         'email' => 'Email hoặc mật khẩu không đúng.',
+                
+        //     ]);
+        // }
+        //     return redirect()->route('home');
     }
 
     
 
     
-    public function logout(Request $request)
+    public function logout_public(Request $request)
     {
         Auth::logout();
 
@@ -56,7 +117,19 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
+       
         return redirect()->route('public.login');
     }
+    
+    public function logout_admin(Request $request)
+    {
+        Auth::logout();
 
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+       
+        return redirect()->route('admin.login');
+    }
 }

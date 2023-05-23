@@ -2,6 +2,10 @@
 
 @section('title', 'Double-N shop')
 
+@php
+use Illuminate\Support\Str;
+@endphp
+
 @section('styles')
 <link href="css/Public/account/style.css" rel="stylesheet">
 <link rel="preload" as="style" href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css">
@@ -21,7 +25,8 @@
         <div class="header">
             <div class="bg">
                 <div class="text">
-                    <h2>CHÀO MỪNG QUAY TRỞ LẠI, NGUYỄN QUANG NINH</h2>
+                    <h2>CHÀO MỪNG QUAY TRỞ LẠI, {!! Str::upper(session('username')) !!}
+                    </h2>
                     <p><i>Tổng quát các hoạt động của bạn tại đây</i></p>
                 </div>
             </div>

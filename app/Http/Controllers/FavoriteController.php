@@ -6,6 +6,8 @@ use App\Models\Product;
 use App\Models\FavoriteDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 class FavoriteController extends Controller
 {
 
@@ -16,10 +18,13 @@ class FavoriteController extends Controller
      */
     public function index()
     {
+        $accountId = session('id_user');
         $favorites = FavoriteDetail::join('favorites', 'favorite_detail.favorite_id', '=', 'favorites.id')
-        ->where('favorites.account_id', '2')
+        ->where('favorites.account_id', $accountId)
         ->get();
-
+        $count_favorites = FavoriteDetail::join('favorites', 'favorite_detail.favorite_id', '=', 'favorites.id')
+        ->where('favorites.account_id', $accountId)
+        ->count();
         return view('public.pages.account.wishlist', compact('favorites'));
     }
 
@@ -29,54 +34,41 @@ class FavoriteController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-public function create(Request $request)
-{
-    // Kiểm tra xem người dùng đã đăng nhập hay chưa
-    if (Auth::check()) {
-        $productId = $request->input('product_id');
-        $accountId = Auth()->user()->id;
-
-        // Get favorite of user
-        $favorite = Favorite::where('account_id', $accountId)->first();
-
-        if ($favorite) {
-            // Get ID favorite
-            $favoriteId = $favorite->id;
-
-            // Kiểm tra xem sản phẩm đã tồn tại trong favorite_detail hay chưa
-            $existingFavoriteDetail = FavoriteDetail::where('favorite_id', $favoriteId)
-                ->where('product_id', $productId)
-                ->first();
-
-            if (!$existingFavoriteDetail) {
-                // Thêm sản phẩm vào favorite_detail
-                $favoriteDetail = new FavoriteDetail();
-                $favoriteDetail->favorite_id = $favoriteId;
-                $favoriteDetail->product_id = $productId;
-                $favoriteDetail->save();
-            }
-        } else {
-            // Tạo mới favorite và thêm account
-            $favorite = new Favorite();
-            $favorite->account_id = $accountId;
-            $favorite->save();
-
-            // Get ID favorite
-            $favoriteId = $favorite->id;
-
-            // Thêm sản phẩm vào favorite_detail
-            $favoriteDetail = new FavoriteDetail();
-            $favoriteDetail->favorite_id = $favoriteId;
-            $favoriteDetail->product_id = $productId;
-            $favoriteDetail->save();
-        }
-
-        return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào mục yêu thích.');
-    } else {
-        // Người dùng chưa đăng nhập, thông báo yêu cầu đăng nhập
-        return redirect()->back()->with('error', 'Vui lòng đăng nhập để thêm sản phẩm vào mục yêu thích.');
-    }
-}
+     public function create(Request $request)
+     {
+         if (session::has('auth_check')) {
+             $productId = $request->input('product_id');
+             $accountId = Auth()->user()->id;
+     
+             // Get or create favorite of user
+             $favorite = Favorite::firstOrCreate(['account_id' => $accountId]);
+     
+             // Get ID favorite
+             $favoriteId = $favorite->id;
+     
+             // Kiểm tra xem sản phẩm đã tồn tại trong favorite_detail hay chưa
+             $existingFavoriteDetail = FavoriteDetail::where('favorite_id', $favoriteId)
+                 ->where('product_id', $productId)
+                 ->first();
+     
+             if (!$existingFavoriteDetail) {
+                 // Thêm sản phẩm vào favorite_detail
+                 $favoriteDetail = new FavoriteDetail();
+                 $favoriteDetail->favorite_id = $favoriteId;
+                 $favoriteDetail->product_id = $productId;
+                 $favoriteDetail->save();
+     
+                 return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào mục yêu thích.');
+             } else {
+                 return redirect()->back()->with('error', 'Sản phẩm đã tồn tại trong mục yêu thích.');
+             }
+         } else {
+             // Người dùng chưa đăng nhập, thông báo yêu cầu đăng nhập và chuyển đến view login
+             return redirect()->route('public.login')->with('error', 'Vui lòng đăng nhập để thêm sản phẩm vào mục yêu thích.');
+         }
+     }
+     
+     
 
 
     /**
@@ -132,8 +124,39 @@ public function create(Request $request)
      */
     public function destroy($id)
     {
-        $product = FavoriteDetail::findOrFail($id);
-        $product->delete();
-        return redirect()->route('account.wishlist')->with('Product has been removed successfully');
+        $accountId = session('id_user');
+        $countFavorites = FavoriteDetail::join('favorites', 'favorite_detail.favorite_id', '=', 'favorites.id')
+            ->where('favorites.account_id', $accountId)
+            ->count();
+        
+        $productId = FavoriteDetail::where('id', $id)
+            ->where('favorite_id', function ($query) use ($accountId) {
+                $query->select('id')
+                    ->from('favorites')
+                    ->where('account_id', $accountId);
+            })
+            ->value('product_id');
+        
+        if ($productId) {
+            FavoriteDetail::where('id', $id)
+                ->where('favorite_id', function ($query) use ($accountId) {
+                    $query->select('id')
+                        ->from('favorites')
+                        ->where('account_id', $accountId);
+                })
+                ->delete();
+            
+            if ($countFavorites == 1) {
+                Favorite::where('id', $favoriteId)
+                    ->where('account_id', $accountId)
+                    ->delete();
+            }
+            
+            return redirect()->route('account.wishlist')->with('success', 'Product has been removed successfully');
+        } else {
+            return redirect()->route('account.wishlist')->with('error', 'Product not found');
+        }
     }
+    
+
 }

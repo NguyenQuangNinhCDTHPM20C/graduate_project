@@ -7,12 +7,12 @@
 
             <div class="info">
                 <div class="avt" id="myAvatar">
-                    <img
-                        src="https://hoanghamobile.com/avatar/Uploads/Avatar/63128-ninhnguyen1239-638164809348787755.jpg">
+                    <img src="{{asset('assets/user/'. session('photo'))}}" alt="{{session('username')}}"
+                        style="width: 100%">
                 </div>
 
                 <div class="summer">
-                    <p><strong>Nguyễn Quang Ninh</strong></p>
+                    <p><strong>{{session('username')}}</strong></p>
                     <p class="change-avatar"><a href="javascript:;"
                             onclick="$('#avtImage').trigger('click'); return false;"><i class="fal fa fa-user"></i>
                             Thay đổi ảnh đại diện</a></p>

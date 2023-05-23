@@ -5,6 +5,7 @@
 @section('content')
 <!-- Cart Start -->
 <div class="container-fluid">
+    @if( Cart::getTotalQuantity()!=0)
     <div class="row px-xl-5">
         @if ($message = Session::get('success'))
         <div class="p-4 mb-3 bg-green-400 rounded">
@@ -84,6 +85,19 @@
             </div>
         </div>
     </div>
+    @else
+    <div class="no-items">
+        <div class="cart-icon">
+            <i class="fa fa-solid fa-triangle-exclamation"></i>
+            <label>Giỏ hàng</label>
+        </div>
+        <div class="img">
+            <img src="{{asset('images/no-item.png')}}">
+            <p><strong>Hiện chưa có sản phẩm nào trong giỏ hàng</strong></p>
+        </div>
+    </div>
+
+    @endif
 </div>
 <!-- Cart End -->
 @stop

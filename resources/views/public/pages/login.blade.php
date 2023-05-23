@@ -16,7 +16,7 @@
                     <h2>LOG IN</h2>
                     <form method="POST" action="{{ route('public.login') }}">
                         @csrf
-                        <input type="hidden" name="id_form" id="id_form" value="2">
+                        <input type="hidden" name="id_form" id="id_form" value="0">
                         <input type="text" class="text" name="email" id="email" placeholder="Email" required=""
                             autofocus>
                         <input type="password" class="password" name="password" id="password" placeholder="Password"

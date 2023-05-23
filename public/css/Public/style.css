@@ -10412,3 +10412,23 @@ span.cart-total-text {
     color: gray;
     font-weight: none;
 }
+.no-items {
+    text-align: center;
+    font-size: 15px;
+}
+.cart-icon i {
+    font-size: 60px;
+    display: block;
+    background: transparent linear-gradient(90deg, #009981 0%, #00483d 100%) 0%
+        0% no-repeat padding-box;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.cart-icon label {
+    font-weight: bold;
+    font-size: 15px;
+}
+.no-items .img {
+    overflow-clip-margin: content-box;
+    overflow: clip;
+}
