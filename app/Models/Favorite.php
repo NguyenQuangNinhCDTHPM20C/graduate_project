@@ -9,8 +9,9 @@ class Favorite extends Model
 {
     use HasFactory;
 
-    protected $favorite = [
-        'account_id'
+    protected $fillable = [
+        'account_id',
+        // other fillable attributes
     ];
     
     public function account()

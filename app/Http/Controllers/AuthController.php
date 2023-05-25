@@ -24,13 +24,9 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
         $account = Account::where('email', $request->email)->first();
-        $id_user = $account->id;
-        $username = $account->username;
-        $photo = $account->photo;
         if($account->role == 1)
-        {session(['id_user' => $id_user]);
-        session(['username' => $username]); // Lưu tên người dùng vào session
-        session(['photo' => $photo]);
+        {
+        session(['account' => $account]); // Lưu tên người dùng vào session
         session(['auth_check_admin'=>true]);
             return redirect()->route('index');}
             return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng.']);
@@ -42,13 +38,9 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
         $account = Account::where('email', $request->email)->first();
-        $id_user = $account->id;
-        $username = $account->username;
-        $photo = $account->photo;
         if($account->role == 2)
-        {session(['id_user' => $id_user]);
-        session(['username' => $username]); // Lưu tên người dùng vào session
-        session(['photo' => $photo]);
+        {
+        session(['account' => $account]); // Lưu tên người dùng vào session
         session(['auth_check'=>true]);
             return redirect()->route('home');}
             return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng.']);

@@ -185,10 +185,11 @@
             <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                 <span class="user-info">
                     <span class="user-letter">
-                        <img src="{{asset('assets/user/'.session('photo'))}}" alt="{{ session('username') }}">
+                        <img src="{{asset('assets/user/'.session('account')->photo)}}"
+                            alt="{{ session('account')->username }}">
                     </span>
                     <span class="user-detail">
-                        <span class="user-name">{{ session('username') }}</span>
+                        <span class="user-name">{{ session('account')->username}}</span>
                         <span class="user-role">Super Admin</span>
                     </span>
                 </span>

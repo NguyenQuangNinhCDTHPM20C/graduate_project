@@ -31,6 +31,10 @@
 </head>
 
 <body>
+    @php
+    use Illuminate\Support\Str;
+    @endphp
+
     @include('Public.partial.header')
 
     @yield('slider')

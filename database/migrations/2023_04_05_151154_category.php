@@ -16,6 +16,7 @@ class Category extends Migration
         Schema::create('category', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',200);
+            $table->string('image');
             $table->string('slug')->unique();
             $table->tinyInteger('status')->nullable()->default(1);
             $table->timestamps(); // creawted_at, updated_at

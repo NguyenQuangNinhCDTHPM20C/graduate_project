@@ -11,19 +11,24 @@
         <div class="col-lg-6 text-center text-lg-right">
             <div class="d-inline-flex align-items-center">
                 <div class="btn-group">
-                    @if(session()->has('username'))
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-sm dropdown-toggle btn-lan" data-toggle="dropdown">
-                            <img src="{{ asset('assets/user/' . session('photo')) }}" alt="Avatar"
-                                style="width: 25px; border-radius: 50%; margin-right: 10px;">
-                            <a class="text-body" data-toggle="dropdown" href="#">Welcome, {{ session('username') }}</a>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <form action="{{ route('public.logout') }}" method="POST" id="logout-form">
-                                @method('POST')
-                                @csrf
-                                <button class="dropdown-item" type="submit">Logout</button>
-                            </form>
+                    @if(session()->has('account'))
+                    <div class="drop-down">
+                        <a class="text-body drop-btn" href="#"><img
+                                src="{{ asset('assets/user/' . session('account')->photo) }}" alt="Avatar"
+                                style="width: 25px; border-radius: 50%; margin-right: 10px;"> Welcome,
+                            {{ session('account')->username}}</a>
+                        <div class="dropdown-menu dropdown-menu-right drop-down-content">
+                            <a href="{{ route('account.index') }}" class="profile-link">
+                                <i class="fal fa fa-user-circle"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a>
+                                <form action="{{ route('public.logout') }}" method="POST" id="logout-form">
+                                    @method('POST')
+                                    @csrf
+                                    <button type="submit"><i class="fal fa fa-sign-out-alt"></i>Logout</button>
+                                </form>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -81,7 +86,7 @@
         </form>
     </div>
     <div class="col-lg-4 col-6 text-right right-search">
-        <a class="itemCheckOrder" id="btnCheckOrder" href="/order/check">
+        <a class="itemCheckOrder" id="btnCheckOrder" href="{{ route('account.order') }}">
             <span><i class="icon fa fa-truck-fast"></i></span>
             <span class="text">Kiểm tra đơn hàng</span>
         </a>

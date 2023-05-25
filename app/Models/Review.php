@@ -16,7 +16,7 @@ class Review extends Model
            'status',
     ];
     public function account(){
-        return $this->belongsTo(Account::class, 'id', 'account_id');
+        return $this->belongsTo(Account::class);
     }
     public function product_id(){
         return $this->belongsTo(Product::class, 'id', 'product_id');

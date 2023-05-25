@@ -7,12 +7,12 @@
 
             <div class="info">
                 <div class="avt" id="myAvatar">
-                    <img src="{{asset('assets/user/'. session('photo'))}}" alt="{{session('username')}}"
-                        style="width: 100%">
+                    <img src="{{asset('assets/user/'. session('account')->photo)}}"
+                        alt="{{session('account')->username}}" style="width: 100%">
                 </div>
 
                 <div class="summer">
-                    <p><strong>{{session('username')}}</strong></p>
+                    <p><strong>{{session('account')->username}}</strong></p>
                     <p class="change-avatar"><a href="javascript:;"
                             onclick="$('#avtImage').trigger('click'); return false;"><i class="fal fa fa-user"></i>
                             Thay đổi ảnh đại diện</a></p>
@@ -41,9 +41,22 @@
                         class="{{ request()->routeIs('account.review') ? 'actived' : '' }}"><i
                             class="fal fa fa-edit"></i><span>Quản lý đánh giá</span></a></li>
 
-                <li><a href="javascript:document.getElementById('logoutForm').submit()"><i
-                            class="fal fa fa-sign-out-alt"></i><span>Đăng xuất</span></a></li>
+                <li>
+                    <a href="javascript:void(0);" onclick="logout()">
+                        <i class="fal fa fa-sign-out-alt"></i>
+                        <span>Đăng xuất</span>
+                    </a>
+
+                    <form id="logout-form" action="{{ route('public.logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+                </li>
             </ul>
         </nav>
     </div>
 </div>
+<script>
+function logout() {
+    document.getElementById('logout-form').submit();
+}
+</script>

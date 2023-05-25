@@ -48,8 +48,9 @@
         <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
             <a class="text-decoration-none bg-border-none" href="">
                 <div class="cat-item d-flex align-items-center mb-4 bg-radius">
-                    <div class="overflow-hidden" style="width: 100px; height: 100px">
-                        <img class="img-fluid" src="images/cat-1.jpg" alt="" />
+                    <div class="overflow-hidden"
+                        style="width: 100px; height: 100px ; display: flex; justify-content: center; align-items: center;">
+                        <img class="img-fluid" src="{{asset('assets/category/'.$_category->image)}}" alt="" />
                     </div>
                     <div class="flex-fill pl-3">
                         <h6>{{$_category->name}}</h6>

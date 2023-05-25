@@ -9,6 +9,9 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Favorite;
 use App\Models\FavoriteDetail;
+use App\Models\Invoice;
+use App\Models\Review;
+use App\Models\Account;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Carbon;
 class UserController extends Controller
@@ -20,8 +23,8 @@ class UserController extends Controller
         $brands = Brand::all();
         $category = \DB::table('category')
         ->leftJoin('products', 'category.id', '=', 'products.category_id')
-        ->select('category.id', 'category.name', \DB::raw('count(products.id) as total'))
-        ->groupBy('category.id', 'category.name')
+        ->select('category.id', 'category.name', 'category.image', \DB::raw('count(products.id) as total'))
+        ->groupBy('category.id', 'category.name', 'category.image')
         ->get();
          // Return view index with products and number of products of each type
          return view('Public.pages.index', [
@@ -38,58 +41,21 @@ class UserController extends Controller
         if (!$product) {
             abort(404);
         }
-
-        return view('public.pages.product.product-detail', compact('product'));
+        $reviews = Review::where('product_id', $id)->get();
+        $review_count = Review::where('product_id', $id)->count();
+        return view('public.pages.product.product-detail', compact('product', 'reviews', 'review_count'));
     }
 
-    // Add product to favorite
-    
+    // Get list order for user
+    public function orders(){
+        $account_id = session('account')->id;
+    $orders = Invoice::where('account_id', '=', $account_id)->get();
 
-    public function add_to_favorite(Request $request)
-    {
-        $productId = $request->input('product_id');
-        $accountId = 2;
-
-        // Get favorite of user
-        $favorite = Favorite::where('account_id', $accountId)->first();
-
-        if ($favorite) {
-            // Get ID favorite
-             $favoriteId = $favorite->id;
-
-             // Add product to favorite_detail
-             $favoriteDetail = new FavoriteDetail();
-             $favoriteDetail->favorite_id = $favoriteId;
-             $favoriteDetail->product_id = $productId;
-             $favoriteDetail->save();
-        } else {
-            // Create new favorit and add account
-            $favorite = new Favorite();
-            $favorite->account_id = $accountId;
-            $favorite->save();
-
-            // Get ID favorite
-            $favoriteId = $favorite->id;
-
-            // Add product to favorite_detail
-            $favoriteDetail = new FavoriteDetail();
-            $favoriteDetail->favorite_id = $favoriteId;
-            $favoriteDetail->product_id = $productId;
-            $favoriteDetail->save();
-        }
-
-        return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào mục yêu thích.');
-    }
-    
-    //Show count favorite product
-    public function get_favorite_count()
-    {
-        $favorites = FavoriteDetail::join('favorites', 'favorite_details.favorite_id', '=', 'favorites.id')
-        ->where('favorites.account_id', '2')
-        ->count();
-        $count = count($favorites);
-
-        return response()->json(['count' => $count]);
+    foreach ($orders as $order) {
+        $order->order_date = Carbon::parse($order->order_date)->format('d/m/Y');
     }
 
+    return view('public.pages.account.order', compact('orders'));
+
+    }
 }

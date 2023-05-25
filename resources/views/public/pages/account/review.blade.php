@@ -22,7 +22,7 @@
         <div class="header">
             <div class="bg">
                 <div class="text">
-                    <h2>CHÀO MỪNG QUAY TRỞ LẠI, NGUYỄN QUANG NINH</h2>
+                    <h2>CHÀO MỪNG QUAY TRỞ LẠI, {!! Str::upper(session('account')->name) !!}</h2>
                     <p><i>Xem và kiểm tra các lần đánh giá sản phẩm của bạn tại đây</i></p>
                 </div>
             </div>

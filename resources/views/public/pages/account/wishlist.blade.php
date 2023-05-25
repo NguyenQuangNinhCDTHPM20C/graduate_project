@@ -22,7 +22,7 @@
         <div class="header">
             <div class="bg">
                 <div class="text">
-                    <h2>CHÀO MỪNG QUAY TRỞ LẠI, NGUYỄN QUANG NINH</h2>
+                    <h2>CHÀO MỪNG QUAY TRỞ LẠI, {!! Str::upper(session('account')->name) !!}</h2>
                     <p><i>Xem và kiểm tra những sản phẩm yêu thích của bạn tại đây</i></p>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                                     </tr>
                                     @foreach($favorites as $_favorite)
                                     <tr>
-                                        <td>{{$_favorite->id}}</td>
+                                        <td>{{ $loop->index }}</td>
                                         <td>{{$_favorite->product->name}}</td>
                                         <td><img style="width: 10%;"
                                                 src="{{ asset('assets/product/'.$_favorite->product->image) }}"

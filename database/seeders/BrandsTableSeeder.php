@@ -1,26 +1,20 @@
 <?php
+namespace Database\Seeders;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
-use Illuminate\Support\Str;
-use App\Models\Brand;
-
-class BrandSeeder extends Seeder
+class BrandsTableSeeder extends Seeder
 {
     public function run()
     {
         $brands = [
-            ['name' => 'Dell', 'image' => 'dell.png'],
-            ['name' => 'HP', 'image' => 'hp.png'],
-            ['name' => 'Lenovo', 'image' => 'lenovo.png'],
-            ['name' => 'Acer', 'image' => 'acer.png'],
-            ['name' => 'Asus', 'image' => 'asus.png'],
+            ['name' => 'Dell', 'slug' =>'dell', 'image' => 'dell.png'],
+            ['name' => 'HP', 'slug' =>'hp','image' => 'hp.png'],
+            ['name' => 'Lenovo','slug' =>'lenovo', 'image' => 'lenovo.png'],
+            ['name' => 'Acer', 'slug' =>'acer','image' => 'acer.png'],
+            ['name' => 'Asus', 'slug' =>'asus','image' => 'asus.png'],
         ];
 
-        foreach ($brands as $brand) {
-            Brand::create([
-                'name' => $brand['name'],
-                'slug' => Str::slug($brand['name'], '-'),
-                'image' => $brand['image'],
-            ]);
-        }
+        DB::table('brands')->insert($brands);
     }
 }

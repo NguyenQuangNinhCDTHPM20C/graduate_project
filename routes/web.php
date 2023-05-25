@@ -37,7 +37,7 @@ Route::group(['domain' => env('APP_URL')], function () {
         return view('Public.pages.contact');
     })->name('contact');
     //Route for add product to favorite
-    Route::post('/favorite/add', [UserController::class, 'add_to_favorite'])->name('favorite.add')->middleware('auth.public');
+    Route::post('/favorite/add', [FavoriteController::class, 'create'])->name('favorite.add')->middleware('auth.public');
     
 
     Route::get('/checkout', function () {
@@ -59,9 +59,7 @@ Route::group(['domain' => env('APP_URL')], function () {
         Route::get('/account-infor', function () {
             return view('Public.pages.account.infor');
         })->name('account.infor');
-        Route::get('/order', function () {
-            return view('Public.pages.account.order');
-        })->name('account.order');
+        Route::get('/order',[UserController::class, 'orders'])->name('account.order');
         Route::get('/wishlist', [FavoriteController::class, 'index'])->name('account.wishlist');
         Route::delete('/wishlist/{id}', [FavoriteController::class, 'destroy'])->name('wishlist.delete');
         Route::get('/comment', function () {
