@@ -12,12 +12,12 @@
                     </ol>
                     <div class="carousel-inner carousel-slide bg-radius">
                         <div class="carousel-item position-relative active" style="height: 430px">
-                            <img class="position-absolute w-100 h-100" src="images/carousel-1.jpg"
+                            <img class="position-absolute w-100 h-100" src="{{asset('images/carousel-1-a.jpg')}}"
                                 style="object-fit: cover" />
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">
-                                        Men Fashion
+                                        <!-- Men Fashion -->
                                     </h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">
                                         Lorem rebum magna amet lorem magna
@@ -30,12 +30,12 @@
                             </div>
                         </div>
                         <div class="carousel-item position-relative" style="height: 430px">
-                            <img class="position-absolute w-100 h-100" src="images/carousel-2.jpg"
+                            <img class="position-absolute w-100 h-100" src="{{asset('images/carousel-1-b.jpg')}}"
                                 style="object-fit: cover" />
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">
-                                        Women Fashion
+                                        <!-- Women Fashion -->
                                     </h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">
                                         Lorem rebum magna amet lorem magna
@@ -48,12 +48,12 @@
                             </div>
                         </div>
                         <div class="carousel-item position-relative" style="height: 430px">
-                            <img class="position-absolute w-100 h-100" src="images/carousel-3.jpg"
+                            <img class="position-absolute w-100 h-100" src="{{asset('images/carousel-1-c.jpg')}}"
                                 style="object-fit: cover" />
                             <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                                 <div class="p-3" style="max-width: 700px">
                                     <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">
-                                        Kids Fashion
+                                        <!-- Kids Fashion -->
                                     </h1>
                                     <p class="mx-md-5 px-5 animate__animated animate__bounceIn">
                                         Lorem rebum magna amet lorem magna
@@ -71,7 +71,7 @@
         </div>
         <div class="col-lg-4">
             <div class="product-offer mb-30 bg-radius" style="height: 200px">
-                <img class="img-fluid" src="images/offer-1.jpg" alt="" />
+                <img class="img-fluid" src="{{asset('images/carousel-2.jpg')}}" alt="" />
                 <div class="offer-text">
                     <h6 class="text-white text-uppercase">Save 20%</h6>
                     <h3 class="text-white mb-3">Special Offer</h3>
@@ -79,7 +79,7 @@
                 </div>
             </div>
             <div class="product-offer mb-30 bg-radius " style="height: 200px">
-                <img class="img-fluid" src="images/offer-2.jpg" alt="" />
+                <img class="img-fluid" src="{{asset('images/carousel-3.jpg')}}" alt="" />
                 <div class="offer-text">
                     <h6 class="text-white text-uppercase">Save 20%</h6>
                     <h3 class="text-white mb-3">Special Offer</h3>

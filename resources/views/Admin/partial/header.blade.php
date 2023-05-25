@@ -2,13 +2,13 @@
 
     <div class="header-left active">
         <a href="{{route('index')}}" class="logo logo-normal">
-            <img src="{{asset('images/logoshop1.png')}}" alt="">
+            <img src="{{asset('images/logoshop1.png')}}" alt="Double-N shop">
         </a>
-        <a href="https://dreamspos.dreamguystech.com/laravel/template/public/index" class="logo logo-white">
-            <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/logo-white.png" alt="">
+        <a href="{{route('index')}}" class="logo logo-white">
+            <img src="{{asset('images/logoshop1.png')}}" alt="Double-N shop">
         </a>
         <a href="{{route('index')}}" class="logo-small">
-            <img src="{{asset('images/logosmall.png')}}" alt="">
+            <img src="{{asset('images/logosmall.png')}}" alt="Double-N shop">
         </a>
         <a id="toggle_btn" href="javascript:void(0);">
             <i data-feather="chevrons-left" class="feather-16"></i>
@@ -185,11 +185,11 @@
             <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                 <span class="user-info">
                     <span class="user-letter">
-                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/profiles/avator1.jpg"
-                            alt="">
+                        <img src="{{asset('assets/user/'.session('account')->photo)}}"
+                            alt="{{ session('account')->username }}">
                     </span>
                     <span class="user-detail">
-                        <span class="user-name">John Smilga</span>
+                        <span class="user-name">{{ session('account')->username}}</span>
                         <span class="user-role">Super Admin</span>
                     </span>
                 </span>
@@ -202,8 +202,12 @@
                     <a class="dropdown-item" href="{{route('setting')}}"><i class="me-2"
                             data-feather="settings"></i>Settings</a>
                     <hr class="m-0">
-                    <a class="dropdown-item logout pb-0" href="{{route('login')}}"><img
-                            src="{{asset('images/log-out.svg')}}" class="me-2" alt="img">Logout</a>
+                    <form action="{{ route('admin.logout') }}" method="POST" id="logout-form">
+                        @method('POST')
+                        @csrf
+                        <button class="dropdown-item logout pb-0" type="submit"><img
+                                src="{{asset('images/log-out.svg')}}" class="me-2" alt="img">Logout</button>
+                    </form>
                 </div>
             </div>
         </li>
@@ -212,12 +216,12 @@
 
     <div class="dropdown mobile-user-menu">
         <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
-            aria-expanded="false"><i class="fa fa-ellipsis-h"></i></a>
+            aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
         <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" href="{{route('profile')}}">My
                 Profile</a>
             <a class="dropdown-item" href="{{route('setting')}}">Settings</a>
-            <a class="dropdown-item" href="{{route('login')}}">Logout</a>
+            <a class="dropdown-item" href="{{route('admin.login')}}">Logout</a>
         </div>
     </div>
 

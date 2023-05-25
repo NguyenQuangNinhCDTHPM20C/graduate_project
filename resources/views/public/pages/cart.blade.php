@@ -5,7 +5,13 @@
 @section('content')
 <!-- Cart Start -->
 <div class="container-fluid">
+    @if( Cart::getTotalQuantity()!=0)
     <div class="row px-xl-5">
+        @if ($message = Session::get('success'))
+        <div class="p-4 mb-3 bg-green-400 rounded">
+            <p class="text-green-800">{{ $message }}</p>
+        </div>
+        @endif
         <div class="col-lg-8 table-responsive mb-5">
             <table class="table table-light table-borderless table-hover text-center mb-0">
                 <thead class="thead-dark">
@@ -18,126 +24,33 @@
                     </tr>
                 </thead>
                 <tbody class="align-middle">
+                    @foreach ($cartItems as $item)
                     <tr>
-                        <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;"> Product Name
+                        <td class="align-middle"><img src="img/product-1.jpg" alt="" style="width: 50px;">
+                            {{ $item->name }}
                         </td>
-                        <td class="align-middle">$150</td>
+                        <td class="align-middle">${{ $item->price }}</td>
                         <td class="align-middle">
                             <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text"
-                                    class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
+                                <form action="{{ route('cart.update') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id" value="{{ $item->id}}">
+                                    <input type="number"
+                                        class="form-control form-control-sm bg-secondary border-0 text-center"
+                                        value="{{ $item->quantity }}" onchange="updateCartQuantity(event)">
+                                </form>
                             </div>
                         </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i
-                                    class="fa fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle"><img src="img/product-2.jpg" alt="" style="width: 50px;"> Product Name
-                        </td>
-                        <td class="align-middle">$150</td>
+                        <td class="align-middle">{{$item->quantity * $item->price}}</td>
                         <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text"
-                                    class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
+                            <form action="{{ route('cart.remove') }}" method="POST">
+                                @csrf
+                                <input type="hidden" value="{{ $item->id }}" name="id"><button
+                                    class="btn btn-sm btn-danger"><i class="fa fa-times"></i></button>
+                            </form>
                         </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i
-                                    class="fa fa-times"></i></button></td>
                     </tr>
-                    <tr>
-                        <td class="align-middle"><img src="img/product-3.jpg" alt="" style="width: 50px;"> Product Name
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text"
-                                    class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i
-                                    class="fa fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle"><img src="img/product-4.jpg" alt="" style="width: 50px;"> Product Name
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text"
-                                    class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i
-                                    class="fa fa-times"></i></button></td>
-                    </tr>
-                    <tr>
-                        <td class="align-middle"><img src="img/product-5.jpg" alt="" style="width: 50px;"> Product Name
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle">
-                            <div class="input-group quantity mx-auto" style="width: 100px;">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-minus">
-                                        <i class="fa fa-minus"></i>
-                                    </button>
-                                </div>
-                                <input type="text"
-                                    class="form-control form-control-sm bg-secondary border-0 text-center" value="1">
-                                <div class="input-group-btn">
-                                    <button class="btn btn-sm btn-primary btn-plus">
-                                        <i class="fa fa-plus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="align-middle">$150</td>
-                        <td class="align-middle"><button class="btn btn-sm btn-danger"><i
-                                    class="fa fa-times"></i></button></td>
-                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -145,9 +58,7 @@
             <form class="mb-30" action="">
                 <div class="input-group">
                     <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
-
                     <button class="btn btn-send">Apply</button>
-
                 </div>
             </form>
             <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Cart
@@ -166,13 +77,45 @@
                 <div class="pt-2">
                     <div class="d-flex justify-content-between mt-2">
                         <h5>Total</h5>
-                        <h5>$160</h5>
+                        <h5>${{ Cart::getTotal() }}VNĐ</h5>
                     </div>
+
                     <button class="btn btn-block btn-primary font-weight-bold my-3 py-3">Proceed To Checkout</button>
                 </div>
             </div>
         </div>
     </div>
+    @else
+    <div class="no-items">
+        <div class="cart-icon">
+            <i class="fa fa-solid fa-triangle-exclamation"></i>
+            <label>Giỏ hàng</label>
+        </div>
+        <div class="img">
+            <img src="{{asset('images/no-item.png')}}">
+            <p><strong>Hiện chưa có sản phẩm nào trong giỏ hàng</strong></p>
+        </div>
+    </div>
+
+    @endif
 </div>
 <!-- Cart End -->
+@stop
+@section('scripts')
+<script>
+$.ajax({
+    url: '{{ route("cart.update") }}',
+    type: 'POST',
+    data: {
+        id: id,
+        quantity: newQuantity // pass the new quantity here
+    },
+    success: function(response) {
+        // handle success response
+    },
+    error: function(xhr) {
+        // handle error response
+    }
+});
+</script>
 @stop

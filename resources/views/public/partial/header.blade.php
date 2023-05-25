@@ -11,63 +11,110 @@
         <div class="col-lg-6 text-center text-lg-right">
             <div class="d-inline-flex align-items-center">
                 <div class="btn-group">
-                    <a class="text-body" href="{{route('login')}}">Login</a>
-                </div>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-sm dropdown-toggle btn-lan" data-toggle="dropdown">
-                        EN
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <button class="dropdown-item" type="button">
-                            FR
-                        </button>
-                        <button class="dropdown-item" type="button">
-                            AR
-                        </button>
-                        <button class="dropdown-item" type="button">
-                            RU
-                        </button>
+                    @if(session()->has('account'))
+                    <div class="drop-down">
+                        <a class="text-body drop-btn" href="#"><img
+                                src="{{ asset('assets/user/' . session('account')->photo) }}" alt="Avatar"
+                                style="width: 25px; border-radius: 50%; margin-right: 10px;"> Welcome,
+                            {{ session('account')->username}}</a>
+                        <div class="dropdown-menu dropdown-menu-right drop-down-content">
+                            <a href="{{ route('account.index') }}" class="profile-link">
+                                <i class="fal fa fa-user-circle"></i>
+                                <span>Profile</span>
+                            </a>
+                            <a>
+                                <form action="{{ route('public.logout') }}" method="POST" id="logout-form">
+                                    @method('POST')
+                                    @csrf
+                                    <button type="submit"><i class="fal fa fa-sign-out-alt"></i>Logout</button>
+                                </form>
+                            </a>
+                        </div>
                     </div>
                 </div>
+                @else
+                <a class="text-body" href="{{ route('public.login') }}">Login</a>
+                @endif
+
             </div>
-            <div class="d-inline-flex align-items-center d-block d-lg-none">
-                <a href="" class="btn px-0 ml-2">
+            <div class="btn-group">
+                <button type="button" class="btn btn-sm dropdown-toggle btn-lan" data-toggle="dropdown">
+                    EN
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button class="dropdown-item" type="button">
+                        FR
+                    </button>
+                    <button class="dropdown-item" type="button">
+                        AR
+                    </button>
+                    <button class="dropdown-item" type="button">
+                        RU
+                    </button>
+                </div>
+            </div>
+            <div class="btn-group"> <a href="" class="btn px-0 ml-2">
                     <i class="fas fa-heart text-dark"></i>
-                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px">0</span>
+                    <span class="badge text-dark border border-dark rounded-circle"
+                        style="padding-bottom: 2px">{{ $favorite_count }}</span>
                 </a>
                 <a href="" class="btn px-0 ml-2">
                     <i class="fas fa-shopping-cart text-dark"></i>
-                    <span class="badge text-dark border border-dark rounded-circle" style="padding-bottom: 2px">0</span>
+                    <span class="badge text-dark border border-dark rounded-circle"
+                        style="padding-bottom: 2px">{{ Cart::getTotalQuantity()}}</span>
                 </a>
             </div>
         </div>
     </div>
-    <div class="row align-items-center py-3 px-xl-5 d-none d-lg-flex">
-        <div class="col-lg-4">
-            <a href="{{route('home')}}" class="logo">
-                <img src="{{asset('images/logoshop1.png')}}" style="  width: 50%;
+</div>
+<div class="row align-items-center py-3 px-xl-5 d-none d-lg-flex">
+    <div class="col-lg-4">
+        <a href="{{route('home')}}" class="logo">
+            <img src="{{asset('images/logoshop1.png')}}" style="  width: 50%;
         padding-right: 10px;
         object-fit: cover;" alt="double-n shop">
-            </a>
-        </div>
-        <div class="col-lg-4 col-6 text-left">
-            <form action="">
-                <div class="input-group">
-                    <input type="text" class="form-control bg-search" placeholder="Search for products" />
-                    <span class="input-group-text bg-transparent text-primary search-bar">
-                        <button class="btn-search"><i class="fa fa-search"></i></button>
-                    </span>
-                </div>
-            </form>
-        </div>
+        </a>
+    </div>
+    <div class="col-lg-4 col-6 text-left">
+        <form action="">
+            <div class="input-group">
+                <input type="text" class="form-control bg-search" placeholder="Search for products" />
+                <span class="input-group-text bg-transparent text-primary search-bar">
+                    <button class="btn-search"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-4 col-6 text-right right-search">
+        <a class="itemCheckOrder" id="btnCheckOrder" href="{{ route('account.order') }}">
+            <span><i class="icon fa fa-truck-fast"></i></span>
+            <span class="text">Kiểm tra đơn hàng</span>
+        </a>
+        <a class="itemCart" href="{{route('cart.list')}}">
+            <i class="fas fa-light fa-cart-shopping"></i>
+            <label>
+                <i class="cart-total fas fa fa-comment"></i>
+                <span class="cart-total cart-total-text">{{ Cart::getTotalQuantity()}}</span>
+            </label>
+        </a>
+        <a class="itemCart" href="{{route('account.wishlist')}}">
+            <i class="fas fa-light fa-heart"></i>
+            <label>
+                <i class="cart-total fas fa fa-comment"></i>
+                <div id="favorite-count"></div>
+                <span class="cart-total cart-total-text">{{ $favorite_count }}</span>
+            </label>
+        </a>
 
     </div>
+
+</div>
 </div>
 <!-- Topbar End -->
 
 <!-- Navbar Start -->
-<div class="container-fluid bg-dark mb-30">
-    <div class="row px-xl-5">
+<div class="container-fluid mb-30">
+    <div class="row px-xl-5 bg-dark bg-menu">
         <div class="col-lg-3 d-none d-lg-block">
             <a class="btn d-flex align-items-center justify-content-between bg-category w-100" data-toggle="collapse"
                 href="#navbar-vertical" style="height: 65px; padding: 0 30px">
@@ -79,7 +126,7 @@
             <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
                 id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999">
                 <div class="navbar-nav w-100">
-                    <div class="nav-item dropdown dropright">
+                    <div class="nav-item dropdown dropright nav-menu">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Dresses
                             <i class="fa fa-angle-right float-right mt-1"></i></a>
                         <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
@@ -103,7 +150,7 @@
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                 <a href="{{ route('home') }}" class="text-decoration-none d-block d-lg-none">
-                    <img src="images/logoshop1.png"
+                    <img src="{{asset('images/logoshop1.png')}}"
                         style="  width: 50%;padding-right: 10px;object-fit: cover;background-color:white;"
                         alt="double-n shop">
                 </a>
@@ -112,31 +159,27 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="{{ route('home') }}" class="nav-item nav-link active">Home</a>
-                        <a href="{{ route('products') }}" class="nav-item nav-link">Products</a>
-                        <a href="{{ route('product-detail') }}" class="nav-item nav-link">Product Detail</a>
-                        <div class="nav-item dropdown">
+                        <a href="{{ route('home') }}"
+                            class="nav-item nav-link{{ request()->is('/') ? ' active' : '' }}">Home</a>
+                        <a href="{{ route('products') }}"
+                            class="nav-item nav-link{{ request()->is('products*') ? ' active' : '' }}">Products</a>
+                        <div class="nav-item dropdown{{ request()->is('cart.list', 'checkout') ? ' active' : '' }}">
                             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages
-                                <i class="fa fa-angle-down mt-1"></i></a>
+                                <i class="fa fa-angle-down mt-1"></i>
+                            </a>
                             <div class="dropdown-menu bg-primary rounded-0 border-0 m-0 bg-drop">
-                                <a href="{{ route('cart') }}" class="dropdown-item">Shopping Cart</a>
-                                <a href="{{ route('checkout') }}" class="dropdown-item">Checkout</a>
+                                <a href="{{ route('cart.list') }}"
+                                    class="dropdown-item{{ request()->is('cart.list') ? ' active' : '' }}">Shopping
+                                    Cart</a>
+                                <a href="{{ route('checkout') }}"
+                                    class="dropdown-item{{ request()->is('checkout') ? ' active' : '' }}">Checkout</a>
                             </div>
                         </div>
-                        <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
+                        <a href="{{ route('contact') }}"
+                            class="nav-item nav-link{{ request()->is('contact') ? ' active' : '' }}">Contact</a>
+
                     </div>
-                    <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
-                        <a href="" class="btn px-0">
-                            <i class="fas fa-heart text-primary"></i>
-                            <span class="badge text-secondary border border-secondary rounded-circle"
-                                style="padding-bottom: 2px">0</span>
-                        </a>
-                        <a href="" class="btn px-0 ml-3">
-                            <i class="fas fa-shopping-cart text-primary"></i>
-                            <span class="badge text-secondary border border-secondary rounded-circle"
-                                style="padding-bottom: 2px">0</span>
-                        </a>
-                    </div>
+
                 </div>
             </nav>
         </div>

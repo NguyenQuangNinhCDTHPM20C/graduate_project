@@ -3,7 +3,7 @@
 @section('title', 'Double-N shop')
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/Public/account/style_ex.css') }}">
+<link rel="stylesheet" href="{{ asset('css/Public/account/style.css') }}">
 <link rel="preload" as="style" href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css">
 <link href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css" rel="stylesheet" type="text/css">
 <style>
@@ -22,7 +22,7 @@
         <div class="header">
             <div class="bg">
                 <div class="text">
-                    <h2>CHÀO MỪNG QUAY TRỞ LẠI, NGUYỄN QUANG NINH</h2>
+                    <h2>CHÀO MỪNG QUAY TRỞ LẠI, {!! Str::upper(session('account')->name) !!}</h2>
                     <p><i>Kiểm tra và chỉnh sửa thông tin cá nhân của bạn tại đây</i></p>
                 </div>
             </div>
@@ -34,7 +34,7 @@
             <div class="row equaHeight" data-obj=".col .box-bg-white">
                 <div class="col col-lg">
                     <h3>Cập nhật thông tin cá nhân</h3>
-                    <div class="box-bg-white" style="height: 805.4px;">
+                    <div class="box-bg-white" style="height:100%; margin-bottom:10px;">
                         <div class="account-form">
                             <form onsubmit="return validFormAccount(this);">
                                 <div class="form-controls">
@@ -278,17 +278,14 @@
 
                 <div class="col col-sm">
                     <h3>Tư cách hiển thị</h3>
-                    <div class="box-bg-white" style="height: 805.4px;">
+                    <div class="box-bg-white" style="height:100%">
                         <div class="user-sticker">
                             <div class="info">
                                 <div class="avt">
-                                    <img
-                                        src="https://hoanghamobile.com/avatar/Uploads/Avatar/63128-ninhnguyen1239-638164809348787755.jpg">
+                                    <img src="{{asset('assets/user/'.session('photo'))}}">
                                 </div>
-
                                 <div class="summer">
-                                    <p><strong>ninhnguyen1239</strong></p>
-                                    <p><strong class="text-gray">Nguyễn Quang Ninh</strong></p>
+                                    <p><strong>{{session('username')}}</strong></p>
                                 </div>
                             </div>
 
@@ -302,7 +299,7 @@
                                             value="XUjMIldDIWNWNOqH5YLGNSBwr4HCTT2qsPDL3EU_s8V8mO4l1eeNuf-AfGF2TQG7KTzkEK4MM0Iw-b3T9TokgxqpPaJNDSZTqb6FNRGmfQZmdrfLgMiMIZao_kK7xhpaH0twfg2">
                                         <input type="hidden" name="ReturnUrl" value="/account/info">
                                         <p>
-                                            <img src="/Content/web/img/login-facebook.png">
+                                            <img src="{{asset('images/login-facebook.png')}}">
                                             <strong>Chưa liên kết</strong>
                                         </p>
                                         <button class="btn-extlogin btn-facebook" title="Liên kết tài khoản Facebook"
@@ -318,7 +315,7 @@
                                             value="vjSV4SCfZWU5SRpnsMV0RzHjrJg_8q0yceHX3cVaL1KDCzF8-cBxShZVS4pyW4plu5v3pEWowxE-qY1zGx-VfvxhJKZ4H94HExlnbwg2DQuHv4nCNHZWUX4UEw6UlgmyVOZX7g2">
                                         <input type="hidden" name="ReturnUrl" value="/account/info">
                                         <p>
-                                            <img src="/Content/web/img/login-google.png">
+                                            <img src="{{asset('images/login-google.png')}}">
                                             <span>Chưa liên kết</span>
                                         </p>
                                         <button class="btn-extlogin btn-google" type="submit"
@@ -326,9 +323,7 @@
                                             <i class="fal fa fa-user-circle"></i> Liên kết tài khoản Google
                                         </button>
                                     </form>
-
                                 </div>
-
                             </div>
                         </div>
                     </div>

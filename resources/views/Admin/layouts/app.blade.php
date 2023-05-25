@@ -13,12 +13,12 @@
     <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/color/1x/shop.png" />
     <!-- bootstrap core css -->
     <link rel="stylesheet" href="{{asset('css/Admin/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('css/Admin/bootstrap-datetimepicker.min.css') }}">
-    <link rel="stylesheet" href="{{asset('css/Admin/owl.carousel.min.css') }}">
-    <link rel="stylesheet" href="{{asset('css/Admin/owl.theme.default.min.css') }}">
-    <link rel="stylesheet" href="{{asset('css/Admin/select2.min.css') }}">
-    <link rel="stylesheet" href="{{asset('css/Admin/dragula.min.css') }}">
-    <link rel="stylesheet" href="{{asset('css/Admin/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{asset('css/Admin/bootstrap-datetimepicker.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/Admin/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/Admin/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/Admin/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/Admin/dragula.min.css')}}">
+    <link rel="stylesheet" href="{{asset('css/Admin/dataTables.bootstrap4.min.css')}}">
     <!-- fonts style -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
@@ -27,16 +27,9 @@
     <link rel="stylesheet" href="{{asset('css/Admin/all.min.css') }}">
     <!--css custome-->
     <link rel="stylesheet" href="{{asset('css/Admin/animate.css') }}">
-    <link rel="stylesheet" href="{{asset('css/Admin/style.css') }}">
-    <!--defaut-->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{asset('css/Admin/style.css')}}">
     @yield('style-libraries')
     {{--Styles custom--}}
-    <!-- Custom styles for this template -->
-    <!-- <link rel="stylesheet" href="css/style.css" rel="stylesheet" /> -->
-    <!-- responsive style -->
-    <!-- <link rel="stylesheet" href="css/responsive.css" rel="stylesheet" /> -->
     @yield('styles')
 </head>
 
@@ -52,7 +45,7 @@
         @yield('content')
     </div>
     {{--Scripts js custom--}}
-    <script src="js/Admin/main.js"></script>
+    <script src="{{asset('js/Admin/main.js')}}"></script>
     {{--Scripts js common--}}
     <script src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/js/jquery-3.6.0.min.js">
     </script>
@@ -70,8 +63,6 @@
     <script src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/js/moment.min.js"></script>
     <script src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/js/bootstrap-datetimepicker.min.js">
     </script>
-    <script
-        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/plugins/apexchart/apexcharts.min.js">
     </script>
     <script src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/plugins/apexchart/chart-data.js">
     </script>
@@ -87,11 +78,9 @@
     <script
         src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/plugins/sweetalert/sweetalert2.all.min.js">
     </script>
-    <script
-        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/plugins/sweetalert/sweetalerts.min.js">
+    <script src="{{asset('js/Admin/sweetalerts.min.js')}}">
     </script>
-
-    <script src="js/Admin/script.js"></script>
+    <script src="{{asset('js/Admin/script.js')}}"></script>
     @yield('scripts')
 
 </body>

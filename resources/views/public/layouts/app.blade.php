@@ -10,17 +10,15 @@
     <title>@yield('title', config('app.name', '@Master Layout'))</title>
 
     {{--Styles css common--}}
-    <link rel="shortcut icon" type="image/png" href="https://img.icons8.com/color/1x/shop.png" />
+    <link rel="shortcut icon" type="image/png" href="{{asset('images/doublenshop-favicon.png')}}" />
     <!-- Favicon -->
     <!-- <link href="img/favicon.ico" rel="icon"> -->
     <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'> -->
     <!-- Google Web Fonts -->
-    <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/Public/fontawesome.min.css') }}">
+    <link href="{{ asset('css/Public/all.min.css') }}" rel="stylesheet">
     <!-- Libraries Stylesheet -->
     <link rel="stylesheet" href="{{ asset('css/Public/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/Public/owl.carousel.min.css') }}">
@@ -33,6 +31,10 @@
 </head>
 
 <body>
+    @php
+    use Illuminate\Support\Str;
+    @endphp
+
     @include('Public.partial.header')
 
     @yield('slider')
@@ -46,7 +48,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="js/Public/easing.min.js"></script>
-    <script src="ljs/Public/owl.carousel.min.js"></script>
+    <script src="js/Public/owl.carousel.min.js"></script>
 
     <!-- Contact Javascript File -->
     <script src="js/Public/jqBootstrapValidation.min.js"></script>

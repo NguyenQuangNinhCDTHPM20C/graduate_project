@@ -3,7 +3,7 @@
 @section('title', 'Double-N shop')
 
 @section('styles')
-<link rel="stylesheet" href="{{ asset('css/Public/account/style_ex.css') }}">
+<link rel="stylesheet" href="{{ asset('css/Public/account/style.css') }}">
 <link rel="preload" as="style" href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css">
 <link href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css" rel="stylesheet" type="text/css">
 <style>
@@ -22,7 +22,7 @@
         <div class="header">
             <div class="bg">
                 <div class="text">
-                    <h2>CHÀO MỪNG QUAY TRỞ LẠI, NGUYỄN QUANG NINH</h2>
+                    <h2>CHÀO MỪNG QUAY TRỞ LẠI, {!! Str::upper(session('account')->name) !!}</h2>
                     <p><i>Xem và kiểm tra các lần đánh giá sản phẩm của bạn tại đây</i></p>
                 </div>
             </div>

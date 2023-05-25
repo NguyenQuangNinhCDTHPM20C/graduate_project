@@ -3,7 +3,7 @@
 @section('title', 'Double-N shop')
 
 @section('styles')
-<link href="css/Public/account/style_ex.css" rel="stylesheet">
+<link href="css/Public/account/style.css" rel="stylesheet">
 <link rel="preload" as="style" href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css">
 <link href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css" rel="stylesheet" type="text/css">
 <style>
@@ -21,7 +21,8 @@
         <div class="header">
             <div class="bg">
                 <div class="text">
-                    <h2>CHÀO MỪNG QUAY TRỞ LẠI, NGUYỄN QUANG NINH</h2>
+                    <h2>CHÀO MỪNG QUAY TRỞ LẠI, {!! Str::upper(session('username')) !!}
+                    </h2>
                     <p><i>Tổng quát các hoạt động của bạn tại đây</i></p>
                 </div>
             </div>
@@ -39,17 +40,13 @@
                                 <a href="/account/info" title="Thay đổi thông tin cá nhân"><i
                                         class="fal fa fa-edit"></i></a>
                             </div>
-
-                            <p><strong>Họ tên:</strong> <i>Nguyễn Quang Ninh</i></p>
-                            <p><strong>Tài khoản:</strong> <i>ninhnguyen1239</i></p>
+                            <p><strong>Họ tên:</strong> <i>{{session('account')->name}}</i></p>
+                            <p><strong>Tài khoản:</strong> <i>{{session('account')->username}}</i></p>
                             <p><strong>Ngày tháng năm sinh:</strong> <i>10/01/2002</i></p>
                             <p><strong>Ngày tham gia:</strong> <i>07/04/2023</i></p>
-                            <p><strong>Email:</strong> <i>ninhnguyen1239@gmail.com</i></p>
-                            <p><strong>Địa chỉ:</strong> <i>thôn 1 xã Nghĩa An</i></p>
+                            <p><strong>Email:</strong> <i>{{session('account')->email}}</i></p>
+                            <p><strong>Địa chỉ:</strong> <i>{{session('account')->address}}</i></p>
                             <p><strong>Số điện thoại:</strong> <i>0869694275</i></p>
-                            <p><strong>Tên công ty:</strong> <i></i></p>
-                            <p><strong>Địa chỉ công ty:</strong> <i></i></p>
-                            <p><strong>Mã số thuế:</strong> <i></i></p>
 
                         </div>
                     </div>

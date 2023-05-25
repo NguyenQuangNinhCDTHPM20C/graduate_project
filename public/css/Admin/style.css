@@ -6129,7 +6129,7 @@ span.select2-container.select2-container--default.select2-container--open {
 .header-left #toggle_btn {
     position: absolute;
     opacity: 1;
-    background: #ff9f43;
+    background: #00483d;
     right: -13px;
     border-radius: 50%;
     display: flex;
@@ -6144,7 +6144,7 @@ span.select2-container.select2-container--default.select2-container--open {
     transform: rotate(180deg);
 }
 .header-left #toggle_btn:hover {
-    background: #fe820e;
+    background: #009a82;
 }
 .header-left.active svg {
     transform: rotate(0) !important;

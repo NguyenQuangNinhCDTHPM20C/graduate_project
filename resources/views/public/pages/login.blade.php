@@ -14,10 +14,13 @@
             <div class="main-hotair">
                 <div class="content-wthree">
                     <h2>LOG IN</h2>
-                    <form action="#" method="post">
-                        <input type="text" class="text" name="text" placeholder="User Name" required="" autofocus>
-                        <input type="password" class="password" name="password" placeholder="User Password" required=""
+                    <form method="POST" action="{{ route('public.login') }}">
+                        @csrf
+                        <input type="hidden" name="id_form" id="id_form" value="0">
+                        <input type="text" class="text" name="email" id="email" placeholder="Email" required=""
                             autofocus>
+                        <input type="password" class="password" name="password" id="password" placeholder="Password"
+                            required="" autofocus>
                         <div class="split">
                             <p>OR</p>
                         </div>

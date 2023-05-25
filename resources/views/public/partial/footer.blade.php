@@ -64,7 +64,7 @@
                              tempor est
                          </p>
                          <form action="">
-                             <div class="input-group">
+                             <div class="input-group input-send-gp">
                                  <input type="text" class="form-control input-send" placeholder="Your Email Address" />
                                  <button class="btn btn-send">
                                      <i class="fas fa-paper-plane"></i>
