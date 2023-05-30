@@ -250,39 +250,40 @@
                             @endforeach
                         </div>
                         <div class="col-md-6">
+                            @if(!session()->has('account'))
+                            <small style="color:red;">You need to login to review products ...*</small>
+                            @else
                             <h4 class="mb-4">Leave a review</h4>
-                            <small>Your email address will not be published. Required fields are marked *</small>
-                            <div class="d-flex my-3">
-                                <p class="mb-0 mr-2">Your Rating * :</p>
-                                <div class="text-primary">
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
-                                    <i class="far fa-star"></i>
+                            <img src="{{ asset('assets/user/' . (session()->has('account') ? session('account')->photo : '')) }}
+" alt="{{session()->has('account') ? session('account')->name : ''}}" class="img-fluid mr-3 mt-1" style="width: 45px;">
+                            <small>
+                                {{session()->has('account') ? session('account')->name : ''}}
+                            </small>
+                            <form action="{{ route('review.add') }}" method="post">
+                                @csrf
+                                @method('POST')
+                                <div class="d-flex my-3">
+                                    <p class="mb-0 mr-2">Your Rating * :</p>
+                                    <div class="text-primary">
+                                        <i class="far fa-star" data-index="1"></i>
+                                        <i class="far fa-star" data-index="2"></i>
+                                        <i class="far fa-star" data-index="3"></i>
+                                        <i class="far fa-star" data-index="4"></i>
+                                        <i class="far fa-star" data-index="5"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <form>
+                                <input type="hidden" id="product_id" name="product_id" value="{{ $product->id }}">
+                                <input type="hidden" id="rating" name="rating" value="5">
                                 <div class="form-group">
                                     <label for="message">Your Review *</label>
-                                    <textarea id="message" cols="30" rows="5" class="form-control"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Your Name *</label>
-                                    <input type="text" class="form-control" id="name"
-                                        value="{{ session()->has('account') ? session('account')->name : '' }}">
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="email">Your Email *</label>
-                                    <input type="email" class="form-control" id="email"
-                                        value="{{ session()->has('account') ? session('account')->email : '' }}">
-
+                                    <textarea id="comment" name="comment" cols="30" rows="5"
+                                        class="form-control"></textarea>
                                 </div>
                                 <div class="form-group mb-0">
-                                    <input type="submit" value="Leave Your Review" class="btn btn-primary px-3">
+                                    <input type="submit" value="Submit" class="btn btn-primary px-3">
                                 </div>
                             </form>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -292,150 +293,6 @@
 </div>
 </div>
 <!-- Shop Detail End -->
-
-
-<!-- Products Start -->
-<div class="container-fluid py-5">
-    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">You May Also
-            Like</span></h2>
-    <div class="row px-xl-5">
-        <div class="col">
-            <div class="owl-carousel related-carousel">
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="images/product-1.jpg" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5>
-                            <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="images/product-2.jpg" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5>
-                            <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="images/product-3.jpg" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5>
-                            <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="images/product-4.jpg" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5>
-                            <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-item bg-light">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100" src="images/product-5.jpg" alt="">
-                        <div class="product-action">
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-shopping-cart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
-                            <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center py-4">
-                        <a class="h6 text-decoration-none text-truncate" href="">Product Name Goes Here</a>
-                        <div class="d-flex align-items-center justify-content-center mt-2">
-                            <h5>$123.00</h5>
-                            <h6 class="text-muted ml-2"><del>$123.00</del></h6>
-                        </div>
-                        <div class="d-flex align-items-center justify-content-center mb-1">
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small class="fa fa-star text-primary mr-1"></small>
-                            <small>(99)</small>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Products End -->
 @stop
 @section('scripts')
 <script>
@@ -470,6 +327,24 @@ document.addEventListener('DOMContentLoaded', function() {
         event.preventDefault();
         heartRegular.classList.toggle('hidden');
         heartHidden.classList.toggle('hidden');
+    });
+});
+//===================
+const stars = document.querySelectorAll('.text-primary i');
+
+stars.forEach(star => {
+    star.addEventListener('click', () => {
+        const clickedIndex = parseInt(star.getAttribute('data-index'));
+        stars.forEach(star => {
+            const starIndex = parseInt(star.getAttribute('data-index'));
+            if (starIndex <= clickedIndex) {
+                star.classList.remove('far');
+                star.classList.add('fa');
+            } else {
+                star.classList.remove('fa');
+                star.classList.add('far');
+            }
+        });
     });
 });
 </script>

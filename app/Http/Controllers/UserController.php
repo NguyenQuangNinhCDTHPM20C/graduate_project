@@ -35,26 +35,60 @@ class UserController extends Controller
         ]);
     }
     
+    // Get list product
+    public function products(Request $request)
+    {
+        // Lấy danh sách tất cả các danh mục cùng số lượng sản phẩm
+        $category = Category::withCount('products')->get();
+
+        // Lấy danh sách sản phẩm
+        $productsQuery = Product::query();
+
+        // Kiểm tra xem checkbox "Filter" có được chọn hay không
+        if ($request->has('filter')) {
+            // Lấy danh sách các danh mục được chọn
+            $selectedCategories = $request->input('categories', []);
+
+            // Lọc sản phẩm dựa trên danh mục được chọn
+            $productsQuery->whereIn('category_id', $selectedCategories);
+        }
+
+        // Lấy kết quả sản phẩm đã lọc hoặc toàn bộ sản phẩm
+        $products = $productsQuery->paginate(10);
+
+        return view('public.pages.product.product-list', compact('products', 'category'));
+    }
+
     // Show product detail 
     public function product_detail($id){
         $product = Product::find($id);
         if (!$product) {
             abort(404);
         }
+
         $reviews = Review::where('product_id', $id)->get();
         $review_count = Review::where('product_id', $id)->count();
         return view('public.pages.product.product-detail', compact('product', 'reviews', 'review_count'));
     }
 
+    // Search product
+    public function search(Request $request)
+    {
+        $slug = $request->input('slug');
+        // Search product follow slug
+        $products = Product::where('slug', 'LIKE', '%' . $slug . '%')->get();
+        // Result
+        return view('public.pages.product.product-search', compact('products'));
+    }
+
     // Get list order for user
     public function orders(){
         $account_id = session('account')->id;
-    $orders = Invoice::where('account_id', '=', $account_id)->get();
+        $orders = Invoice::where('account_id', '=', $account_id)->get();
 
-    foreach ($orders as $order) {
-        $order->order_date = Carbon::parse($order->order_date)->format('d/m/Y');
-    }
-
+        foreach ($orders as $order) {
+            $order->order_date = Carbon::parse($order->order_date)->format('d/m/Y');
+        }
     return view('public.pages.account.order', compact('orders'));
 
     }

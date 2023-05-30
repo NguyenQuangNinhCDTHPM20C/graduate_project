@@ -10,6 +10,7 @@ use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\ReviewController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,35 +24,42 @@ use App\Http\Controllers\FavoriteController;
 //This is Routes for Public
 Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/',[UserController::class, 'index'])->name('home');
-    Route::get('/products', function () {
-        return view('Public.pages.product.product-list');
-    })->name('products');
+    //Routes for product
+    Route::get('/products', [UserController::class, 'products'])->name('products');
     Route::get('/product/{id}', [UserController::class, 'product_detail'])->name('product-detail');
+    Route::get('/search', [UserController::class, 'search'])->name('search');
     //Routes for shopping cart
     Route::get('cart', [CartController::class, 'index'])->name('cart.list');
     Route::post('cart', [CartController::class, 'add'])->name('cart.add');
     Route::post('update-cart', [CartController::class, 'update'])->name('cart.update');
     Route::post('remove', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('clear', [CartController::class, 'clear'])->name('cart.clear');
+    //Route for contact
     Route::get('/contact', function () {
         return view('Public.pages.contact');
     })->name('contact');
     //Route for add product to favorite
     Route::post('/favorite/add', [FavoriteController::class, 'create'])->name('favorite.add')->middleware('auth.public');
-    
-
+    //Route for add review product
+    Route::post('/review/add', [ReviewController::class, 'store'])->name('review.add');
     Route::get('/checkout', function () {
         return view('Public.pages.checkout');
     })->name('checkout');
-    // Login
+    //Routes for authenticate
     Route::get('/login', [AuthController::class, 'showLoginFormPublic'])->name('public.login')->middleware('guest.public');
     Route::post('/login', [AuthController::class, 'login_public'])->middleware('guest.public');
-    // Logout
     Route::post('/logout', [AuthController::class, 'logout_public'])->name('public.logout');
-    //Logup
     Route::get('/logup', function () {
-        return view('Public.pages.logup');
+        return view('Public.pages.auth.logup');
     })->name('logup');
+    //Routes for blog
+    Route::get('/blogs', function(){
+        return view('Public.pages.blog.blog-list');
+    })->name('blogs');
+    Route::get('/blog-detail', function(){
+        return view('Public.pages.blog.blog-detail');
+    })->name('blog-detail');
+    //Routes for account
     Route::group(['prefix' => 'account', 'middleware' => 'auth.public'], function () {
         Route::get('/', function () {
             return view('Public.pages.account.index');

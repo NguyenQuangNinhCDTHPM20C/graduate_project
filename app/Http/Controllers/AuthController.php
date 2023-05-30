@@ -15,7 +15,7 @@ class AuthController extends Controller
     //Auth for Public
     public function showLoginFormPublic()
     {
-        return view('public.pages.login');
+        return view('public.pages.auth.login');
     }
     
     public function login_admin(Request $request){

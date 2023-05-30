@@ -13,6 +13,7 @@ class Account extends Model implements Authenticatable
         'name', 
         'username',
         'email',
+        'email_verified_at',
         'password',
         'photo',
         'address',

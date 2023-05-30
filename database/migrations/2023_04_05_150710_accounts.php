@@ -18,6 +18,7 @@ class Accounts extends Migration
             $table->string('name',200);
             $table->string('username',200);
             $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('photo');
             $table->string('address');

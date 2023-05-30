@@ -2025,7 +2025,7 @@ pre code {
 .form-control:focus {
     color: #495057;
     background-color: #fff;
-    border-color: #ffefb3;
+    border-color: #00917a;
     outline: 0;
     box-shadow: none;
 }
@@ -10292,8 +10292,10 @@ h6 {
     text-overflow: ellipsis;
 }
 .img-p {
-    padding-top: 10px;
-    height: 300px;
+    display: flex;
+    justify-content: center;
+    height: 200px;
+    width: 100%;
 }
 .right-search {
     display: flex;
@@ -10492,4 +10494,15 @@ span.cart-total-text {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.input-search:focus-within {
+    border: 1px solid #00483d;
+}
+
+.bg-search:focus {
+    caret-color: #00917a;
+}
+
+.bg-search {
+    caret-width: 2px;
 }

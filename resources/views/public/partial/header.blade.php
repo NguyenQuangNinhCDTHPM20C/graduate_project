@@ -75,12 +75,12 @@
         object-fit: cover;" alt="double-n shop">
         </a>
     </div>
-    <div class="col-lg-4 col-6 text-left">
-        <form action="">
-            <div class="input-group">
-                <input type="text" class="form-control bg-search" placeholder="Search for products" />
+    <div class="col-lg-4 col-6 text-left input-search">
+        <form action="{{ route('search') }}" method="GET">
+            <div class="input-group ">
+                <input type="text" name="slug" class="form-control bg-search" placeholder="Search for products" />
                 <span class="input-group-text bg-transparent text-primary search-bar">
-                    <button class="btn-search"><i class="fa fa-search"></i></button>
+                    <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
                 </span>
             </div>
         </form>
@@ -177,7 +177,8 @@
                         </div>
                         <a href="{{ route('contact') }}"
                             class="nav-item nav-link{{ request()->is('contact') ? ' active' : '' }}">Contact</a>
-
+                        <a href="{{ route('blogs') }}"
+                            class="nav-item nav-link{{ request()->is('blogs') ? ' active' : '' }}">Blog</a>
                     </div>
 
                 </div>

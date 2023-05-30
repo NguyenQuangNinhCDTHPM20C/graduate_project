@@ -73,8 +73,8 @@
             @foreach($new_products as $product)
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4 item-p bg-radius">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100 img-p" src="{{ asset('assets/product/' . $product->image) }}"
+                    <div class="product-img position-relative overflow-hidden img-p">
+                        <img class="img-fluid" src="{{ asset('assets/product/' . $product->image) }}"
                             alt="{{$product->name}}" />
 
                     </div>
@@ -140,8 +140,8 @@
             @foreach($products as $product)
             <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                 <div class="product-item bg-light mb-4 item-p bg-radius">
-                    <div class="product-img position-relative overflow-hidden">
-                        <img class="img-fluid w-100 img-p" src="{{ asset('assets/product/' . $product->image) }}"
+                    <div class="product-img position-relative overflow-hidden img-p">
+                        <img class="img-fluid " src="{{ asset('assets/product/' . $product->image) }}"
                             alt="{{$product->name}}" />
 
                     </div>
