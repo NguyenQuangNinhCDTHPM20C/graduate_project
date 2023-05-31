@@ -185,7 +185,7 @@
             <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                 <span class="user-info">
                     <span class="user-letter">
-                        <img src="{{asset('assets/user/'.session('account')->photo)}}"
+                        <img src="{{session('account')->photo}}"
                             alt="{{ session('account')->username }}">
                     </span>
                     <span class="user-detail">

@@ -25,7 +25,7 @@
                             <p>OR</p>
                         </div>
                         <div class="d-flex iconlog">
-                            <a class=" btn-square mr-2 btn-link google" href="#"><img
+                            <a class=" btn-square mr-2 btn-link google" href="{{route('login.google')}}"><img
                                     src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt=""
                                     style="width:50%"></a>
                             <a class="btn-square mr-2 btn-link facebook" href="#"><i class="fab fa-facebook-f"></i></a>

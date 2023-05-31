@@ -19,7 +19,9 @@ class Account extends Model implements Authenticatable
         'address',
         'role',
         'status',
-        'rememberToken'
+        'rememberToken',
+        'verification_token',
+        'google_id'
     ];
 
         /**

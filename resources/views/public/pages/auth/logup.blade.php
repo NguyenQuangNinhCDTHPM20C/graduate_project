@@ -14,13 +14,14 @@
             <div class="main-hotair">
                 <div class="content-wthree">
                     <h2>LOG UP</h2>
-                    <form action="#" method="post">
-                        <input type="text" class="text" name="text" placeholder="User Name" required="" autofocus>
+                    <form method="POST" action="{{ route('logup') }}">
+                        @csrf
+                        <input type="text" class="text" name="email" placeholder="Email" required="" autofocus>
                         <input type="password" class="password" name="password" placeholder="User Password" required=""
                             autofocus>
-                        <input type="password" class="password" name="password" placeholder="Confirm Password"
+                        <input type="password" class="password" name="confirm_password" placeholder="Confirm Password"
                             required="" autofocus>
-                        <button class="btnlog" type="submit">Log In</button>
+                        <button class="btnlog" type="submit">Log Up</button>
                     </form>
                     <p class="account">Do have an account? <a href="{{route('public.login')}}">Login</a></p>
                 </div>

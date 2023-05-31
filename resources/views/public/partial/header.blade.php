@@ -14,7 +14,7 @@
                     @if(session()->has('account'))
                     <div class="drop-down">
                         <a class="text-body drop-btn" href="#"><img
-                                src="{{ asset('assets/user/' . session('account')->photo) }}" alt="Avatar"
+                                src="{{  session('account')->photo }}" alt="Avatar"
                                 style="width: 25px; border-radius: 50%; margin-right: 10px;"> Welcome,
                             {{ session('account')->username}}</a>
                         <div class="dropdown-menu dropdown-menu-right drop-down-content">
