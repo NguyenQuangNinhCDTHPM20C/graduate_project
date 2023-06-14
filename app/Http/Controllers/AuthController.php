@@ -9,6 +9,9 @@ use App\Mail\EmailVerification;
 use App\Mail\EmailVerificationAdmin;
 use Illuminate\Http\Request;
 use App\Models\Account;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Http\Controllers\Api\GoogleController;
+use App\Http\Controllers\Api\FacebookController;
 class AuthController extends Controller
 {
     //Auth for Admin
@@ -44,17 +47,54 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
         $account = Account::where('email', $request->email)->first();
-        if($account->role == 2 && $account->email_verified_at != null)
-        {
-        session(['account' => $account]); // Lưu tên người dùng vào session
-        session(['auth_check'=>true]);
-            return redirect()->route('home');}
+        if($account){
+            if($account->role == 2 && $account->email_verified_at != null)
+             {
+                session(['account' => $account]); // Lưu tên người dùng vào session
+                session(['auth_check'=>true]);
+                $account->qr_token = bcrypt($account->phone_number.$account->email.Str::random(40));
+                $account->save();
+                return redirect()->route('home');
+            }
+        }
             return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng.']);
+    }
+
+    public function check_qr($qrToken)
+    {
+        $account = Account::where('qr_token', $qrToken)->first();
+        if ($account) {
+            if ($account->role == 2) {
+                session(['account' => $account]);
+                session(['auth_check' => true]);
+
+                //Check existing account is google account
+                if ($account->google_id !== null) {
+                    $googleController = new GoogleController;
+                    $googleRequest = Request::create('/login/google', 'GET');
+                    return $googleController->callAction('handleGoogleCallback', [$googleRequest]);
+                }
+                //Check existing account is facebook account
+                if ($account->facebook_id !== null) {
+                    $facebookController = new FacebookController;
+                    $facebookRequest = Request::create('/login/facebook', 'GET');
+                    return $facebookController->callAction('handleFacebookCallback', [$facebookRequest]);
+                }
+
+                return redirect()->route('home');
+            }
+
+            return redirect()->route('public.login')->with('error', 'Vui lòng đăng nhập trước');
+        }
     }
 
     public function logout_public(Request $request)
     {
         Auth::logout();
+
+        $account = Account::where('id', session('account')->id)->first();
+        $account->qr_token = null;
+        $account->save();
 
         $request->session()->invalidate();
 
@@ -169,4 +209,7 @@ class AuthController extends Controller
         // Chuyển hướng đến trang đăng nhập hoặc hiển thị thông báo xác minh thành công
         return redirect()->route('admin.login')->with('success', 'Email verification successful. Please log in.');
     }
+
+    //Login with QRCode
+    
 }

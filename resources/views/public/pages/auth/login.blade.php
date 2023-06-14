@@ -28,7 +28,10 @@
                             <a class=" btn-square mr-2 btn-link google" href="{{route('login.google')}}"><img
                                     src="https://cdn-icons-png.flaticon.com/512/2991/2991148.png" alt=""
                                     style="width:50%"></a>
-                            <a class="btn-square mr-2 btn-link facebook" href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn-square mr-2 btn-link facebook" href="{{ route('login.facebook') }}"><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn-square mr-2 btn-link " href="{{ route('login.zalo') }}"><img
+                                src="https://i.pinimg.com/736x/1d/07/c2/1d07c2bacaefc123ddc782e6288ddc41.jpg" alt=""
+                                style="width:100%"></a>
                         </div>
 
                         <button class="btnlog" type="submit">Log In</button>

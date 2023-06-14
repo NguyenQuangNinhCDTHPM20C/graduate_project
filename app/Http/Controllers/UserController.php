@@ -12,8 +12,12 @@ use App\Models\FavoriteDetail;
 use App\Models\Invoice;
 use App\Models\Review;
 use App\Models\Account;
+use App\Models\Blog;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Carbon;
+use Endroid\QrCode\QrCode;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 class UserController extends Controller
 {
     // Show home
@@ -27,7 +31,7 @@ class UserController extends Controller
         ->groupBy('category.id', 'category.name', 'category.image')
         ->get();
          // Return view index with products and number of products of each type
-         return view('Public.pages.index', [
+         return view('public.pages.home.index', [
             'products' => $products,
             'category' => $category,
             'brands' => $brands,
@@ -65,10 +69,19 @@ class UserController extends Controller
         if (!$product) {
             abort(404);
         }
-
+        $existingFavoriteDetail = '';
+        if(session::has('account')){
+        $favorite = Favorite::firstOrCreate(['account_id' => session('account')->id]);
+        // Get ID favorite
+        $favoriteId = $favorite->id;
+        // Check exits product in favorite_detail
+        $existingFavoriteDetail = FavoriteDetail::where('favorite_id', $favoriteId)
+            ->where('product_id', $id)
+            ->first();
+        }
         $reviews = Review::where('product_id', $id)->get();
         $review_count = Review::where('product_id', $id)->count();
-        return view('public.pages.product.product-detail', compact('product', 'reviews', 'review_count'));
+        return view('public.pages.product.product-detail', compact('product', 'reviews', 'review_count', 'existingFavoriteDetail'));
     }
 
     // Search product
@@ -85,11 +98,64 @@ class UserController extends Controller
     public function orders(){
         $account_id = session('account')->id;
         $orders = Invoice::where('account_id', '=', $account_id)->get();
-
         foreach ($orders as $order) {
             $order->order_date = Carbon::parse($order->order_date)->format('d/m/Y');
         }
     return view('public.pages.account.order', compact('orders'));
 
+    }
+
+    // Get list comment for user
+    public function comments(){
+        $account_id = session('account')->id;
+        $comments = Review::where('account_id', '=', $account_id)->get();
+        return view('public.pages.account.comment', compact('comments'));
+
+    }
+
+    //Get info account
+    public function dash_board(){
+        $account_id = session('account')->id;
+        $orders = DB::table('invoices')
+        ->join('invoice_detail', 'invoices.id', '=', 'invoice_detail.invoice_id')
+        ->join('products', 'invoice_detail.product_id', '=', 'products.id')
+        ->select('invoices.*', 'invoice_detail.quantity', 'invoice_detail.price', 'products.name as product_name')
+        ->where('invoices.account_id', '=', $account_id)
+        ->get();
+
+        foreach ($orders as $order) {
+            $order->order_date = Carbon::parse($order->order_date)->format('d/m/Y');
+        }
+        $favorites = FavoriteDetail::join('favorites', 'favorite_detail.favorite_id', '=', 'favorites.id')
+        ->where('favorites.account_id', $account_id)
+        ->get();
+        $reviews = Review::where('account_id', '=', $account_id)->get();
+        
+        return view('public.pages.account.index', compact('orders', 'favorites', 'reviews'));
+
+    }
+    
+    public function account_infor()
+    {
+        return view('Public.pages.account.infor');
+    }   
+
+    public function checkout(){
+        $cartItems = \Cart::getContent();
+        return view('public.pages.checkout.checkout', compact('cartItems'));
+    }
+
+    public function payment(){
+        return view('Public.pages.payment.payment');
+    }
+
+    public function blogs(){
+        $blogs = Blog::paginate(10);
+        return view('Public.pages.blog.blog-list', compact('blogs'));
+    }
+
+    public function blog_detail($slug){
+        $blog = Blog::where('slug', $slug)->first();
+        return view('Public.pages.blog.blog-detail', compact('blog'));
     }
 }

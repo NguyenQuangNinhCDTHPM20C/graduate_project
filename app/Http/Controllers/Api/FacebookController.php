@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -10,17 +11,17 @@ use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 use GuzzleHttp\Client;
 
-class GoogleController extends Controller
+class FacebookController extends Controller
 {
-    public function redirectToGoogle()
+    public function redirectToFacebook()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('facebook')->redirect();
     }
 
-    public function handleGoogleCallback()
+    public function handleFacebookCallback()
     {
         try {
-            $user = Socialite::driver('google')->user();
+            $user = Socialite::driver('facebook')->user();
             
             // Tìm tài khoản dựa trên email của người dùng Google
             $existingUser = Account::where('email', $user->email)->first();
@@ -35,12 +36,12 @@ class GoogleController extends Controller
             } else {
                 $account = new Account;
                 $account->name = $user->name;
-                $account->username = explode('@', $user->email)[0];
+                $account->username = Str::lower(Str::replace(' ', '', $user->name));
                 $account->email = $user->email;
                 $account->password = bcrypt(Str::random(16));
                 $account->photo = $user->avatar;
                 $account->role = 2;
-                $account->google_id = $user->id;
+                $account->facebook_id = $user->id;
                 $account->qr_token = bcrypt($account->phone_number.$account->email.Str::random(40));
                 $account->save();
                 session(['account' => $account]); // Lưu tên người dùng vào session
@@ -50,8 +51,7 @@ class GoogleController extends Controller
         } catch (\Exception $exception) {
             // Xử lý lỗi nếu có
             // dd($exception->getMessage());
-            return redirect()->route('public.login')->with('error', 'Đăng nhập bằng Google thất bại.');
+            return redirect()->route('public.login')->with('error', 'Đăng nhập bằng Facebook thất bại.');
         }
     }
-
 }

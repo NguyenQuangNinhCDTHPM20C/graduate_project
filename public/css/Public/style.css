@@ -10398,6 +10398,11 @@ span.cart-total-text {
     width: 25px;
     color: #fd475a;
 }
+.love-this-button button:focus {
+    outline: none;
+    border: none;
+}
+
 .hidden {
     display: none;
 }
@@ -10505,4 +10510,7 @@ span.cart-total-text {
 
 .bg-search {
     caret-width: 2px;
+}
+a.name-product:hover {
+    color: #009981;
 }

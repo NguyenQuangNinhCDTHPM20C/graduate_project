@@ -9,8 +9,7 @@ class CartController extends Controller
         public function index()
         {
             $cartItems = \Cart::getContent();
-            // dd($cartItems);
-            return view('public.pages.cart', compact('cartItems'));
+            return view('public.pages.cart.cart', compact('cartItems'));
         }
 
 

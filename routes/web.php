@@ -12,6 +12,10 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Api\GoogleController;
+use App\Http\Controllers\Api\FacebookController;
+use App\Http\Controllers\Api\ZaloController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\BlogController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +28,9 @@ use App\Http\Controllers\Api\GoogleController;
 */
 //This is Routes for Public
 Route::group(['domain' => env('APP_URL')], function () {
+    Route::get('test', function(){
+        return view('public.pages.test');
+    });
     Route::get('/',[UserController::class, 'index'])->name('home');
     //Routes for product
     Route::get('/products', [UserController::class, 'products'])->name('products');
@@ -37,15 +44,13 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::post('clear', [CartController::class, 'clear'])->name('cart.clear');
     //Route for contact
     Route::get('/contact', function () {
-        return view('Public.pages.contact');
+        return view('public.pages.contact.contact');
     })->name('contact');
     //Route for add product to favorite
     Route::post('/favorite/add', [FavoriteController::class, 'create'])->name('favorite.add')->middleware('auth.public');
     //Route for add review product
     Route::post('/review/add', [ReviewController::class, 'store'])->name('review.add');
-    Route::get('/checkout', function () {
-        return view('Public.pages.checkout');
-    })->name('checkout');
+    Route::get('/checkout',[UserController::class, 'checkout'])->name('checkout');
     //Routes for authenticate
     Route::get('/login', [AuthController::class, 'showLoginFormPublic'])->name('public.login')->middleware('guest.public');
     Route::post('/login', [AuthController::class, 'login_public'])->middleware('guest.public');
@@ -54,29 +59,28 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::post('/logup', [AuthController::class, 'register'])->name('logup.submit');
     Route::get('/verify-email/{token}', [AuthController::class, 'verifyEmail'])->name('verify-email');
     //Routes for login google
-    Route::get('/get-google-sign-in-url', [GoogleController::class, 'redirectToGoogle'])->name('login.google'); 
-    Route::get('/callback', [GoogleController::class, 'handleGoogleCallback']);
+    Route::get('/login/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google'); 
+    Route::get('/callback/google', [GoogleController::class, 'handleGoogleCallback']);
+    Route::get('/login/facebook', [FacebookController::class, 'redirectToFacebook'])->name('login.facebook');
+    Route::get('/callback/facebook', [FacebookController::class, 'handleFacebookCallback']);
+    Route::get('/login/zalo', [ZaloController::class, 'redirectToZalo'])->name('login.zalo');
+    Route::get('/callback/zalo', [ZaloController::class, 'handleZaloCallback']);
+    //Routes for payment
+    Route::post('/payment/process', [PaymentController::class, 'processPayment'])->name('payment.process');
+    Route::get('/payment/status', [PaymentController::class, 'getPaymentStatus'])->name('payment.status');
+    Route::get('/payment', [UserController::class, 'payment'])->name('payment');
     //Routes for blog
-    Route::get('/blogs', function(){
-        return view('Public.pages.blog.blog-list');
-    })->name('blogs');
-    Route::get('/blog-detail', function(){
-        return view('Public.pages.blog.blog-detail');
-    })->name('blog-detail');
+    Route::get('/blogs',[UserController::class, 'blogs'])->name('blogs');
+    Route::get('/blog-detail/{slug}',[UserController::class, 'blog_detail'])->name('blog-detail');
+    Route::get('/check-qr/{qr_token}', [AuthController::class, 'check_qr'])->name('check-qr');
     //Routes for account
     Route::group(['prefix' => 'account', 'middleware' => 'auth.public'], function () {
-        Route::get('/', function () {
-            return view('Public.pages.account.index');
-        })->name('account.index');
-        Route::get('/account-infor', function () {
-            return view('Public.pages.account.infor');
-        })->name('account.infor');
+        Route::get('/', [UserController::class, 'dash_board'])->name('account.index');
+        Route::get('/account-infor', [UserController::class, 'account_infor'])->name('account.infor');
         Route::get('/order',[UserController::class, 'orders'])->name('account.order');
         Route::get('/wishlist', [FavoriteController::class, 'index'])->name('account.wishlist');
         Route::delete('/wishlist/{id}', [FavoriteController::class, 'destroy'])->name('wishlist.delete');
-        Route::get('/comment', function () {
-            return view('Public.pages.account.comment');
-        })->name('account.comment');
+        Route::get('/comment', [UserController::class, 'comments'])->name('account.comment');
         Route::get('/review', function () {
             return view('Public.pages.account.review');
         })->name('account.review');
@@ -152,6 +156,13 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::get('/setting', function () {
             return view('Admin.pages.setting');
         })->name('setting');
+        Route::get('/add-blog', function () {
+            return view('Admin.pages.blog.add-blog');
+        })->name('add-blog');
+        Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
+        Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
+        Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
+
     });
     Route::get('/login', [AuthController::class, 'showLoginFormAdmin'])->name('admin.login')->middleware('guest.admin');
     Route::post('/login', [AuthController::class, 'login_admin'])->middleware('guest.admin');

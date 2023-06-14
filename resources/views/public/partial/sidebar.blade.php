@@ -7,7 +7,7 @@
 
             <div class="info">
                 <div class="avt" id="myAvatar">
-                    <img src="{{asset('assets/user/'. session('account')->photo)}}"
+                    <img src="{{asset(session('account')->photo)}}"
                         alt="{{session('account')->username}}" style="width: 100%">
                 </div>
 

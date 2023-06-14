@@ -486,7 +486,7 @@ section.account .body-content {
 }
 section.account {
     margin-top: -40px;
-    margin-bottom: -60px;
+    margin-bottom: -57px;
 }
 .row-acc {
     display: flex;
@@ -570,4 +570,54 @@ section.account {
     color: #fff;
     background: #009a82;
     text-align: center;
+}
+.review-content {
+    margin: 15px 50px 0 50px;
+}
+.review-content .item {
+    display: flex;
+    margin-bottom: 20px;
+}
+.review-content .item-selected {
+    background: #ffffc0;
+    padding: 10px;
+}
+.review-content .item .avt {
+    width: 60px;
+    height: 55px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    background: #f1f1f1;
+    overflow: hidden;
+}
+.review-content .item .avt img {
+    max-width: 100%;
+}
+.review-content .item .info {
+    padding-left: 20px;
+    flex-basis: 100%;
+}
+.review-content .item .info p {
+    margin: 5px 0;
+    display: flex;
+    align-items: start;
+}
+.review-content .item-selected strong.name {
+    color: #fd475a;
+}
+.review-content .item .info p label i {
+    color: #d4d4d4;
+}
+.review-content .item .info p span {
+    color: #009981;
+}
+.review-content .item .info .content {
+    margin-top: 15px;
+    text-align: justify;
+    line-height: 1.4;
+}
+.childs {
+    margin-top: 20px;
+    border-left: 2px solid #a7a9ac;
+    padding-left: 20px;
 }

@@ -3,36 +3,38 @@
     <div class="row bg-secondary py-1 px-xl-5">
         <div class="col-lg-6 d-none d-lg-block">
             <div class="d-inline-flex align-items-center h-100">
-                <a class="text-body mr-3" href=""><i class="fa fa-phone-alt text-primary mr-3"></i>+ 012 345 6789</a>
+                <a class="text-body mr-3" href=""><i class="fa fa-phone-alt text-primary mr-3"></i>+ 012 345
+                    6789</a>
                 <a class="text-body mr-3" href=""></a>
-                <a class="text-body mr-3" href=""><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</a>
+                <a class="text-body mr-3" href=""><i
+                        class="fa fa-envelope text-primary mr-3"></i>info@example.com</a>
             </div>
         </div>
         <div class="col-lg-6 text-center text-lg-right">
             <div class="d-inline-flex align-items-center">
                 <div class="btn-group">
-                    @if(session()->has('account'))
-                    <div class="drop-down">
-                        <a class="text-body drop-btn" href="#"><img
-                                src="{{  session('account')->photo }}" alt="Avatar"
-                                style="width: 25px; border-radius: 50%; margin-right: 10px;"> Welcome,
-                            {{ session('account')->username}}</a>
-                        <div class="dropdown-menu dropdown-menu-right drop-down-content">
-                            <a href="{{ route('account.index') }}" class="profile-link">
-                                <i class="fal fa fa-user-circle"></i>
-                                <span>Profile</span>
-                            </a>
-                            <a>
-                                <form action="{{ route('public.logout') }}" method="POST" id="logout-form">
-                                    @method('POST')
-                                    @csrf
-                                    <button type="submit"><i class="fal fa fa-sign-out-alt"></i>Logout</button>
-                                </form>
-                            </a>
+                    @if (session()->has('account'))
+                        <div class="drop-down">
+                            <a class="text-body drop-btn" href="#"><img
+                                    src="{{ asset(session('account')->photo) }}" alt="Avatar"
+                                    style="width: 25px; border-radius: 50%; margin-right: 10px;"> Welcome,
+                                {{ session('account')->username }}</a>
+                            <div class="dropdown-menu dropdown-menu-right drop-down-content">
+                                <a href="{{ route('account.index') }}" class="profile-link">
+                                    <i class="fal fa fa-user-circle"></i>
+                                    <span>Profile</span>
+                                </a>
+                                <a>
+                                    <form action="{{ route('public.logout') }}" method="POST" id="logout-form">
+                                        @method('POST')
+                                        @csrf
+                                        <button type="submit"><i class="fal fa fa-sign-out-alt"></i>Logout</button>
+                                    </form>
+                                </a>
+                            </div>
                         </div>
-                    </div>
                 </div>
-                @else
+            @else
                 <a class="text-body" href="{{ route('public.login') }}">Login</a>
                 @endif
 
@@ -61,7 +63,7 @@
                 <a href="" class="btn px-0 ml-2">
                     <i class="fas fa-shopping-cart text-dark"></i>
                     <span class="badge text-dark border border-dark rounded-circle"
-                        style="padding-bottom: 2px">{{ Cart::getTotalQuantity()}}</span>
+                        style="padding-bottom: 2px">{{ Cart::getTotalQuantity() }}</span>
                 </a>
             </div>
         </div>
@@ -69,8 +71,9 @@
 </div>
 <div class="row align-items-center py-3 px-xl-5 d-none d-lg-flex">
     <div class="col-lg-4">
-        <a href="{{route('home')}}" class="logo">
-            <img src="{{asset('images/logoshop1.png')}}" style="  width: 50%;
+        <a href="{{ route('home') }}" class="logo">
+            <img src="{{ asset('images/logoshop1.png') }}"
+                style="  width: 50%;
         padding-right: 10px;
         object-fit: cover;" alt="double-n shop">
         </a>
@@ -90,14 +93,14 @@
             <span><i class="icon fa fa-truck-fast"></i></span>
             <span class="text">Kiểm tra đơn hàng</span>
         </a>
-        <a class="itemCart" href="{{route('cart.list')}}">
+        <a class="itemCart" href="{{ route('cart.list') }}">
             <i class="fas fa-light fa-cart-shopping"></i>
             <label>
                 <i class="cart-total fas fa fa-comment"></i>
-                <span class="cart-total cart-total-text">{{ Cart::getTotalQuantity()}}</span>
+                <span class="cart-total cart-total-text">{{ Cart::getTotalQuantity() }}</span>
             </label>
         </a>
-        <a class="itemCart" href="{{route('account.wishlist')}}">
+        <a class="itemCart" href="{{ route('account.wishlist') }}">
             <i class="fas fa-light fa-heart"></i>
             <label>
                 <i class="cart-total fas fa fa-comment"></i>
@@ -150,7 +153,7 @@
         <div class="col-lg-9">
             <nav class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
                 <a href="{{ route('home') }}" class="text-decoration-none d-block d-lg-none">
-                    <img src="{{asset('images/logoshop1.png')}}"
+                    <img src="{{ asset('images/logoshop1.png') }}"
                         style="  width: 50%;padding-right: 10px;object-fit: cover;background-color:white;"
                         alt="double-n shop">
                 </a>

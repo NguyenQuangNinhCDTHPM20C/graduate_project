@@ -57,11 +57,10 @@ class FavoriteController extends Controller
                  $favoriteDetail->favorite_id = $favoriteId;
                  $favoriteDetail->product_id = $productId;
                  $favoriteDetail->save();
-     
-                 return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào mục yêu thích.');
-             } else {
-                 return redirect()->back()->with('error', 'Sản phẩm đã tồn tại trong mục yêu thích.');
-             }
+                //  $message = 'Sản phẩm đã được thêm vào mục yêu thích.';
+                 session(['message' => 'Phần tử đã được xóa khỏi danh sách yêu thích.']);
+                 return redirect()->back();
+             } 
          } else {
              // if no login
              return redirect()->route('public.login')->with('error', 'Vui lòng đăng nhập để thêm sản phẩm vào mục yêu thích.');
@@ -127,8 +126,9 @@ class FavoriteController extends Controller
         $favoriteDetail = FavoriteDetail::where('favorite_id', $id)->first();
 
         if ($favoriteDetail) {
-            $favoriteDetail->delete();
-            return redirect()->back()->with('success', 'Phần tử đã được xóa khỏi danh sách yêu thích.');
+            session(['message' => 'Sản phẩm đã được thêm vào mục yêu thích.']);
+            $favoriteDetail->delete();            
+            return redirect()->back();
         } else {
             return redirect()->back()->with('error', 'Không tìm thấy phần tử để xóa.');
         }

@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Str;
 
 class Accounts extends Migration
 {
@@ -22,11 +23,14 @@ class Accounts extends Migration
             $table->string('password');
             $table->string('photo')->nullable();
             $table->string('address')->nullable();
+            $table->string('phone_number')->nullable();
             $table->integer('role');
             $table->tinyInteger('status')->nullable()->default(1);
             $table->rememberToken();
             $table->string('verification_token')->nullable();
             $table->string('google_id')->nullable();
+            $table->string('facebook_id')->nullable();
+            $table->string('qr_token')->nullable();
             $table->timestamps(); // creawted_at, updated_at
         });
     }
