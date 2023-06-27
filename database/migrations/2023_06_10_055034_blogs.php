@@ -15,11 +15,16 @@ class Blogs extends Migration
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
+            $table->integer('category_id')->nullable()->unsigned();
+            $table->integer('sub_category_id')->nullable()->unsigned();
+            $table->string('author');
             $table->string('title');
             $table->string('slug')->unique();
             $table->string('image');
             $table->text('content');
             $table->timestamps();
+            $table->foreign('category_id')->references('id')->on('category');
+            $table->foreign('sub_category_id')->references('id')->on('sub_category');
         });
     }
 

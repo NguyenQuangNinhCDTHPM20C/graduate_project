@@ -68,7 +68,7 @@
                                                 <tr>
                                                     <td>{{ $loop->index }}</td>
                                                     <td>{{ $order->code }}</td>
-                                                    <td>{{ $order->created_at }}</td>
+                                                    <td>{{ $order->order_date }}</td>
                                                     <td>{{ $order->product_name }}</td> <!-- Đóng dấu nháy đơn ở đây -->
                                                     <td>{{ $order->price }}</td>
                                                 </tr>
@@ -117,7 +117,7 @@
                                                                         </div>
                                                                         <div class="text-center py-4 px-4 overflow-text">
                                                                             <a class="h6 text-decoration-none text-truncate name-product"
-                                                                                href="{{ route('product-detail', ['id' => $favorite->id]) }}">{{ $favorite->product->name }}</a>
+                                                                                href="{{ route('product-detail', ['slug' => $favorite->product->slug]) }}">{{ $favorite->product->name }}</a>
                                                                             <div
                                                                                 class="d-flex align-items-center justify-content-center mt-2">
                                                                                 <h5 style="color: #fd475a;">
@@ -191,8 +191,10 @@
                                                     <label>
                                                         <i>
                                                             ({{ $review->created_at }})
-                                                            <span>- bài viết gốc:</span> <a target="_blank"
-                                                                href="{{ route('product-detail', ['id' => $review->product_id]) }}">{{ route('product-detail', ['id' => $review->product_id]) }}</a>
+                                                            <span>- bài viết gốc:</span> <a
+                                                                class="text-dark text-decoration-none text-truncate name-product"
+                                                                target="_blank"
+                                                                href="{{ route('product-detail', ['slug' => $review->product_slug]) }}">{{ route('product-detail', ['slug' => $review->product_slug]) }}</a>
                                                         </i>
                                                     </label>
                                                 </p>

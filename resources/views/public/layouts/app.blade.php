@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{--CSRF Token--}}
+    <meta property="fb:app_id" content="1284707605765260" />
+    <meta property="fb:admins" content="USER ID" />
+    {{-- CSRF Token --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', config('app.name', '@Master Layout'))</title>
 
-    {{--Styles css common--}}
-    <link rel="shortcut icon" type="image/png" href="{{asset('images/doublenshop-favicon.png')}}" />
+    {{-- Styles css common --}}
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/doublenshop-favicon.png') }}" />
     <!-- Favicon -->
     <!-- <link href="img/favicon.ico" rel="icon"> -->
     <!-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'> -->
@@ -24,7 +26,7 @@
     <link rel="stylesheet" href="{{ asset('css/Public/owl.carousel.min.css') }}">
 
     @yield('style-libraries')
-    {{--Styles custom--}}
+    {{-- Styles custom --}}
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{ asset('css/Public/style.css') }}">
     @yield('styles')
@@ -32,9 +34,13 @@
 
 <body>
     @php
-    use Illuminate\Support\Str;
+        use Illuminate\Support\Str;
     @endphp
 
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+        src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0&appId=1284707605765260&autoLogAppEvents=1"
+        nonce="HZS5fH7a"></script>
     @include('Public.partial.header')
 
     @yield('slider')
@@ -43,7 +49,7 @@
 
     @include('Public.partial.footer')
 
-    {{--Scripts js common--}}
+    {{-- Scripts js common --}}
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>

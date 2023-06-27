@@ -13,9 +13,9 @@ class CategoryTableSeeder extends Seeder
     public function run()
     {
         $category = [
-            ['name' => 'Laptops', 'slug' => 'laptops', 'image' => 'laptop.png', 'status' => 1, 'created_at' => now(),'updated_at' => now()],
-            ['name' => 'Desktops', 'slug' => 'desktops', 'image' => 'desktop.png', 'status' => 1,'created_at' => now(),'updated_at' => now(),],
-            ['name' => 'Computer Components','slug' => 'computer-components', 'image' => 'computer_component.png', 'status' => 1,'created_at' => now(),'updated_at' => now(),],
+            ['name' => 'Laptops', 'slug' => 'laptops', 'image' => 'laptop.png', 'type' => 'product',  'status' => 1, 'created_at' => now(),'updated_at' => now()],
+            ['name' => 'Desktops', 'slug' => 'desktops', 'image' => 'desktop.png', 'type' => 'product', 'status' => 1,'created_at' => now(),'updated_at' => now(),],
+            ['name' => 'Computer Components','slug' => 'computer-components', 'image' => 'computer_component.png', 'type' => 'product', 'status' => 1,'created_at' => now(),'updated_at' => now(),],
         ];
         
         DB::table('category')->insert($category);

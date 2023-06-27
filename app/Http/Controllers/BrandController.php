@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 class BrandController extends Controller
@@ -106,8 +107,9 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
+        Product::where('brand_id', $id)->update(['brand_id' => null]);
         $brand = Brand::findOrFail($id);
         $brand->delete();
-        return redirect()->route('category.list')->with('Brand has been deleted successfully');
+        return redirect()->route('brand.list')->with('Brand has been deleted successfully');
     }
 }

@@ -15,9 +15,9 @@ class Products extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('brand_id')->unsigned();
-            $table->integer('category_id')->unsigned();
-            $table->integer('sub_category_id')->unsigned();
+            $table->integer('brand_id')->nullable()->unsigned();
+            $table->integer('category_id')->nullable()->unsigned();
+            $table->integer('sub_category_id')->nullable()->unsigned();
             $table->string('name',200);
             $table->string('slug')->unique();
             $table->string('code');
@@ -25,7 +25,7 @@ class Products extends Migration
             $table->string('tag');
             $table->float('selling_price');
             $table->float('discount_price');
-            $table->string('description');
+            $table->text('description');
             $table->string('image');
             $table->tinyInteger('status')->nullable()->default(1);
             $table->timestamps(); // creawted_at, updated_at

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\SubCategory;
 use App\Models\Category;
+use App\Models\Product;
+use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -41,6 +43,7 @@ class SubCategoryController extends Controller
     {
         $sub_category = new SubCategory;
         $subCategory = SubCategory::where('name', $request->input('category'))->first();
+        $category = Category::where('name', $request->input('category'))->first();
         if($category != null){
             $sub_category->category_id = $category->id;
         }
@@ -106,6 +109,8 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
+        Product::where('sub_category_id', $id)->update(['sub_category_id' => null]);
+        Blog::where('sub_category_id', $id)->update(['sub_category_id' => null]);
         $sub_category = SubCategory::findOrFail($id);
         $sub_category->delete();
         return redirect()->route('subcategory.list')->with('Sub Category has been deleted successfully');

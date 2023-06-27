@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\InvoiceDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 class ProductController extends Controller
@@ -48,13 +49,18 @@ class ProductController extends Controller
         $product = new Product;
     
         $product->name = $request->input('name');
-        $product->slug = Str::slug($request->input('name'), '-');
         $product->code = $request->input('code');
         $product->quantity = $request->input('quantity');
         $product->selling_price = $request->input('selling_price');
         $product->description = $request->input('description');
         $product->status = $request->input('status');
         $product->tag = $request->tag;
+        
+        $product->slug = Str::slug($request->input('name'), '-');
+        $existingSlug = Product::where('slug', $product->slug)->first();
+        if ($existingSlug) {
+            $product->slug .= '-' . uniqid();
+        }
         
         if ($request->hasFile('image')) {
             $file = $request->file('image');
@@ -95,9 +101,9 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $product = Product::find($id);
+        $product = Product::where('slug', $slug)->first();
         if (!$product) {
             abort(404);
         }
@@ -135,7 +141,6 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
 
         $product->name = $request->input('name');
-        $product->slug = Str::slug($request->input('name'), '-');
         $product->code = $request->input('code');
         $product->quantity = $request->input('quantity');
         $product->selling_price = $request->input('selling_price');
@@ -143,6 +148,11 @@ class ProductController extends Controller
         $product->status = $request->input('status');
         $product->tag = $request->tag;
         
+        $product->slug = Str::slug($request->input('name'), '-');
+        $existingSlug = Product::where('slug', $slug)->first();
+        if ($existingSlug) {
+            $product->slug .= '-' . uniqid();
+        }
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $fileName = Str::slug($product->name) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
@@ -192,6 +202,7 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        InvoiceDetail::where('product_id', $id)->update(['product_id' => null]);
         $product = Product::findOrFail($id);
         $product->delete();
         return redirect()->route('product.list')->with('Product has been deleted successfully');

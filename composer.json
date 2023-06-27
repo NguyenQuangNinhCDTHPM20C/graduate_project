@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "awssat/laravel-visits": "^4.1",
+        "cyrildewit/eloquent-viewable": "^7.0",
         "darryldecode/cart": "^4.2",
         "endroid/qr-code": "^4.6",
         "fruitcake/laravel-cors": "^2.0",
@@ -15,6 +17,7 @@
         "laravel/sanctum": "^2.11",
         "laravel/socialite": "^5.6",
         "laravel/tinker": "^2.5",
+        "milon/barcode": "^10.0",
         "paypal/rest-api-sdk-php": "^1.14",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "zaloplatform/zalo-php-sdk": "^4.0"

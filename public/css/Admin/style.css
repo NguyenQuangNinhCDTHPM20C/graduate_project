@@ -8290,11 +8290,13 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .slider-product {
+    justify-content: center;
     text-align: center;
     width: 100%;
 }
 .slider-product img {
-    width: auto !important;
+    max-width: 100%;
+    max-height: 100%;
     margin: 0 0 10px;
 }
 @media (max-width: 991.98px) {

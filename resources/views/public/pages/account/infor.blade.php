@@ -217,7 +217,7 @@
                                     <div class="form-controls">
                                         <label>Mật khẩu mới: </label>
                                         <div class="controls">
-                                            <input type="password" value="" name="PasswordHash" id="PasswordHash"
+                                            <input type="text" name="PasswordHash" id="PasswordHash"
                                                 placeholder="Mật khẩu mới">
                                         </div>
                                     </div>

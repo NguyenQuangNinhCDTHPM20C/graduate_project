@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
@@ -14,7 +14,7 @@ use App\Models\Review;
 use App\Models\Account;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Carbon;
+use Carbon\Carbon;
 use Endroid\QrCode\QrCode;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
@@ -22,10 +22,10 @@ class UserController extends Controller
 {
     // Show home
     public function index(){
-        $products = Product::all();
+        $products = Product::paginate(10);
         $newProducts = Product::where('created_at', '>=', Carbon::now()->subDays(7))->get();
         $brands = Brand::all();
-        $category = \DB::table('category')
+        $category = \DB::table('category')->where('type', 'product')
         ->leftJoin('products', 'category.id', '=', 'products.category_id')
         ->select('category.id', 'category.name', 'category.image', \DB::raw('count(products.id) as total'))
         ->groupBy('category.id', 'category.name', 'category.image')
@@ -64,8 +64,9 @@ class UserController extends Controller
     }
 
     // Show product detail 
-    public function product_detail($id){
-        $product = Product::find($id);
+    public function product_detail($slug){
+        $product = Product::where('slug', $slug)->first();
+
         if (!$product) {
             abort(404);
         }
@@ -76,11 +77,16 @@ class UserController extends Controller
         $favoriteId = $favorite->id;
         // Check exits product in favorite_detail
         $existingFavoriteDetail = FavoriteDetail::where('favorite_id', $favoriteId)
-            ->where('product_id', $id)
+            ->where('product_id', $product->id)
             ->first();
         }
-        $reviews = Review::where('product_id', $id)->get();
-        $review_count = Review::where('product_id', $id)->count();
+        $reviews = DB::table('reviews')
+        ->join('accounts', 'reviews.account_id', '=', 'accounts.id')
+        ->where('reviews.product_id', $product->id)
+        ->select('reviews.*', 'accounts.photo as account_photo', 'accounts.name as account_name')
+        ->get();
+
+        $review_count = $reviews->count();
         return view('public.pages.product.product-detail', compact('product', 'reviews', 'review_count', 'existingFavoriteDetail'));
     }
 
@@ -108,7 +114,15 @@ class UserController extends Controller
     // Get list comment for user
     public function comments(){
         $account_id = session('account')->id;
-        $comments = Review::where('account_id', '=', $account_id)->get();
+        $comments =  DB::table('reviews')
+        ->join('products', 'reviews.product_id', '=', 'products.id')
+        ->where('reviews.account_id', $account_id)
+        ->select('reviews.*', 'products.slug as product_slug')
+        ->get();
+    
+        foreach ($comments as $comment) {
+            $comment->created_at = Carbon::createFromFormat('Y-m-d H:i:s', $comment->created_at)->format('d/m/Y');
+        }
         return view('public.pages.account.comment', compact('comments'));
 
     }
@@ -126,11 +140,22 @@ class UserController extends Controller
         foreach ($orders as $order) {
             $order->order_date = Carbon::parse($order->order_date)->format('d/m/Y');
         }
+
         $favorites = FavoriteDetail::join('favorites', 'favorite_detail.favorite_id', '=', 'favorites.id')
         ->where('favorites.account_id', $account_id)
         ->get();
-        $reviews = Review::where('account_id', '=', $account_id)->get();
         
+        $reviews = DB::table('reviews')
+        ->join('products', 'reviews.product_id', '=', 'products.id')
+        ->where('reviews.account_id', $account_id)
+        ->select('reviews.*', 'products.slug as product_slug')
+        ->get();
+    
+        foreach ($reviews as $review) {
+            $review->created_at = Carbon::createFromFormat('Y-m-d H:i:s', $review->created_at)->format('d/m/Y');
+        }
+    
+
         return view('public.pages.account.index', compact('orders', 'favorites', 'reviews'));
 
     }
@@ -149,13 +174,70 @@ class UserController extends Controller
         return view('Public.pages.payment.payment');
     }
 
-    public function blogs(){
-        $blogs = Blog::paginate(10);
-        return view('Public.pages.blog.blog-list', compact('blogs'));
+    public function blogs()
+    {
+        $blogs = DB::table('blogs')
+        ->join('sub_category', 'blogs.sub_category_id', '=', 'sub_category.id')
+        ->leftjoin('views', 'blogs.id', '=', 'views.viewable_id')
+        ->select('blogs.*', 'sub_category.name as sub_category_name', DB::raw('COUNT(views.viewable_id) as view_count'))
+        ->groupBy('blogs.id', 'blogs.category_id', 'blogs.sub_category_id', 'blogs.author', 'blogs.title', 'blogs.slug', 'blogs.image', 'blogs.content', 'blogs.created_at', 'blogs.updated_at', 'sub_category.name')
+        ->paginate(10);
+
+        foreach ($blogs as $blog) {
+            $blog->created_at = Carbon::createFromFormat('Y-m-d H:i:s', $blog->created_at)->format('d F, Y');
+        }
+
+        $hot_blogs = DB::table('blogs')
+        ->join('views', 'views.viewable_id', '=', 'blogs.id')
+        ->select('blogs.*', DB::raw('COUNT(views.viewable_id) as view_count'))
+        ->groupBy('blogs.id', 'blogs.category_id', 'blogs.sub_category_id', 'blogs.author', 'blogs.title', 'blogs.slug', 'blogs.image', 'blogs.content', 'blogs.created_at', 'blogs.updated_at')
+        ->orderBy('view_count', 'desc')
+        ->take(5)
+        ->get();    
+
+        foreach ($hot_blogs as $hot_blog) {
+            $hot_blog->created_at = Carbon::createFromFormat('Y-m-d H:i:s', $hot_blog->created_at)->format('d F, Y');
+        }
+
+        $random_blog = Blog::inRandomOrder()->take(3)->get();
+
+        $viewed_blogs_id = session('viewed_blogs', []);
+        $viewed_blogs = Blog::whereIn('id', $viewed_blogs_id)->get();
+      
+        return view('public.pages.blog.blog-list', compact('blogs', 'random_blog', 'hot_blogs', 'viewed_blogs'));
     }
+
+    
 
     public function blog_detail($slug){
         $blog = Blog::where('slug', $slug)->first();
-        return view('Public.pages.blog.blog-detail', compact('blog'));
+        
+        views($blog)->record();
+        $count_view = views($blog)->count();
+        session()->push('viewed_blogs', $blog->id);
+        $viewed_blogs_id = session('viewed_blogs', []);
+        $viewed_blogs = Blog::whereIn('id', $viewed_blogs_id)->get();
+        
+        $hot_blogs = DB::table('blogs')
+        ->join('views', 'views.viewable_id', '=', 'blogs.id')
+        ->select('blogs.*', DB::raw('COUNT(views.viewable_id) as view_count'))
+        ->groupBy('blogs.id', 'blogs.category_id', 'blogs.sub_category_id', 'blogs.author', 'blogs.title', 'blogs.slug', 'blogs.image', 'blogs.content', 'blogs.created_at', 'blogs.updated_at')
+        ->orderBy('view_count', 'desc')
+        ->take(5)
+        ->get();    
+
+        foreach ($hot_blogs as $hot_blog) {
+            $hot_blog->created_at = Carbon::createFromFormat('Y-m-d H:i:s', $hot_blog->created_at)->format('d F, Y');
+        }
+        $new_blog = Blog::orderBy('created_at', 'desc')->first();
+        
+        $previous_blog = Blog::where('id', '<', $blog->id)
+          ->orderBy('id', 'desc')
+          ->first();
+
+        $next_blog = Blog::where('id', '>', $blog->id)
+            ->orderBy('id', 'asc')
+            ->first();
+        return view('Public.pages.blog.blog-detail', compact('blog', 'new_blog', 'count_view', 'hot_blogs', 'viewed_blogs', 'previous_blog', 'next_blog'));
     }
 }

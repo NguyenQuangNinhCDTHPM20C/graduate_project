@@ -16,7 +16,7 @@ class InvoicesDetail extends Migration
         Schema::create('invoice_detail', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('invoice_id')->unsigned();
-            $table->integer('product_id')->unsigned();
+            $table->integer('product_id')->nullable()->unsigned();
             $table->integer('quantity');
             $table->float('price');
             $table->timestamps(); // creawted_at, updated_at

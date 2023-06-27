@@ -15,7 +15,7 @@ class Subcategory extends Migration
     {
         Schema::create('sub_category', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category_id')->unsigned();
+            $table->integer('category_id')->nullable()->unsigned();
             $table->string('name',200);
             $table->string('slug')->unique();
             $table->tinyInteger('status')->nullable()->default(1);

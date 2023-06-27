@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\SubCategory;
+use App\Models\Product;
+use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 class CategoryController extends Controller
@@ -39,7 +42,14 @@ class CategoryController extends Controller
         $category = new Category;
     
         $category->name = $request->input('name');
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = Str::slug($category->name) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $file->move(public_path('assets/category/'), $fileName);
+            $category->image = $fileName;
+        }
         $category->slug = Str::slug($request->input('name'), '-');
+        $category->type = $request->input('type');
         $category->status = $request->input('status');
        
         $category->save();
@@ -80,6 +90,13 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $category->name = $request->input('name');
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = Str::slug($category->name) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $file->move(public_path('assets/category/'), $fileName);
+            $category->image = $fileName;
+        }
+        $category->type = $request->input('type');
         $category->slug = Str::slug($request->input('name'), '-');
         $category->status = $request->input('status');
        
@@ -94,7 +111,10 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
+    {    
+        Product::where('category_id', $id)->update(['category_id' => null]);
+        Subcategory::where('category_id', $id)->update(['category_id' => null]);
+        Blog::where('category_id', $id)->update(['category_id' => null]);
         $category = Category::findOrFail($id);
         $category->delete();
         return redirect()->route('category.list')->with('Category has been deleted successfully');

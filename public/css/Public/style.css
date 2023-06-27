@@ -1895,7 +1895,7 @@ pre code {
 
 .table .thead-dark th {
     color: #fff;
-    background-color: #343a40;
+    background-color: #009981;
     border-color: #454d55;
 }
 
@@ -9757,7 +9757,7 @@ a.text-light:focus {
 }
 
 .text-dark {
-    color: white !important;
+    color: black;
 }
 
 a.text-dark:hover,
@@ -10226,18 +10226,33 @@ h6 {
     border: 1px solid;
     border-color: var(--white);
 }
+
 .bg-menu {
     margin: 0 45px;
     border-radius: 10px;
+    background-color: #00483d;
 }
-@media screen and (max-width: 768px) {
-    .bg-menu {
-        margin: 5px;
+.bg-search-1 {
+    display: none;
+}
+.btn-group-2 {
+    display: none;
+}
+@media screen and (max-width: 992px) {
+    .btn-group-2 {
+        display: inline;
     }
-}
-@media screen and (min-width: 768px) {
+    .bg-search-1 {
+        display: flex;
+        background-color: white;
+    }
+    .bg-menu-container {
+        padding-left: 0;
+        padding-right: 0;
+    }
     .bg-menu {
-        background-color: #00483d;
+        margin: 0px;
+        border-radius: 0px;
     }
 }
 .bg-radius {
@@ -10512,5 +10527,5 @@ span.cart-total-text {
     caret-width: 2px;
 }
 a.name-product:hover {
-    color: #009981;
+    color: #009981 !important;
 }

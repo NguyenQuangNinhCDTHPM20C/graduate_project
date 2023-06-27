@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -26,28 +27,28 @@ class AuthController extends Controller
     }
     
     public function login_admin(Request $request){
-        $validatedData = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
         $account = Account::where('email', $request->email)->first();
-        if(!$account)
-            return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng.']);
-        if($account->role == 1)
-        {
-        session(['account' => $account]); // Lưu tên người dùng vào session
-        session(['auth_check_admin'=>true]);
-            return redirect()->route('index');}
-            
+        
+        if ($account && Hash::check($request->password, $account->password)) {
+            if($account->role == 1 && $account->email_verified_at != null)
+             {
+                session(['account' => $account]); // Lưu tên người dùng vào session
+                session(['auth_check_admin'=>true]);
+                $account->qr_token = bcrypt($account->phone_number.$account->email.Str::random(40));
+                $account->save();
+                return redirect()->route('index');
+            }
+            else{
+                return back()->withErrors(['error' => 'Tài khoản chưa xác thực email hoặc không hợp lệ.']);
+            }
+        }
+            return back()->withErrors(['error' => 'Email hoặc mật khẩu không đúng.']);
     }
 
     public function login_public(Request $request){
-        $validatedData = $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
         $account = Account::where('email', $request->email)->first();
-        if($account){
+        
+        if ($account && Hash::check($request->password, $account->password)) {
             if($account->role == 2 && $account->email_verified_at != null)
              {
                 session(['account' => $account]); // Lưu tên người dùng vào session
@@ -56,13 +57,17 @@ class AuthController extends Controller
                 $account->save();
                 return redirect()->route('home');
             }
+            else{
+                return back()->withErrors(['error' => 'Tài khoản chưa xác thực email hoặc không hợp lệ.']);
+            }
         }
-            return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng.']);
+            return back()->withErrors(['error' => 'Email hoặc mật khẩu không đúng.']);
     }
-
+    
     public function check_qr($qrToken)
     {
-        $account = Account::where('qr_token', $qrToken)->first();
+        $account = Account::where('qr_token', '$2y$10$gmiOA3GJiMXgJ/.85EpYwejxxCTE5afj8FWcf6mSbFcdjrAjjQAhC')->first();
+        dd($account);
         if ($account) {
             if ($account->role == 2) {
                 session(['account' => $account]);

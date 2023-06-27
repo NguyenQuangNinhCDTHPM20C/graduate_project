@@ -24,13 +24,15 @@
                                     <i class="fal fa fa-user-circle"></i>
                                     <span>Profile</span>
                                 </a>
-                                <a>
-                                    <form action="{{ route('public.logout') }}" method="POST" id="logout-form">
-                                        @method('POST')
-                                        @csrf
-                                        <button type="submit"><i class="fal fa fa-sign-out-alt"></i>Logout</button>
-                                    </form>
+                                <a href="javascript:void(0);" onclick="logout()" class="profile-link">
+                                    <i class="fal fa fa-sign-out-alt"></i>
+                                    <span>Logout</span>
                                 </a>
+                                <form action="{{ route('public.logout') }}" method="POST" id="logout-form"
+                                    style="display: none;">
+                                    @method('POST')
+                                    @csrf
+                                </form>
                             </div>
                         </div>
                 </div>
@@ -55,16 +57,21 @@
                     </button>
                 </div>
             </div>
-            <div class="btn-group"> <a href="" class="btn px-0 ml-2">
-                    <i class="fas fa-heart text-dark"></i>
-                    <span class="badge text-dark border border-dark rounded-circle"
+            <div class="btn-group-2">
+                <a href="{{ route('account.wishlist') }}" class="btn px-0 ml-2">
+                    <i class="fas fa-heart text-white"></i>
+                    <span class="badge text-white border border-white rounded-circle"
                         style="padding-bottom: 2px">{{ $favorite_count }}</span>
                 </a>
-                <a href="" class="btn px-0 ml-2">
-                    <i class="fas fa-shopping-cart text-dark"></i>
-                    <span class="badge text-dark border border-dark rounded-circle"
+                <a href="{{ route('cart.list') }}" class="btn px-0 ml-2">
+                    <i class="fas fa-shopping-cart text-white"></i>
+                    <span class="badge text-white border border-white rounded-circle"
                         style="padding-bottom: 2px">{{ Cart::getTotalQuantity() }}</span>
                 </a>
+
+                <button id="scan-button" class="btn px-0 ml-2">
+                    <i class="fas fa-solid fa-qrcode text-white"></i>
+                </button>
             </div>
         </div>
     </div>
@@ -108,7 +115,9 @@
                 <span class="cart-total cart-total-text">{{ $favorite_count }}</span>
             </label>
         </a>
-
+        <a class="itemCart" href="{{ route('account.wishlist') }}">
+            <i class="fa-solid fa-qrcode"></i>
+        </a>
     </div>
 
 </div>
@@ -116,15 +125,15 @@
 <!-- Topbar End -->
 
 <!-- Navbar Start -->
-<div class="container-fluid mb-30">
+<div class="container-fluid mb-30 bg-menu-container">
     <div class="row px-xl-5 bg-dark bg-menu">
         <div class="col-lg-3 d-none d-lg-block">
             <a class="btn d-flex align-items-center justify-content-between bg-category w-100" data-toggle="collapse"
                 href="#navbar-vertical" style="height: 65px; padding: 0 30px">
-                <h6 class="text-dark m-0">
+                <h6 class="text-white m-0">
                     <i class="fa fa-bars mr-2"></i>Categories
                 </h6>
-                <i class="fa fa-angle-down text-dark"></i>
+                <i class="fa fa-angle-down text-white"></i>
             </a>
             <nav class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
                 id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999">
@@ -182,6 +191,19 @@
                             class="nav-item nav-link{{ request()->is('contact') ? ' active' : '' }}">Contact</a>
                         <a href="{{ route('blogs') }}"
                             class="nav-item nav-link{{ request()->is('blogs') ? ' active' : '' }}">Blog</a>
+                        <div class="nav-item">
+                            <form action="{{ route('search') }}" method="GET">
+                                <div class="input-group bg-search-1">
+                                    <input type="text" name="slug" class="form-control bg-search"
+                                        placeholder="Search for products" />
+                                    <span class="input-group-text bg-transparent text-primary search-bar">
+                                        <button class="btn-search" type="submit"><i
+                                                class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+
                     </div>
 
                 </div>
@@ -190,3 +212,8 @@
     </div>
 </div>
 <!-- Navbar End -->
+<script>
+    function logout() {
+        document.getElementById('logout-form').submit();
+    }
+</script>

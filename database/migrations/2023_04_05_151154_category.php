@@ -18,6 +18,7 @@ class Category extends Migration
             $table->string('name',200);
             $table->string('image');
             $table->string('slug')->unique();
+            $table->string('type');
             $table->tinyInteger('status')->nullable()->default(1);
             $table->timestamps(); // creawted_at, updated_at
         });

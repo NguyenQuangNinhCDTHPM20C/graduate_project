@@ -76,8 +76,9 @@
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Blogs</h6>
                     <ul>
-                        <li class="{{ request()->routeIs('add-blog') ? 'active' : '' }}"><a
-                                href="{{ route('add-blog') }}"><i data-feather="bar-chart-2"></i><span>Add Blog</span></a></li>
+                        <li class="{{ request()->routeIs('blog.create') ? 'active' : '' }}"><a
+                                href="{{ route('blog.create') }}"><i data-feather="bar-chart-2"></i><span>Add
+                                    Blog</span></a></li>
                     </ul>
                 </li>
                 <li class="submenu-open">
