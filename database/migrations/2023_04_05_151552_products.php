@@ -15,23 +15,22 @@ class Products extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('code');
             $table->integer('brand_id')->nullable()->unsigned();
             $table->integer('category_id')->nullable()->unsigned();
             $table->integer('sub_category_id')->nullable()->unsigned();
-            $table->string('name',200);
+            $table->string('name');
             $table->string('slug')->unique();
-            $table->string('code');
             $table->integer('quantity');
-            $table->string('tag');
             $table->float('selling_price');
             $table->float('discount_price');
             $table->text('description');
-            $table->string('image');
             $table->tinyInteger('status')->nullable()->default(1);
-            $table->timestamps(); // creawted_at, updated_at
+            $table->timestamps();
+            
             $table->foreign('brand_id')->references('id')->on('brands');
-            $table->foreign('category_id')->references('id')->on('category');
-            $table->foreign('sub_category_id')->references('id')->on('sub_category');
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories');
         });
     }
 

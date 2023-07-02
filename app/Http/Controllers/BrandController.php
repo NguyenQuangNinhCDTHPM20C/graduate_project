@@ -69,9 +69,9 @@ class BrandController extends Controller
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $brand = Brand::findOrFail($id); 
+        $brand = Brand::where('slug', $slug)->first(); 
         return view('Admin.pages.brand.edit-brand', compact( 'brand'));
     }
 

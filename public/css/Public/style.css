@@ -2000,7 +2000,7 @@ pre code {
     background-color: #fff;
     background-clip: padding-box;
     border: solid 0.5px grey;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
@@ -2543,7 +2543,6 @@ fieldset:disabled a.btn {
     color: #212529;
     background-color: #ffd333;
     border-color: #ffd333;
-    border-radius: 5px;
 }
 
 .btn-primary:hover {
@@ -10528,4 +10527,116 @@ span.cart-total-text {
 }
 a.name-product:hover {
     color: #009981 !important;
+}
+.radio-item [type="radio"] {
+    display: none;
+}
+
+.radio-item label:hover {
+    border-color: #fd475a;
+}
+
+.radio-item label {
+    display: block;
+    padding: 10px 25px;
+    margin-right: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 400;
+    white-space: nowrap;
+    position: relative;
+    transition: 0.4s ease-in-out 0s;
+}
+
+.radio-item label:after,
+.radio-item label:before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+}
+
+.radio-item label:after {
+    height: 15px;
+    width: 15px;
+    border: 1px solid #ccc;
+    left: 4px;
+    top: calc(50% - 8px);
+}
+
+.radio-item label:before {
+    background: #009981;
+    height: 14px;
+    width: 14px;
+    left: 5px;
+    top: calc(50% - 8px);
+    transform: scale(5);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.4s ease-in-out 0s;
+}
+
+.radio-item [type="radio"]:checked ~ label {
+    border-color: #009981;
+}
+
+.radio-item [type="radio"]:checked ~ label::before {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+}
+
+.radio-item {
+    display: inline-block;
+}
+.bg-radius-none {
+    border-radius: 0;
+}
+.bg-number-left {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.bg-number-right {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.section-title-header {
+    background: #009981;
+    margin-bottom: 20px;
+    display: inline-block;
+    height: 30px;
+    overflow: hidden;
+}
+
+.section-title-header:after {
+    content: " ";
+    border-top: 30px solid #00483d;
+    border-left: 30px solid #009981;
+    margin-left: 40px;
+}
+
+.section-title-header h4 {
+    padding: 5px 60px 6px 35px;
+    margin: 0 0 0 60px;
+    background: #00483d;
+    color: #fff;
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.section-title-header h4,
+.section-title-header h4 a,
+.section-title-header h4 a:link,
+.section-title-header h4 a:visited {
+    color: #fff;
+}
+.section-title-header h4 a:hover {
+    color: #009981;
+}
+
+.lts-product {
+    display: flex;
+    flex-flow: wrap;
+    animation: append 0.2s ease-in-out;
 }

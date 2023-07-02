@@ -99,7 +99,7 @@
                                         </td>
                                         <td>{{ $_brand->name }}</td>
                                         <td>
-                                            <a class="me-3" href="{{ route('brand.edit', ['id' => $_brand->id]) }}">
+                                            <a class="me-3" href="{{ route('brand.edit', ['slug' => $_brand->slug]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
                                             <a class="me-3 confirm-text"

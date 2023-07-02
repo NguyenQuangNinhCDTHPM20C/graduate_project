@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Product;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\InvoiceDetail;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use App\Models\Image;
+
 class ProductController extends Controller
 {
     /**
@@ -61,13 +63,6 @@ class ProductController extends Controller
         if ($existingSlug) {
             $product->slug .= '-' . uniqid();
         }
-        
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $fileName = Str::slug($product->name) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $file->move(public_path('assets/product/'), $fileName);
-            $product->image = $fileName;
-        }
 
         $discountType = $request->input('discount_price');
         switch($discountType)
@@ -92,7 +87,30 @@ class ProductController extends Controller
         $product->brand_id = $brand->id;
         $product->sub_category_id = $subCategory->id;
         $product->save();
-        return redirect('/add-product')->with('success', 'Product has been added successfully');
+        
+        $insert = [] ;
+        if ($product->save()) {
+            if($request->hasfile('images'))
+            {
+                foreach ($request->file('images') as $key => $file) {
+                    $file_name = time().rand(1,100).'.'.$file->extension();
+                    $file->move(public_path('assets/product/'), $file_name);
+                
+                    $image = new Image;
+                    $image->entity_type = 'product';
+                    $image->entity_id = $product->id;
+                    $image->image_path = $file_name;
+                    $image->save();
+                    $featuredImageIndex = $request->input('featured_image_'.$key);
+                    if ($featuredImageIndex !== null && $featuredImageIndex == $key) {
+                        $product->featured_image_id = $image->id;
+                        $product->update();
+                    }
+                }                
+            }
+            Image::insert($insert);
+        }
+        return redirect()->route('product.list')->with('success', 'Product has been added successfully');
     }
     
     /**
@@ -104,11 +122,11 @@ class ProductController extends Controller
     public function show($slug)
     {
         $product = Product::where('slug', $slug)->first();
+        $images = Image::where('entity_id', $product->id)->get();
         if (!$product) {
             abort(404);
         }
-
-        return view('Admin.pages.product.product-detail', compact('product'));
+        return view('admin.pages.product.product-detail', compact('product', 'images'));
     }
 
 
@@ -119,14 +137,14 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::where('slug', $slug)->first();
         $category = Category::all();
         $sub_category = SubCategory::all();
         $brands = Brand::all();
         $discount_percentage = (($product->selling_price - $product->discount_price) / $product->selling_price) * 100;
-        return view('Admin.pages.product.edit-product', compact('product', 'category', 'sub_category', 'brands', 'discount_percentage'));
+        return view('admin.pages.product.edit-product', compact('product', 'category', 'sub_category', 'brands', 'discount_percentage'));
     }
 
     /**

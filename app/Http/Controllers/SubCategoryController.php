@@ -72,9 +72,9 @@ class SubCategoryController extends Controller
      * @param  \App\Models\SubCategory  $subCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $sub_category = SubCategory::findOrFail($id);
+        $sub_category = SubCategory::where('slug', $slug);
         $category = Category::all();
         return view('Admin.pages.subcategory.edit-subcategory', compact( 'sub_category','category'));
     }

@@ -58,7 +58,7 @@
                 </div>
             </div>
             <div class="btn-group-2">
-                <a href="{{ route('account.wishlist') }}" class="btn px-0 ml-2">
+                <a href="{{ route('account.favorite') }}" class="btn px-0 ml-2">
                     <i class="fas fa-heart text-white"></i>
                     <span class="badge text-white border border-white rounded-circle"
                         style="padding-bottom: 2px">{{ $favorite_count }}</span>
@@ -107,7 +107,7 @@
                 <span class="cart-total cart-total-text">{{ Cart::getTotalQuantity() }}</span>
             </label>
         </a>
-        <a class="itemCart" href="{{ route('account.wishlist') }}">
+        <a class="itemCart" href="{{ route('account.favorite') }}">
             <i class="fas fa-light fa-heart"></i>
             <label>
                 <i class="cart-total fas fa fa-comment"></i>
@@ -115,7 +115,7 @@
                 <span class="cart-total cart-total-text">{{ $favorite_count }}</span>
             </label>
         </a>
-        <a class="itemCart" href="{{ route('account.wishlist') }}">
+        <a class="itemCart" href="{{ route('account.favorite') }}">
             <i class="fa-solid fa-qrcode"></i>
         </a>
     </div>

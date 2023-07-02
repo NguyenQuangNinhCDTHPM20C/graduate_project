@@ -1085,15 +1085,16 @@
                     <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
                         <div class="product-item bg-light mb-4 item-p bg-radius">
                             <div class="product-img position-relative overflow-hidden img-p">
-                                <img class="img-fluid" src="{{ asset('assets/product/' . $product->image) }}"
+                                <img class="img-fluid "
+                                    src="{{ $product->featured_image ? asset($product->featured_image->image_path) : '' }}"
                                     alt="{{ $product->name }}" />
 
                             </div>
                             <div class="text-center py-4 px-4 overflow-text">
-                                <a class="h6 text-decoration-none text-truncate"
+                                <a class="h6 text-decoration-none text-truncate name-product"
                                     href="{{ route('product-detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>{{ $product->selling_price }}VND</h5>
+                                    <h5 style="color: #fd475a;">{{ $product->selling_price }}VND</h5>
                                     <h6 class="text-muted ml-2">
                                         <del>{{ $product->discount_price }}VND</del>
                                     </h6>

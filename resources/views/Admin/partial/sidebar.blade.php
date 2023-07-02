@@ -40,8 +40,8 @@
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Sales</h6>
                     <ul>
-                        <li class="{{ request()->routeIs('sales-list') ? 'active' : '' }}"><a
-                                href="{{ route('sales-list') }}"><i
+                        <li class="{{ request()->routeIs('sales.list') ? 'active' : '' }}"><a
+                                href="{{ route('sales.list') }}"><i
                                     data-feather="shopping-cart"></i><span>Sales</span></a></li>
                         <li class="{{ request()->routeIs('invoice.list') ? 'active' : '' }}"><a
                                 href="{{ route('invoice.list') }}"><i
@@ -51,25 +51,25 @@
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Peoples</h6>
                     <ul>
-                        <li class="{{ request()->routeIs('customer-list') ? 'active' : '' }}"><a
-                                href="{{ route('customer-list') }}"><i
+                        <li class="{{ request()->routeIs('customer.list') ? 'active' : '' }}"><a
+                                href="{{ route('customer.list') }}"><i
                                     data-feather="user"></i><span>Customers</span></a></li>
-                        <li class="{{ request()->routeIs('supplier-list') ? 'active' : '' }}"><a
-                                href="{{ route('supplier-list') }}"><i
+                        <li class="{{ request()->routeIs('supplier.list') ? 'active' : '' }}"><a
+                                href="{{ route('supplier.list') }}"><i
                                     data-feather="users"></i><span>Suppliers</span></a></li>
-                        <li class="{{ request()->routeIs('user-list') ? 'active' : '' }}"><a
-                                href="{{ route('user-list') }}"><i data-feather="user-check"></i><span>Users</span></a>
+                        <li class="{{ request()->routeIs('user.list') ? 'active' : '' }}"><a
+                                href="{{ route('user.list') }}"><i data-feather="user-check"></i><span>Users</span></a>
                         </li>
                     </ul>
                 </li>
                 <li class="submenu-open">
                     <h6 class="submenu-hdr">Reports</h6>
                     <ul>
-                        <li class="{{ request()->routeIs('sales-report') ? 'active' : '' }}"><a
-                                href="{{ route('sales-report') }}"><i data-feather="bar-chart-2"></i><span>Sales
+                        <li class="{{ request()->routeIs('sales.report') ? 'active' : '' }}"><a
+                                href="{{ route('sales.report') }}"><i data-feather="bar-chart-2"></i><span>Sales
                                     Report</span></a></li>
-                        <li class="{{ request()->routeIs('invoice-report') ? 'active' : '' }}"><a
-                                href="{{ route('invoice-report') }}"><i data-feather="file"></i><span>Invoice
+                        <li class="{{ request()->routeIs('invoice.report') ? 'active' : '' }}"><a
+                                href="{{ route('invoice.report') }}"><i data-feather="file"></i><span>Invoice
                                     Report</span></a></li>
                     </ul>
                 </li>

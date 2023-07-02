@@ -34,15 +34,15 @@
                                     </li>
                                     <li>
                                         <h4>Category</h4>
-                                        <h6>{{ $product->category->name }}</h6>
+                                        <h6>{{ optional($product->category)->name }}</h6>
                                     </li>
                                     <li>
                                         <h4>Sub Category</h4>
-                                        <h6>{{ $product->sub_category->name }}</h6>
+                                        <h6>{{ optional($product->sub_category)->name }}</h6>
                                     </li>
                                     <li>
                                         <h4>Brand</h4>
-                                        <h6>{{ $product->brand->name }}</h6>
+                                        <h6>{{ optional($product->brand)->name }}</h6>
                                     </li>
                                     <li>
                                         <h4>Code</h4>
@@ -84,18 +84,12 @@
                         <div class="card-body">
                             <div class="slider-product-details">
                                 <div class="owl-carousel owl-theme product-slide">
-                                    <div class="slider-product">
-                                        <img src="{{ asset('assets/product/' . $product->image) }}"
-                                            alt="{{ $product->name }}">
-                                        <h4>{{ $product->name }}</h4>
-                                        <h6>581kb</h6>
-                                    </div>
-                                    <div class="slider-product">
-                                        <img src="{{ asset('assets/product/' . $product->image) }}"
-                                            alt="{{ $product->name }}">
-                                        <h4>{{ $product->name }}</h4>
-                                        <h6>581kb</h6>
-                                    </div>
+                                    @foreach ($images as $image)
+                                        <div class="slider-product">
+                                            <img src="{{ asset($image->image_path) }}" alt="{{ $product->name }}">
+                                            <h6>{{ optional($image->product)->name }}</h6>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

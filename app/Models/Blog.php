@@ -11,7 +11,8 @@ class Blog extends Model implements Viewable
 {
     use InteractsWithViews;
     use HasFactory;
-    protected $blog = [
+    public $table = "blogs";
+    protected $fillable = [
         'title',
         'slug',
         'image',

@@ -29,7 +29,7 @@ use App\Http\Controllers\AdminController;
 */
 //This is Routes for Public
 Route::group(['domain' => env('APP_URL')], function () {
-    Route::get('test', function(){
+    Route::get('cart/update', function(){
         return view('public.pages.test');
     });
     Route::get('/',[UserController::class, 'index'])->name('home');
@@ -40,8 +40,8 @@ Route::group(['domain' => env('APP_URL')], function () {
     //Routes for shopping cart
     Route::get('cart', [CartController::class, 'index'])->name('cart.list');
     Route::post('cart', [CartController::class, 'add'])->name('cart.add');
-    Route::post('update-cart', [CartController::class, 'update'])->name('cart.update');
-    Route::post('remove', [CartController::class, 'remove'])->name('cart.remove');
+    Route::post('cart/update', [CartController::class, 'update'])->name('cart.update');
+    Route::post('cart/remove', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('clear', [CartController::class, 'clear'])->name('cart.clear');
     //Route for contact
     Route::get('/contact', function () {
@@ -78,13 +78,13 @@ Route::group(['domain' => env('APP_URL')], function () {
     //Routes for account
     Route::group(['prefix' => 'account', 'middleware' => 'auth.public'], function () {
         Route::get('/', [UserController::class, 'dash_board'])->name('account.index');
-        Route::get('/account-infor', [UserController::class, 'account_infor'])->name('account.infor');
+        Route::get('/infor', [UserController::class, 'account_infor'])->name('account.infor');
         Route::get('/order',[UserController::class, 'orders'])->name('account.order');
-        Route::get('/wishlist', [FavoriteController::class, 'index'])->name('account.wishlist');
-        Route::delete('/wishlist/{id}', [FavoriteController::class, 'destroy'])->name('wishlist.delete');
+        Route::get('/favorite', [FavoriteController::class, 'index'])->name('account.favorite');
+        Route::delete('/favorite/{id}', [FavoriteController::class, 'destroy'])->name('account.favorite.delete');
         Route::get('/comment', [UserController::class, 'comments'])->name('account.comment');
         Route::get('/review', function () {
-            return view('Public.pages.account.review');
+            return view('public.pages.account.review');
         })->name('account.review');
     });
 });
@@ -93,73 +93,70 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
     Route::middleware(['auth.admin'])->group(function () {
         Route::get('/', [AdminController::class, 'dash_board'])->name('index');
         Route::get('/chat', function () {
-            return view('Admin.pages.chat');
+            return view('admin.pages.chat.chat');
         })->name('chat')->middleware('auth.admin');
         Route::get('/email', function () {
-            return view('Admin.pages.email');
+            return view('admin.pages.email.email');
         })->name('email');
         //Routes for product
-        Route::get('/product-list', [ProductController::class, 'index'])->name('product.list');
-        Route::post('/add-product', [ProductController::class, 'store'])->name('product.store');
-        Route::get('/add-product', [ProductController::class, 'create'])->name('product.add');
+        Route::get('/product/list', [ProductController::class, 'index'])->name('product.list');
+        Route::post('/product/add', [ProductController::class, 'store'])->name('product.store');
+        Route::get('/product/add', [ProductController::class, 'create'])->name('product.add');
         Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.detail');
-        Route::get('/product/{id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+        Route::get('/product/edit/{slug}', [ProductController::class, 'edit'])->name('product.edit');
         Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
-        Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+        Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
         //Routes for category
-        Route::get('/category-list', [CategoryController::class, 'index'])->name('category.list');
-        Route::post('/add-category', [CategoryController::class, 'store'])->name('category.store');
-        Route::get('/add-category', [CategoryController::class, 'create'])->name('category.add');
-        Route::get('/category/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::get('/category/list', [CategoryController::class, 'index'])->name('category.list');
+        Route::post('/category/add', [CategoryController::class, 'store'])->name('category.store');
+        Route::get('/category/add', [CategoryController::class, 'create'])->name('category.add');
+        Route::get('/category/edit/{slug}', [CategoryController::class, 'edit'])->name('category.edit');
         Route::put('/category/{id}', [CategoryController::class, 'update'])->name('category.update');
         Route::delete('/category/{id}', [CategoryController::class, 'destroy'])->name('category.delete');
         //Routes for brand
-        Route::get('/brand-list',[BrandController::class, 'index'])->name('brand.list');
-        Route::post('/add-brand', [BrandController::class, 'store'])->name('brand.store');
-        Route::get('/add-brand', [BrandController::class, 'create'])->name('brand.add');
-        Route::get('/brand/{id}/edit', [BrandController::class, 'edit'])->name('brand.edit');
+        Route::get('/brand/list',[BrandController::class, 'index'])->name('brand.list');
+        Route::post('/brand/add', [BrandController::class, 'store'])->name('brand.store');
+        Route::get('/brand/add', [BrandController::class, 'create'])->name('brand.add');
+        Route::get('/brand/edit/{slug}', [BrandController::class, 'edit'])->name('brand.edit');
         Route::put('/brand/{id}', [BrandController::class, 'update'])->name('brand.update');
         Route::delete('/brand/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
         //Routes for sub category
-        Route::get('/subcategory-list', [SubCategoryController::class, 'index'])->name('subcategory.list');
-        Route::post('/add-subcategory', [SubCategoryController::class, 'store'])->name('subcategory.store');
-        Route::get('/add-subcategory', [SubCategoryController::class, 'create'])->name('subcategory.add');
-        Route::get('/subcategory/{id}/edit', [SubCategoryController::class, 'edit'])->name('subcategory.edit');
-        Route::put('/subcategory/{id}', [SubCategoryController::class, 'update'])->name('subcategory.update');
-        Route::delete('/subcategory/{id}', [SubCategoryController::class, 'destroy'])->name('subcategory.delete');
-        Route::get('sales-list', function () {
-            return view('Admin.pages.sales');
-        })->name('sales-list');
+        Route::get('/sub-category/list', [SubCategoryController::class, 'index'])->name('subcategory.list');
+        Route::post('/sub-category/add', [SubCategoryController::class, 'store'])->name('subcategory.store');
+        Route::get('/sub-category/add', [SubCategoryController::class, 'create'])->name('subcategory.add');
+        Route::get('/sub-category/edit/{slug}', [SubCategoryController::class, 'edit'])->name('subcategory.edit');
+        Route::put('/sub-category/{id}', [SubCategoryController::class, 'update'])->name('subcategory.update');
+        Route::delete('/sub-category/{id}', [SubCategoryController::class, 'destroy'])->name('subcategory.delete');
+        Route::get('/sales/list', function () {
+            return view('admin.pages.sale.sale-list');
+        })->name('sales.list');
         //Routes for invoice
-        Route::get('/invoice-list',[InvoiceController::class, 'index'])->name('invoice.list');
+        Route::get('/invoice/list',[InvoiceController::class, 'index'])->name('invoice.list');
         //Routes for auth
         Route::post('/logout', [AuthController::class, 'logout_admin'])->name('admin.logout');
-        Route::get('/invoice-report', function () {
-            return view('Admin.pages.invoices');
-        })->name('invoice-report');
-        Route::get('/customer-list', function () {
-            return view('Admin.pages.customers');
-        })->name('customer-list');
-        Route::get('/supplier-list', function () {
-            return view('Admin.pages.suppliers');
-        })->name('supplier-list');
-        Route::get('/user-list', function () {
-            return view('Admin.pages.users');
-        })->name('user-list');
-         Route::get('/sales-report', function () {
-            return view('Admin.pages.sales-report');
-        })->name('sales-report');
-         Route::get('/invoice-report', function () {
-            return view('Admin.pages.invoices-report');
-        })->name('invoice-report');
+        Route::get('/invoice/report', function () {
+            return view('admin.pages.invoice.invoice-list');
+        })->name('invoice.report');
+        Route::get('/customer/list', function () {
+            return view('admin.pages.customer.customer-list');
+        })->name('customer.list');
+        Route::get('/supplier/list', function () {
+            return view('admin.pages.supplier.supplier-list');
+        })->name('supplier.list');
+        Route::get('/user/list', function () {
+            return view('admin.pages.user.user-list');
+        })->name('user.list');
+         Route::get('/sales/report', function () {
+            return view('admin.pages.sale.sales-report');
+        })->name('sales.report');
         Route::get('/profile', function () {
-            return view('Admin.pages.profile');
+            return view('admin.pages.profile.profile');
         })->name('profile');
         Route::get('/setting', function () {
-            return view('Admin.pages.setting');
+            return view('admin.pages..setting.setting');
         })->name('setting');
-        Route::get('/add-blog', [BlogController::class, 'create'])->name('blog.create');
-        Route::post('/add-blog', [BlogController::class, 'store'])->name('blog.store');
+        Route::get('/blog/add', [BlogController::class, 'create'])->name('blog.create');
+        Route::post('/blog/add', [BlogController::class, 'store'])->name('blog.store');
         Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 
     });

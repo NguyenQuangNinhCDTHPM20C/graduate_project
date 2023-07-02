@@ -25,7 +25,7 @@ class FavoriteController extends Controller
         $count_favorites = FavoriteDetail::join('favorites', 'favorite_detail.favorite_id', '=', 'favorites.id')
         ->where('favorites.account_id', $accountId)
         ->count();
-        return view('public.pages.account.wishlist', compact('favorites'));
+        return view('public.pages.account.favorite', compact('favorites'));
     }
 
     /**

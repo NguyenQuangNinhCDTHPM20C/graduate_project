@@ -8,11 +8,12 @@ class BrandsTableSeeder extends Seeder
     public function run()
     {
         $brands = [
-            ['name' => 'Dell', 'slug' =>'dell', 'image' => 'dell.png'],
-            ['name' => 'HP', 'slug' =>'hp','image' => 'hp.png'],
-            ['name' => 'Lenovo','slug' =>'lenovo', 'image' => 'lenovo.png'],
-            ['name' => 'Acer', 'slug' =>'acer','image' => 'acer.png'],
-            ['name' => 'Asus', 'slug' =>'asus','image' => 'asus.png'],
+            ['name' => 'Dell', 'slug' =>'dell', 'image' => 'assets/brand/dell.png'],
+            ['name' => 'HP', 'slug' =>'hp','image' => 'assets/brand/hp.png'],
+            ['name' => 'Lenovo','slug' =>'lenovo', 'image' => 'assets/brand/lenovo.png'],
+            ['name' => 'Acer', 'slug' =>'acer','image' => 'assets/brand/acer.png'],
+            ['name' => 'Asus', 'slug' =>'asus','image' => 'assets/brand/asus.png'],
+            ['name' => 'Macbook', 'slug' =>'macbook','image' => 'assets/brand/macbook.jpg'],
         ];
 
         DB::table('brands')->insert($brands);

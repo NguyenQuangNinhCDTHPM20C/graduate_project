@@ -126,15 +126,17 @@
                                             </label>
                                         </td>
                                         <td class="productimgname">
-                                            <a href="javascript:void(0);" class="product-img">
-                                                <img src="{{ asset('assets/product/' . $product->image) }}"
+                                            <a href="{{ route('product.detail', ['slug' => $product->slug]) }}"
+                                                class="product-img">
+                                                <img src="{{ $product->featured_image ? asset($product->featured_image->image_path) : '' }}"
                                                     alt="{{ $product->name }}">
                                             </a>
-                                            <a href="javascript:void(0);">{{ $product->name }}</a>
+                                            <a
+                                                href="{{ route('product.detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
                                         </td>
-                                        <td>{{ $product->category->name }}</td>
-                                        <td>{{ $product->sub_category->name }}.000</td>
-                                        <td>{{ $product->brand->name }}</td>
+                                        <td>{{ optional($product->category)->name }}</td>
+                                        <td>{{ optional($product->sub_category)->name }}.000</td>
+                                        <td>{{ optional($product->brand)->name }}</td>
                                         <td>{{ $product->selling_price }}</td>
                                         <td>{{ $product->code }}</td>
                                         <td>{{ $product->quantity }}</td>
@@ -143,7 +145,8 @@
                                                 href="{{ route('product.detail', ['slug' => $product->slug]) }}">
                                                 <img src="{{ asset('images/eye.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3" href="{{ route('product.edit', ['id' => $product->id]) }}">
+                                            <a class="me-3"
+                                                href="{{ route('product.edit', ['slug' => $product->slug]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
                                             <a class="confirm-text"

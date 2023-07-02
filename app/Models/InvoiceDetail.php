@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class InvoiceDetail extends Model
 {
     use HasFactory;
-    protected $table = 'invoice_detail';
-    protected $invoice_detail = [
+    public $table = "invoice_details";
+    protected $fillable = [
         'invoice_id', 
         'product_id',
         'quantity',

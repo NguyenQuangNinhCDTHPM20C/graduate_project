@@ -1,14 +1,14 @@
 <div class="header">
 
     <div class="header-left active">
-        <a href="{{route('index')}}" class="logo logo-normal">
-            <img src="{{asset('images/logoshop1.png')}}" alt="Double-N shop">
+        <a href="{{ route('index') }}" class="logo logo-normal">
+            <img src="{{ asset('images/logoshop1.png') }}" alt="Double-N shop">
         </a>
-        <a href="{{route('index')}}" class="logo logo-white">
-            <img src="{{asset('images/logoshop1.png')}}" alt="Double-N shop">
+        <a href="{{ route('index') }}" class="logo logo-white">
+            <img src="{{ asset('images/logoshop1.png') }}" alt="Double-N shop">
         </a>
-        <a href="{{route('index')}}" class="logo-small">
-            <img src="{{asset('images/logosmall.png')}}" alt="Double-N shop">
+        <a href="{{ route('index') }}" class="logo-small">
+            <img src="{{ asset('images/logosmall.png') }}" alt="Double-N shop">
         </a>
         <a id="toggle_btn" href="javascript:void(0);">
             <i data-feather="chevrons-left" class="feather-16"></i>
@@ -113,7 +113,8 @@
                                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/profiles/avatar-03.jpg">
                                     </span>
                                     <div class="media-body flex-grow-1">
-                                        <p class="noti-details"><span class="noti-title">Tarah Shropshire</span> changed
+                                        <p class="noti-details"><span class="noti-title">Tarah Shropshire</span>
+                                            changed
                                             the task name <span class="noti-title">Appointment booking with payment
                                                 gateway</span></p>
                                         <p class="noti-time"><span class="notification-time">6 mins ago</span></p>
@@ -129,8 +130,8 @@
                                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/profiles/avatar-06.jpg">
                                     </span>
                                     <div class="media-body flex-grow-1">
-                                        <p class="noti-details"><span class="noti-title">Misty Tison</span> added <span
-                                                class="noti-title">Domenic Houston</span> and <span
+                                        <p class="noti-details"><span class="noti-title">Misty Tison</span> added
+                                            <span class="noti-title">Domenic Houston</span> and <span
                                                 class="noti-title">Claire Mapes</span> to project <span
                                                 class="noti-title">Doctor available module</span></p>
                                         <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
@@ -146,7 +147,8 @@
                                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/profiles/avatar-17.jpg">
                                     </span>
                                     <div class="media-body flex-grow-1">
-                                        <p class="noti-details"><span class="noti-title">Rolland Webber</span> completed
+                                        <p class="noti-details"><span class="noti-title">Rolland Webber</span>
+                                            completed
                                             task <span class="noti-title">Patient and Doctor video conferencing</span>
                                         </p>
                                         <p class="noti-time"><span class="notification-time">12 mins ago</span></p>
@@ -185,11 +187,10 @@
             <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                 <span class="user-info">
                     <span class="user-letter">
-                        <img src="{{session('account')->photo}}"
-                            alt="{{ session('account')->username }}">
+                        <img src="{{ asset(session('account')->photo) }}" alt="{{ session('account')->username }}">
                     </span>
                     <span class="user-detail">
-                        <span class="user-name">{{ session('account')->username}}</span>
+                        <span class="user-name">{{ session('account')->username }}</span>
                         <span class="user-role">Super Admin</span>
                     </span>
                 </span>
@@ -197,16 +198,17 @@
             <div class="dropdown-menu menu-drop-user">
                 <div class="profilename">
                     <hr class="m-0">
-                    <a class="dropdown-item" href="{{route('profile')}}">
+                    <a class="dropdown-item" href="{{ route('profile') }}">
                         <i class="me-2" data-feather="user"></i> My Profile</a>
-                    <a class="dropdown-item" href="{{route('setting')}}"><i class="me-2"
+                    <a class="dropdown-item" href="{{ route('setting') }}"><i class="me-2"
                             data-feather="settings"></i>Settings</a>
                     <hr class="m-0">
                     <form action="{{ route('admin.logout') }}" method="POST" id="logout-form">
                         @method('POST')
                         @csrf
                         <button class="dropdown-item logout pb-0" type="submit"><img
-                                src="{{asset('images/log-out.svg')}}" class="me-2" alt="img">Logout</button>
+                                src="{{ asset('images/log-out.svg') }}" class="me-2"
+                                alt="img">Logout</button>
                     </form>
                 </div>
             </div>
@@ -218,10 +220,10 @@
         <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
             aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="{{route('profile')}}">My
+            <a class="dropdown-item" href="{{ route('profile') }}">My
                 Profile</a>
-            <a class="dropdown-item" href="{{route('setting')}}">Settings</a>
-            <a class="dropdown-item" href="{{route('admin.login')}}">Logout</a>
+            <a class="dropdown-item" href="{{ route('setting') }}">Settings</a>
+            <a class="dropdown-item" href="{{ route('admin.login') }}">Logout</a>
         </div>
     </div>
 

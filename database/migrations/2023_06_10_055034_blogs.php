@@ -14,7 +14,7 @@ class Blogs extends Migration
     public function up()
     {
         Schema::create('blogs', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->integer('category_id')->nullable()->unsigned();
             $table->integer('sub_category_id')->nullable()->unsigned();
             $table->string('author');
@@ -23,8 +23,8 @@ class Blogs extends Migration
             $table->string('image');
             $table->text('content');
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('category');
-            $table->foreign('sub_category_id')->references('id')->on('sub_category');
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('sub_category_id')->references('id')->on('sub_categories');
         });
     }
 

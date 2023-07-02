@@ -94,26 +94,29 @@
 
                     <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                         <div class="sidebar">
-                            <div class="widget">
-                                <h2 class="widget-title">Popular Posts</h2>
-                                <div class="blog-list-widget">
-                                    <div class="list-group">
-                                        @foreach ($hot_blogs as $hot_blog)
-                                            <a href="{{ route('blog-detail', ['slug' => $hot_blog->slug]) }}"
-                                                class="list-group-item list-group-item-action flex-column align-items-start">
-                                                <div class="w-100 justify-content-between">
-                                                    <img src="{{ asset('assets/blog/' . $hot_blog->image) }}"
-                                                        alt="{{ $hot_blog->title }}" class="float-left">
-                                                    <h5 class="mb-1">{{ $hot_blog->title }}</h5>
-                                                    <small>{{ $hot_blog->created_at }}</small>
-                                                </div>
-                                            </a>
-                                        @endforeach
-                                    </div>
-                                </div><!-- end blog-list -->
-                            </div><!-- end widget -->
+                            @if ($hot_blogs)
+                                <div class="widget">
+                                    <h2 class="widget-title">Popular Posts</h2>
+                                    <div class="blog-list-widget">
+                                        <div class="list-group">
+                                            @foreach ($hot_blogs as $hot_blog)
+                                                <a href="{{ route('blog-detail', ['slug' => $hot_blog->slug]) }}"
+                                                    class="list-group-item list-group-item-action flex-column align-items-start">
+                                                    <div class="w-100 justify-content-between">
+                                                        <img src="{{ asset('assets/blog/' . $hot_blog->image) }}"
+                                                            alt="{{ $hot_blog->title }}" class="float-left">
+                                                        <h5 class="mb-1">{{ $hot_blog->title }}</h5>
+                                                        <small>{{ $hot_blog->created_at }}</small>
+                                                    </div>
+                                                </a>
+                                            @endforeach
+                                        </div>
+                                    </div><!-- end blog-list -->
+                                </div><!-- end widget -->
+                            @endif
 
-                            @if ($viewed_blogs->count() > 0)
+
+                            @if ($viewed_blogs)
                                 <div class="widget">
                                     <h2 class="widget-title">Recent Reviews</h2>
                                     <div class="blog-list-widget">

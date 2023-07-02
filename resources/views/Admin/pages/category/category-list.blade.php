@@ -110,7 +110,7 @@
                                         <td>{{ $_category->status == '1' ? 'Active' : 'Inactive' }}</td>
                                         <td>
                                             <a class="me-3"
-                                                href="{{ route('category.edit', ['id' => $_category->id]) }}">
+                                                href="{{ route('category.edit', ['slug' => $_category->slug]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
                                             <a class="confirm-text"

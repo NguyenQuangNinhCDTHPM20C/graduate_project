@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class SubCategory extends Model
 {
     use HasFactory;
-    public $table = "sub_category";
-    protected $sub_category = [
+    public $table = "sub_categories";
+    protected $sub_categories = [
         'category_id',
         'name',
         'slug',

@@ -73,9 +73,9 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $category = Category::findOrFail($id); 
+        $category = Category::where('slug', $slug)->first(); 
         return view('Admin.pages.category.edit-category', compact( 'category'));
     }
 

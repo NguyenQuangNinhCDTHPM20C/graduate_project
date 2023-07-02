@@ -130,7 +130,7 @@
                                         </td>
                                         <td>
                                             <a class="me-3"
-                                                href="{{ route('subcategory.edit', ['id' => $_sub_category->id]) }}">
+                                                href="{{ route('subcategory.edit', ['slug' => $_sub_category->slug]) }}">
                                                 <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/edit.svg"
                                                     alt="img">
                                             </a>

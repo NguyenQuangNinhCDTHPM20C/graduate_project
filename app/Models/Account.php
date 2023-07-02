@@ -9,7 +9,8 @@ use Illuminate\Contracts\Auth\Authenticatable;
 class Account extends Model implements Authenticatable
 {
     use HasFactory;
-    protected $account = [
+    public $table = "accounts";
+    protected $fillable = [
         'name', 
         'username',
         'email',
