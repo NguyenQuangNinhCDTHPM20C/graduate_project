@@ -12,6 +12,11 @@ use PayPal\Api\PaymentExecution;
 use PayPal\Api\PaymentGateway;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
+use App\Models\Invoice;
+use App\Models\InvoiceDetail;
+use Illuminate\Support\Facades\Session;
+use Ramsey\Uuid\Uuid;
+use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
@@ -75,12 +80,37 @@ class PaymentController extends Controller
         try {
             $result = $payment->execute($execution, $this->apiContext);
             if ($result->getState() === 'approved') {
-                return view('Public.pages.payment.payment-status')->with('success', 'Payment successful.');
+                $invoice = new Invoice;
+                $invoice->code = Uuid::uuid4()->toString();
+                $invoice->account_id = $request->input('account_id');
+                $invoice->order_date = Carbon::now();
+                $invoice->address = $request->input('address').','.$request->input('district').','.$request->input('province');
+                $invoice->phone = $request->input('phone_number');
+                $invoice->email = $request->input('email');
+                $invoice->notes = $request->input('notes');
+                $invoice->total = $request->input('total');
+                $invoice->payment_method = $request->input('payment_method');
+                $invoice->save();
+                if($invoice->save()){
+                    if ($invoice->save()) {
+                        $cartItems = $request->session()->get('cart.items');
+            
+                        foreach ($cartItems as $cartItem) {
+                            $invoice_detail = new InvoiceDetail;
+                            $invoice_detail->invoice_id = $invoice->id;
+                            $invoice_detail->product_id = $cartItem['product_id'];
+                            $invoice_detail->quantity = $cartItem['quantity'];
+                            $invoice_detail->price = $cartItem['quantity'] * $cartItem['price'];
+                            $invoice_detail->save();
+                        }
+                    }
+                }
+                return view('public.pages.payment.payment-status')->with('success', 'Payment successful.');
             } else {
-                return view('Public.pages.payment.payment-status')->withErrors('Payment failed.');
+                return view('public.pages.payment.payment-status')->withErrors('Payment failed.');
             }
         } catch (\Exception $ex) {
-            return view('Public.pages.payment.payment-status')->withErrors('Error processing PayPal payment.');
+            return view('public.pages.payment.payment-status')->withErrors('Error processing PayPal payment.');
         }
     }
 }

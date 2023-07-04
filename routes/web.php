@@ -17,6 +17,7 @@ use App\Http\Controllers\Api\ZaloController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AccountController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,9 +30,6 @@ use App\Http\Controllers\AdminController;
 */
 //This is Routes for Public
 Route::group(['domain' => env('APP_URL')], function () {
-    Route::get('cart/update', function(){
-        return view('public.pages.test');
-    });
     Route::get('/',[UserController::class, 'index'])->name('home');
     //Routes for product
     Route::get('/products', [UserController::class, 'products'])->name('products');
@@ -44,9 +42,7 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::post('cart/remove', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('clear', [CartController::class, 'clear'])->name('cart.clear');
     //Route for contact
-    Route::get('/contact', function () {
-        return view('public.pages.contact.contact');
-    })->name('contact');
+    Route::get('/contact', [UserController::class, 'contact'])->name('contact');
     //Route for add product to favorite
     Route::post('/favorite/add', [FavoriteController::class, 'create'])->name('favorite.add')->middleware('auth.public');
     Route::delete('/favorite/{id}', [FavoriteController::class, 'destroy_2'])->name('favorite.delete')->middleware('auth.public');
@@ -79,13 +75,12 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::group(['prefix' => 'account', 'middleware' => 'auth.public'], function () {
         Route::get('/', [UserController::class, 'dash_board'])->name('account.index');
         Route::get('/infor', [UserController::class, 'account_infor'])->name('account.infor');
+        Route::post('/infor/update', [AccountController::class, 'update'])->name('account.update');
         Route::get('/order',[UserController::class, 'orders'])->name('account.order');
         Route::get('/favorite', [FavoriteController::class, 'index'])->name('account.favorite');
         Route::delete('/favorite/{id}', [FavoriteController::class, 'destroy'])->name('account.favorite.delete');
         Route::get('/comment', [UserController::class, 'comments'])->name('account.comment');
-        Route::get('/review', function () {
-            return view('public.pages.account.review');
-        })->name('account.review');
+        Route::get('/review', [UserController::class, 'reviews'])->name('account.review');
     });
 });
 //This is Routes for Admin

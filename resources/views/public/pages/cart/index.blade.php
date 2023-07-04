@@ -99,7 +99,7 @@
                             </div>
 
                             <a href="{{ route('checkout') }}"
-                                class="btn btn-block btn-primary font-weight-bold my-3 py-3 bg-number-left bg-number-right">Proceed
+                                class="btn btn-block btn-custom font-weight-bold my-3 py-3 bg-number-left bg-number-right">Proceed
                                 To
                                 Checkout</a>
                         </div>

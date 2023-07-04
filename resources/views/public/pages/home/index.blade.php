@@ -72,29 +72,30 @@
                     <div class="owl-carousel vendor-carousel bg-light bg-radius">
                         @foreach ($products as $product)
                             <div class="bg-light mb-4 item-p bg-radius">
-                                <div class="product-img position-relative overflow-hidden img-p">
-                                    <a href="{{ route('product-detail', ['slug' => $product->slug]) }}"><img
-                                            class="img-fluid "
-                                            src="{{ $product->featured_image ? asset($product->featured_image->image_path) : '' }}"
-                                            alt="{{ $product->name }}" /></a>
-
-                                </div>
-                                <div class="text-center py-4 px-4 overflow-text">
-                                    <a class="h6 text-decoration-none text-truncate name-product"
-                                        href="{{ route('product-detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
-                                    <div class="d-flex align-items-center justify-content-center mt-2">
-                                        <h5 style="color: #fd475a;">{{ $product->selling_price }}VND</h5>
-                                        <h6 class="text-muted ml-2">
-                                            <del>{{ $product->discount_price }}VND</del>
-                                        </h6>
+                                <div class="product-item bg-light mb-4 bg-radius">
+                                    <div class="product-img position-relative overflow-hidden img-p align-items-center">
+                                        <a href="{{ route('product-detail', ['slug' => $product->slug]) }}"><img
+                                                class="img-fluid "
+                                                src="{{ $product->featured_image ? asset($product->featured_image->image_path) : '' }}"
+                                                alt="{{ $product->name }}" /></a>
                                     </div>
-                                    <div class="d-flex align-items-center justify-content-center mb-1">
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small class="fa fa-star text-primary mr-1"></small>
-                                        <small>(99)</small>
+                                    <div class="text-center py-4 px-4 overflow-text">
+                                        <a class="h6 text-decoration-none text-truncate name-product"
+                                            href="{{ route('product-detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
+                                        <div class="d-flex align-items-center justify-content-center mt-2">
+                                            <h5 style="color: #fd475a;">{{ $product->selling_price }}VND</h5>
+                                            <h6 class="text-muted ml-2">
+                                                <del>{{ $product->discount_price }}VND</del>
+                                            </h6>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-center mb-1">
+                                            <small class="fa fa-star text-primary mr-1"></small>
+                                            <small class="fa fa-star text-primary mr-1"></small>
+                                            <small class="fa fa-star text-primary mr-1"></small>
+                                            <small class="fa fa-star text-primary mr-1"></small>
+                                            <small class="fa fa-star text-primary mr-1"></small>
+                                            <small>(99)</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

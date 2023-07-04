@@ -23,6 +23,8 @@ class Accounts extends Migration
             $table->string('password');
             $table->string('photo')->nullable();
             $table->string('address')->nullable();
+            $table->string('district')->nullable();
+            $table->string('province')->nullable();
             $table->string('phone_number')->nullable();
             $table->integer('role');
             $table->tinyInteger('status')->nullable()->default(1);

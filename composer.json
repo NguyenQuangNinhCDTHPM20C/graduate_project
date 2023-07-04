@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.5",
         "milon/barcode": "^10.0",
         "paypal/rest-api-sdk-php": "^1.14",
+        "ramsey/uuid": "^4.2",
         "simplesoftwareio/simple-qrcode": "^4.2",
         "zaloplatform/zalo-php-sdk": "^4.0"
     },

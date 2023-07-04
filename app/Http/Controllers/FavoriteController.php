@@ -19,10 +19,10 @@ class FavoriteController extends Controller
     public function index()
     {
         $accountId = session('account')->id;
-        $favorites = FavoriteDetail::join('favorites', 'favorite_detail.favorite_id', '=', 'favorites.id')
+        $favorites = FavoriteDetail::join('favorites', 'favorite_details.favorite_id', '=', 'favorites.id')
         ->where('favorites.account_id', $accountId)
         ->get();
-        $count_favorites = FavoriteDetail::join('favorites', 'favorite_detail.favorite_id', '=', 'favorites.id')
+        $count_favorites = FavoriteDetail::join('favorites', 'favorite_details.favorite_id', '=', 'favorites.id')
         ->where('favorites.account_id', $accountId)
         ->count();
         return view('public.pages.account.favorite', compact('favorites'));

@@ -3,27 +3,20 @@
 @section('title', 'Double-N shop')
 
 @section('styles')
-    <link href="css/Public/account/style.css" rel="stylesheet">
-    <link rel="preload" as="style" href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css">
-    <link href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css" rel="stylesheet" type="text/css">
-    <style>
-        .product-center .current-product-price label.text-green {
-            display: none
-        }
-    </style>
+    <link href="css/public/account/style.css" rel="stylesheet">
 @stop
 
 @section('content')
     <section class="account">
         @include('Public.partial.sidebar')
         <div class="body-content">
-            <h1>Bảng điều khiển</h1>
+            <h1>Dashboard</h1>
             <div class="header">
                 <div class="bg">
                     <div class="text">
-                        <h2>CHÀO MỪNG QUAY TRỞ LẠI, {!! Str::upper(session('account')->name) !!}
+                        <h2>WELCOME TO BACK, {!! Str::upper(session('account')->name) !!}
                         </h2>
-                        <p><i>Tổng quát các hoạt động của bạn tại đây</i></p>
+                        <p><i>Overview of your activities here</i></p>
                     </div>
                 </div>
                 <div class="icon">
@@ -33,35 +26,40 @@
             <div class="account-layout">
                 <div class="row-acc equaHeight" data-obj=".col .box-bg-white">
                     <div class="col-acc">
-                        <h3>Thông tin cá nhân</h3>
+                        <h3>Personal information</h3>
                         <div class="box-bg-white" style="height: 100%;">
                             <div class=" account-info">
                                 <div class="tools">
                                     <a href="{{ route('account.infor') }}" title="Thay đổi thông tin cá nhân"><i
                                             class="fal fa fa-edit"></i></a>
                                 </div>
-                                <p><strong>Họ tên:</strong> <i>{{ session('account')->name }}</i></p>
-                                <p><strong>Tài khoản:</strong> <i>{{ session('account')->username }}</i></p>
-                                <p><strong>Ngày tham gia:</strong> <i>{{ session('account')->created_at }}</i></p>
+                                <p><strong>Full name:</strong> <i>{{ session('account')->name }}</i></p>
+                                <p><strong>User name:</strong> <i>{{ session('account')->username }}</i></p>
+                                <p><strong>Join date:</strong>
+                                    <i>{{ \Carbon\Carbon::parse(session('account')->created_at)->format('d/m/Y') }}
+                                    </i></p>
                                 <p><strong>Email:</strong> <i>{{ session('account')->email }}</i></p>
-                                <p><strong>Địa chỉ:</strong> <i>{{ session('account')->address }}</i></p>
-                                <p><strong>Số điện thoại:</strong> <i>{{ session('account')->phone_number }}</i></p>
+                                <p><strong>Address:</strong>
+                                    <i>{{ session('account')->address }}, {{ session('account')->district }},
+                                        {{ session('account')->province }}</i>
+                                </p>
+                                <p><strong>Phone number:</strong> <i>{{ session('account')->phone_number }}</i></p>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-acc">
-                        <h3>Đơn hàng đã đặt</h3>
+                        <h3>Orders placed</h3>
                         <div class="box-bg-white" style="height: 100%;">
                             <div style="padding:25px;">
                                 <table class="table table-border table-lgpading">
                                     <tbody>
                                         <tr>
-                                            <th>#</th>
-                                            <th>Mã đơn hàng</th>
-                                            <th>Ngày đặt</th>
-                                            <th>Sản phẩm đặt hàng</th>
-                                            <th>Tổng tiền</th>
+                                            <th>ID</th>
+                                            <th>Code</th>
+                                            <th>Order date</th>
+                                            <th>Ordered products</th>
+                                            <th>Total</th>
                                         </tr>
                                         @if (count($orders) > 0)
                                             @foreach ($orders as $order)
@@ -75,7 +73,7 @@
                                             @endforeach
                                         @else
                                             <tr>
-                                                Bạn không có đơn hàng nào!!
+                                                You don't have any orders!!
                                             </tr>
                                         @endif
                                     </tbody>
@@ -87,7 +85,7 @@
 
                 <div class="row">
                     <div class="col" style="max-width:100%;">
-                        <h3>Sản phẩm yêu thích</h3>
+                        <h3>Favorite products</h3>
                         <div class="box-bg-white" style="padding:25px;">
 
                             <div class="tools">
@@ -112,7 +110,7 @@
                                                                         <div
                                                                             class="product-img position-relative overflow-hidden img-p">
                                                                             <img class="img-fluid"
-                                                                                src="{{ asset('assets/product/' . $favorite->product->image) }}"
+                                                                                src="{{ asset($favorite->product->featured_image->image_path) }}"
                                                                                 alt="{{ $favorite->product->name }}" />
                                                                         </div>
                                                                         <div class="text-center py-4 px-4 overflow-text">
@@ -149,7 +147,7 @@
 
                                                     </div>
                                                 @else
-                                                    <p>Chưa có sản phẩm nào trong danh sách yêu thích của bạn.</p>
+                                                    <p>There are no products in your favorites.</p>
                                                 @endif
                                             </div>
                                         </div>
@@ -168,7 +166,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <h3>Quản lý đánh giá</h3>
+                        <h3>Manage reviews</h3>
 
                         <div class="box-bg-white" style="padding:25px;">
 
@@ -191,7 +189,7 @@
                                                     <label>
                                                         <i>
                                                             ({{ $review->created_at }})
-                                                            <span>- bài viết gốc:</span> <a
+                                                            <span>- original review:</span> <a
                                                                 class="text-dark text-decoration-none text-truncate name-product"
                                                                 target="_blank"
                                                                 href="{{ route('product-detail', ['slug' => $review->product_slug]) }}">{{ route('product-detail', ['slug' => $review->product_slug]) }}</a>
@@ -207,34 +205,13 @@
                                 </div>
                             @else
                                 <div class="review-content comment-content" style="max-width:100%; padding:0 30px;">
-                                    <p>Bạn chưa gửi đánh giá nào cả.</p>
+                                    <p>You have not submitted any reviews yet.</p>
                                 </div>
                             @endif
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col">
-                        <h3>Quản lý bình luận</h3>
-
-                        <div class="box-bg-white" style="padding:25px;">
-
-                            <div class="tools">
-                                <a href="/account/comment" title="Xem tất cả các bình luận bạn đã gửi"><i
-                                        class="fal fa fa-eye"></i></a>
-                            </div>
-
-                            <div class="review-content comment-content" style="max-width:100%; padding:0 30px;">
-                                <p>Bạn chưa gửi bình luận nào cả.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
-
-
-
         </div>
     </section>
 @stop

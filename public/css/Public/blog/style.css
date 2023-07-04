@@ -768,10 +768,9 @@ section.blog {
 }
 
 .page-link {
-    background-color: #edeff2 !important;
+    background-color: #fff !important;
     border: 0 dashed #e2e2e2;
     border-radius: 0;
-    color: #a3a5a8 !important;
     display: block;
     font-size: 14px;
     line-height: 1;
@@ -784,15 +783,6 @@ section.blog {
 .page-link:hover,
 .page-link:focus {
     color: #111 !important;
-}
-
-.page-item:first-child .page-link {
-    margin-left: 0;
-    border-radius: 0;
-}
-
-.page-item:last-child .page-link {
-    border-radius: 0;
 }
 
 .page-title {
@@ -1757,8 +1747,8 @@ hr.invis3 {
 .blog-content img {
     width: 100%;
 }
-ul.pagination .page-item.active .page-link {
+/* ul.pagination .page-item.active .page-link {
     background-color: #6ed9b7 !important;
     border-color: #007bff;
     color: #fff !important;
-}
+} */

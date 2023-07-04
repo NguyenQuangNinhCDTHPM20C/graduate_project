@@ -28,15 +28,19 @@
                              Quick Shop
                          </h5>
                          <div class="d-flex flex-column justify-content-start">
-                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                             <a class="text-secondary mb-2" href="#"><i
+                                     class="fa fa-angle-right mr-2"></i>Home</a>
                              <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our
                                  Shop</a>
                              <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop
                                  Detail</a>
-                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
+                             <a class="text-secondary mb-2" href="#"><i
+                                     class="fa fa-angle-right mr-2"></i>Shopping
                                  Cart</a>
-                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                             <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                             <a class="text-secondary mb-2" href="#"><i
+                                     class="fa fa-angle-right mr-2"></i>Checkout</a>
+                             <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact
+                                 Us</a>
                          </div>
                      </div>
                      <div class="col-md-4 mb-5">
@@ -44,15 +48,19 @@
                              My Account
                          </h5>
                          <div class="d-flex flex-column justify-content-start">
-                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                             <a class="text-secondary mb-2" href="#"><i
+                                     class="fa fa-angle-right mr-2"></i>Home</a>
                              <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our
                                  Shop</a>
                              <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop
                                  Detail</a>
-                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shopping
+                             <a class="text-secondary mb-2" href="#"><i
+                                     class="fa fa-angle-right mr-2"></i>Shopping
                                  Cart</a>
-                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Checkout</a>
-                             <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                             <a class="text-secondary mb-2" href="#"><i
+                                     class="fa fa-angle-right mr-2"></i>Checkout</a>
+                             <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact
+                                 Us</a>
                          </div>
                      </div>
                      <div class="col-md-4 mb-5">
@@ -65,8 +73,9 @@
                          </p>
                          <form action="">
                              <div class="input-group input-send-gp">
-                                 <input type="text" class="form-control input-send" placeholder="Your Email Address" />
-                                 <button class="btn btn-send">
+                                 <input type="text" class="form-control input-send"
+                                     placeholder="Your Email Address" />
+                                 <button class="btn btn-primary bg-number-right text-white">
                                      <i class="fas fa-paper-plane"></i>
                                  </button>
 
@@ -76,8 +85,10 @@
                              Follow Us
                          </h6>
                          <div class="d-flex">
-                             <a class=" btn-square mr-2 btn-link twitter" href="#"><i class="fab fa-twitter"></i></a>
-                             <a class="btn-square mr-2 btn-link facebook" href="#"><i class="fab fa-facebook-f"></i></a>
+                             <a class=" btn-square mr-2 btn-link twitter" href="#"><i
+                                     class="fab fa-twitter"></i></a>
+                             <a class="btn-square mr-2 btn-link facebook" href="#"><i
+                                     class="fab fa-facebook-f"></i></a>
                              <a class=" btn-square mr-2 btn-link instagram" href="#"><i
                                      class="fab fa-instagram"></i></a>
                          </div>

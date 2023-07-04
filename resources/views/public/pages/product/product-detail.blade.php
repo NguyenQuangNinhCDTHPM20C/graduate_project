@@ -631,7 +631,7 @@
                                                 <textarea id="comment" name="comment" cols="30" rows="5" class="form-control"></textarea>
                                             </div>
                                             <div class="form-group mb-0">
-                                                <input type="submit" value="Submit" class="btn btn-primary px-3">
+                                                <input type="submit" value="Submit" class="btn btn-custom px-3">
                                             </div>
                                         </form>
                                     @endif

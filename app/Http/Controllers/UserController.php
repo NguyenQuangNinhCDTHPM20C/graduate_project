@@ -48,9 +48,9 @@ class UserController extends Controller
             $selected_categories = $request->input('categories', []);
             $products_query->whereIn('category_id', $selected_categories);
         }
-        $products = $products_query->paginate(10);
-
-        return view('public.pages.product.product-list', compact('products', 'category'));
+        $products = $products_query->paginate(12);
+        $brands = Brand::all();
+        return view('public.pages.product.product-list', compact('products', 'category', 'brands'));
     }
 
     // Show product detail 
@@ -117,9 +117,9 @@ class UserController extends Controller
     public function dash_board(){
         $account_id = session('account')->id;
         $orders = DB::table('invoices')
-        ->join('invoice_detail', 'invoices.id', '=', 'invoice_detail.invoice_id')
-        ->join('products', 'invoice_detail.product_id', '=', 'products.id')
-        ->select('invoices.*', 'invoice_detail.quantity', 'invoice_detail.price', 'products.name as product_name')
+        ->join('invoice_details', 'invoices.id', '=', 'invoice_details.invoice_id')
+        ->join('products', 'invoice_details.product_id', '=', 'products.id')
+        ->select('invoices.*', 'invoice_details.quantity', 'invoice_details.price', 'products.name as product_name')
         ->where('invoices.account_id', '=', $account_id)
         ->get();
 
@@ -127,7 +127,7 @@ class UserController extends Controller
             $order->order_date = Carbon::parse($order->order_date)->format('d/m/Y');
         }
 
-        $favorites = FavoriteDetail::join('favorites', 'favorite_detail.favorite_id', '=', 'favorites.id')
+        $favorites = FavoriteDetail::join('favorites', 'favorite_details.favorite_id', '=', 'favorites.id')
         ->where('favorites.account_id', $account_id)
         ->get();
         
@@ -149,11 +149,25 @@ class UserController extends Controller
     public function account_infor()
     {
         return view('Public.pages.account.infor');
-    }   
+    }
+    
+    public function reviews(){
+        $account_id = session('account')->id;
+        $reviews = DB::table('reviews')
+        ->join('products', 'reviews.product_id', '=', 'products.id')
+        ->where('reviews.account_id', $account_id)
+        ->select('reviews.*', 'products.slug as product_slug')
+        ->get();
+    
+        foreach ($reviews as $review) {
+            $review->created_at = Carbon::createFromFormat('Y-m-d H:i:s', $review->created_at)->format('d/m/Y');
+        }
+        return view('public.pages.account.review', compact('reviews'));
+    }
 
     public function checkout(){
         $cartItems = \Cart::getContent();
-        return view('public.pages.checkout.checkout', compact('cartItems'));
+        return view('public.pages.checkout.index', compact('cartItems'));
     }
 
     public function payment(){
@@ -225,5 +239,9 @@ class UserController extends Controller
             ->orderBy('id', 'asc')
             ->first();
         return view('Public.pages.blog.blog-detail', compact('blog', 'new_blog', 'count_view', 'hot_blogs', 'viewed_blogs', 'previous_blog', 'next_blog'));
+    }
+
+    public function contact(){
+        return view('public.pages.contact.index');
     }
 }

@@ -58,12 +58,12 @@
                 </div>
             </div>
             <div class="btn-group-2">
-                <a href="{{ route('account.favorite') }}" class="btn px-0 ml-2">
+                <a href="{{ route('account.favorite') }}" class="btn px-0 ml-2" alt="Favorite">
                     <i class="fas fa-heart text-white"></i>
                     <span class="badge text-white border border-white rounded-circle"
                         style="padding-bottom: 2px">{{ $favorite_count }}</span>
                 </a>
-                <a href="{{ route('cart.list') }}" class="btn px-0 ml-2">
+                <a href="{{ route('cart.list') }}" class="btn px-0 ml-2" alt="Cart">
                     <i class="fas fa-shopping-cart text-white"></i>
                     <span class="badge text-white border border-white rounded-circle"
                         style="padding-bottom: 2px">{{ Cart::getTotalQuantity() }}</span>
@@ -82,7 +82,7 @@
             <img src="{{ asset('images/logoshop1.png') }}"
                 style="  width: 50%;
         padding-right: 10px;
-        object-fit: cover;" alt="double-n shop">
+        object-fit: cover;" alt="Double-N Shop">
         </a>
     </div>
     <div class="col-lg-4 col-6 text-left input-search">
@@ -98,7 +98,7 @@
     <div class="col-lg-4 col-6 text-right right-search">
         <a class="itemCheckOrder" id="btnCheckOrder" href="{{ route('account.order') }}">
             <span><i class="icon fa fa-truck-fast"></i></span>
-            <span class="text">Kiểm tra đơn hàng</span>
+            <span class="text">Check Order</span>
         </a>
         <a class="itemCart" href="{{ route('cart.list') }}">
             <i class="fas fa-light fa-cart-shopping"></i>

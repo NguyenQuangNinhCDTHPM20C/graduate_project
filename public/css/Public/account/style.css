@@ -109,14 +109,13 @@ section.account .sidebar .header .info p.logout a:hover {
     color: #00483d;
 }
 section.account .sidebar .header .info p.change-avatar a {
+    font-size: 13px;
     color: #999;
 }
 section.account .sidebar .header .info p.change-avatar a:hover {
     color: #111;
 }
 
-section.account .sidebar nav {
-}
 section.account .sidebar nav ul {
     list-style: none;
     padding: 0;

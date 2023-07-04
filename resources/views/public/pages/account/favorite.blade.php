@@ -3,27 +3,20 @@
 @section('title', 'Double-N shop')
 
 @section('styles')
-    <link rel="stylesheet" href="{{ asset('css/Public/account/style.css') }}">
-    <link rel="preload" as="style" href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css">
-    <link href="https://hoanghamobile.com/js-css/web_v1.1.6.5.css" rel="stylesheet" type="text/css">
-    <style>
-        .product-center .current-product-price label.text-green {
-            display: none
-        }
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/public/account/style.css') }}">
 @stop
 
 @section('content')
     <section class="account">
         @include('Public.partial.sidebar')
         <div class="body-content">
-            <h1>Sản phẩm yêu thích</h1>
+            <h1>Manage favorites</h1>
 
             <div class="header">
                 <div class="bg">
                     <div class="text">
-                        <h2>CHÀO MỪNG QUAY TRỞ LẠI, {!! Str::upper(session('account')->name) !!}</h2>
-                        <p><i>Xem và kiểm tra những sản phẩm yêu thích của bạn tại đây</i></p>
+                        <h2>WELCOME TO BACK, {!! Str::upper(session('account')->name) !!}</h2>
+                        <p><i>View and check out your favorite products here</i></p>
                     </div>
                 </div>
                 <div class="icon">
@@ -33,15 +26,14 @@
             <div class="account-layout ">
                 <div class="row equaHeight" data-obj=".col .box-bg-white">
                     <div class="col col-lg">
-                        <h3>Sản phẩm yêu thích</h3>
+                        <h3>Favorite products</h3>
                         <div class="box-bg-white" style="height: 100%;">
                             <div style="padding:25px;">
                                 <table class="table table-border table-lgpading">
                                     <tbody>
                                         <tr>
                                             <th>#</th>
-                                            <th>Product Name</th>
-                                            <th>Image</th>
+                                            <th>Product</th>
                                             <th>Selling Price</th>
                                             <th>Discount Price</th>
                                             <th>Action</th>
@@ -49,10 +41,10 @@
                                         @foreach ($favorites as $_favorite)
                                             <tr>
                                                 <td>{{ $loop->index }}</td>
-                                                <td>{{ $_favorite->product->name }}</td>
-                                                <td><img style="width: 10%;"
-                                                        src="{{ asset('assets/product/' . $_favorite->product->image) }}"
-                                                        alt="{{ $_favorite->product->name }}"></td>
+                                                <td><img style="width: 50px;"
+                                                        src="{{ asset($_favorite->product->featured_image->image_path) }}"
+                                                        alt="{{ $_favorite->product->name }}">{{ $_favorite->product->name }}
+                                                </td>
                                                 <td>{{ $_favorite->product->selling_price }}</td>
                                                 <td>{{ $_favorite->product->discount_price }}</td>
                                                 <form
@@ -61,8 +53,8 @@
                                                     @csrf
                                                     @method('DELETE')
                                                     <td>
-                                                        <button type="submit"
-                                                            class="btn btn-danger bg-radius">Remove</button>
+                                                        <button type="submit" class="btn btn-danger bg-radius"><i
+                                                                class="fa-regular fa-trash-can"></i></button>
                                                     </td>
                                                 </form>
 

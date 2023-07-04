@@ -2,182 +2,6 @@
 
 @section('title', 'Double-N shop')
 
-@section('styles')
-    <style>
-        .product-filters2 {
-            font-size: 12px;
-            background: #fff 0% 0% no-repeat padding-box;
-            box-shadow: 0 3px 6px #00000029;
-            border-radius: 14px;
-            margin: 20px 3rem 20px 3rem;
-        }
-
-        .product-filters2 a {
-            text-decoration: none;
-            color: #00483d;
-        }
-
-        .product-filters2 .sub a:hover {
-            color: #00917a;
-        }
-
-        .product-filters2 {
-            position: relative;
-            display: flex
-        }
-
-        .product-filters2 .left,
-        .product-filters2 .right {
-            display: flex;
-            justify-items: right;
-            justify-content: right;
-            width: 100px;
-            flex-grow: 0;
-            flex-shrink: 0
-        }
-
-        .product-filters2 .left {
-            flex-basis: auto;
-            flex-shrink: 1;
-            flex-grow: 2
-        }
-
-        .product-filters2 strong.label {
-            display: inline-block;
-            color: #00917a;
-            padding: 15px 20px;
-            font-size: 14px;
-        }
-
-        .product-filters2 .facet {
-            display: block;
-            padding: 15px 10px;
-            margin-right: 20px
-        }
-
-        .product-filters2 .facet .sub {
-            display: none;
-            position: absolute;
-            width: 100%;
-            z-index: 123;
-            left: 0;
-            top: 40px;
-            padding-top: 10px
-        }
-
-        .product-filters2 .facet:hover .sub {
-            display: block
-        }
-
-        .product-filters2 .facet:hover label a,
-        .product-filters2 .facet:hover label span {
-            color: #fd475a
-        }
-
-        .product-filters2 .facet .sub ul {
-            background: #fff;
-            box-shadow: 0 3px 6px #00000029;
-            border-radius: 14px;
-            margin: 0;
-            display: grid;
-            grid-template-columns: auto auto auto auto auto;
-            paddaing: 5px 10px;
-            grid-column-gap: 10px
-        }
-
-        .product-filters2 .facet .sub ul li {
-            list-style: none;
-            padding: 5px
-        }
-
-        .product-filters2 .facet label {
-            display: flex
-        }
-
-        .product-filters2 .facet label span,
-        .product-filters2 .facet label strong {
-            display: block;
-            margin-right: 5px
-        }
-
-        .product-filters2 .facet i.icon-rightar::before {
-            font-size: 8px;
-            transform: rotate(90deg)
-        }
-
-        .product-filters2 .facet i.icon-minutes {
-            font-size: 8px;
-            background: #fd475a;
-            line-height: 16px;
-            width: 16px;
-            height: 16px;
-            display: block;
-            border-radius: 20px;
-            text-align: center;
-            color: #fff;
-            margin-right: 5px
-        }
-
-        .product-filters2 .facet ul li a {
-            display: flex
-        }
-
-        .product-filters2 .facet ul li i.total {
-            color: #888;
-            margin-left: 4px
-        }
-
-        .container2 {
-            display: none;
-        }
-
-        .product-filters2 h3 {
-            padding: 0;
-            margin: 0 0 10px 0
-        }
-
-        .product-filters2 .container-filters2 {
-            padding: 10px 15px;
-            border-radius: 6px
-        }
-
-        .product-filters2 .container-filters2 .facet {
-            display: grid;
-            grid-template-columns: 40% 60%;
-            margin-bottom: 8px
-        }
-
-        .product-filters2 .container-filters2 .facet label {
-            padding: 5px 0;
-            color: #888;
-            font-weight: bold
-        }
-
-        .product-filters2 .container-filters2 .facet select {
-            border: 1px solid #009981;
-            color: #009981;
-            padding: 4px 8px
-        }
-
-        @media screen and (min-width: 992px) {}
-
-        @media(max-width: 992px) {
-            .container2 {
-                display: block;
-                margin: 0 0 20px 0;
-            }
-
-            .product-filters2 .left {
-                display: none;
-            }
-
-            .product-filters2 .right {
-                display: none;
-            }
-        }
-    </style>
-@endsection
-
 @section('content')
 
     <!-- Products Start -->
@@ -193,9 +17,9 @@
         @if (isset($products) && count($products) > 0)
             <div class="product-filters2">
                 <div class="left">
-                    <strong class="label">Lọc danh sách:</strong>
+                    <strong class="label">Filter:</strong>
                     <div class="facet">
-                        <label><a href="javascript:;">Danh mục <i class="fa fa-angle-down mt-1"></i></a></label>
+                        <label><a href="javascript:;">Category <i class="fa fa-angle-down mt-1"></i></a></label>
                         <div class="sub">
                             <ul>
                                 <li><a href="/laptop/macbook">Apple</a></li>
@@ -219,7 +43,7 @@
 
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Dòng CPU <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">CPU series <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -259,7 +83,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Thương hiệu <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Brand<i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -294,7 +118,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Giá <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Price<i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -322,7 +146,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Loại sản phẩm <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Product Type <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -335,7 +159,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Độ phân giải <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Display resolution <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -424,7 +248,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Kích thước màn hình <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Display size <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -500,7 +324,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Card đồ hoạ rời <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Discrete graphics card <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -542,7 +366,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Ổ cứng mặc định <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Default hard drive <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -574,7 +398,7 @@
 
                 <div class="right">
                     <div class="facet">
-                        <label>Sắp xếp <i class="fa fa-angle-down mt-1"></i></label>
+                        <label>Sort <i class="fa fa-angle-down mt-1"></i></label>
                         <div class="sub">
                             <ul>
                                 <li><a href="/laptop?filters=%7b%22sort%22%3a%2212%22%7d&amp;search=true"> Mặc định</a>
@@ -1078,7 +902,7 @@
             </div>
 
             <h5 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
-                <span class="bg-secondary pr-3">Products</span>
+                <span class="pr-3"></span>
             </h5>
             <div class="row px-xl-5">
                 @foreach ($products as $product)
@@ -1151,6 +975,7 @@
     </div>
     <!-- Featured End -->
 @stop
+
 @section('scripts')
     <script>
         $(document).ready(function() {
