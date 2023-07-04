@@ -49,6 +49,7 @@ Route::group(['domain' => env('APP_URL')], function () {
     //Route for add review product
     Route::post('/review/add', [ReviewController::class, 'store'])->name('review.add');
     Route::get('/checkout',[UserController::class, 'checkout'])->name('checkout');
+    Route::get('/invoice/{code}',[UserController::class, 'invoice'])->name('invoice');
     //Routes for authenticate
     Route::get('/login', [AuthController::class, 'showLoginFormPublic'])->name('public.login')->middleware('guest.public');
     Route::post('/login', [AuthController::class, 'login_public'])->middleware('guest.public');

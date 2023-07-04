@@ -16,18 +16,18 @@ class Invoices extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('code');
-            $table->integer('account_id')->unsigned();
+            $table->integer('account_id')->nullable()->unsigned();
             $table->dateTime('order_date');
             $table->string('name',200);
             $table->string('address');
             $table->string('phone');
-            $table->string('email')->unique();
-            $table->string('notes');
+            $table->string('email');
+            $table->text('notes');
             $table->float('total');
             $table->string('payment_method');
             $table->tinyInteger('status')->nullable()->default(1);
             $table->rememberToken();
-            $table->timestamps(); // creawted_at, updated_at
+            $table->timestamps();
             $table->foreign('account_id')->references('id')->on('accounts');
         });
     }

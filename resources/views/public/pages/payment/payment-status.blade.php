@@ -8,7 +8,9 @@
 
         @if ($errors->any())
             <div class="alert alert-danger">
-                {{ $errors->first() }}
+                @foreach ($errors->all() as $error)
+                    {{ $error }}
+                @endforeach
             </div>
         @endif
 
@@ -18,8 +20,8 @@
             </div>
         @endif
 
-        <div class="alert alert-info">
+        {{-- <div class="alert alert-info">
             Payment status: {{ $success }}
-        </div>
+        </div> --}}
     </div>
 @endsection

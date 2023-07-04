@@ -15,6 +15,7 @@ use App\Models\Brand;
 use App\Models\Favorite;
 use App\Models\FavoriteDetail;
 use App\Models\Invoice;
+use App\Models\InvoiceDetail;
 use App\Models\Review;
 use App\Models\Account;
 use App\Models\Blog;
@@ -172,6 +173,12 @@ class UserController extends Controller
 
     public function payment(){
         return view('Public.pages.payment.payment');
+    }
+
+    public function invoice($code){
+        $invoice = Invoice::where('code', $code)->first();
+        $order_items = InvoiceDetail::where('invoice_id', $invoice->id)->get();
+        return view('Public.pages.payment.invoice', compact('invoice', 'order_items'));
     }
 
     public function blogs()

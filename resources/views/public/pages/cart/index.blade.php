@@ -7,11 +7,6 @@
     <div class="container-fluid">
         @if (Cart::getTotalQuantity() != 0)
             <div class="row px-xl-5">
-                @if ($message = Session::get('success'))
-                    <div class="p-4 mb-3 bg-green-400 rounded">
-                        <p class="text-green-800">{{ $message }}</p>
-                    </div>
-                @endif
                 <div class="col-lg-8 table-responsive mb-5">
                     <table class="table table-light table-borderless table-hover text-center mb-0">
                         <thead class="thead-dark">

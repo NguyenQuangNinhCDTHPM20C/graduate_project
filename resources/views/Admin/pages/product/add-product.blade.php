@@ -117,6 +117,14 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
+                                <div class="form-group">
+                                    <p class="row">
+                                        <input type="checkbox" id="test1" />
+                                        <label for="test1">Is Laptop</label>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
                                 <button type="submit" class="btn btn-submit me-2">Submit</button>
                                 <a href="{{ route('product.list') }}" class="btn btn-cancel">Cancel</a>
                             </div>
@@ -166,7 +174,7 @@
                             var radioButton = document.createElement('input');
                             radioButton.type = 'radio';
                             radioButton.name = 'featured_image_' +
-                            index; // Sử dụng tên duy nhất cho mỗi radio button
+                                index; // Sử dụng tên duy nhất cho mỗi radio button
                             radioButton.value = index; // Giá trị của radio button là chỉ mục của hình ảnh
 
                             radioButtonContainer.appendChild(radioButton);
@@ -175,7 +183,7 @@
                             var deleteButton = document.createElement('button');
                             deleteButton.classList.add('delete-button');
                             deleteButton.setAttribute('data-index',
-                            index); // Lưu chỉ mục của hình ảnh vào thuộc tính data-index
+                                index); // Lưu chỉ mục của hình ảnh vào thuộc tính data-index
                             deleteButton.innerHTML = '<i class="fas fa-times-circle"></i>';
                             deleteButton.addEventListener('click', function() {
                                 deleteImage(this);

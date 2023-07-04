@@ -16,6 +16,9 @@
 
         <form action="{{ route('payment.process') }}" method="POST">
             @csrf
+            <input name="account_id" class="form-control" type="hidden"
+                value="{{ session()->has('account') ? session('account')->id : '' }}" required>
+            <input type="hidden" name="cart_items" value="{{ json_encode($cartItems) }}">
             <div class="row px-xl-5">
                 <div class="col-lg-8">
                     <div class="bg-light p-30 mb-5 bg-radius">
