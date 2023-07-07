@@ -33,7 +33,9 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/',[UserController::class, 'index'])->name('home');
     //Routes for product
     Route::get('/products', [UserController::class, 'products'])->name('products');
+    Route::post('/products', [UserController::class, 'products']);
     Route::get('/product/{slug}', [UserController::class, 'product_detail'])->name('product-detail');
+    Route::get('/products/{type}', [UserController::class, 'products_type'])->name('product-type');
     Route::get('/search', [UserController::class, 'search'])->name('search');
     //Routes for shopping cart
     Route::get('cart', [CartController::class, 'index'])->name('cart.list');
@@ -54,8 +56,8 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/login', [AuthController::class, 'showLoginFormPublic'])->name('public.login')->middleware('guest.public');
     Route::post('/login', [AuthController::class, 'login_public'])->middleware('guest.public');
     Route::post('/logout', [AuthController::class, 'logout_public'])->name('public.logout');
-    Route::get('/logup', [AuthController::class, 'showRegisterForm'])->name('logup');
-    Route::post('/logup', [AuthController::class, 'register'])->name('logup.submit');
+    Route::get('/logup', [AuthController::class, 'showRegisterForm'])->name('logup')->middleware('guest.public');
+    Route::post('/logup', [AuthController::class, 'register'])->name('logup.submit')->middleware('guest.public');
     Route::get('/verify-email/{token}', [AuthController::class, 'verifyEmail'])->name('verify-email');
     //Routes for login google
     Route::get('/login/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google'); 

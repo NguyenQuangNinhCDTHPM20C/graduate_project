@@ -8,8 +8,8 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark text-decoration-none" href="#">Home</a>
-                    <span class="breadcrumb-item active">Invoice</span>
+                    <a class="breadcrumb-item text-dark text-decoration-none" href="{{ route('home') }}">Trang chủ</a>
+                    <span class="breadcrumb-item active">Hóa đơn</span>
                 </nav>
             </div>
         </div>
@@ -18,30 +18,30 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            Order Date
+                            Ngày đặt
                             <strong>{{ \Carbon\Carbon::parse($invoice->order_date)->format('d/m/Y') }}</strong>
                             <span class="float-right"> <strong>Code:</strong> {{ $invoice->code }}</span>
                         </div>
                         <div class="card-body">
                             <div class="row mb-4">
                                 <div class="col-sm-6">
-                                    <h6 class="mb-3">From:</h6>
+                                    <h6 class="mb-3">Từ:</h6>
                                     <div>
                                         <strong>Double-N Shop</strong>
                                     </div>
-                                    <div>65, Huynh Thuc Khang, Ben Nghe, District 1, Ho Chi Minh City</div>
-                                    <div>Email: info@example.com</div>
-                                    <div>Phone: + 012 345 6789</div>
+                                    <div>65, Huỳnh Thúc Kháng, Bến Nghé, quận 1, Thành phố Hồ Chí Minh</div>
+                                    <div>Email: contatc@doublenshop.com</div>
+                                    <div>Số điện thoại: + 012 345 6789</div>
                                 </div>
 
                                 <div class="col-sm-6">
-                                    <h6 class="mb-3">To:</h6>
+                                    <h6 class="mb-3">Đến:</h6>
                                     <div>
                                         <strong>{{ $invoice->name }}</strong>
                                     </div>
                                     <div>{{ $invoice->address }}</div>
                                     <div>Email: {{ $invoice->email }}</div>
-                                    <div>Phone: {{ $invoice->phone }}</div>
+                                    <div>Số điện thoại: {{ $invoice->phone }}</div>
                                 </div>
                             </div>
 
@@ -49,12 +49,12 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th class="center">#</th>
-                                            <th>Item</th>
-                                            <th>Description</th>
-                                            <th class="right">Unit Cost</th>
-                                            <th class="center">Qty</th>
-                                            <th class="right">Total</th>
+                                            <th class="center">STT</th>
+                                            <th>Sản phẩm</th>
+                                            <th>Mô tả</th>
+                                            <th class="right">Giá</th>
+                                            <th class="center">Số lượng</th>
+                                            <th class="right">Tổng tiền</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -81,7 +81,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="left">
-                                                    <strong>Total</strong>
+                                                    <strong>Tổng tiền</strong>
                                                 </td>
                                                 <td class="right">
                                                     <strong>${{ $invoice->total }}</strong>

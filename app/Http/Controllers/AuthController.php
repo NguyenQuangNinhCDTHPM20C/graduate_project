@@ -134,6 +134,8 @@ class AuthController extends Controller
             'password' => 'required|min:6',
             'confirm_password' => 'required|same:password',
         ]);
+        $existing_email = Account::where('email', $validatedData['email'])->first();
+        if(!$existing_email){
         // Generate verification code
         $verificationCode = Str::random(40);
         // Create new account
@@ -141,13 +143,17 @@ class AuthController extends Controller
         $account->username = explode('@', $validatedData['email'])[0];
         $account->email = $validatedData['email'];
         $account->password = bcrypt($validatedData['password']);
+        $account->photo = 'assets/user/avt_defaut.png';
         $account->role = 2;
         $account->verification_token = $verificationCode;
         $account->save();
 
         // Send email verification
         Mail::to($account->email)->send(new EmailVerification($account, $verificationCode));
-
+        $request->session()->flash('message', 'Đăng ký thành công, vui lòng xác nhận email!');
+        }else{
+            $request->session()->flash('error', 'Đăng ký thất bại, email đã được sử dụng!');
+        }
         // Redirect to a success page or show a success message
         return redirect()->route('logup');
     }

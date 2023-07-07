@@ -10,13 +10,13 @@
     <section class="account">
         @include('Public.partial.sidebar')
         <div class="body-content">
-            <h1>Manage reviews</h1>
+            <h1>Quản lý đánh giá & review sản phẩm</h1>
 
             <div class="header">
                 <div class="bg">
                     <div class="text">
-                        <h2>WELCOME TO BACK, {!! Str::upper(session('account')->name) !!}</h2>
-                        <p><i>View and check your product reviews here</i></p>
+                        <h2>CHÀO MỪNG QUAY TRỞ LẠI, {!! Str::upper(session('account')->name) !!}</h2>
+                        <p><i>Xem và kiểm tra các lần đánh giá sản phẩm của bạn tại đây</i></p>
                     </div>
                 </div>
                 <div class="icon">
@@ -26,9 +26,9 @@
             <div class="account-layout ">
                 <div class="row equaHeight" data-obj=".col .box-bg-white">
                     <div class="col col-lg">
-                        <h3>Review products</h3>
-                        @if (count($reviews) > 0)
-                            <div class="review-content comment-content" style="max-width:100%; padding:0 30px;">
+                        <h3>Các đánh giá của bạn</h3>
+                        <div class="review-content comment-content" style="max-width:100%; padding:0 30px;">
+                            @if (count($reviews) > 0)
                                 @foreach ($reviews as $review)
                                     <div class="item item-selected">
                                         <div class="avt">
@@ -42,7 +42,7 @@
                                                 <label>
                                                     <i>
                                                         ({{ $review->created_at }})
-                                                        <span>- original review:</span> <a
+                                                        <span>- bài viết gốc:</span> <a
                                                             class="text-dark text-decoration-none text-truncate name-product"
                                                             target="_blank"
                                                             href="{{ route('product-detail', ['slug' => $review->product_slug]) }}">{{ route('product-detail', ['slug' => $review->product_slug]) }}</a>
@@ -55,11 +55,11 @@
                                         </div>
                                     </div>
                                 @endforeach
-                            </div>
-                        @else
-                            <div class="review-content comment-content" style="max-width:100%; padding:0 30px;">
-                                <p>You have not submitted any reviews yet.</p>
-                            </div>
+                        </div>
+                    @else
+                        <div class="review-content comment-content" style="max-width:100%; padding:0 30px;">
+                            <p>You have not submitted any reviews yet.</p>
+                        </div>
                         @endif
                     </div>
                 </div>
@@ -68,7 +68,6 @@
     </section>
 @stop
 @section('scripts')
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 @stop

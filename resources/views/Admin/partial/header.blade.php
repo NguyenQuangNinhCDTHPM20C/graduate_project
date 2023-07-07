@@ -84,8 +84,8 @@
             </a>
             <div class="dropdown-menu notifications">
                 <div class="topnav-dropdown-header">
-                    <span class="notification-title">Notifications</span>
-                    <a href="javascript:void(0)" class="clear-noti"> Clear All </a>
+                    <span class="notification-title">Thông báo</span>
+                    <a href="javascript:void(0)" class="clear-noti"> Dọn dẹp tất cả </a>
                 </div>
                 <div class="noti-content">
                     <ul class="notification-list">
@@ -133,7 +133,8 @@
                                         <p class="noti-details"><span class="noti-title">Misty Tison</span> added
                                             <span class="noti-title">Domenic Houston</span> and <span
                                                 class="noti-title">Claire Mapes</span> to project <span
-                                                class="noti-title">Doctor available module</span></p>
+                                                class="noti-title">Doctor available module</span>
+                                        </p>
                                         <p class="noti-time"><span class="notification-time">8 mins ago</span></p>
                                     </div>
                                 </div>
@@ -174,8 +175,8 @@
                     </ul>
                 </div>
                 <div class="topnav-dropdown-footer">
-                    <a href="https://dreamspos.dreamguystech.com/laravel/template/public/activities">View all
-                        Notifications</a>
+                    <a href="https://dreamspos.dreamguystech.com/laravel/template/public/activities">Xem tất cả
+                        Thông báo</a>
                 </div>
             </div>
         </li>
@@ -191,7 +192,7 @@
                     </span>
                     <span class="user-detail">
                         <span class="user-name">{{ session('account')->username }}</span>
-                        <span class="user-role">Super Admin</span>
+                        <span class="user-role">Administrator</span>
                     </span>
                 </span>
             </a>
@@ -199,16 +200,16 @@
                 <div class="profilename">
                     <hr class="m-0">
                     <a class="dropdown-item" href="{{ route('profile') }}">
-                        <i class="me-2" data-feather="user"></i> My Profile</a>
+                        <i class="me-2" data-feather="user"></i> Tài khoản</a>
                     <a class="dropdown-item" href="{{ route('setting') }}"><i class="me-2"
-                            data-feather="settings"></i>Settings</a>
+                            data-feather="settings"></i>Cài đặt</a>
                     <hr class="m-0">
                     <form action="{{ route('admin.logout') }}" method="POST" id="logout-form">
                         @method('POST')
                         @csrf
                         <button class="dropdown-item logout pb-0" type="submit"><img
-                                src="{{ asset('images/log-out.svg') }}" class="me-2"
-                                alt="img">Logout</button>
+                                src="{{ asset('images/log-out.svg') }}" class="me-2" alt="img">Đăng
+                            xuất</button>
                     </form>
                 </div>
             </div>
@@ -220,10 +221,9 @@
         <a href="javascript:void(0);" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
             aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
         <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="{{ route('profile') }}">My
-                Profile</a>
-            <a class="dropdown-item" href="{{ route('setting') }}">Settings</a>
-            <a class="dropdown-item" href="{{ route('admin.login') }}">Logout</a>
+            <a class="dropdown-item" href="{{ route('profile') }}">Tài khoản</a>
+            <a class="dropdown-item" href="{{ route('setting') }}">Cài đặt</a>
+            <a class="dropdown-item" href="{{ route('admin.login') }}">Đăng xuất</a>
         </div>
     </div>
 

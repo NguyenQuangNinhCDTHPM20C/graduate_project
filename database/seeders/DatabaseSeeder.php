@@ -27,5 +27,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ReviewsTableSeeder::class);    
         $this->call(BlogsTableSeeder::class);   
         $this->call(ProductColorsTableSeeder::class);
+        $this->call(LaptopsTableSeeder::class);
+        $this->call(SettingsTableSeeder::class);
     }
 }

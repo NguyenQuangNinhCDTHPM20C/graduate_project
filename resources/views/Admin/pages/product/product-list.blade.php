@@ -7,12 +7,12 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Product List</h4>
-                    <h6>Manage your products</h6>
+                    <h4>Danh sách sản phẩm</h4>
+                    <h6>Quản lý sản phẩm của bạn</h6>
                 </div>
                 <div class="page-btn">
                     <a href="{{ route('product.add') }}" class="btn btn-added"><img src="{{ asset('images/plus.svg') }}"
-                            alt="img" class="me-1">Add New Product</a>
+                            alt="img" class="me-1">Thêm sản phẩm</a>
                 </div>
             </div>
 
@@ -22,8 +22,8 @@
                         <div class="search-set">
                             <div class="search-path">
                                 <a class="btn btn-filter" id="filter_search">
-                                    <img src="{{ asset('images/filter.svg') }}" alt="img">
-                                    <span><img src="{{ asset('images/closes.svg') }}" alt="img"></span>
+                                    <img src="{{ asset('images/filter.svg') }}" alt="filter-button">
+                                    <span><img src="{{ asset('images/closes.svg') }}" alt="close-button"></span>
                                 </a>
                             </div>
                             <div class="search-input">
@@ -57,7 +57,7 @@
                                         <div class="col-lg col-sm-6 col-12">
                                             <div class="form-group">
                                                 <select class="select">
-                                                    <option>Choose Category</option>
+                                                    <option>Chọn danh mục</option>
                                                     @foreach ($category as $_category)
                                                         <option>{{ $_category->name }}</option>
                                                     @endforeach
@@ -67,7 +67,7 @@
                                         <div class="col-lg col-sm-6 col-12">
                                             <div class="form-group">
                                                 <select class="select">
-                                                    <option>Choose Sub Category</option>
+                                                    <option>Chọn phụ mục</option>
                                                     @foreach ($sub_category as $_sub_category)
                                                         <option>{{ $_sub_category->name }}</option>
                                                     @endforeach
@@ -77,7 +77,7 @@
                                         <div class="col-lg col-sm-6 col-12">
                                             <div class="form-group">
                                                 <select class="select">
-                                                    <option>Brand</option>
+                                                    <option>Thương hiệu</option>
                                                     @foreach ($brands as $_brand)
                                                         <option>{{ $_brand->name }}</option>
                                                     @endforeach
@@ -106,14 +106,14 @@
                                             <span class="checkmarks"></span>
                                         </label>
                                     </th>
-                                    <th>Product Name</th>
-                                    <th>Category </th>
-                                    <th>Sub Category </th>
-                                    <th>Brand</th>
-                                    <th>Price</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Danh mục</th>
+                                    <th>Phụ mục</th>
+                                    <th>Thương hiệu</th>
+                                    <th>Giá</th>
                                     <th>Code</th>
-                                    <th>Qty</th>
-                                    <th>Action</th>
+                                    <th>Số lượng</th>
+                                    <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>

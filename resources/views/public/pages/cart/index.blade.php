@@ -5,18 +5,26 @@
 @section('content')
     <!-- Cart Start -->
     <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark text-decoration-none" href="{{ route('home') }}">Trang chủ</a>
+                    <span class="breadcrumb-item active">Giỏ hàng</span>
+                </nav>
+            </div>
+        </div>
         @if (Cart::getTotalQuantity() != 0)
             <div class="row px-xl-5">
                 <div class="col-lg-8 table-responsive mb-5">
                     <table class="table table-light table-borderless table-hover text-center mb-0">
                         <thead class="thead-dark">
                             <tr>
-                                <th>Products</th>
-                                <th>Color</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th>Action</th>
+                                <th>Sản phẩm</th>
+                                <th>Màu sắc</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng tiền</th>
+                                <th>Chức năng</th>
                             </tr>
                         </thead>
                         <tbody class="align-middle">
@@ -72,31 +80,30 @@
                 <div class="col-lg-4">
                     <form class="mb-30" action="">
                         <div class="input-group">
-                            <input type="text" class="form-control border-0 p-4" placeholder="Coupon Code">
-                            <button class="btn btn-send">Apply</button>
+                            <input type="text" class="form-control border-0 p-4" placeholder="Mã giảm giá">
+                            <button class="btn btn-send">Áp dụng</button>
                         </div>
                     </form>
                     <div class="bg-light p-30 mb-5 bg-radius bg-shadow">
                         <div class="border-bottom pb-2">
                             <div class="d-flex justify-content-between mb-3">
-                                <h6>Subtotal</h6>
+                                <h6>Tổng phụ</h6>
                                 <h6>${{ Cart::getTotal() }}VNĐ</h6>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">Shipping</h6>
+                                <h6 class="font-weight-medium">Phí ship</h6>
                                 <h6 class="font-weight-medium">$10</h6>
                             </div>
                         </div>
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
-                                <h5>Total</h5>
-                                <h5>${{ Cart::getTotal() + 10 }}VNĐ</h5>
+                                <h5>Tổng tiền</h5>
+                                <h5>${{ Cart::getTotal() + 10 }}</h5>
                             </div>
 
                             <a href="{{ route('checkout') }}"
-                                class="btn btn-block btn-custom font-weight-bold my-3 py-3 bg-number-left bg-number-right">Proceed
-                                To
-                                Checkout</a>
+                                class="btn btn-block btn-custom font-weight-bold my-3 py-3 bg-number-left bg-number-right">Thanh
+                                toán</a>
                         </div>
                     </div>
                 </div>

@@ -2,7 +2,7 @@
     <div class="ctn">
         <div class="header">
             <div class="logo">
-                <a href="{{ route('home') }}"><img src="{{ asset('images/logoshop1.png') }}" alt="Hoàng Hà Mobile"></a>
+                <a href="{{ route('home') }}"><img src="{{ asset('images/logoshop1.png') }}" alt="Double-N Shop"></a>
             </div>
 
             <div class="info">
@@ -15,7 +15,7 @@
                     <p><strong>{{ session('account')->username }}</strong></p>
                     <p class="change-avatar"><a href="javascript:;"
                             onclick="$('#avtImage').trigger('click'); return false;"><i class="fal fa fa-user"></i>
-                            Change avatar</a></p>
+                            Thay đổi ảnh đại diện</a></p>
                     <form id="update-avt-form" action="{{ route('account.update') }}" method="post"
                         enctype="multipart/form-data">
                         @csrf
@@ -37,24 +37,24 @@
             <ul>
                 <li><a href="{{ route('account.index') }}"
                         class="{{ request()->routeIs('account.index') ? 'actived' : '' }}"><i
-                            class="fas fa fa-sliders"></i><span>Dashboard</span></a></li>
+                            class="fas fa fa-sliders"></i><span>Bảng điều khiển</span></a></li>
                 <li><a href="{{ route('account.infor') }}"
                         class="{{ request()->routeIs('account.infor') ? 'actived' : '' }}"><i
-                            class="fal fa fa-user-circle"></i><span>Account information</span></a></li>
+                            class="fal fa fa-user-circle"></i><span>Thông tin tài khoản</span></a></li>
                 <li><a href="{{ route('account.order') }}"
                         class="{{ request()->routeIs('account.order') ? 'actived' : '' }}"><i
-                            class="fal fa fa-box-open"></i><span>Your Order</span></a></li>
+                            class="fal fa fa-box-open"></i><span>Đơn hàng của bạn</span></a></li>
                 <li><a href="{{ route('account.favorite') }}"
                         class="{{ request()->routeIs('account.favorite') ? 'actived' : '' }}"><i
-                            class="fal fa fa-heart"></i><span>Favorite product</span></a></li>
+                            class="fal fa fa-heart"></i><span>Sản phẩm yêu thích</span></a></li>
                 <li><a href="{{ route('account.review') }}"
                         class="{{ request()->routeIs('account.review') ? 'actived' : '' }}"><i
-                            class="fal fa fa-edit"></i><span>Manage reviews</span></a></li>
+                            class="fal fa fa-edit"></i><span>Quản lý đánh giá</span></a></li>
 
                 <li>
                     <a href="javascript:void(0);" onclick="logout()">
                         <i class="fal fa fa-sign-out-alt"></i>
-                        <span>Logout</span>
+                        <span>Đăng xuất</span>
                     </a>
 
                     <form id="logout-form" action="{{ route('public.logout') }}" method="POST" style="display: none;">

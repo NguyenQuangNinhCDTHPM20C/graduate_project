@@ -1,80 +1,62 @@
      <!-- Footer Start -->
      <div class="container-fluid bg-dark text-secondary mt-5 pt-5">
-         <div class="row px-xl-5 pt-5">
+         <div class="d-flex px-xl-5 pt-5">
              <div class="col-lg-4 col-md-12 mb-5 pr-3 pr-xl-5">
                  <h5 class="text-secondary text-uppercase mb-4">
-                     Get In Touch
+                     Kết nối với chúng tôi
                  </h5>
-                 <p class="mb-4">
-                     No dolore ipsum accusam no lorem. Invidunt sed clita
-                     kasd clita et et dolor sed dolor. Rebum tempor no vero
-                     est magna amet no
+                 <p class="mb-2">
+                     <i class="fa fa-map-marker-alt text-primary mr-3"></i>{{ $settings->address }}
                  </p>
                  <p class="mb-2">
-                     <i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street, New York, USA
-                 </p>
-                 <p class="mb-2">
-                     <i class="fa fa-envelope text-primary mr-3"></i>info@example.com
+                     <i class="fa fa-envelope text-primary mr-3"></i>{{ $settings->email }}
                  </p>
                  <p class="mb-0">
-                     <i class="fa fa-phone-alt text-primary mr-3"></i>+012
-                     345 67890
+                     <i class="fa fa-phone-alt text-primary mr-3"></i>{{ $settings->phone_number }}
                  </p>
              </div>
              <div class="col-lg-8 col-md-12">
                  <div class="row">
                      <div class="col-md-4 mb-5">
                          <h5 class="text-secondary text-uppercase mb-4">
-                             Quick Shop
+                             Thông tin cần biết
                          </h5>
                          <div class="d-flex flex-column justify-content-start">
-                             <a class="text-secondary mb-2" href="#"><i
-                                     class="fa fa-angle-right mr-2"></i>Home</a>
-                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our
-                                 Shop</a>
-                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop
-                                 Detail</a>
-                             <a class="text-secondary mb-2" href="#"><i
-                                     class="fa fa-angle-right mr-2"></i>Shopping
-                                 Cart</a>
-                             <a class="text-secondary mb-2" href="#"><i
-                                     class="fa fa-angle-right mr-2"></i>Checkout</a>
-                             <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact
-                                 Us</a>
+                             <a class="text-secondary mb-2" href="#">Chính
+                                 sách đổi trả</a>
+                             <a class="text-secondary mb-2" href="{{ route('account.order') }}">Tra cứu
+                                 đơn hàng</a>
+                             <a class="text-secondary mb-2" href="{{ route('blogs') }}">Tin
+                                 tức</a>
+                             <a class="text-secondary mb-2" href="{{ route('contact') }}">Liên
+                                 hệ</a>
+                             <a class="text-secondary mb-2"
+                                 href="{{ route('product-type', ['type' => 'laptop']) }}">Laptop</a>
+                             <a class="text-secondary" href="{{ route('product-type', ['type' => 'accessory']) }}">Phụ
+                                 kiện</a>
                          </div>
                      </div>
                      <div class="col-md-4 mb-5">
                          <h5 class="text-secondary text-uppercase mb-4">
-                             My Account
+                             Tài khoản
                          </h5>
                          <div class="d-flex flex-column justify-content-start">
-                             <a class="text-secondary mb-2" href="#"><i
-                                     class="fa fa-angle-right mr-2"></i>Home</a>
-                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Our
-                                 Shop</a>
-                             <a class="text-secondary mb-2" href="#"><i class="fa fa-angle-right mr-2"></i>Shop
-                                 Detail</a>
-                             <a class="text-secondary mb-2" href="#"><i
-                                     class="fa fa-angle-right mr-2"></i>Shopping
-                                 Cart</a>
-                             <a class="text-secondary mb-2" href="#"><i
-                                     class="fa fa-angle-right mr-2"></i>Checkout</a>
-                             <a class="text-secondary" href="#"><i class="fa fa-angle-right mr-2"></i>Contact
-                                 Us</a>
+                             <a class="text-secondary mb-2" href="{{ route('public.login') }}">Đăng nhập</a>
+                             <a class="text-secondary mb-2" href="{{ route('account.infor') }}">Thông tin tài khoản</a>
+                             <a class="text-secondary mb-2" href="{{ route('account.favorite') }}">Sản phẩm yêu
+                                 thích</a>
                          </div>
                      </div>
                      <div class="col-md-4 mb-5">
                          <h5 class="text-secondary text-uppercase mb-4">
-                             Newsletter
+                             Bảng tin
                          </h5>
                          <p>
-                             Duo stet tempor ipsum sit amet magna ipsum
-                             tempor est
+                             Nhận thông tin cập nhật bằng cách đăng ký bản tin của chúng tôi
                          </p>
                          <form action="">
                              <div class="input-group input-send-gp">
-                                 <input type="text" class="form-control input-send"
-                                     placeholder="Your Email Address" />
+                                 <input type="text" class="form-control input-send" placeholder="Địa chỉ email" />
                                  <button class="btn btn-primary bg-number-right text-white">
                                      <i class="fas fa-paper-plane"></i>
                                  </button>
@@ -82,7 +64,7 @@
                              </div>
                          </form>
                          <h6 class="text-secondary text-uppercase mt-4 mb-3">
-                             Follow Us
+                             Theo dõi chúng tôi
                          </h6>
                          <div class="d-flex">
                              <a class=" btn-square mr-2 btn-link twitter" href="#"><i
@@ -96,16 +78,12 @@
                  </div>
              </div>
          </div>
-         <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, 0.1) !important">
-             <div class="col-md-6 px-xl-0">
-                 <p class="mb-md-0 text-center text-md-left text-secondary">
-                     &copy; <a class="text-primary" href="#">Domain</a>. All
-                     Rights Reserved. Designed by
-                     <a class="text-primary" href="https://htmlcodex.com">HTML Codex</a>
+         <div class="border-top mx-xl-5 py-4 text-center" style="border-color: rgba(256, 256, 256, 0.1) !important">
+             <div class="col-md-12 px-xl-0">
+                 <p class="mb-md-0 text-center text-secondary">
+                     &copy; <a class="text-primary" href="#"></a>2023.Chịu trách nhiệm nội dung:
+                     <a class="text-primary" href="https://htmlcodex.com">Thanh Nhã - Quang Ninh</a>
                  </p>
-             </div>
-             <div class="col-md-6 px-xl-0 text-center text-md-right">
-                 <img class="img-fluid" src="img/payments.png" alt="" />
              </div>
          </div>
      </div>

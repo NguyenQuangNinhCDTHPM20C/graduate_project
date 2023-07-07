@@ -399,6 +399,15 @@
     </div>
     <div class="container-fluid pb-5">
         <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-light mb-30">
+                    <a class="breadcrumb-item text-dark text-decoration-none" href="{{ route('home') }}">Trang chủ</a>
+                    <a class="breadcrumb-item text-dark text-decoration-none" href="{{ route('products') }}">Sản phẩm</a>
+                    <span class="breadcrumb-item active">{{ $product->name }}</span>
+                </nav>
+            </div>
+        </div>
+        <div class="row px-xl-5">
             <div class="col-lg-5 mb-30">
                 <div id="product-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner bg-light bg-radius">
@@ -446,7 +455,7 @@
                             <small class="fas fa-star-half-alt"></small>
                             <small class="far fa-star"></small>
                         </div>
-                        <small class="pt-1">({{ $review_count }} Reviews)</small>
+                        <small class="pt-1">({{ $review_count }} Đánh giá)</small>
                     </div>
                     <div class="d-flex align-items-center  mt-2">
 
@@ -455,12 +464,8 @@
                             <del>{{ $product->selling_price }}VNĐ</del>
                         </h6>
                     </div>
-
-                    <p class="mb-4">Volup erat ipsum diam elitr rebum et dolor. Est nonumy elitr erat diam stet sit
-                        clita ea. Sanc ipsum et, labore clita lorem magna duo dolor no sea
-                        Nonumy</p>
                     <div class="d-flex mb-4">
-                        <strong class="text-grey mr-3">Colors:</strong>
+                        <strong class="text-grey mr-3">Màu sắc:</strong>
                         <form action="{{ route('cart.add') }}" method="POST">
                             @csrf
                             @foreach ($product_colors as $key => $product_color)
@@ -471,6 +476,11 @@
                                 </div>
                             @endforeach
                     </div>
+                    <p class="mb-4"><strong class="text-grey mr-3">Thương hiệu:</strong>{{ $product->brand->name }}</p>
+                    <p class="mb-4"><strong class="text-grey mr-3">Loại sản
+                            phẩm:</strong>{{ $product->sub_category->name }}</p>
+                    <p class="mb-4"><strong class="text-grey mr-3">Trạng
+                            thái:</strong>{{ $product->quantity > 0 ? 'Còn hàng' : 'Hết hàng' }}</p>
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
@@ -491,12 +501,11 @@
                         <input type="hidden" name="price" value="{{ $product->discount_price }}">
                         <input type="hidden" name="image" value="{{ $product->featured_image->image_path }}">
                         <button class="btn btn-primary px-3 bg-number-left bg-number-right"><i
-                                class="fa fa-shopping-cart mr-1"></i> Add To
-                            Cart</button>
+                                class="fa fa-shopping-cart mr-1"></i> Thêm giỏ hàng</button>
                         </form>
                     </div>
                     <div class="d-flex pt-2">
-                        <strong class="mr-2">Share on:</strong>
+                        <strong class="mr-2">Chia sẻ:</strong>
                         <div class="d-inline-flex">
                             <a class="px-2" href="">
                                 <i class="fab fa-facebook-f"></i>
@@ -520,64 +529,130 @@
                 <div class="bg-light bg-radius p-30">
                     <div class="nav nav-tabs mb-4">
                         <a class="nav-item nav-link text-tab-p-d text-tab-p-d-active" data-toggle="tab"
-                            href="#tab-pane-1">Description</a>
-                        <a class="nav-item nav-link text-tab-p-d" data-toggle="tab" href="#tab-pane-2">Information</a>
-                        <a class="nav-item nav-link text-tab-p-d" data-toggle="tab" href="#tab-pane-3">Reviews
+                            href="#tab-pane-1">Mô tả</a>
+                        <a class="nav-item nav-link text-tab-p-d" data-toggle="tab" href="#tab-pane-2">Thông tin chi
+                            tiết</a>
+                        <a class="nav-item nav-link text-tab-p-d" data-toggle="tab" href="#tab-pane-3">Đánh giá
                             ({{ $review_count }})</a>
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-pane-1">
-                            <h4 class="mb-3">Product Description</h4>
+                            <h4 class="mb-3">Mô tả sản phấm</h4>
                             <p>{{ $product->description }}</p>
                         </div>
-                        <div class="tab-pane fade" id="tab-pane-2">
-                            <h4 class="mb-3">Additional Information</h4>
-                            <p>Eos no lorem eirmod diam diam, eos elitr et gubergren diam sea. Consetetur vero aliquyam
-                                invidunt duo dolores et duo sit. Vero diam ea vero et dolore rebum, dolor rebum eirmod
-                                consetetur invidunt sed sed et, lorem duo et eos elitr, sadipscing kasd ipsum rebum diam.
-                                Dolore diam stet rebum sed tempor kasd eirmod. Takimata kasd ipsum accusam sadipscing, eos
-                                dolores sit no ut diam consetetur duo justo est, sit sanctus diam tempor aliquyam eirmod
-                                nonumy rebum dolor accusam, ipsum kasd eos consetetur at sit rebum, diam kasd invidunt
-                                tempor lorem, ipsum lorem elitr sanctus eirmod takimata dolor ea invidunt.</p>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item px-0">
-                                            Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item px-0">
-                                            Sit erat duo lorem duo ea consetetur, et eirmod takimata.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Amet kasd gubergren sit sanctus et lorem eos sadipscing at.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Duo amet accusam eirmod nonumy stet et et stet eirmod.
-                                        </li>
-                                        <li class="list-group-item px-0">
-                                            Takimata ea clita labore amet ipsum erat justo voluptua. Nonumy.
-                                        </li>
-                                    </ul>
+                        @if ($product->category->type == 'laptop')
+                            <div class="tab-pane fade" id="tab-pane-2">
+                                <h4 class="mb-3">Thông tin chi tiết</h4>
+                                <div class="row px-xl-5">
+                                    <div class="col-lg-8 table-responsive mb-5">
+                                        <table class="table table-light table-borderless table-hover text-center mb-0">
+                                            <thead class="thead-dark">
+                                                <tr>
+                                                    <th>Thuộc tính</th>
+                                                    <th>Thông tin</th>
+                                                    <th>Thuộc tính</th>
+                                                    <th>Thông tin</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="align-middle">
+                                                <tr>
+                                                    <td class="align-middle">Hãng CPU</td>
+                                                    <td class="align-middle">{{ $product_info->cpu_brand }}</td>
+                                                    <td class="align-middle">Loại ổ cứng</td>
+                                                    <td class="align-middle">{{ $product_info->storage_type }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">Dòng CPU</td>
+                                                    <td class="align-middle">{{ $product_info->cpu_series }}</td>
+                                                    <td class="align-middle">Kích thước màn hình</td>
+                                                    <td class="align-middle">{{ $product_info->display_size }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">Số hiệu CPU</td>
+                                                    <td class="align-middle">{{ $product_info->cpu_model }}</td>
+                                                    <td class="align-middle">Độ phân giải</td>
+                                                    <td class="align-middle">{{ $product_info->display_resolution }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">Xung nhịp cơ bản</td>
+                                                    <td class="align-middle">{{ $product_info->cpu_base_clock }}</td>
+                                                    <td class="align-middle">Công nghệ màn hình</td>
+                                                    <td class="align-middle">{{ $product_info->display_technology }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">Bộ nhớ đệm</td>
+                                                    <td class="align-middle">{{ $product_info->cpu_cache }}</td>
+                                                    <td class="align-middle">Tần số quét</td>
+                                                    <td class="align-middle">{{ $product_info->refresh_rate }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="align-middle">Xung nhịp tối đa</td>
+                                                    <td class="align-middle">{{ $product_info->cpu_max_clock }}</td>
+                                                    <td class="align-middle">Loại tấm nền</td>
+                                                    <td class="align-middle">{{ $product_info->cpu_series }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="align-middle">Số nhân</td>
+                                                    <td class="align-middle">{{ $product_info->cpu_cores }}</td>
+                                                    <td class="align-middle">Công nghệ âm thanh</td>
+                                                    <td class="align-middle">{{ $product_info->cpu_series }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="align-middle">Số luồng</td>
+                                                    <td class="align-middle">{{ $product_info->cpu_threads }}</td>
+                                                    <td class="align-middle">Card on-board</td>
+                                                    <td class="align-middle">{{ $product_info->onboard_graphics }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="align-middle">RAM</td>
+                                                    <td class="align-middle">{{ $product_info->ram_size }}</td>
+                                                    <td class="align-middle">Các cổng giao tiếp</td>
+                                                    <td class="align-middle">{{ $product_info->dedicated_graphics }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="align-middle">Tiêu chuẩn RAM</td>
+                                                    <td class="align-middle">{{ $product_info->ram_standard }}</td>
+                                                    <td class="align-middle">Kết nối không dây</td>
+                                                    <td class="align-middle">{{ $product_info->wireless_connectivity }}
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="align-middle">Tốc độ Bus</td>
+                                                    <td class="align-middle">{{ $product_info->ram_speed }}</td>
+                                                    <td class="align-middle">Hệ điều hành</td>
+                                                    <td class="align-middle">{{ $product_info->operating_system }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="align-middle">Ổ cứng mặc định</td>
+                                                    <td class="align-middle">{{ $product_info->storage_capacity }}</td>
+                                                    <td class="align-middle">Kích thước</td>
+                                                    <td class="align-middle">{{ $product_info->dimensions }}</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="align-middle">Dung lượng pin</td>
+                                                    <td class="align-middle">{{ $product_info->battery_capacity }}</td>
+                                                    <td class="align-middle">Trọng lượng</td>
+                                                    <td class="align-middle">{{ $product_info->weight }}</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        @endif
                         <div class="tab-pane fade" id="tab-pane-3">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <h4 class="mb-4">{{ $review_count }} review for "{{ $product->name }}"</h4>
+                                    <h4 class="mb-4">{{ $review_count }} đánh giá cho "{{ $product->name }}"</h4>
                                     @foreach ($reviews as $_review)
                                         <div class="media mb-4">
                                             <img src="{{ asset($_review->account_photo) }}" alt="Image"
@@ -600,9 +675,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     @if (!session()->has('account'))
-                                        <small style="color:red;">You need to login to review products ...*</small>
+                                        <small style="color:red;">Bạn cần đăng nhập để đánh giá sản phẩm ...*</small>
                                     @else
-                                        <h4 class="mb-4">Leave a review</h4>
+                                        <h4 class="mb-4">Để lại đánh giá</h4>
                                         <img src="{{ asset(session()->has('account') ? session('account')->photo : '') }}
 "
                                             alt="{{ session()->has('account') ? session('account')->name : '' }}"
@@ -614,7 +689,7 @@
                                             @csrf
                                             @method('POST')
                                             <div class="d-flex my-3">
-                                                <p class="mb-0 mr-2">Your Rating * :</p>
+                                                <p class="mb-0 mr-2">Bình chọn* :</p>
                                                 <div class="text-primary">
                                                     <i class="far fa-star" data-index="1"></i>
                                                     <i class="far fa-star" data-index="2"></i>
@@ -627,11 +702,11 @@
                                                 value="{{ $product->id }}">
                                             <input type="hidden" id="rating" name="rating" value="5">
                                             <div class="form-group">
-                                                <label for="message">Your Review *</label>
+                                                <label for="message">Đánh giá *</label>
                                                 <textarea id="comment" name="comment" cols="30" rows="5" class="form-control"></textarea>
                                             </div>
                                             <div class="form-group mb-0">
-                                                <input type="submit" value="Submit" class="btn btn-custom px-3">
+                                                <input type="submit" value="Gửi" class="btn btn-custom px-3">
                                             </div>
                                         </form>
                                     @endif

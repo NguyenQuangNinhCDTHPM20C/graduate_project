@@ -13,25 +13,25 @@
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1 ">
                 <div class="d-flex align-items-center bg-light mb-4 bg-radius bg-shadow" style="padding: 30px">
                     <h1 class="fas fa-solid fa-clipboard-check fa-icon m-0 mr-3 fa-p"></h1>
-                    <h5 class="font-weight-semi-bold m-0">Genuine Product</h5>
+                    <h5 class="font-weight-semi-bold m-0">Sản phẩm chính hãng</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1 ">
                 <div class="d-flex align-items-center bg-light mb-4 bg-radius bg-shadow" style="padding: 30px">
                     <h1 class="fa fa-cart-flatbed-suitcase fa-icon m-0 mr-2 fa-p"></h1>
-                    <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
+                    <h5 class="font-weight-semi-bold m-0">Miễn phí vận chuyển</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center bg-light mb-4 bg-radius bg-shadow" style="padding: 30px">
                     <h1 class="fa fa-rotate fa-icon m-0 mr-3 fa-p"></h1>
-                    <h5 class="font-weight-semi-bold m-0">Easy Return</h5>
+                    <h5 class="font-weight-semi-bold m-0">Đổi trả dễ dàng</h5>
                 </div>
             </div>
             <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                 <div class="d-flex align-items-center bg-light mb-4 bg-radius bg-shadow" style="padding: 30px">
                     <h1 class="fa fa-headset fa-icon m-0 mr-3 "></h1>
-                    <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
+                    <h5 class="font-weight-semi-bold m-0">Hỗ trợ 24/7</h5>
                 </div>
             </div>
         </div>
@@ -41,7 +41,7 @@
     <!-- Categories Start -->
     <div class="container-fluid pt-5">
         <div class="section-title-header position-relative text-uppercase mx-xl-5 mb-4 text-decoration-none">
-            <h4><a href="/dien-thoai-di-dong">Accessory</a></h4>
+            <h4><a href="/dien-thoai-di-dong">Phụ kiện</a></h4>
         </div>
         <div class="row px-xl-5 pb-3 box-category">
             @foreach ($accsessories as $_accsessories)
@@ -65,7 +65,7 @@
         <!-- Categories End -->
         <div class="py-5">
             <div class="section-title-header position-relative text-uppercase mx-xl-5 mb-4 text-decoration-none">
-                <h4><a href="/dien-thoai-di-dong">Sale Product</a></h4>
+                <h4><a href="/dien-thoai-di-dong">Sản phẩm giảm giá</a></h4>
             </div>
             <div class="row px-xl-5 box-category">
                 <div class="col">
@@ -108,7 +108,7 @@
         <div class="pt-5 pb-3">
             @if ($new_products && count($new_products) > 0)
                 <div class="section-title-header position-relative text-uppercase mx-xl-5 mb-4 text-decoration-none">
-                    <h4><a href="/dien-thoai-di-dong">New Products</a></h4>
+                    <h4><a href="/dien-thoai-di-dong">Sản phẩm mới</a></h4>
                 </div>
                 <div class="row px-xl-5">
                     @foreach ($new_products as $product)
@@ -151,22 +151,12 @@
             <div class="row px-xl-5">
                 <div class="col-md-6">
                     <div class="product-offer mb-30 bg-radius" style="height: 300px">
-                        <img class="img-fluid" src="images/carousel-2.jpg" alt="" />
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase">Save 20%</h6>
-                            <h3 class="text-white mb-3">Special Offer</h3>
-                            <a href="" class="btn btn-slide btn-outline-light bg-radius">Shop Now</a>
-                        </div>
+                        <a href=""><img class="img-fluid" src="images/carousel-2.jpg" alt="" /></a>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="product-offer mb-30 bg-radius" style="height: 300px">
-                        <img class="img-fluid" src="images/carousel-3.jpg" alt="" />
-                        <div class="offer-text">
-                            <h6 class="text-white text-uppercase">Save 20%</h6>
-                            <h3 class="text-white mb-3">Special Offer</h3>
-                            <a href="" class="btn btn-slide btn-outline-light bg-radius">Shop Now</a>
-                        </div>
+                        <a><img class="img-fluid" src="images/carousel-3.jpg" alt="" /></a>
                     </div>
                 </div>
             </div>
@@ -176,7 +166,7 @@
         <!-- Products Start -->
         <div class="pt-5 pb-3">
             <div class="section-title-header position-relative text-uppercase mx-xl-5 mb-4 text-decoration-none">
-                <h4><a href="/dien-thoai-di-dong">Products</a></h4>
+                <h4><a href="/dien-thoai-di-dong">Các sản phẩm</a></h4>
             </div>
             <div class="row px-xl-5">
                 @foreach ($products as $product)
@@ -216,7 +206,7 @@
         <!-- Vendor Start -->
         <div class="py-5">
             <div class="section-title-header position-relative text-uppercase mx-xl-5 mb-4 text-decoration-none">
-                <h4><a href="/dien-thoai-di-dong">Brand</a></h4>
+                <h4><a href="/dien-thoai-di-dong">Thương hiệu</a></h4>
             </div>
             <div class="row px-xl-5">
                 <div class="col">
@@ -230,5 +220,6 @@
                 </div>
             </div>
         </div>
-        <!-- Vendor End -->
-    @stop
+    </div>
+    <!-- Vendor End -->
+@stop

@@ -27,7 +27,7 @@
                         @foreach ($random_blog as $index => $random_blog)
                             <div class="carousel-item position-relative{{ $index == 0 ? ' active' : '' }}"
                                 style="height: 430px">
-                                <img class="position-absolute" src="{{ asset('assets/blog/' . $random_blog->image) }}"
+                                <img class="position-absolute" src="{{ asset($random_blog->image) }}"
                                     style="object-fit: cover" />
                                 <div class="shadoweffect">
                                     <div class="shadow-desc">
@@ -62,7 +62,7 @@
                                             <div class="post-media">
                                                 <a class="blog-a" href="{{ route('blog-detail', ['slug' => $blog->slug]) }}"
                                                     title="">
-                                                    <img src="{{ asset('assets/blog/' . $blog->image) }}" alt="">
+                                                    <img src="{{ asset($blog->image) }}" alt="">
                                                     <div class="hovereffect"></div>
                                                 </a>
                                             </div><!-- end media -->
@@ -96,14 +96,14 @@
                         <div class="sidebar">
                             @if ($hot_blogs)
                                 <div class="widget">
-                                    <h2 class="widget-title">Popular Posts</h2>
+                                    <h2 class="widget-title">Tin tức nổi bật</h2>
                                     <div class="blog-list-widget">
                                         <div class="list-group">
                                             @foreach ($hot_blogs as $hot_blog)
                                                 <a href="{{ route('blog-detail', ['slug' => $hot_blog->slug]) }}"
                                                     class="list-group-item list-group-item-action flex-column align-items-start">
                                                     <div class="w-100 justify-content-between">
-                                                        <img src="{{ asset('assets/blog/' . $hot_blog->image) }}"
+                                                        <img src="{{ asset($hot_blog->image) }}"
                                                             alt="{{ $hot_blog->title }}" class="float-left">
                                                         <h5 class="mb-1">{{ $hot_blog->title }}</h5>
                                                         <small>{{ $hot_blog->created_at }}</small>
@@ -118,14 +118,14 @@
 
                             @if ($viewed_blogs)
                                 <div class="widget">
-                                    <h2 class="widget-title">Recent Reviews</h2>
+                                    <h2 class="widget-title">Tin tức đã xem</h2>
                                     <div class="blog-list-widget">
                                         <div class="list-group">
                                             @foreach ($viewed_blogs as $viewed_blog)
                                                 <a href="{{ route('blog-detail', ['slug' => $viewed_blog->slug]) }}"
                                                     class="list-group-item list-group-item-action flex-column align-items-start">
                                                     <div class="w-100 justify-content-between">
-                                                        <img src="{{ asset('assets/blog/' . $viewed_blog->image) }}"
+                                                        <img src="{{ asset($viewed_blog->image) }}"
                                                             alt="{{ $viewed_blog->title }}" class="float-left">
                                                         <h5 class="mb-1">{{ $viewed_blog->title }}</h5>
                                                         <small>{{ $viewed_blog->created_at }}</small>
@@ -136,39 +136,6 @@
                                     </div><!-- end blog-list -->
                                 </div><!-- end widget -->
                             @endif
-                            <div class="widget">
-                                <h2 class="widget-title">Follow Us</h2>
-
-                                <div class="row text-center">
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                        <a href="#" class="social-button facebook-button">
-                                            <i class="fa-brands fa-facebook-f"></i>
-                                            <p>27k</p>
-                                        </a>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                        <a href="#" class="social-button twitter-button">
-                                            <i class="fa-brands fa-twitter"></i>
-                                            <p>98k</p>
-                                        </a>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                        <a href="#" class="social-button google-button">
-                                            <i class="fa-brands fa-google-plus-g"></i>
-                                            <p>17k</p>
-                                        </a>
-                                    </div>
-
-                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                        <a href="#" class="social-button youtube-button">
-                                            <i class="fa-brands fa-youtube"></i>
-                                            <p>22k</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div><!-- end widget -->
                         </div><!-- end sidebar -->
                     </div><!-- end col -->
                 </div><!-- end row -->

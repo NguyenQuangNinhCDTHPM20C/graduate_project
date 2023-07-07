@@ -10,7 +10,7 @@
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark text-decoration-none" href="#">Trang chủ</a>
-                    <span class="breadcrumb-item active">Sản phẩm</span>
+                    <span class="breadcrumb-item active">{{ $category->name }}</span>
                 </nav>
             </div>
         </div>
@@ -21,9 +21,20 @@
                     <label><a href="javascript:;">Danh mục <i class="fa fa-angle-down mt-1"></i></a></label>
                     <div class="sub">
                         <ul>
-                            @foreach ($categories as $category)
-                                <li><a href="">{{ $category->name }}</a></li>
-                            @endforeach
+                            <li><a href="/laptop/macbook">Apple</a></li>
+                            <li><a href="/laptop/asus">ASUS</a></li>
+                            <li><a href="/laptop/dell">Dell</a></li>
+                            <li><a href="/laptop/hang-san-xuat/acer">Acer</a></li>
+                            <li><a href="/laptop/msi">MSI</a></li>
+                            <li><a href="/laptop/hang-san-xuat/lg">LG</a></li>
+                            <li><a href="/laptop/huawei">Huawei</a></li>
+                            <li><a href="/laptop/microsoft">Surface</a></li>
+                            <li><a href="/laptop/lenovo">Lenovo</a></li>
+                            <li><a href="/laptop/hp">HP</a></li>
+                            <li><a href="/laptop/gigabyte">GIGABYTE</a></li>
+                            <li><a href="/laptop/itel">Itel</a></li>
+                            <li><a href="/laptop/hang-san-xuat/xiaomi">Xiaomi</a></li>
+                            <li><a href="/laptop/masstel">Masstel</a></li>
                         </ul>
                     </div>
                 </div>
@@ -35,10 +46,37 @@
                     </label>
                     <div class="sub">
                         <ul>
-                            @foreach ($cpu_brands as $cpu_brand)
-                                <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Core+i5%22%7d&amp;search=true">{{ $cpu_brand }}
-                                    </a></li>
-                            @endforeach
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Core+i5%22%7d&amp;search=true">Core i5
+                                    <i class="total">(66)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Ryzen+5%22%7d&amp;search=true">Ryzen 5
+                                    <i class="total">(16)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Ryzen+7%22%7d&amp;search=true">Ryzen 7
+                                    <i class="total">(15)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Core+i3%22%7d&amp;search=true">Core i3
+                                    <i class="total">(14)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Core+i7%22%7d&amp;search=true">Core i7
+                                    <i class="total">(14)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Apple+M2%22%7d&amp;search=true">Apple M2
+                                    <i class="total">(5)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Apple+M1%22%7d&amp;search=true">Apple M1
+                                    <i class="total">(4)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Celeron%22%7d&amp;search=true">Celeron
+                                    <i class="total">(3)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Apple+M1+8-core%22%7d&amp;search=true">Apple
+                                    M1 8-core <i class="total">(2)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22M2%22%7d&amp;search=true">M2 <i
+                                        class="total">(2)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Core+i9%22%7d&amp;search=true">Core i9
+                                    <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22dong-cpu%22%3a%22Intel+Core+i5+Tiger+Lake%22%7d&amp;search=true">Intel
+                                    Core i5 Tiger Lake <i class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22M1+series%22%7d&amp;search=true">M1
+                                    series <i class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Pentium+Silver%22%7d&amp;search=true">Pentium
+                                    Silver <i class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Ryzen+3%22%7d&amp;search=true">Ryzen 3
+                                    <i class="total">(1)</i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -48,10 +86,32 @@
                     </label>
                     <div class="sub">
                         <ul>
-                            @foreach ($brands as $brand)
-                                <li><a href="/laptop?filters=%7b%22brand%22%3a%2245%22%7d&amp;search=true">{{ $brand }}
-                                    </a></li>
-                            @endforeach
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%2245%22%7d&amp;search=true">HP <i
+                                        class="total">(49)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%2249%22%7d&amp;search=true">Acer <i
+                                        class="total">(26)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%225%22%7d&amp;search=true">Lenovo <i
+                                        class="total">(19)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%22135%22%7d&amp;search=true">MSI <i
+                                        class="total">(19)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%2248%22%7d&amp;search=true">Dell <i
+                                        class="total">(16)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%229%22%7d&amp;search=true">LG <i
+                                        class="total">(15)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%2211%22%7d&amp;search=true">Huawei <i
+                                        class="total">(7)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%22202%22%7d&amp;search=true">Microsoft <i
+                                        class="total">(3)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%22221%22%7d&amp;search=true">Gigabyte <i
+                                        class="total">(3)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%22114%22%7d&amp;search=true">Itel <i
+                                        class="total">(2)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%221%22%7d&amp;search=true">Apple <i
+                                        class="total">(28)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%228%22%7d&amp;search=true">Asus <i
+                                        class="total">(40)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22brand%22%3a%223%22%7d&amp;search=true">Xiaomi <i
+                                        class="total">(2)</i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -89,10 +149,10 @@
                     </label>
                     <div class="sub">
                         <ul>
-                            @foreach ($sub_categories as $item)
-                                <li><a href="/laptop?filters=%7b%22type%22%3a%2247%22%7d&amp;search=true">{{ $item }}
-                                    </a></li>
-                            @endforeach
+                            <li><a href="/laptop?filters=%7b%22type%22%3a%2247%22%7d&amp;search=true">PC <i
+                                        class="total">(5)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22type%22%3a%223%22%7d&amp;search=true">Laptop <i
+                                        class="total">(226)</i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -102,10 +162,84 @@
                     </label>
                     <div class="sub">
                         <ul>
-                            @foreach ($display_resolutions as $item)
-                                <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%221920x1080%22%7d&amp;search=true">{{ $item }}
-                                    </a></li>
-                            @endforeach
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%221920x1080%22%7d&amp;search=true">1920x1080
+                                    <i class="total">(64)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%221920+x+1080%22%7d&amp;search=true">1920
+                                    x 1080 <i class="total">(33)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22do-phan-giai%22%3a%22Full+HD+(1920+x+1080)%22%7d&amp;search=true">Full
+                                    HD (1920 x 1080) <i class="total">(13)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%221920+x+1200%22%7d&amp;search=true">1920
+                                    x 1200 <i class="total">(8)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22do-phan-giai%22%3a%22Retina+(2560+x+1600)%22%7d&amp;search=true">Retina
+                                    (2560 x 1600) <i class="total">(7)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%222560+x+1600%22%7d&amp;search=true">2560
+                                    x 1600 <i class="total">(5)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%222880x1800%22%7d&amp;search=true">2880x1800
+                                    <i class="total">(5)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%222560x1600%22%7d&amp;search=true">2560x1600
+                                    <i class="total">(4)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%223456+x+2234%22%7d&amp;search=true">3456
+                                    x 2234 <i class="total">(4)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%221366+x+768%22%7d&amp;search=true">1366
+                                    x 768 <i class="total">(3)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%221920x1200%22%7d&amp;search=true">1920x1200
+                                    <i class="total">(3)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%222880+x+1800%22%7d&amp;search=true">2880
+                                    x 1800 <i class="total">(3)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%223024+x+1964%22%7d&amp;search=true">3024
+                                    x 1964 <i class="total">(3)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%222560+x1600%22%7d&amp;search=true">2560
+                                    x1600 <i class="total">(2)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%222560x1440%22%7d&amp;search=true">2560x1440
+                                    <i class="total">(2)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22do-phan-giai%22%3a%222736+x+1824+pixels%22%7d&amp;search=true">2736
+                                    x 1824 pixels <i class="total">(2)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%222880+x+1864%22%7d&amp;search=true">2880
+                                    x 1864 <i class="total">(2)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22do-phan-giai%22%3a%224.5K+(4480x2520)%22%7d&amp;search=true">4.5K
+                                    (4480x2520) <i class="total">(2)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22do-phan-giai%22%3a%22Liquid+Retina+(2560+x+1664)%22%7d&amp;search=true">Liquid
+                                    Retina (2560 x 1664) <i class="total">(2)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%221366x768%22%7d&amp;search=true">1366x768
+                                    <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22do-phan-giai%22%3a%222160+x+1440%2c+185+PPI%22%7d&amp;search=true">2160
+                                    x 1440, 185 PPI <i class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%222160x1440%22%7d&amp;search=true">2160x1440
+                                    <i class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%222560+x+1440%22%7d&amp;search=true">2560
+                                    x 1440 <i class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%223456x2160%22%7d&amp;search=true">3456x2160
+                                    <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22do-phan-giai%22%3a%22Aspect+ratio%3a+3%3a2%22%7d&amp;search=true">Aspect
+                                    ratio: 3:2 <i class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%22FHD+(1920x1080)%22%7d&amp;search=true">FHD
+                                    (1920x1080) <i class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%22HD+(1366+x+768)%22%7d&amp;search=true">HD
+                                    (1366 x 768) <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22do-phan-giai%22%3a%22QHD+(2160+x+1440)%22%7d&amp;search=true">QHD
+                                    (2160 x 1440) <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22do-phan-giai%22%3a%22Resolution%3a+2736+x+1824+(267+PPI)%22%7d&amp;search=true">Resolution:
+                                    2736 x 1824 (267 PPI) <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22do-phan-giai%22%3a%22Screen%3a+12.3+inch+PixelSense%e2%84%a2+Display%22%7d&amp;search=true">Screen:
+                                    12.3 inch PixelSense™ Display <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22do-phan-giai%22%3a%22Touch%3a+10+point+multi-touch%22%7d&amp;search=true">Touch:
+                                    10 point multi-touch <i class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22do-phan-giai%22%3a%22sRGB+100%25%22%7d&amp;search=true">sRGB
+                                    100% <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22do-phan-giai%22%3a%22%c4%90%e1%bb%99+ph%c3%a2n+gi%e1%ba%a3i%22%7d&amp;search=true">Độ
+                                    phân giải <i class="total">(1)</i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -115,11 +249,49 @@
                     </label>
                     <div class="sub">
                         <ul>
-                            @foreach ($display_sizes as $item)
-                                <li><a
-                                        href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2215.6+inch%22%7d&amp;search=true">{{ $item }}
-                                        inch </a></li>
-                            @endforeach
+                            <li><a
+                                    href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2215.6+inch%22%7d&amp;search=true">15.6
+                                    inch <i class="total">(80)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2214+inch%22%7d&amp;search=true">14
+                                    inch <i class="total">(46)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2216+inch%22%7d&amp;search=true">16
+                                    inch <i class="total">(13)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2213.3+inch%22%7d&amp;search=true">13.3
+                                    inch <i class="total">(11)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2216.1+inch%22%7d&amp;search=true">16.1
+                                    inch <i class="total">(4)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2216.2+inch%22%7d&amp;search=true">16.2
+                                    inch <i class="total">(4)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2211.6+inch%22%7d&amp;search=true">11.6
+                                    inch <i class="total">(3)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2214.2+inch%22%7d&amp;search=true">14.2
+                                    inch <i class="total">(3)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2212.3+inch%22%7d&amp;search=true">12.3
+                                    inch <i class="total">(2)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2213.6+inch%22%7d&amp;search=true">13.6
+                                    inch <i class="total">(2)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2215.3+inch%22%7d&amp;search=true">15.3
+                                    inch <i class="total">(2)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2217.3+inch%22%7d&amp;search=true">17.3
+                                    inch <i class="total">(2)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2218+inch%22%7d&amp;search=true">18
+                                    inch <i class="total">(2)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2224+inch%22%7d&amp;search=true">24
+                                    inch <i class="total">(2)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2213.4+inch%22%7d&amp;search=true">13.4
+                                    inch <i class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22kich-thuoc-man-hinh%22%3a%2217+inch%22%7d&amp;search=true">17
+                                    inch <i class="total">(1)</i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -129,10 +301,16 @@
                     </label>
                     <div class="sub">
                         <ul>
-                            @foreach ($ram_sizes as $item)
-                                <li><a href="/laptop?filters=%7b%22ram%22%3a%228GB%22%7d&amp;search=true">{{ $item }}GB
-                                    </a></li>
-                            @endforeach
+                            <li><a href="/laptop?filters=%7b%22ram%22%3a%228GB%22%7d&amp;search=true">8GB <i
+                                        class="total">(130)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22ram%22%3a%2216GB%22%7d&amp;search=true">16GB <i
+                                        class="total">(32)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22ram%22%3a%224GB%22%7d&amp;search=true">4GB <i
+                                        class="total">(10)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22ram%22%3a%2232GB%22%7d&amp;search=true">32GB <i
+                                        class="total">(6)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22ram%22%3a%228+GB%22%7d&amp;search=true">8 GB <i
+                                        class="total">(1)</i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -142,11 +320,38 @@
                     </label>
                     <div class="sub">
                         <ul>
-                            @foreach ($dedicated_graphics as $item)
-                                <li><a
-                                        href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22RTX+3050%22%7d&amp;search=true">{{ $item }}</a>
-                                </li>
-                            @endforeach
+                            <li><a href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22RTX+3050%22%7d&amp;search=true">RTX
+                                    3050 <i class="total">(23)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22GTX+1650%22%7d&amp;search=true">GTX
+                                    1650 <i class="total">(8)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22RTX+3050Ti%22%7d&amp;search=true">RTX
+                                    3050Ti <i class="total">(7)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22RTX+3060%22%7d&amp;search=true">RTX
+                                    3060 <i class="total">(2)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22RTX+4080%22%7d&amp;search=true">RTX
+                                    4080 <i class="total">(2)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22AMD+Radeon+660M%22%7d&amp;search=true">AMD
+                                    Radeon 660M <i class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22MX550%22%7d&amp;search=true">MX550
+                                    <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22NVIDIA+GeForce+MX450%22%7d&amp;search=true">NVIDIA
+                                    GeForce MX450 <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22NVIDIA+GeForce+MX550%22%7d&amp;search=true">NVIDIA
+                                    GeForce MX550 <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22NVIDIA+GeForce+RTX+3050%22%7d&amp;search=true">NVIDIA
+                                    GeForce RTX 3050 <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22NVIDIA+GeForce+RTX+3060%22%7d&amp;search=true">NVIDIA
+                                    GeForce RTX 3060 <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22NVIDIA+GeForce+RTX+4050%22%7d&amp;search=true">NVIDIA
+                                    GeForce RTX 4050 <i class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22card-do-hoa-roi%22%3a%22RX6600M%22%7d&amp;search=true">RX6600M
+                                    <i class="total">(1)</i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -156,11 +361,26 @@
                     </label>
                     <div class="sub">
                         <ul>
-                            @foreach ($storage_capacitys as $item)
-                                <li><a href="/laptop?filters=%7b%22o-cung-mac-dinh%22%3a%22512GB%22%7d&amp;search=true">
-                                        {{ $item }}GB
-                                    </a></li>
-                            @endforeach
+                            <li><a href="/laptop?filters=%7b%22o-cung-mac-dinh%22%3a%22512GB%22%7d&amp;search=true">512GB
+                                    <i class="total">(116)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22o-cung-mac-dinh%22%3a%22256GB%22%7d&amp;search=true">256GB
+                                    <i class="total">(36)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22o-cung-mac-dinh%22%3a%221TB%22%7d&amp;search=true">1TB
+                                    <i class="total">(6)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22o-cung-mac-dinh%22%3a%22128GB%22%7d&amp;search=true">128GB
+                                    <i class="total">(4)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22o-cung-mac-dinh%22%3a%222TB%22%7d&amp;search=true">2TB
+                                    <i class="total">(2)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22o-cung-mac-dinh%22%3a%22512+GB+SSD+NVMe+PCIe+(C%c3%b3+th%e1%bb%83+th%c3%a1o+ra%2c+l%e1%ba%afp+thanh+kh%c3%a1c+t%e1%bb%91i+%c4%91a+1TB)%22%7d&amp;search=true">512
+                                    GB SSD NVMe PCIe (Có thể tháo ra, lắp thanh khác tối đa 1TB) <i
+                                        class="total">(1)</i></a></li>
+                            <li><a href="/laptop?filters=%7b%22o-cung-mac-dinh%22%3a%22Gen4+512GB%22%7d&amp;search=true">Gen4
+                                    512GB <i class="total">(1)</i></a></li>
+                            <li><a
+                                    href="/laptop?filters=%7b%22o-cung-mac-dinh%22%3a%22H%e1%bb%97+tr%e1%bb%a3+th%c3%aam+1+khe+c%e1%ba%afm+SSD+M.2+PCIe+m%e1%bb%9f+r%e1%bb%99ng+(n%c3%a2ng+c%e1%ba%a5p+t%e1%bb%91i+%c4%91a+1TB)%22%7d&amp;search=true">Hỗ
+                                    trợ thêm 1 khe cắm SSD M.2 PCIe mở rộng (nâng cấp tối đa 1TB) <i
+                                        class="total">(1)</i></a></li>
                         </ul>
                     </div>
                 </div>

@@ -21,6 +21,7 @@ use App\Models\Account;
 use App\Models\Blog;
 use App\Models\Image;
 use App\Models\ProductColor;
+use App\Models\Laptop;
 
 class UserController extends Controller
 {
@@ -42,16 +43,30 @@ class UserController extends Controller
     // Get list product
     public function products(Request $request)
     {
-        $category = Category::withCount('products')->get();
+        $categories = Category::where('type', '!=', 'blog')->get();
+        $blog_category = Category::where('type', 'blog')->first();
+        $sub_categories = SubCategory::where('category_id','!=', $blog_category->id)->distinct('name')->pluck('name');
+        $laptop_properties = Laptop::get();
+        $cpu_brands = Laptop::distinct('cpu_brand')->pluck('cpu_brand');
+        $cpu_series = Laptop::distinct('cpu_series')->pluck('cpu_series');
+        $cpu_models = Laptop::distinct('cpu_model')->pluck('cpu_model');
+        $display_resolutions = Laptop::distinct('display_resolution')->pluck('display_resolution');
+        $display_sizes = Laptop::distinct('display_size')->pluck('display_size');
+        $ram_sizes = Laptop::distinct('ram_size')->pluck('ram_size');
+        $storage_capacitys = Laptop::distinct('storage_capacity')->pluck('storage_capacity');
+        $dedicated_graphics = Laptop::distinct('dedicated_graphics')->pluck('dedicated_graphics');
         $products_query = Product::query();
 
-        if ($request->has('filter')) {
-            $selected_categories = $request->input('categories', []);
-            $products_query->whereIn('category_id', $selected_categories);
+        if ($request->has('category_filter')) {
+            $selected_categories = $category->where('name', 'LIKE', '%' . $request->input('category_filter') . '%')->first();
+            $products_query->whereIn('category_id', $selected_categories->id);
         }
         $products = $products_query->paginate(12);
-        $brands = Brand::all();
-        return view('public.pages.product.product-list', compact('products', 'category', 'brands'));
+        $brands = Brand::distinct('name')->pluck('name');
+        return view('public.pages.product.product-list', 
+        compact('products', 'categories', 'sub_categories', 'laptop_properties',
+         'brands', 'cpu_brands', 'cpu_series', 'cpu_models', 'display_resolutions', 
+         'display_sizes', 'ram_sizes', 'storage_capacitys', 'dedicated_graphics'));
     }
 
     // Show product detail 
@@ -59,6 +74,10 @@ class UserController extends Controller
         $product = Product::where('slug', $slug)->first();
         $images = Image::where('entity_id', $product->id)->get();
         $product_colors = ProductColor::where('product_id', $product->id)->get();
+        $product_info = '';
+        if($product->category->type == 'laptop'){
+            $product_info = Laptop::where('product_id', $product->id)->first();
+        }
         if (!$product) {
             abort(404);
         }
@@ -77,7 +96,14 @@ class UserController extends Controller
         ->get();
 
         $review_count = $reviews->count();
-        return view('public.pages.product.product-detail', compact('product', 'images', 'product_colors', 'reviews', 'review_count', 'existingFavoriteDetail'));
+        return view('public.pages.product.product-detail', compact('product', 'images', 'product_colors', 'reviews', 'review_count', 'existingFavoriteDetail', 'product_info'));
+    }
+
+    public function products_type($type)
+    {
+        $category = Category::where('type',$type) ->first();
+        $products = Product::where('category_id', $category->id)->paginate(12);
+        return view('public.pages.product.product-type', compact('products', 'category'));
     }
 
     // Search product
@@ -245,7 +271,9 @@ class UserController extends Controller
         $next_blog = Blog::where('id', '>', $blog->id)
             ->orderBy('id', 'asc')
             ->first();
-        return view('Public.pages.blog.blog-detail', compact('blog', 'new_blog', 'count_view', 'hot_blogs', 'viewed_blogs', 'previous_blog', 'next_blog'));
+        $random_blog = Blog::inRandomOrder()->take(2)->get();
+
+        return view('Public.pages.blog.blog-detail', compact('blog', 'new_blog', 'count_view', 'hot_blogs', 'viewed_blogs', 'previous_blog', 'next_blog', 'random_blog'));
     }
 
     public function contact(){

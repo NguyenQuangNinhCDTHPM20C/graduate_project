@@ -8,8 +8,8 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark text-decoration-none" href="#">Home</a>
-                    <span class="breadcrumb-item active">Checkout</span>
+                    <a class="breadcrumb-item text-dark text-decoration-none" href="{{ route('home') }}">Trang chủ</a>
+                    <span class="breadcrumb-item active">Thanh toán</span>
                 </nav>
             </div>
         </div>
@@ -24,8 +24,8 @@
                     <div class="bg-light p-30 mb-5 bg-radius">
                         <div class="row">
                             <div class="col-md-6 form-group">
-                                <label>Name: </label>
-                                <input name="name" class="form-control" type="text" placeholder="Enter your name *"
+                                <label>Họ tên: </label>
+                                <input name="name" class="form-control" type="text" placeholder="Nhập họ tên *"
                                     value="{{ session()->has('account') ? session('account')->name : '' }}" required>
                             </div>
                             <div class="col-md-6 form-group">
@@ -34,38 +34,39 @@
                                     value="{{ session()->has('account') ? session('account')->email : '' }}" required>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Phone number: </label>
+                                <label>Số điện thoại: </label>
                                 <input name="phone_number" class="form-control" type="text" placeholder="+84"
                                     value="{{ session()->has('account') ? session('account')->phone_number : '' }}"
                                     required>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Address: </label>
-                                <input name="address" class="form-control" type="text" placeholder="Enter your address *"
+                                <label>Địa chỉ: </label>
+                                <input name="address" class="form-control" type="text"
+                                    placeholder="Nhập địa chỉ nhận hàng *"
                                     value="{{ session()->has('account') ? session('account')->address : '' }}" required>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Dicstrict: </label>
+                                <label>Quận/huyện: </label>
                                 <input name="district"
                                     value="{{ session()->has('account') ? session('account')->district : '' }}"
-                                    class="form-control" type="text" placeholder="Enter your dictrict*" required>
+                                    class="form-control" type="text" placeholder="Nhập quận, huyện*" required>
                             </div>
                             <div class="col-md-6 form-group">
-                                <label>Province: </label>
+                                <label>Tỉnh/thành phố: </label>
                                 <input name="province"
                                     value="{{ session()->has('account') ? session('account')->province : '' }}"
-                                    class="form-control" type="text" placeholder="Enter your province*" required>
+                                    class="form-control" type="text" placeholder="Nhập tỉnh, thành*" required>
                             </div>
                             <div class="col-md-12 form-group">
-                                <label>Notes: </label>
-                                <textarea class="form-control" rows="8" name="notes" id="message" placeholder="Please enter your notes"
-                                    required data-validation-required-message="Please enter your notes"></textarea>
+                                <label>Ghi chú: </label>
+                                <textarea class="form-control" rows="8" name="notes" id="message" placeholder="Nhập ghi chú" required
+                                    data-validation-required-message="Vui lòng nhập ghi chú"></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
                             <div class="col-md-12 form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" class="custom-control-input" id="newaccount">
-                                    <label class="custom-control-label" for="newaccount">Create an account</label>
+                                    <label class="custom-control-label" for="newaccount">Tạo tài khoản</label>
                                 </div>
                             </div>
                             {{-- <div class="col-md-12">
@@ -133,37 +134,37 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <h5 class="position-relative text-uppercase mb-3"><span class="pr-3">Order
-                            Total</span></h5>
+                    <h5 class="position-relative text-uppercase mb-3"><span class="pr-3">Tổng đơn hàng</span></h5>
                     <div class="bg-light p-30 mb-5 bg-radius">
                         <div class="border-bottom">
                             <h6 class="mb-3">Products</h6>
                             @foreach ($cartItems as $item)
                                 <div class="d-flex justify-content-between">
                                     <p>{{ $item->name }}</p>
-                                    <p>{{ $item->price }}</p>
+                                    <p>${{ $item->price }}</p>
                                 </div>
                             @endforeach
                         </div>
                         <div class="border-bottom pt-3 pb-2">
                             <div class="d-flex justify-content-between mb-3">
-                                <h6>Subtotal</h6>
-                                <h6>${{ Cart::getTotal() }}VND</h6>
+                                <h6>Tổng phụ</h6>
+                                <h6>${{ Cart::getTotal() }}</h6>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">Shipping</h6>
+                                <h6 class="font-weight-medium">Phí ship</h6>
                                 <h6 class="font-weight-medium">$10</h6>
                             </div>
                         </div>
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
-                                <h5>Total</h5>
-                                <h5>${{ Cart::getTotal() + 10 }}VNĐ</h5>
+                                <h5>Tổng tiền</h5>
+                                <h5>${{ Cart::getTotal() + 10 }}</h5>
                             </div>
                         </div>
                     </div>
                     <div class="mb-5">
-                        <h5 class="position-relative text-uppercase mb-3"><span class="pr-3">Payment</span>
+                        <h5 class="position-relative text-uppercase mb-3"><span class="pr-3">Phương thức thanh
+                                toán</span>
                         </h5>
                         <div class="bg-light p-30 bg-radius">
                             <div class="form-group">
@@ -189,8 +190,8 @@
                                 $total = Cart::getTotal() + 10;
                             @endphp
                             <input type="hidden" name="total" value="{{ $total }}">
-                            <button type="submit" class="btn btn-block btn-custom font-weight-bold py-3">Place
-                                Order</button>
+                            <button type="submit" class="btn btn-block btn-custom font-weight-bold py-3">Xác nhận đặt
+                                hàng</button>
 
 
                         </div>

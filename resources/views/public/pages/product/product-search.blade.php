@@ -9,17 +9,17 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark text-decoration-none" href="#">Home</a>
-                    <span class="breadcrumb-item active">Search</span>
+                    <a class="breadcrumb-item text-dark text-decoration-none" href="#">Trang chủ</a>
+                    <span class="breadcrumb-item active">Tìm kiếm</span>
                 </nav>
             </div>
         </div>
         @if (isset($products) && count($products) > 0)
             <div class="product-filters2">
                 <div class="left">
-                    <strong class="label">Filter:</strong>
+                    <strong class="label">Lọc danh sách:</strong>
                     <div class="facet">
-                        <label><a href="javascript:;">Category <i class="fa fa-angle-down mt-1"></i></a></label>
+                        <label><a href="javascript:;">Danh mục <i class="fa fa-angle-down mt-1"></i></a></label>
                         <div class="sub">
                             <ul>
                                 <li><a href="/laptop/macbook">Apple</a></li>
@@ -43,7 +43,7 @@
 
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">CPU series <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Dòng CPU <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Brand<i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Thương hiệu <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -118,7 +118,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Price<i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Giá <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -146,7 +146,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Product Type <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Loại sản phẩm <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Display resolution <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Độ phân giải <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -248,7 +248,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Display size <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Kích thước màn hình <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -324,7 +324,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Discrete graphics card <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Card đồ hoạ rời <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -366,7 +366,7 @@
                     </div>
                     <div class="facet">
                         <label>
-                            <a href="javascript:;">Default hard drive <i class="fa fa-angle-down mt-1"></i></a>
+                            <a href="javascript:;">Ổ cứng mặc định <i class="fa fa-angle-down mt-1"></i></a>
                         </label>
                         <div class="sub">
                             <ul>
@@ -398,7 +398,7 @@
 
                 <div class="right">
                     <div class="facet">
-                        <label>Sort <i class="fa fa-angle-down mt-1"></i></label>
+                        <label>Sắp xếp <i class="fa fa-angle-down mt-1"></i></label>
                         <div class="sub">
                             <ul>
                                 <li><a href="/laptop?filters=%7b%22sort%22%3a%2212%22%7d&amp;search=true"> Mặc định</a>

@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\InvoiceDetail;
 use App\Models\Image;
+use App\Models\Laptop;
 
 class ProductController extends Controller
 {
@@ -56,7 +57,6 @@ class ProductController extends Controller
         $product->selling_price = $request->input('selling_price');
         $product->description = $request->input('description');
         $product->status = $request->input('status');
-        $product->tag = $request->tag;
         
         $product->slug = Str::slug($request->input('name'), '-');
         $existingSlug = Product::where('slug', $product->slug)->first();
@@ -71,8 +71,7 @@ class ProductController extends Controller
             case '10':$discountAmount = 10; break;
             case '20':$discountAmount = 20; break;
         }
-        $discountedPrice =  $product->selling_price - $discountAmount; // Tính giá sau khi giảm giá
-        // Lưu giá sau khi giảm giá vào trường discount_price trong cơ sở dữ liệu
+        $discountedPrice =  $product->selling_price - $discountAmount;
         $product->discount_price = $discountedPrice;
         
         $categoryName = $request->input('category');
@@ -99,16 +98,49 @@ class ProductController extends Controller
                     $image = new Image;
                     $image->entity_type = 'product';
                     $image->entity_id = $product->id;
-                    $image->image_path = $file_name;
+                    $image->image_path = 'assets/product/'.$file_name;
                     $image->save();
                     $featuredImageIndex = $request->input('featured_image_'.$key);
                     if ($featuredImageIndex !== null && $featuredImageIndex == $key) {
                         $product->featured_image_id = $image->id;
-                        $product->update();
+                        $product->save();
                     }
                 }                
             }
             Image::insert($insert);
+        }
+
+        $is_laptop = $request->input('is_laptop');
+        if($is_laptop){
+            $laptop = new Laptop;
+            $laptop->product_id = $product->id;
+            $laptop->cpu_brand = $request->input('cpu_brand');
+            $laptop->cpu_series = $request->input('cpu_series');
+            $laptop->cpu_model = $request->input('cpu_model');
+            $laptop->cpu_base_clock = $request->input('cpu_base_clock');
+            $laptop->cpu_cache = $request->input('cpu_cache');
+            $laptop->cpu_max_clock = $request->input('cpu_max_clock');
+            $laptop->cpu_cores = $request->input('cpu_cores');
+            $laptop->cpu_threads = $request->input('cpu_threads');
+            $laptop->ram_size = $request->input('ram_size');
+            $laptop->ram_standard = $request->input('ram_standard');
+            $laptop->ram_speed = $request->input('ram_speed');
+            $laptop->storage_capacity = $request->input('storage_capacity');
+            $laptop->ram_socket_type = $request->input('ram_socket_type');
+            $laptop->storage_type = $request->input('storage_type');
+            $laptop->display_size = $request->input('display_size');
+            $laptop->display_resolution = $request->input('display_resolution');
+            $laptop->display_technology = $request->input('display_technology');
+            $laptop->refresh_rate = $request->input('refresh_rate');
+            $laptop->graphics_vram = $request->input('graphics_vram');
+            $laptop->onboard_graphics = $request->input('onboard_graphics');
+            $laptop->dedicated_graphics = $request->input('dedicated_graphics');
+            $laptop->wireless_connectivity = $request->input('wireless_connectivity');
+            $laptop->operating_system = $request->input('operating_system');
+            $laptop->dimensions = $request->input('dimensions');
+            $laptop->weight = $request->input('weight');
+            $laptop->battery_capacity = $request->input('battery_capacity');
+            $laptop->save();            
         }
         return redirect()->route('product.list')->with('success', 'Product has been added successfully');
     }

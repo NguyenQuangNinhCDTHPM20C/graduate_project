@@ -30,7 +30,7 @@ section.account {
     height: 100%;
     flex-basis: 100%;
     display: flex;
-    padding: 10px 55px 10px 55px;
+    padding: 10px 60px 10px 65px;
 }
 section.account .sidebar {
     width: 300px;
