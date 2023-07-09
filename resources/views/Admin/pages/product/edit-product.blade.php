@@ -129,7 +129,7 @@
                                         </div>
                                     </div>
                                     <input type="file" name="images[]" id="image" class="form-control" multiple
-                                        required accept="image/jpeg, image/png, image/gif, image/svg+xml">
+                                         accept="image/jpeg, image/png, image/gif, image/svg+xml">
                                 </div>
                             </div>
                             @if ($is_laptop)

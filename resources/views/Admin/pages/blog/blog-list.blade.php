@@ -11,7 +11,7 @@
                     <h6>Quản lý tin tức của bạn</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="https://dreamspos.dreamguystech.com/laravel/template/public/add-sales" class="btn btn-added"><img
+                    <a href="{{ route('blog.create') }}" class="btn btn-added"><img
                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
                             alt="img" class="me-1">Thêm tin tức</a>
                 </div>
