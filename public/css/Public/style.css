@@ -10853,3 +10853,46 @@ ul.pagination .page-item.active .page-link {
     background: transparent linear-gradient(0deg, #00917a 0%, #00483d 100%) 0%
         0% no-repeat padding-box;
 }
+.hotline {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+.hotline div {
+    justify-items: center;
+    padding: 0 50px;
+}
+
+.hotline strong {
+    margin-bottom: 4px;
+    display: block;
+    font-size: 14px;
+}
+
+.hotline a {
+    justify-content: flex-end; /* Căn chỉnh nút về phía bên phải */
+    align-items: flex-end; /* Căn chỉnh nút về phía bên phải */
+    font-size: 15px;
+    color: #fff;
+    display: flex;
+    padding: 8px;
+    background: transparent linear-gradient(88deg, #009981 0%, #00483d 100%) 0%
+        0% no-repeat padding-box;
+    box-shadow: 0px 4px 6px #00000029;
+    border-radius: 20px;
+}
+
+.hotline a i {
+    padding: 3px 0 0 3px;
+    font-size: 18px;
+}
+
+.hotline a strong {
+    display: block;
+    padding: 3px 40px 0 20px;
+}

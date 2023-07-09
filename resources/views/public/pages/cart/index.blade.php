@@ -35,7 +35,7 @@
                                         {{ $item->name }}
                                     </td>
                                     <td class="align-middle">{{ $item->attributes->color }}</td>
-                                    <td class="align-middle">${{ $item->price }}</td>
+                                    <td class="align-middle">{{ number_format($item->price, 0, ',', '.') }}đ</td>
                                     <td class="align-middle">
                                         <div class="input-group quantity mx-auto bg-radius-right bg-radius-left"
                                             style="width: 100px;">
@@ -63,7 +63,8 @@
                                             </form>
                                         </div>
                                     </td>
-                                    <td class="align-middle">{{ $item->quantity * $item->price }}</td>
+                                    <td class="align-middle pl-5">
+                                        {{ number_format($item->quantity * $item->price, 0, ',', '.') }}đ</td>
                                     <td class="align-middle">
                                         <form action="{{ route('cart.remove') }}" method="POST">
                                             @csrf
@@ -88,17 +89,17 @@
                         <div class="border-bottom pb-2">
                             <div class="d-flex justify-content-between mb-3">
                                 <h6>Tổng phụ</h6>
-                                <h6>${{ Cart::getTotal() }}VNĐ</h6>
+                                <h6>{{ number_format(Cart::getTotal(), 0, ',', '.') }}đ</h6>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">Phí ship</h6>
-                                <h6 class="font-weight-medium">$10</h6>
+                                <h6 class="font-weight-medium">Giá giảm</h6>
+                                <h6 class="font-weight-medium">{{ number_format(10000, 0, ',', '.') }}đ</h6>
                             </div>
                         </div>
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Tổng tiền</h5>
-                                <h5>${{ Cart::getTotal() + 10 }}</h5>
+                                <h5>{{ number_format(Cart::getTotal() - 10000, 0, ',', '.') }}đ</h5>
                             </div>
 
                             <a href="{{ route('checkout') }}"

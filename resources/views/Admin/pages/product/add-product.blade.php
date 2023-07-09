@@ -7,8 +7,11 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Thêm sản phẩm</h4>
-                    <h6>Tạo mới 1 sản phẩm</h6>
+                    <h6>
+                        <a href="{{ route('product.list') }}">Sản phẩm /</a>
+                        <span>Thêm</span>
+                    </h6>
+                    <h4>Thêm sản phẩm của bạn</h4>
                 </div>
             </div>
             <form method="post" action="{{ route('product.store') }}" enctype="multipart/form-data">

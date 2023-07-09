@@ -130,33 +130,37 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         })->name('sales.list');
         //Routes for invoice
         Route::get('/invoice/list',[InvoiceController::class, 'index'])->name('invoice.list');
+        Route::get('/invoice/edit/{code}', [InvoiceController::class, 'edit'])->name('invoice.edit');
+        Route::put('/invoice/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
+        Route::delete('/invoice/delete/{id}', [InvoiceController::class, 'destroy'])->name('invoice.delete');
         //Routes for auth
         Route::post('/logout', [AuthController::class, 'logout_admin'])->name('admin.logout');
         Route::get('/invoice/report', function () {
             return view('admin.pages.invoice.invoice-list');
         })->name('invoice.report');
-        Route::get('/customer/list', function () {
-            return view('admin.pages.customer.customer-list');
-        })->name('customer.list');
+        Route::get('/customer/list', [AdminController::class, 'customers'])->name('customer.list');
         Route::get('/supplier/list', function () {
             return view('admin.pages.supplier.supplier-list');
         })->name('supplier.list');
-        Route::get('/user/list', function () {
-            return view('admin.pages.user.user-list');
-        })->name('user.list');
+        Route::get('/user/list',[AdminController::class, 'users'])->name('user.list');
          Route::get('/sales/report', function () {
             return view('admin.pages.sale.sales-report');
         })->name('sales.report');
         Route::get('/profile', function () {
             return view('admin.pages.profile.profile');
         })->name('profile');
+        Route::post('/profile', [AccountController::class, 'update'])->name('profile.update');
         Route::get('/setting', function () {
-            return view('admin.pages..setting.setting');
+            return view('admin.pages.setting.setting');
         })->name('setting');
+        Route::post('/setting', [AdminController::class, 'update_setting'])->name('setting.update');
+        Route::get('/blog/list', [BlogController::class, 'index'])->name('blog.index');
         Route::get('/blog/add', [BlogController::class, 'create'])->name('blog.create');
         Route::post('/blog/add', [BlogController::class, 'store'])->name('blog.store');
-        Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
-
+        Route::get('/blog/edit/{slug}', [BlogController::class, 'edit'])->name('blog.edit');
+        Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
+        Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
+        Route::delete('/delete/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
     });
     Route::get('/login', [AuthController::class, 'showLoginFormAdmin'])->name('admin.login')->middleware('guest.admin');
     Route::post('/login', [AuthController::class, 'login_admin'])->middleware('guest.admin');

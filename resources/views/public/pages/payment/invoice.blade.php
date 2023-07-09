@@ -29,9 +29,9 @@
                                     <div>
                                         <strong>Double-N Shop</strong>
                                     </div>
-                                    <div>65, Huỳnh Thúc Kháng, Bến Nghé, quận 1, Thành phố Hồ Chí Minh</div>
-                                    <div>Email: contatc@doublenshop.com</div>
-                                    <div>Số điện thoại: + 012 345 6789</div>
+                                    <div>Địa chỉ: {{ $settings->address }}</div>
+                                    <div>Email: {{ $settings->email }}</div>
+                                    <div>Số điện thoại: {{ $settings->phone_number }}</div>
                                 </div>
 
                                 <div class="col-sm-6">
@@ -53,7 +53,7 @@
                                             <th>Sản phẩm</th>
                                             <th>Mô tả</th>
                                             <th class="right">Giá</th>
-                                            <th class="center">Số lượng</th>
+                                            <th class="center">SL</th>
                                             <th class="right">Tổng tiền</th>
                                         </tr>
                                     </thead>
@@ -63,9 +63,10 @@
                                                 <td class="center">{{ $index + 1 }}</td>
                                                 <td class="left strong">{{ $item->product->name }}</td>
                                                 <td class="left">{{ $item->product->description }}</td>
-                                                <td class="right">${{ $item->price }}</td>
+                                                <td class="right">{{ number_format($item->price, 0, ',', '.') }}đ</td>
                                                 <td class="center">{{ $item->quantity }}</td>
-                                                <td class="right">${{ $item->quantity * $item->price }}</td>
+                                                <td class="right">
+                                                    {{ number_format($item->quantity * $item->price, 0, ',', '.') }}đ</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -81,10 +82,26 @@
                                         <tbody>
                                             <tr>
                                                 <td class="left">
+                                                    <strong>Giảm giá</strong>
+                                                </td>
+                                                <td class="right">
+                                                    <strong>{{ number_format(10000, 0, ',', '.') }}đ</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="left">
                                                     <strong>Tổng tiền</strong>
                                                 </td>
                                                 <td class="right">
-                                                    <strong>${{ $invoice->total }}</strong>
+                                                    <strong>{{ number_format($invoice->total, 0, ',', '.') }}đ</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="left">
+                                                    <strong>Hình thức thanh toán</strong>
+                                                </td>
+                                                <td class="right">
+                                                    <strong>{{ $invoice->payment_method }}</strong>
                                                 </td>
                                             </tr>
                                         </tbody>

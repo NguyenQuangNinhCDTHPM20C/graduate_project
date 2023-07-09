@@ -7,12 +7,12 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Product Category list</h4>
-                    <h6>View/Search product Category</h6>
+                    <h4>Danh mục</h4>
+                    <h6>Xem và tìm kiếm danh mục ở đây</h6>
                 </div>
                 <div class="page-btn">
                     <a href="{{ route('category.add') }}" class="btn btn-added">
-                        <img src="{{ asset('images/plus.svg') }}" class="me-1" alt="img">Add Category
+                        <img src="{{ asset('images/plus.svg') }}" class="me-1" alt="img">Thêm danh mục
                     </a>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                                 <div class="col-lg-2 col-sm-6 col-12">
                                     <div class="form-group">
                                         <select class="select">
-                                            <option>Choose Category</option>
+                                            <option>Chọn danh mục</option>
                                             @foreach ($category as $_category)
                                                 <option>{{ $_category->name }}</option>
                                             @endforeach
@@ -83,10 +83,10 @@
                                             <span class="checkmarks"></span>
                                         </label>
                                     </th>
-                                    <th>Category name</th>
-                                    <th>Type</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Tên danh mục</th>
+                                    <th>Loại</th>
+                                    <th>Trạng thái</th>
+                                    <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -100,11 +100,8 @@
                                         </td>
 
                                         <td class="productimgname">
-                                            <a href="javascript:void(0);" class="product-img">
-                                                <img src="{{ asset('assets/category/' . $_category->image) }}"
-                                                    alt="{{ $_category->name }}">
-                                            </a>
-                                            <a href="javascript:void(0);">{{ $_category->name }}</a>
+                                            <a
+                                                href="{{ route('category.edit', ['slug' => $_category->slug]) }}">{{ $_category->name }}</a>
                                         </td>
                                         <td>{{ $_category->type }}</td>
                                         <td>{{ $_category->status == '1' ? 'Active' : 'Inactive' }}</td>
@@ -126,8 +123,6 @@
                                         </td>
                                     </tr>
                                 @endforeach
-
-                                {{ $category->links() }}
                             </tbody>
                         </table>
                     </div>

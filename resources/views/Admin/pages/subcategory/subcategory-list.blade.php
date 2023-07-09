@@ -7,13 +7,13 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Product Sub Category list</h4>
-                    <h6>View/Search product Category</h6>
+                    <h4>Phụ mục</h4>
+                    <h6>Xem và tìm kiếm phụ mục ở đây</h6>
                 </div>
                 <div class="page-btn">
                     <a href="{{ route('subcategory.add') }}" class="btn btn-added"><img
                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
-                            class="me-2" alt="img"> Add Sub Category</a>
+                            class="me-2" alt="img"> Thêm phụ mục</a>
                 </div>
             </div>
 
@@ -62,16 +62,16 @@
                             <div class="row">
                                 <div class="col-lg-2 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label>Category</label>
-                                        <select class="select">
-                                            <option>Choose Category</option>
-                                            <option>Computers</option>
-                                        </select>
+                                        <label>Danh mục/label>
+                                            <select class="select">
+                                                <option>Chọn danh mục</option>
+                                                <option>Computers</option>
+                                            </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label>Sub Category</label>
+                                        <label>Chọn phụ mục</label>
                                         <select class="select">
                                             <option>Choose Sub Category</option>
                                             <option>Fruits</option>
@@ -109,10 +109,10 @@
                                             <span class="checkmarks"></span>
                                         </label>
                                     </th>
-                                    <th>SubCategory</th>
-                                    <th>Category</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Phụ mục</th>
+                                    <th>Danh mục</th>
+                                    <th>Trạng thái</th>
+                                    <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -124,7 +124,10 @@
                                                 <span class="checkmarks"></span>
                                             </label>
                                         </td>
-                                        <td>{{ $_sub_category->name }}</td>
+                                        <td class="productimgname">
+                                            <img src="{{ asset($_sub_category->image) }}" alt="{{ $_sub_category->name }}">
+                                            {{ $_sub_category->name }}
+                                        </td>
                                         <td>{{ $_sub_category->category->name }}</td>
                                         <td>{{ $_sub_category->status == '1' ? 'Active' : 'Inactive' }}</td>
                                         </td>

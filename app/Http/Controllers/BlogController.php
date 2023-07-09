@@ -10,11 +10,17 @@ use Illuminate\Support\Str;
 
 class BlogController extends Controller
 {
+
+    public function index(){
+        $blogs = Blog::get();
+        return view('admin.pages.blog.blog-list', compact('blogs'));
+    }
+
     public function create()
     {
         $category = Category::where('type', 'blog')->get();
         $sub_category = SubCategory::get();
-        return view('Admin.pages.blog.create', compact('category', 'sub_category'));
+        return view('admin.pages.blog.create', compact('category', 'sub_category'));
     }
 
     public function store(Request $request)
@@ -49,9 +55,48 @@ class BlogController extends Controller
         return redirect()->route('blog.show', $blog->id);
     }
 
-    public function show($id)
+    public function show($slug)
     {
-        $blog = Blog::find($id);
-        return view('Admin.pages.blog.show', compact('blog'));
+        $blog = Blog::where('slug', $slug)->first();
+        $category = Category::where('type', 'blog')->get();
+        $sub_category = SubCategory::get();
+        return view('Admin.pages.blog.show', compact('blog', 'category', 'sub_category'));
+    }
+
+    public function edit($slug)
+    {
+        $blog = Blog::where('slug', $slug)->first();
+        $category = Category::where('type', 'blog')->get();
+        $sub_category = SubCategory::get();
+        return view('Admin.pages.blog.edit-blog', compact('blog', 'category', 'sub_category'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $blog = Blog::findOrFail($id);
+        if($blog){
+        $blog->category_id = $request->input('category_id');
+        $blog->sub_category_id = $request->input('sub_category_id');
+        $blog->author = $request->input('author');
+        $blog->title = $request->input('title');
+        $blog->slug = Str::slug($request->input('title').$blog->id);
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $fileName = Str::slug($blog->title) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
+            $file->move(public_path('assets/blog/'), $fileName);
+            $blog->image = 'assets/blog/'.$fileName;
+        }
+        $blog->content = $request->input('content');
+        $blog->save();
+        return redirect()->route('blog.index');
+        }
+        abort(404);
+    }
+
+    public function destroy($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->delete();
+        return redirect()->route('blog.index');
     }
 }

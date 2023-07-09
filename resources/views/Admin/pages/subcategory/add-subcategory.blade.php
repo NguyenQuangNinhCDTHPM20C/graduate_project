@@ -7,8 +7,11 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Product Edit Sub Category</h4>
-                    <h6>Create new product Category</h6>
+                    <h6>
+                        <a href="{{ route('subcategory.list') }}">Phụ mục/</a>
+                        <span>Thêm</span>
+                    </h6>
+                    <h4>Thêm phụ mục của bạn</h4>
                 </div>
             </div>
             <form method="post" action="{{ route('subcategory.store') }}" enctype="multipart/form-data">
@@ -19,13 +22,13 @@
                         <div class="row">
                             <div class="col-lg-4 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>SubCategory Name</label>
+                                    <label>Tên phụ mục</label>
                                     <input type="text" name="name" id="name" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Category Name</label>
+                                    <label>Danh mục</label>
                                     <select class="select" name="category" id="category" class="form-control" required>
                                         @foreach ($category as $_category)
                                             <option>{{ $_category->name }}</option>
@@ -35,7 +38,7 @@
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label> Status</label>
+                                    <label> Trạng thái</label>
                                     <select class="select" name="status" id="status" class="form-control" required>
                                         <option value="1">Active</option>
                                         <option value="0">Inactive</option>
@@ -43,10 +46,16 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <button href="javascript:void(0);" type="submit"
-                                    class="btn btn-submit me-2">Submit</button>
+                                <div class="form-group">
+                                    <label>Hình ảnh phụ mục:</label>
+                                    <input type="file" name="image" id="image" class="form-control" required
+                                        accept="image/jpeg, image/png, image/gif, image/svg+xml">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <button href="javascript:void(0);" type="submit" class="btn btn-submit me-2">THÊM</button>
                                 <a href="https://dreamspos.dreamguystech.com/laravel/template/public/subcategorylist"
-                                    class="btn btn-cancel">Cancel</a>
+                                    class="btn btn-cancel">THOÁT</a>
                             </div>
                         </div>
                     </div>

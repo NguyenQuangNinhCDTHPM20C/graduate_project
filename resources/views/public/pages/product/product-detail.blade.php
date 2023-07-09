@@ -459,9 +459,10 @@
                     </div>
                     <div class="d-flex align-items-center  mt-2">
 
-                        <h5 style="color: #fd475a;"> {{ $product->discount_price }}VNĐ</h5>
+                        <h5 style="color: #fd475a;font-size:1rem;">
+                            {{ number_format($product->discount_price, 0, ',', '.') }}đVNĐ</h5>
                         <h6 class="text-muted ml-2">
-                            <del>{{ $product->selling_price }}VNĐ</del>
+                            <del>{{ number_format($product->selling_price, 0, ',', '.') }}đ</del>
                         </h6>
                     </div>
                     <div class="d-flex mb-4">

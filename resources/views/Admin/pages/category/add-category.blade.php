@@ -7,8 +7,13 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Product Add Category</h4>
-                    <h6>Create new product Category</h6>
+                    <div class="page-title">
+                        <h6>
+                            <a href="{{ route('category.list') }}">Danh mục /</a>
+                            <span>Thêm</span>
+                        </h6>
+                        <h4>Thêm danh mục của bạn</h4>
+                    </div>
                 </div>
             </div>
             <form method="post" action="{{ route('category.store') }}" enctype="multipart/form-data">
@@ -18,19 +23,13 @@
                         <div class="row">
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Category Name</label>
+                                    <label>Tên danh mục</label>
                                     <input type="text" name="name" id="name" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="image">Image:</label>
-                                    <input type="file" name="image" id="image">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label> Status</label>
+                                    <label> Trạng thái</label>
                                     <select class="select" name="status" id="status" class="form-control" required>
                                         <option value="1">Active</option>
                                         <option value="0">Inactive</option>
@@ -39,17 +38,17 @@
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Type</label>
+                                    <label>Loại danh mục</label>
                                     <select class="select" name="type" id="type" class="form-control" required>
-                                        <option value="product">Product</option>
-                                        <option value="blog">Blog</option>
+                                        <option value="laptop">Laptop</option>
+                                        <option value="accessory">Phụ kiện</option>
+                                        <option value="blog">Tin tức</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <button href="javascript:void(0);" type="submit"
-                                    class="btn btn-submit me-2">Submit</button>
-                                <a href="{{ route('category.list') }}" class="btn btn-cancel">Cancel</a>
+                                <button href="javascript:void(0);" type="submit" class="btn btn-submit me-2">THÊM</button>
+                                <a href="{{ route('category.list') }}" class="btn btn-cancel">THOÁT</a>
                             </div>
                         </div>
                     </div>

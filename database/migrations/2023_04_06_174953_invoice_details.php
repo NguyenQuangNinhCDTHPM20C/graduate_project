@@ -18,7 +18,7 @@ class InvoiceDetails extends Migration
             $table->integer('invoice_id')->unsigned();
             $table->integer('product_id')->nullable()->unsigned();
             $table->integer('quantity');
-            $table->float('price');
+            $table->integer('price');
             $table->timestamps(); // creawted_at, updated_at
             
             $table->foreign('invoice_id')->references('id')->on('invoices');

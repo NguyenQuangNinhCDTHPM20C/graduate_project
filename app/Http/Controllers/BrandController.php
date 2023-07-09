@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 class BrandController extends Controller
 {
     /**
@@ -45,7 +46,7 @@ class BrandController extends Controller
             $file = $request->file('image');
             $fileName = Str::slug($brand->name) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
             $file->move(public_path('assets/brand/'), $fileName);
-            $brand->image = $fileName;
+            $brand->image = 'assets/brand/'.$fileName;
         }
        
         $brand->save();
@@ -90,9 +91,14 @@ class BrandController extends Controller
         $brand->slug = Str::slug($request->input('name'), '-');
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $fileName = Str::slug($brand->name) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $file->move(public_path('assets/brand/'), $fileName);
-            $brand->image = $fileName;
+            $file_name = Str::slug($brand->name) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('assets/brand/'), $file_name);
+        
+            if ($brand->image && File::exists(public_path($brand->image))) {
+                File::delete(public_path($brand->image));
+            }
+        
+            $brand->image = 'assets/brand/'.$file_name;
         }
        
         $brand->save();

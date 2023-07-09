@@ -918,9 +918,10 @@
                                 <a class="h6 text-decoration-none text-truncate name-product"
                                     href="{{ route('product-detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5 style="color: #fd475a;">{{ $product->selling_price }}VND</h5>
-                                    <h6 class="text-muted ml-2">
-                                        <del>{{ $product->discount_price }}VND</del>
+                                    <h5 style="color: #fd475a; font-size:1rem;">
+                                        {{ number_format($product->discount_price, 0, ',', '.') }}đ</h5>
+                                    <h6 class="text-muted ml-2"style="font-size:0.9em;">
+                                        <del>{{ number_format($product->selling_price, 0, ',', '.') }}đ</del>
                                     </h6>
                                 </div>
                                 <div class="d-flex align-items-center justify-content-center mb-1">

@@ -13,6 +13,8 @@ class Blog extends Model implements Viewable
     use HasFactory;
     public $table = "blogs";
     protected $fillable = [
+        'category_id',
+        'sub_category_id',
         'title',
         'slug',
         'image',
@@ -22,5 +24,15 @@ class Blog extends Model implements Viewable
     public function visits()
     {
         return $this->hasMany(\CyrildeWit\EloquentViewable\Contracts\Visit::class);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function sub_category()
+    {
+        return $this->belongsTo(SubCategory::class, 'sub_category_id', 'id');
     }
 }

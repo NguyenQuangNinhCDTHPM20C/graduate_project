@@ -22,8 +22,8 @@ class Products extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->integer('quantity');
-            $table->float('selling_price');
-            $table->float('discount_price');
+            $table->integer('selling_price');
+            $table->integer('discount_price');
             $table->text('description');
             $table->tinyInteger('status')->nullable()->default(1);
             $table->timestamps();

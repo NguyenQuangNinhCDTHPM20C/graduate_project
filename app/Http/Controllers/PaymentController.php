@@ -35,7 +35,7 @@ class PaymentController extends Controller
     }
     public function processPayment(Request $request)
     {
-        // Lưu các giá trị request vào session
+        if($request->input('payment_method') == 'paypal'){
         $request->session()->put('paymentRequest', $request->all());
         $request->session()->put('cart.items', \Cart::getContent());
 
@@ -43,7 +43,7 @@ class PaymentController extends Controller
         $payer->setPaymentMethod('paypal');
     
         $amount = new Amount();
-        $amount->setTotal($request->input('total'));
+        $amount->setTotal($request->input('total')/23650);
         $amount->setCurrency('USD');
     
         $transaction = new Transaction();
@@ -63,8 +63,34 @@ class PaymentController extends Controller
             $payment->create($this->apiContext);
             return redirect()->away($payment->getApprovalLink());
         } catch (\Exception $ex) {
-            return redirect()->route('payment.status')->withErrors('Error processing PayPal payment.');
+            return redirect()->route('payment.status')->withErrors('Lỗi thanh toán Paypal.');
         }
+    }else{
+        $invoice = new Invoice;
+                $invoice->code = Invoice::max('code') ? Invoice::max('code') + 1 : 1001;
+                $invoice->account_id = $request->input('account_id');
+                $invoice->order_date = Carbon::now();
+                $invoice->name = $request->input('name');
+                $invoice->address = $request->input('address').','.$request->input('district').','.$request->input('province');
+                $invoice->phone = $request->input('phone_number');
+                $invoice->email = $request->input('email');
+                $invoice->notes = $request->input('notes');
+                $invoice->total = $request->input('total');
+                $invoice->payment_method = 'Ship COD';
+                $invoice->save();
+    
+                $cartItems = \Cart::getContent();
+                foreach ($cartItems as $cartItem) {
+                    $invoice_detail = new InvoiceDetail;
+                    $invoice_detail->invoice_id = $invoice->id;
+                    $invoice_detail->product_id = $cartItem['id'];
+                    $invoice_detail->quantity = $cartItem['quantity'];
+                    $invoice_detail->price = $cartItem['price'];
+                    $invoice_detail->save();
+                }
+                return redirect()->route('invoice', $invoice->code);    
+    }
+    return redirect()->route('checkout')->withErrors('Thanh toán thất bại.');
     }
     
     public function getPaymentStatus(Request $request)
@@ -96,7 +122,7 @@ class PaymentController extends Controller
                 $invoice->email = $paymentRequest['email'];
                 $invoice->notes = $paymentRequest['notes'];
                 $invoice->total = $paymentRequest['total'];
-                $invoice->payment_method = $paymentRequest['payment_method'];
+                $invoice->payment_method = 'Paypal';
                 $invoice->save();
     
                 $cartItems = $request->session()->get('cart.items');
@@ -110,7 +136,7 @@ class PaymentController extends Controller
                 }
     
                 // Xóa session sau khi tạo hóa đơn thành công
-                $request->session()->forget('paymentRequest');
+                $request->session()->pull('paymentRequest');
                 session()->put('success', 'Payment successful.');
                 session()->save();                
                 return redirect()->route('invoice', $invoice->code);

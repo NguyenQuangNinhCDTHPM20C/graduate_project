@@ -17,8 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::paginate(10);
-        return view('Admin.pages.category.category-list', compact('category'));
+        $category = Category::get();
+        return view('admin.pages.category.category-list', compact('category'));
     }
 
     /**
@@ -42,12 +42,6 @@ class CategoryController extends Controller
         $category = new Category;
     
         $category->name = $request->input('name');
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $fileName = Str::slug($category->name) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $file->move(public_path('assets/category/'), $fileName);
-            $category->image = $fileName;
-        }
         $category->slug = Str::slug($request->input('name'), '-');
         $category->type = $request->input('type');
         $category->status = $request->input('status');

@@ -34,16 +34,54 @@
     @php
         use Illuminate\Support\Str;
     @endphp
-
+    <!-- Messenger Plugin chat Code -->
     <div id="fb-root"></div>
+
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "102783876216743");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v17.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+    {{-- <div id="fb-root"></div>
     <script async defer crossorigin="anonymous"
         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0&appId=1284707605765260&autoLogAppEvents=1"
-        nonce="HZS5fH7a"></script>
+        nonce="HZS5fH7a"></script> --}}
     @include('Public.partial.header')
 
     @yield('slider')
 
     @yield('content')
+
+    <div class="hotline">
+        <div>
+            <strong>Bạn cần hỗ trợ?</strong>
+            <a class="text-decoration-none" href="tel:{{ $settings->phone_number }}"><i class="fas fa-phone-alt"></i>
+                <strong>{{ $settings->phone_number }}</strong></a>
+        </div>
+    </div>
 
     @include('Public.partial.footer')
 

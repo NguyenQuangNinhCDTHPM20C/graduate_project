@@ -137,28 +137,29 @@
                     <h5 class="position-relative text-uppercase mb-3"><span class="pr-3">Tổng đơn hàng</span></h5>
                     <div class="bg-light p-30 mb-5 bg-radius">
                         <div class="border-bottom">
-                            <h6 class="mb-3">Products</h6>
+                            <h6 class="mb-3">Sản phẩm</h6>
                             @foreach ($cartItems as $item)
                                 <div class="d-flex justify-content-between">
-                                    <p>{{ $item->name }}</p>
-                                    <p>${{ $item->price }}</p>
+                                    <p style="width:100px" class="text-truncate">{{ $item->name }}</p>
+                                    <p>SL: {{ $item->quantity }}</p>
+                                    <p>{{ number_format($item->price, 0, ',', '.') }}đ</p>
                                 </div>
                             @endforeach
                         </div>
                         <div class="border-bottom pt-3 pb-2">
                             <div class="d-flex justify-content-between mb-3">
                                 <h6>Tổng phụ</h6>
-                                <h6>${{ Cart::getTotal() }}</h6>
+                                <h6>{{ number_format(Cart::getTotal(), 0, ',', '.') }}đ</h6>
                             </div>
                             <div class="d-flex justify-content-between">
-                                <h6 class="font-weight-medium">Phí ship</h6>
-                                <h6 class="font-weight-medium">$10</h6>
+                                <h6 class="font-weight-medium">Giá giảm</h6>
+                                <h6 class="font-weight-medium">{{ number_format(10000, 0, ',', '.') }}đ</h6>
                             </div>
                         </div>
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Tổng tiền</h5>
-                                <h5>${{ Cart::getTotal() + 10 }}</h5>
+                                <h5>{{ number_format(Cart::getTotal() - 10000, 0, ',', '.') }}đ</h5>
                             </div>
                         </div>
                     </div>
@@ -170,7 +171,7 @@
                             <div class="form-group">
                                 <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" name="payment_method"
-                                        value="Paypal" id="paypal" required>
+                                        value="paypal" id="paypal" required>
                                     <label class="custom-control-label" for="paypal">
                                         <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png"
                                             border="0" alt="Check out with PayPal">
@@ -180,14 +181,15 @@
                             <div class="form-group">
                                 <div class="custom-control custom-radio">
                                     <input type="radio" class="custom-control-input" name="payment_method"
-                                        value="Ship CODE" id="directcheck" required>
+                                        value="ship_code" id="directcheck" required>
                                     <label class="custom-control-label" for="directcheck"> <img style="width:30%;"
                                             src="{{ asset('images/Ship_COD.jpg') }}"
                                             alt="Check out with ShipCOD"></label>
                                 </div>
                             </div>
                             @php
-                                $total = Cart::getTotal() + 10;
+                                $total = Cart::getTotal() - 10000;
+                                // dd($total);
                             @endphp
                             <input type="hidden" name="total" value="{{ $total }}">
                             <button type="submit" class="btn btn-block btn-custom font-weight-bold py-3">Xác nhận đặt

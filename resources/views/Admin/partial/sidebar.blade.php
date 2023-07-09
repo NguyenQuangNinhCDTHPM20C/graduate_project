@@ -21,7 +21,7 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"
-                                class="{{ request()->routeIs('product.list') || request()->routeIs('product.add') ? 'active' : '' }}"><i
+                                class="{{ request()->routeIs('product.list') || request()->routeIs('product.add') || request()->routeIs('product.edit') || request()->routeIs('product.detail') ? 'active' : '' }}"><i
                                     data-feather="box"></i><span>Quản lý
                                     sản phẩm</span><span class="menu-arrow"></span></a>
                             <ul>
@@ -33,7 +33,7 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"
-                                class="{{ request()->routeIs('category.list') || request()->routeIs('category.add') ? 'active' : '' }}"><i
+                                class="{{ request()->routeIs('category.list') || request()->routeIs('category.add') || request()->routeIs('category.edit') ? 'active' : '' }}"><i
                                     data-feather="codepen"></i><span>Quản lý
                                     danh mục</span><span class="menu-arrow"></span></a>
                             <ul>
@@ -45,7 +45,7 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"
-                                class="{{ request()->routeIs('subcategory.list') || request()->routeIs('subcategory.add') ? 'active' : '' }}"><i
+                                class="{{ request()->routeIs('subcategory.list') || request()->routeIs('subcategory.add') || request()->routeIs('subcategory.edit') ? 'active' : '' }}"><i
                                     data-feather="speaker"></i><span>Quản lý
                                     phụ mục</span><span class="menu-arrow"></span></a>
                             <ul>
@@ -58,7 +58,7 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"
-                                class="{{ request()->routeIs('brand.list') || request()->routeIs('brand.add') ? 'active' : '' }}"><i
+                                class="{{ request()->routeIs('brand.list') || request()->routeIs('brand.add') || request()->routeIs('brand.edit') ? 'active' : '' }}"><i
                                     data-feather="tag"></i><span>Quản lý
                                     thương hiệu</span><span class="menu-arrow"></span></a>
                             <ul>
@@ -71,13 +71,10 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"
-                                class="{{ request()->routeIs('sales.list') || request()->routeIs('invoice.list') ? 'active' : '' }}"><i
+                                class="{{ request()->routeIs('sales.list') || request()->routeIs('invoice.edit') ? 'active' : '' }}"><i
                                     data-feather="shopping-cart"></i><span>Quản
                                     lý bán hàng</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li class="{{ request()->routeIs('sales.list') ? 'active' : '' }}"><a class=""
-                                        href="{{ route('sales.list') }}">Kênh bán hàng</a>
-                                </li>
                                 <li class="{{ request()->routeIs('invoice.list') ? 'active' : '' }}"><a class=""
                                         href="{{ route('invoice.list') }}">Danh sách hóa đơn</a></li>
                             </ul>
@@ -107,11 +104,13 @@
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);" class=""><i data-feather="file-text"></i><span>Quản
+                            <a href="javascript:void(0);"
+                                class="{{ request()->routeIs('blog.index') || request()->routeIs('blog.create') ? 'active' : '' }}"><i
+                                    data-feather="file-text"></i><span>Quản
                                     lý tin tức</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li class="{{ request()->routeIs('sales.list') ? 'active' : '' }}"><a class=""
-                                        href="{{ route('sales.list') }}">Danh sách tin tức</a>
+                                <li class="{{ request()->routeIs('blog.index') ? 'active' : '' }}"><a class=""
+                                        href="{{ route('blog.index') }}">Danh sách tin tức</a>
                                 </li>
                                 <li class="{{ request()->routeIs('blog.create') ? 'active' : '' }}"><a class=""
                                         href="{{ route('blog.create') }}">Thêm tin tức</a></li>

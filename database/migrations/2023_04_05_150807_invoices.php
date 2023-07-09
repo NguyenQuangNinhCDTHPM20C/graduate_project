@@ -23,7 +23,7 @@ class Invoices extends Migration
             $table->string('phone');
             $table->string('email');
             $table->text('notes');
-            $table->float('total');
+            $table->bigInteger('total');
             $table->string('payment_method');
             $table->tinyInteger('status')->nullable()->default(1);
             $table->rememberToken();

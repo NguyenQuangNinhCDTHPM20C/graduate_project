@@ -7,8 +7,13 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Khách hàng</h4>
-                    <h6>Quản lý khách hàng của bạn</h6>
+                    <h4>Tin tức</h4>
+                    <h6>Quản lý tin tức của bạn</h6>
+                </div>
+                <div class="page-btn">
+                    <a href="https://dreamspos.dreamguystech.com/laravel/template/public/add-sales" class="btn btn-added"><img
+                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
+                            alt="img" class="me-1">Thêm tin tức</a>
                 </div>
             </div>
 
@@ -26,10 +31,9 @@
                                 </a>
                             </div>
                             <div class="search-input">
-                                <a class="btn btn-searchset">
-                                    <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/search-white.svg"
-                                        alt="img">
-                                </a>
+                                <a class="btn btn-searchset"><img
+                                        src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/search-white.svg"
+                                        alt="img"></a>
                             </div>
                         </div>
                         <div class="wordset">
@@ -56,30 +60,25 @@
                     <div class="card" id="filter_inputs">
                         <div class="card-body pb-0">
                             <div class="row">
-                                <div class="col-lg-2 col-sm-6 col-12">
+                                <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Enter User Name">
+                                        <input type="text" placeholder="Enter Name">
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-sm-6 col-12">
+                                <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Enter Phone">
+                                        <input type="text" placeholder="Enter Reference No">
                                     </div>
                                 </div>
-                                <div class="col-lg-2 col-sm-6 col-12">
-                                    <div class="form-group">
-                                        <input type="text" placeholder="Enter Email">
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-sm-6 col-12">
+                                <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
                                         <select class="select">
-                                            <option>Disable</option>
-                                            <option>Enable</option>
+                                            <option>Completed</option>
+                                            <option>Paid</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-1 col-sm-6 col-12 ms-auto">
+                                <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
                                         <a class="btn btn-filters ms-auto"><img
                                                 src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/search-whites.svg"
@@ -96,18 +95,20 @@
                                 <tr>
                                     <th>
                                         <label class="checkboxs">
-                                            <input type="checkbox">
+                                            <input type="checkbox" id="select-all">
                                             <span class="checkmarks"></span>
                                         </label>
                                     </th>
-                                    <th>Họ tên </th>
-                                    <th>Số điện thoại</th>
-                                    <th>Email</th>
-                                    <th>Địa chỉ</th>
+                                    <th>Danh mục</th>
+                                    <th>Phụ mục</th>
+                                    <th>Tác giả</th>
+                                    <th>Hình ảnh</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $key => $user)
+                                @foreach ($blogs as $blog)
                                     <tr>
                                         <td>
                                             <label class="checkboxs">
@@ -115,27 +116,35 @@
                                                 <span class="checkmarks"></span>
                                             </label>
                                         </td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->phone_number }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>
-                                            {{ $user->address, $user->district, $user->province }}
+                                        <td>{{ $blog->category->name }}</td>
+                                        <td>{{ $blog->sub_category->name }}</td>
+                                        <td>{{ $blog->author }}</td>
+                                        <td class="productimgname">
+                                            <a href="{{ route('blog.show', ['slug' => $blog->slug]) }}" class="product-img">
+                                                <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}">
+                                            </a>
                                         </td>
-                                    </tr>
-                                @endforeach
-                                @foreach ($customers as $key => $customer)
-                                    <tr>
                                         <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
+                                            <a
+                                                href="{{ route('blog.show', ['slug' => $blog->slug]) }}">{{ $blog->title }}</a>
                                         </td>
-                                        <td>{{ $customer->name }}</td>
-                                        <td>{{ $customer->phone }}</td>
-                                        <td>{{ $customer->email }}</td>
                                         <td>
-                                            {{ $customer->address }}
+                                            <a class="me-3" href="{{ route('blog.show', ['slug' => $blog->slug]) }}">
+                                                <img src="{{ asset('images/eye.svg') }}" alt="img">
+                                            </a>
+                                            <a class="me-3" href="{{ route('blog.edit', ['slug' => $blog->slug]) }}">
+                                                <img src="{{ asset('images/edit.svg') }}" alt="img">
+                                            </a>
+                                            <a class="confirm-text"
+                                                onclick="$.fn.showConfirmationDeleteAlert('blog_delete_{{ $blog->id }}')">
+                                                <img src="{{ asset('images/delete.svg') }}" alt="img">
+                                            </a>
+                                            <form id="blog_delete_{{ $blog->id }}"
+                                                action="{{ route('blog.destroy', ['id' => $blog->id]) }}" method="POST"
+                                                style="display: none">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

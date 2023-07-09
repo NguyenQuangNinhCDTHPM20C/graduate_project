@@ -7,8 +7,8 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Invoice Report</h4>
-                    <h6>Manage your Invoice Report</h6>
+                    <h4>Hóa đơn bán hàng</h4>
+                    <h6>Quản lý đơn hàng của bạn</h6>
                 </div>
             </div>
 
@@ -91,12 +91,12 @@
                                             <span class="checkmarks"></span>
                                         </label>
                                     </th>
-                                    <th>Invoice number </th>
-                                    <th>Customer name </th>
-                                    <th>Order date</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
+                                    <th>Code</th>
+                                    <th>Tên khách hàng </th>
+                                    <th>Ngày đặt</th>
+                                    <th>Tổng tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -112,21 +112,32 @@
                                         <td>{{ $_invoices->name }}</td>
                                         <td>{{ $_invoices->order_date }}</td>
                                         <td>{{ $_invoices->total }}</td>
-                                        <td>{!! $_invoices->status == 1
-                                            ? '<span class="badges bg-lightgreen">completed</span>'
-                                            : '<span class="badges bg-lightred">unfinished</span>' !!}</td>
+                                        <td>
+                                            @if ($_invoices->status == 1)
+                                                <span class="badges bg-lightgreen">Hoàn thành</span>
+                                            @elseif ($_invoices->status == 0)
+                                                <span class="badges bg-lightred">Chưa hoàn thành</span>
+                                            @else
+                                                <span class="badges bg-lightred">Thất bại</span>
+                                            @endif
+                                        </td>
 
                                         </td>
                                         <td>
-                                            <a class="me-3" href="#">
-                                                <img src="{{ asset('images/eye.svg') }}" alt="img">
-                                            </a>
-                                            <a class="me-3" href="#">
+                                            <a class="me-3"
+                                                href="{{ route('invoice.edit', ['code' => $_invoices->code]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
-                                            <a class="confirm-text" href="javascript:void(0);">
+                                            <a class="me-3 confirm-text"
+                                                onclick="$.fn.showConfirmationDeleteAlert('invoices_delete_{{ $_invoices->id }}')">
                                                 <img src="{{ asset('images/delete.svg') }}" alt="img">
                                             </a>
+                                            <form id="invoices_delete_{{ $_invoices->id }}"
+                                                action="{{ route('invoice.delete', ['id' => $_invoices->id]) }}"
+                                                method="POST" style="display: none">
+                                                @csrf
+                                                @method('DELETE')
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
