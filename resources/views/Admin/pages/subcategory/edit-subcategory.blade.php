@@ -55,7 +55,7 @@
                                 <div class="form-group">
                                     <label>Hình ảnh phụ mục:</label>
                                     <img src="{{ asset($sub_category->image) }}" alt="{{ $sub_category->name }}">
-                                    <input type="file" name="image" id="image" class="form-control" required
+                                    <input type="file" name="image" id="image" class="form-control" 
                                         accept="image/jpeg, image/png, image/gif, image/svg+xml">
                                 </div>
                             </div>
