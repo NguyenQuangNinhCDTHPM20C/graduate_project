@@ -17,7 +17,7 @@ class InvoiceController extends Controller
     public function index()
     {
         $invoices = Invoice::all();
-        return view('Admin.pages.invoices',compact('invoices'));
+        return view('admin.pages.invoice.invoice-list',compact('invoices'));
     }
 
     /**
@@ -47,9 +47,9 @@ class InvoiceController extends Controller
      * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function show(Invoice $invoice)
+    public function show($code)
     {
-        //
+        
     }
 
     /**
@@ -58,9 +58,10 @@ class InvoiceController extends Controller
      * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function edit(Invoice $invoice)
+    public function edit($code)
     {
-        //
+        $invoice = Invoice::where('code', $code)->first();
+        return view('admin.pages.invoice.invoice-edit', compact('invoice'));
     }
 
     /**
@@ -70,9 +71,12 @@ class InvoiceController extends Controller
      * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Invoice $invoice)
+    public function update(Request $request, $id)
     {
-        //
+        $invoice = Invoice::findOrFail($id);
+        $invoice->status = $request->input('status');
+        $invoice->save();
+        return redirect()->route('invoice.list')->with('success', 'Invoice has been updated successfully');
     }
 
     /**
@@ -81,8 +85,11 @@ class InvoiceController extends Controller
      * @param  \App\Models\Invoice  $invoice
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Invoice $invoice)
+    public function destroy($id)
     {
-        //
+        $invoice = Invoice::findOrFail($id);
+        InvoiceDetail::where('invoice_id', $invoice->id)->delete();
+        $invoice->delete();
+        return redirect()->route('invoice.list')->with('Invoice has been deleted successfully');
     }
 }

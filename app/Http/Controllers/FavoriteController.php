@@ -19,13 +19,13 @@ class FavoriteController extends Controller
     public function index()
     {
         $accountId = session('account')->id;
-        $favorites = FavoriteDetail::join('favorites', 'favorite_detail.favorite_id', '=', 'favorites.id')
+        $favorites = FavoriteDetail::join('favorites', 'favorite_details.favorite_id', '=', 'favorites.id')
         ->where('favorites.account_id', $accountId)
         ->get();
-        $count_favorites = FavoriteDetail::join('favorites', 'favorite_detail.favorite_id', '=', 'favorites.id')
+        $count_favorites = FavoriteDetail::join('favorites', 'favorite_details.favorite_id', '=', 'favorites.id')
         ->where('favorites.account_id', $accountId)
         ->count();
-        return view('public.pages.account.wishlist', compact('favorites'));
+        return view('public.pages.account.favorite', compact('favorites'));
     }
 
     /**
@@ -57,11 +57,10 @@ class FavoriteController extends Controller
                  $favoriteDetail->favorite_id = $favoriteId;
                  $favoriteDetail->product_id = $productId;
                  $favoriteDetail->save();
-     
-                 return redirect()->back()->with('success', 'Sản phẩm đã được thêm vào mục yêu thích.');
-             } else {
-                 return redirect()->back()->with('error', 'Sản phẩm đã tồn tại trong mục yêu thích.');
-             }
+                //  $message = 'Sản phẩm đã được thêm vào mục yêu thích.';
+                 session(['message' => 'Phần tử đã được xóa khỏi danh sách yêu thích.']);
+                 return redirect()->back();
+             } 
          } else {
              // if no login
              return redirect()->route('public.login')->with('error', 'Vui lòng đăng nhập để thêm sản phẩm vào mục yêu thích.');
@@ -127,11 +126,27 @@ class FavoriteController extends Controller
         $favoriteDetail = FavoriteDetail::where('favorite_id', $id)->first();
 
         if ($favoriteDetail) {
-            $favoriteDetail->delete();
-            return redirect()->back()->with('success', 'Phần tử đã được xóa khỏi danh sách yêu thích.');
-        } else {
+            session(['message' => 'Sản phẩm đã được thêm vào mục yêu thích.']);
+            $favoriteDetail->delete();            
+            return redirect()->back();
+        } 
             return redirect()->back()->with('error', 'Không tìm thấy phần tử để xóa.');
-        }
+       
+    }
+
+    public function destroy_2($id)
+    {
+        $account_id = session('account')->id;
+        $favorite = Favorite::where('account_id', $account_id)->first();
+        $favorite_detail = FavoriteDetail::where('favorite_id', $favorite->id)->where('product_id', $id)->first();
+
+        if ($favorite_detail) {
+            session(['message' => 'Sản phẩm đã được thêm vào mục yêu thích.']);
+            $favorite_detail->delete();            
+            return redirect()->back();
+        } 
+            return redirect()->back()->with('error', 'Không tìm thấy phần tử để xóa.');
+      
     }
 
 }

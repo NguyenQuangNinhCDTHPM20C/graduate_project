@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory;
-
-    protected $product = [
+    public $table = "products";
+    protected $fillable = [
         'brand_id',
         'category_id',
         'sub_category_id',
@@ -19,7 +19,7 @@ class Product extends Model
         'selling_price',
         'discount_price',
         'description',
-        'image',
+        'featured_image_id',
         'status'
     ];
 
@@ -36,5 +36,10 @@ class Product extends Model
     public function sub_category()
     {
         return $this->belongsTo(SubCategory::class, 'sub_category_id', 'id');
+    }
+
+    public function featured_image()
+    {
+        return $this->belongsTo(Image::class, 'featured_image_id', 'id');
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\File;
 class BrandController extends Controller
 {
     /**
@@ -44,7 +46,7 @@ class BrandController extends Controller
             $file = $request->file('image');
             $fileName = Str::slug($brand->name) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
             $file->move(public_path('assets/brand/'), $fileName);
-            $brand->image = $fileName;
+            $brand->image = 'assets/brand/'.$fileName;
         }
        
         $brand->save();
@@ -68,9 +70,9 @@ class BrandController extends Controller
      * @param  \App\Models\Brand  $brand
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
-        $brand = Brand::findOrFail($id); 
+        $brand = Brand::where('slug', $slug)->first(); 
         return view('Admin.pages.brand.edit-brand', compact( 'brand'));
     }
 
@@ -89,9 +91,14 @@ class BrandController extends Controller
         $brand->slug = Str::slug($request->input('name'), '-');
         if ($request->hasFile('image')) {
             $file = $request->file('image');
-            $fileName = Str::slug($brand->name) . '-' . time() . '.' . $request->file('image')->getClientOriginalExtension();
-            $file->move(public_path('assets/brand/'), $fileName);
-            $brand->image = $fileName;
+            $file_name = Str::slug($brand->name) . '-' . time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('assets/brand/'), $file_name);
+        
+            if ($brand->image && File::exists(public_path($brand->image))) {
+                File::delete(public_path($brand->image));
+            }
+        
+            $brand->image = 'assets/brand/'.$file_name;
         }
        
         $brand->save();
@@ -106,8 +113,9 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
+        Product::where('brand_id', $id)->update(['brand_id' => null]);
         $brand = Brand::findOrFail($id);
         $brand->delete();
-        return redirect()->route('category.list')->with('Brand has been deleted successfully');
+        return redirect()->route('brand.list')->with('Brand has been deleted successfully');
     }
 }

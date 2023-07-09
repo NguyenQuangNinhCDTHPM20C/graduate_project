@@ -8,10 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Favorite extends Model
 {
     use HasFactory;
-
+    public $table = "favorites";
     protected $fillable = [
         'account_id',
-        // other fillable attributes
     ];
     
     public function account()

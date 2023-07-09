@@ -18,7 +18,7 @@ class Brands extends Migration
             $table->string('name',200);
             $table->string('slug')->unique();
             $table->string('image');
-            $table->timestamps(); // creawted_at, updated_at
+            $table->timestamps();
         });
     }
 

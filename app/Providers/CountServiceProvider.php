@@ -13,7 +13,7 @@ class CountServiceProvider extends ServiceProvider
             $favoritesCount = 0;
             if (session()->has('account')) {
                 $userId = session('account')->id;
-                $favoritesCount = FavoriteDetail::join('favorites', 'favorite_detail.favorite_id', '=', 'favorites.id')
+                $favoritesCount = FavoriteDetail::join('favorites', 'favorite_details.favorite_id', '=', 'favorites.id')
                     ->where('favorites.account_id', $userId)
                     ->count();
             }

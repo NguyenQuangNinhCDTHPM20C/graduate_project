@@ -8290,11 +8290,13 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 .slider-product {
+    justify-content: center;
     text-align: center;
     width: 100%;
 }
 .slider-product img {
-    width: auto !important;
+    max-width: 100%;
+    max-height: 100%;
     margin: 0 0 10px;
 }
 @media (max-width: 991.98px) {
@@ -9462,3 +9464,61 @@ span.select2-container.select2-container--default.select2-container--open {
 }
 
 /*# sourceMappingURL=style.css.map */
+#preview-images {
+    display: inline-block;
+    flex-wrap: wrap;
+}
+
+.preview-image {
+    width: 25%;
+    height: auto;
+    padding: 5px;
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.preview-image img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 100%;
+}
+
+.image-upload {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* Căn trái */
+    align-items: flex-start; /* Căn trên */
+}
+
+.delete-button {
+    padding: 0;
+    line-height: 1;
+    height: auto;
+    position: absolute;
+    top: -5px;
+    right: -3px;
+    color: red;
+    background-color: transparent;
+    border-color: transparent;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.delete-button i {
+    font-size: 12px;
+}
+.radio-button-container {
+    display: flex;
+    align-items: center;
+}
+
+.radio-button-container input[type="radio"] {
+    margin-right: 5px;
+}
+
+.radio-button-container p {
+    margin: 0;
+}

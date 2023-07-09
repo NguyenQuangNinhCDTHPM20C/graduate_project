@@ -9,16 +9,22 @@ use Illuminate\Contracts\Auth\Authenticatable;
 class Account extends Model implements Authenticatable
 {
     use HasFactory;
-    protected $account = [
+    public $table = "accounts";
+    protected $fillable = [
         'name', 
         'username',
         'email',
+        'email_verified_at',
         'password',
         'photo',
         'address',
         'role',
         'status',
-        'rememberToken'
+        'rememberToken',
+        'verification_token',
+        'google_id',
+        'facebook_id',
+        'qr_token'
     ];
 
         /**
