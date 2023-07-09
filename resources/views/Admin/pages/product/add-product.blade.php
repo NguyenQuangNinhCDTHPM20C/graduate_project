@@ -30,7 +30,7 @@
                                     <label>Danh mục</label>
                                     <select class="select" name="category" id="category" class="form-control" required>
                                         @foreach ($category as $_category)
-                                            <option>{{ $_category->name }}</option>
+                                            <option value="{{ $_category->id }}">{{ $_category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -41,7 +41,7 @@
                                     <select class="select" name="sub_category" id="sub_category" class="form-control"
                                         required>
                                         @foreach ($sub_category as $_sub_category)
-                                            <option>{{ $_sub_category->name }}</option>
+                                            <option value="{{ $_sub_category->id }}">{{ $_sub_category->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -51,7 +51,7 @@
                                     <label>Thương hiệu</label>
                                     <select class="select" name="brand" id="brand" class="form-control" required>
                                         @foreach ($brands as $_brand)
-                                            <option>{{ $_brand->name }}</option>
+                                            <option value="{{ $_brand->id }}">{{ $_brand->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
