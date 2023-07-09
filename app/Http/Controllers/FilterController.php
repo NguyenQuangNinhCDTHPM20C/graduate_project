@@ -42,6 +42,8 @@ class FilterController extends Controller
                 case '3_to_4' : $query->whereBetween('discount_price', [3000000, 4000000]);break;
                 case '5_to_6' : $query->whereBetween('discount_price', [5000000, 6000000]);break;
                 case '6_to_8' : $query->whereBetween('discount_price', [6000000, 8000000]);break;
+                case '8_to_10' : $query->whereBetween('discount_price', [5000000, 6000000]);break;
+                case '_to_6' : $query->whereBetween('discount_price', [5000000, 6000000]);break;
                 case '8_to_6' : $query->whereBetween('discount_price', [5000000, 6000000]);break;
             }
             

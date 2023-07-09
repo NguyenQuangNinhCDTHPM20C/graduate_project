@@ -79,12 +79,12 @@ class ProductController extends Controller
         $product->discount_price = $discountedPrice;
         
         $category_id = $request->input('category');
-        $brand_name = $request->input('brand');
-        $sub_category_name = $request->input('sub_category');
+        $brand_id = $request->input('brand');
+        $sub_category_id = $request->input('sub_category');
     
         $category = Category::where('id', $category_id)->first();
-        $brand = Brand::where('name', $brand_name)->first();
-        $subCategory = SubCategory::where('name', $sub_category_name)->first();
+        $brand = Brand::where('id', $brand_id)->first();
+        $subCategory = SubCategory::where('id', $sub_category_id)->first();
     
         $product->category_id = $category->id;
         $product->brand_id = $brand->id;
