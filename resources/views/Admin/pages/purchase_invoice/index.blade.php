@@ -10,6 +10,11 @@
                     <h4>Hóa đơn mua hàng</h4>
                     <h6>Quản lý đơn hàng của bạn</h6>
                 </div>
+                <div class="page-btn">
+                    <a href="{{ route('purchase-invoice.add') }}" class="btn btn-added"><img
+                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
+                            alt="img" class="me-1">Thêm hóa đơn</a>
+                </div>
             </div>
 
             <div class="card">
@@ -92,10 +97,10 @@
                                         </label>
                                     </th>
                                     <th>Code</th>
-                                    <th>Tên khách hàng </th>
+                                    <th>Tên người mua </th>
+                                    <th>Số điện thoại</th>
                                     <th>Ngày đặt</th>
                                     <th>Tổng tiền</th>
-                                    <th>Trạng thái</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
@@ -110,22 +115,13 @@
                                         </td>
                                         <td>{{ $_invoices->code }}</td>
                                         <td>{{ $_invoices->name }}</td>
+                                        <td>{{ $_invoices->phone_number }}</td>
                                         <td>{{ $_invoices->order_date }}</td>
                                         <td>{{ $_invoices->total }}</td>
-                                        <td>
-                                            @if ($_invoices->status == 1)
-                                                <span class="badges bg-lightgreen">Hoàn thành</span>
-                                            @elseif ($_invoices->status == 0)
-                                                <span class="badges bg-lightred">Chưa hoàn thành</span>
-                                            @else
-                                                <span class="badges bg-lightred">Thất bại</span>
-                                            @endif
-                                        </td>
-
                                         </td>
                                         <td>
                                             <a class="me-3"
-                                                href="{{ route('invoice.edit', ['code' => $_invoices->code]) }}">
+                                                href="{{ route('purchase-invoice.edit', ['code' => $_invoices->code]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
                                             <a class="me-3 confirm-text"
@@ -133,7 +129,7 @@
                                                 <img src="{{ asset('images/delete.svg') }}" alt="img">
                                             </a>
                                             <form id="invoices_delete_{{ $_invoices->id }}"
-                                                action="{{ route('invoice.delete', ['id' => $_invoices->id]) }}"
+                                                action="{{ route('purchase-invoice.delete', ['id' => $_invoices->id]) }}"
                                                 method="POST" style="display: none">
                                                 @csrf
                                                 @method('DELETE')

@@ -18,6 +18,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\PurchaseInvoiceController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -156,6 +157,7 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
             return view('admin.pages.setting.setting');
         })->name('setting');
         Route::post('/setting', [AdminController::class, 'update_setting'])->name('setting.update');
+        //Routes for blogs
         Route::get('/blog/list', [BlogController::class, 'index'])->name('blog.index');
         Route::get('/blog/add', [BlogController::class, 'create'])->name('blog.create');
         Route::post('/blog/add', [BlogController::class, 'store'])->name('blog.store');
@@ -163,6 +165,15 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
         Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
         Route::delete('/delete/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
+        //Routes for purchase_invoice
+        Route::get('/purchase-invoice/list',[PurchaseInvoiceController::class, 'index'])->name('purchase-invoice.list');
+        Route::post('/purchase-invoice/add', [PurchaseInvoiceController::class, 'store'])->name('purchase-invoice.store');
+        Route::post('/purchase-invoice/add/detail', [PurchaseInvoiceController::class, 'store_detail'])->name('purchase-invoice.store_detail');
+        Route::get('/purchase-invoice/add/detail', [PurchaseInvoiceController::class, 'store_detail'])->name('purchase-invoice.add_detail');
+        Route::get('/purchase-invoice/add', [PurchaseInvoiceController::class, 'create'])->name('purchase-invoice.add');
+        Route::get('/purchase-invoice/edit/{code}', [PurchaseInvoiceController::class, 'edit'])->name('purchase-invoice.edit');
+        Route::put('/purchase-invoice/{id}', [PurchaseInvoiceController::class, 'update'])->name('purchase-invoice.update');
+        Route::delete('/purchase-invoice/{id}', [PurchaseInvoiceController::class, 'destroy'])->name('purchase-invoice.delete');
     });
     Route::get('/login', [AuthController::class, 'showLoginFormAdmin'])->name('admin.login')->middleware('guest.admin');
     Route::post('/login', [AuthController::class, 'login_admin'])->middleware('guest.admin');
