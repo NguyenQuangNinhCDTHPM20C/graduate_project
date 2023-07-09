@@ -22,7 +22,9 @@
                     <div class="sub">
                         <ul>
                             @foreach ($categories as $category)
-                                <li><a href="">{{ $category->name }}</a></li>
+                                <li><a
+                                        href="{{ route('products', ['category' => $category->slug]) }}">{{ $category->name }}</a>
+                                </li>
                             @endforeach
                         </ul>
                     </div>
@@ -36,7 +38,7 @@
                     <div class="sub">
                         <ul>
                             @foreach ($cpu_brands as $cpu_brand)
-                                <li><a href="/laptop?filters=%7b%22dong-cpu%22%3a%22Core+i5%22%7d&amp;search=true">{{ $cpu_brand }}
+                                <li><a href="{{ route('products', ['cpu_brand' => $cpu_brand]) }}">{{ $cpu_brand }}
                                     </a></li>
                             @endforeach
                         </ul>
@@ -49,7 +51,7 @@
                     <div class="sub">
                         <ul>
                             @foreach ($brands as $brand)
-                                <li><a href="/laptop?filters=%7b%22brand%22%3a%2245%22%7d&amp;search=true">{{ $brand }}
+                                <li><a href="{{ route('products', ['brand' => $brand]) }}">{{ $brand }}
                                     </a></li>
                             @endforeach
                         </ul>
@@ -61,25 +63,16 @@
                     </label>
                     <div class="sub">
                         <ul>
-                            <li><a href="/laptop?filters=%7b%22price%22%3a%22T100t%22%7d&amp;search=true">Trên 100
-                                    triệu
-                                    <i class="total">(2)</i></a></li>
-                            <li><a href="/laptop?filters=%7b%22price%22%3a%223t-4t%22%7d&amp;search=true">3 đến 4 triệu
-                                    <i class="total">(3)</i></a></li>
-                            <li><a href="/laptop?filters=%7b%22price%22%3a%225t-6t%22%7d&amp;search=true">5 đến 6 triệu
-                                    <i class="total">(2)</i></a></li>
-                            <li><a href="/laptop?filters=%7b%22price%22%3a%226t-8t%22%7d&amp;search=true">6 đến 8 triệu
-                                    <i class="total">(2)</i></a></li>
-                            <li><a href="/laptop?filters=%7b%22price%22%3a%228t-10t%22%7d&amp;search=true">8 đến 10
-                                    triệu <i class="total">(10)</i></a></li>
-                            <li><a href="/laptop?filters=%7b%22price%22%3a%2210t-12t%22%7d&amp;search=true">10 đến 12
-                                    triệu <i class="total">(11)</i></a></li>
-                            <li><a href="/laptop?filters=%7b%22price%22%3a%2212t-15t%22%7d&amp;search=true">12 đến 15
-                                    triệu <i class="total">(38)</i></a></li>
-                            <li><a href="/laptop?filters=%7b%22price%22%3a%2215t-20t%22%7d&amp;search=true">15 đến 20
-                                    triệu <i class="total">(71)</i></a></li>
-                            <li><a href="/laptop?filters=%7b%22price%22%3a%2220t-100tr%22%7d&amp;search=true">20 đến
-                                    100 triệu <i class="total">(88)</i></a></li>
+                            <li><a href="{{ route('products', ['price' => 'more_than_100']) }}">Trên 100
+                                    triệu</a></li>
+                            <li><a href="{{ route('products', ['price' => '3_to_4']) }}">3 đến 4 triệu</a></li>
+                            <li><a href="{{ route('products', ['price' => '5_to_6']) }}">5 đến 6 triệu</a></li>
+                            <li><a href="{{ route('products', ['price' => '6_to_8']) }}">6 đến 8 triệu</a></li>
+                            <li><a href="{{ route('products', ['price' => '8_to_10']) }}">8 đến 10 triệu </a></li>
+                            <li><a href="{{ route('products', ['price' => '10_to_12']) }}">10 đến 12 triệu </a></li>
+                            <li><a href="{{ route('products', ['price' => '12_to_15']) }}">12 đến 15 triệu </a></li>
+                            <li><a href="{{ route('products', ['price' => '15_to_20']) }}">15 đến 20 triệu</a></li>
+                            <li><a href="{{ route('products', ['price' => '20_to_100']) }}">20 đến 100 triệu </a></li>
                         </ul>
                     </div>
                 </div>
@@ -173,28 +166,10 @@
                         <ul>
                             <li><a href="/laptop?filters=%7b%22sort%22%3a%2212%22%7d&amp;search=true"> Mặc định</a>
                             </li>
-                            <li><a href="/laptop?filters=%7b%22sort%22%3a%221%22%7d&amp;search=true"> Sản phẩm mới -
-                                    cũ</a></li>
                             <li><a href="/laptop?filters=%7b%22sort%22%3a%222%22%7d&amp;search=true"> Giá thấp đến
                                     cao</a></li>
                             <li><a href="/laptop?filters=%7b%22sort%22%3a%223%22%7d&amp;search=true"> Giá cao đến
                                     thấp</a></li>
-                            <li><a href="/laptop?filters=%7b%22sort%22%3a%224%22%7d&amp;search=true"> Mới cập nhật</a>
-                            </li>
-                            <li><a href="/laptop?filters=%7b%22sort%22%3a%225%22%7d&amp;search=true"> Sản phẩm cũ</a>
-                            </li>
-                            <li><a href="/laptop?filters=%7b%22sort%22%3a%226%22%7d&amp;search=true"> Xem nhiều hôm
-                                    nay</a></li>
-                            <li><a href="/laptop?filters=%7b%22sort%22%3a%227%22%7d&amp;search=true"> Xem nhiều tuần
-                                    này</a></li>
-                            <li><a href="/laptop?filters=%7b%22sort%22%3a%228%22%7d&amp;search=true"> Xem nhiều tháng
-                                    này</a></li>
-                            <li><a href="/laptop?filters=%7b%22sort%22%3a%2210%22%7d&amp;search=true"> Xem nhiều năm
-                                    nay</a></li>
-                            <li><a href="/laptop?filters=%7b%22sort%22%3a%229%22%7d&amp;search=true"> Xem nhiều
-                                    nhất</a></li>
-                            <li><a href="/laptop?filters=%7b%22sort%22%3a%2211%22%7d&amp;search=true"> Kết quả tìm
-                                    kiếm</a></li>
                         </ul>
                     </div>
                 </div>

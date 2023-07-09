@@ -22,6 +22,7 @@ use App\Models\Blog;
 use App\Models\Image;
 use App\Models\ProductColor;
 use App\Models\Laptop;
+use App\Http\Controllers\FilterController;
 
 class UserController extends Controller
 {
@@ -57,10 +58,9 @@ class UserController extends Controller
         $dedicated_graphics = Laptop::distinct('dedicated_graphics')->pluck('dedicated_graphics');
         $products_query = Product::query();
 
-        if ($request->has('category_filter')) {
-            $selected_categories = $category->where('name', 'LIKE', '%' . $request->input('category_filter') . '%')->first();
-            $products_query->whereIn('category_id', $selected_categories->id);
-        }
+        $filterController = new FilterController();
+        $products_query = $filterController->filterProducts($request);
+
         $products = $products_query->paginate(12);
         $brands = Brand::distinct('name')->pluck('name');
         return view('public.pages.product.product-list', 

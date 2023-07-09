@@ -33,7 +33,6 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/',[UserController::class, 'index'])->name('home');
     //Routes for product
     Route::get('/products', [UserController::class, 'products'])->name('products');
-    Route::post('/products', [UserController::class, 'products']);
     Route::get('/product/{slug}', [UserController::class, 'product_detail'])->name('product-detail');
     Route::get('/products/{type}', [UserController::class, 'products_type'])->name('product-type');
     Route::get('/search', [UserController::class, 'search'])->name('search');
