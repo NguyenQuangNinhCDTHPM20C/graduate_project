@@ -34,6 +34,7 @@
 
                             <button class="btnlog" type="submit">ĐĂNG NHẬP</button>
                         </form>
+                        <p class="account"><a href="{{ route('reset-pass.form') }}">Quên mật khẩu? </a></p>
                         <p class="account">Bạn chưa có tài khoản? <a href="{{ route('logup') }}">Đăng ký</a></p>
                     </div>
                     <div class="w3l_form align-self">

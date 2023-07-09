@@ -58,6 +58,9 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/logup', [AuthController::class, 'showRegisterForm'])->name('logup')->middleware('guest.public');
     Route::post('/logup', [AuthController::class, 'register'])->name('logup.submit')->middleware('guest.public');
     Route::get('/verify-email/{token}', [AuthController::class, 'verifyEmail'])->name('verify-email');
+    Route::get('/reset-password', [AuthController::class, 'showResetPassForm'])->name('reset-pass.form')->middleware('guest.public');
+    Route::post('/reset-password', [AuthController::class, 'resetPass'])->name('reset-pass.submit')->middleware('guest.public');
+    Route::get('/reset-password/{token}', [AuthController::class, 'resetPass'])->name('reset-pass');
     //Routes for login google
     Route::get('/login/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google'); 
     Route::get('/callback/google', [GoogleController::class, 'handleGoogleCallback']);

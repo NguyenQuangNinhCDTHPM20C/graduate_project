@@ -500,7 +500,8 @@
                         <input type="hidden" name="id" value="{{ $product->id }}">
                         <input type="hidden" name="name" value="{{ $product->name }}">
                         <input type="hidden" name="price" value="{{ $product->discount_price }}">
-                        <input type="hidden" name="image" value="{{ $product->featured_image->image_path }}">
+                        <input type="hidden" name="image"
+                            value="{{ optional($product->featured_image)->image_path }}">
                         <button class="btn btn-primary px-3 bg-number-left bg-number-right"><i
                                 class="fa fa-shopping-cart mr-1"></i> Thêm giỏ hàng</button>
                         </form>
@@ -541,7 +542,7 @@
                             <h4 class="mb-3">Mô tả sản phấm</h4>
                             <p>{{ $product->description }}</p>
                         </div>
-                        @if ($product->category->type == 'laptop')
+                        @if ($product->category->type == 'laptop' && $product_info)
                             <div class="tab-pane fade" id="tab-pane-2">
                                 <h4 class="mb-3">Thông tin chi tiết</h4>
                                 <div class="row px-xl-5">

@@ -99,11 +99,32 @@ class UserController extends Controller
         return view('public.pages.product.product-detail', compact('product', 'images', 'product_colors', 'reviews', 'review_count', 'existingFavoriteDetail', 'product_info'));
     }
 
-    public function products_type($type)
+    public function products_type(Request $request, $type)
     {
         $category = Category::where('type',$type) ->first();
         $products = Product::where('category_id', $category->id)->paginate(12);
-        return view('public.pages.product.product-type', compact('products', 'category'));
+        $categories = Category::where('type', '!=', 'blog')->get();
+        $blog_category = Category::where('type', 'blog')->first();
+        $sub_categories = SubCategory::where('category_id','!=', $blog_category->id)->distinct('name')->pluck('name');
+        $laptop_properties = Laptop::get();
+        $cpu_brands = Laptop::distinct('cpu_brand')->pluck('cpu_brand');
+        $cpu_series = Laptop::distinct('cpu_series')->pluck('cpu_series');
+        $cpu_models = Laptop::distinct('cpu_model')->pluck('cpu_model');
+        $display_resolutions = Laptop::distinct('display_resolution')->pluck('display_resolution');
+        $display_sizes = Laptop::distinct('display_size')->pluck('display_size');
+        $ram_sizes = Laptop::distinct('ram_size')->pluck('ram_size');
+        $storage_capacitys = Laptop::distinct('storage_capacity')->pluck('storage_capacity');
+        $dedicated_graphics = Laptop::distinct('dedicated_graphics')->pluck('dedicated_graphics');
+        $products_query = Product::query();
+        if($request){
+        $filterController = new FilterController();
+        $products_query = $filterController->filterProducts($request);
+        }
+        // $products = $products_query->paginate(12);
+        $brands = Brand::distinct('name')->pluck('name');
+        return view('public.pages.product.product-type', compact('products', 'category', 'categories', 'sub_categories', 'laptop_properties',
+        'brands', 'cpu_brands', 'cpu_series', 'cpu_models', 'display_resolutions', 
+        'display_sizes', 'ram_sizes', 'storage_capacitys', 'dedicated_graphics'));
     }
 
     // Search product
@@ -111,7 +132,28 @@ class UserController extends Controller
     {
         $slug = $request->input('slug');
         $products = Product::where('slug', 'LIKE', '%' . $slug . '%')->get();
-        return view('public.pages.product.product-search', compact('products'));
+        $categories = Category::where('type', '!=', 'blog')->get();
+        $blog_category = Category::where('type', 'blog')->first();
+        $sub_categories = SubCategory::where('category_id','!=', $blog_category->id)->distinct('name')->pluck('name');
+        $laptop_properties = Laptop::get();
+        $cpu_brands = Laptop::distinct('cpu_brand')->pluck('cpu_brand');
+        $cpu_series = Laptop::distinct('cpu_series')->pluck('cpu_series');
+        $cpu_models = Laptop::distinct('cpu_model')->pluck('cpu_model');
+        $display_resolutions = Laptop::distinct('display_resolution')->pluck('display_resolution');
+        $display_sizes = Laptop::distinct('display_size')->pluck('display_size');
+        $ram_sizes = Laptop::distinct('ram_size')->pluck('ram_size');
+        $storage_capacitys = Laptop::distinct('storage_capacity')->pluck('storage_capacity');
+        $dedicated_graphics = Laptop::distinct('dedicated_graphics')->pluck('dedicated_graphics');
+        $products_query = Product::query();
+
+        $filterController = new FilterController();
+        $products_query = $filterController->filterProducts($request);
+
+        // $products = $products_query->paginate(12);
+        $brands = Brand::distinct('name')->pluck('name');
+        return view('public.pages.product.product-search', compact('products', 'categories', 'sub_categories', 'laptop_properties',
+        'brands', 'cpu_brands', 'cpu_series', 'cpu_models', 'display_resolutions', 
+        'display_sizes', 'ram_sizes', 'storage_capacitys', 'dedicated_graphics'));
     }
 
     // Get list order for user

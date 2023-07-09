@@ -14,6 +14,7 @@
             </div>
             <form method="POST" action="{{ route('blog.update', $blog->id) }}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="card">
                     <div class="card-body">
                         <div class="container">
@@ -68,7 +69,7 @@
                                         <textarea name="content" id="content"></textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary form-control">TẠO BÀI VIẾT</button>
+                                <button type="submit" class="btn btn-primary form-control">CẬP NHẬT BÀI VIẾT</button>
                             </div>
                         </div>
                     </div>

@@ -69,7 +69,7 @@
                          <div class="d-flex">
                              <a class=" btn-square mr-2 btn-link twitter" href="#"><i
                                      class="fab fa-twitter"></i></a>
-                             <a class="btn-square mr-2 btn-link facebook" href="#"><i
+                             <a class="btn-square mr-2 btn-link facebook" href="{{ $settings->link_facebook }}"><i
                                      class="fab fa-facebook-f"></i></a>
                              <a class=" btn-square mr-2 btn-link instagram" href="#"><i
                                      class="fab fa-instagram"></i></a>

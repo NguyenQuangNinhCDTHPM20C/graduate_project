@@ -221,6 +221,9 @@ class AuthController extends Controller
         return redirect()->route('admin.login')->with('success', 'Email verification successful. Please log in.');
     }
 
-    //Login with QRCode
+    public function showResetPassForm()
+    {
+        return view('public.pages.auth.reset-password');
+    }
     
 }
