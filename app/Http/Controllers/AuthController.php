@@ -5,46 +5,155 @@ use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
-use App\Mail\EmailVerification;
-use App\Mail\EmailVerificationAdmin;
-use Illuminate\Http\Request;
-use App\Models\Account;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Http\Controllers\Api\GoogleController;
 use App\Http\Controllers\Api\FacebookController;
+use Illuminate\Support\Str;
+use App\Mail\ChangedPassword;
+use App\Mail\EmailVerification;
+use App\Mail\ResetPassEmailVerification;
+use App\Mail\ChangedPasswordAdmin;
+use App\Mail\EmailVerificationAdmin;
+use App\Mail\ResetPassEmailVerificationAdmin;
+use Illuminate\Http\Request;
+use App\Models\Account;
+
 class AuthController extends Controller
 {
-    //Auth for Admin
+    //=================Auth for Admin======================//
     public function showLoginFormAdmin()
     {
         return view('Admin.pages.auth.login');
     }
-    //Auth for Public
-    public function showLoginFormPublic()
-    {
-        return view('public.pages.auth.login');
-    }
-    
+
     public function login_admin(Request $request){
         $account = Account::where('email', $request->email)->first();
         
         if ($account && Hash::check($request->password, $account->password)) {
             if($account->role == 1 && $account->email_verified_at != null)
              {
-                session(['account' => $account]); // Lưu tên người dùng vào session
+                session(['account' => $account]);
                 session(['auth_check_admin'=>true]);
                 $account->qr_token = bcrypt($account->phone_number.$account->email.Str::random(40));
                 $account->save();
+                session()->put('success', 'Đăng nhập thành công');
                 return redirect()->route('index');
             }
             else{
-                return back()->withErrors(['error' => 'Tài khoản chưa xác thực email hoặc không hợp lệ.']);
+                session()->put('error', 'Tài khoản chưa xác thực hoặc email không hợp lệ');
+                return redirect()->back();
             }
         }
-            return back()->withErrors(['error' => 'Email hoặc mật khẩu không đúng.']);
+        session()->put('error', 'Email hoặc mật khẩu không đúng');
+        return redirect()->back();
     }
 
+    public function logout_admin(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('admin.login');
+    }
+
+    public function showRegisterFormAdmin()
+    {
+        return view('Admin.pages.auth.logup');
+    }
+
+    public function register_admin(Request $request)
+    {
+        $validatedData = $request->validate([
+            'email' => 'required|email|',
+            'password' => 'required|min:6',
+            'confirm_password' => 'required|same:password',
+        ]);
+        $existing_email = Account::where('email', $validatedData['email'])->first();
+        if(!$existing_email){
+        $verificationCode = Str::random(40);
+        $account = new Account;
+        $account->username = explode('@', $validatedData['email'])[0];
+        $account->email = $validatedData['email'];
+        $account->password = bcrypt($validatedData['password']);
+        $account->photo = 'assets/user/avt_defaut.png';
+        $account->role = 1;
+        $account->verification_token = $verificationCode;
+        $account->save();
+        Mail::to($account->email)->send(new EmailVerificationAdmin($account, $verificationCode));
+        session()->put('success', 'Đăng ký thành công, vui lòng xác nhận Email!');
+        }else{
+            session()->put('error', 'Đăng ký thất bại, Email đã được sử dụng');
+        }
+        return redirect()->route('admin.logup');
+    }
+
+    public function verifyEmailAdmin($token)
+    {
+        $account = Account::where('verification_token', $token)->first();
+
+        if (!$account) {
+            return abort(404);
+        }
+        $account->email_verified_at = now();
+        $account->verification_token = null;
+        $account->save();
+        session()->put('success', 'Xác minh thành công, vui lòng đăng nhập!');
+        return redirect()->route('admin.login');
+    }
+    public function showInputEmailAdmin()
+    {
+        return view('admin.pages.auth.input-email');
+    }
+
+    public function showResetPassFormAdmin($id, $token)
+    {
+        $account = Account::where('id', $id)->where('verification_token', $token)->first();
+        if(!$account){
+            return abort(404);
+        }
+        return view('admin.pages.auth.reset-password', compact('account'));
+    }
+    
+    public function SendEmailResetPassAdmin(Request $request){
+        $email = $request->input('email');
+        $verificationCode = Str::random(40);
+        $account = Account::where('email', $email)->first();
+
+        if (!$account) {
+            session()->put('error', 'Email chưa được đăng kí !');
+        }else{
+            $account->verification_token = $verificationCode;
+            $account->save();
+            Mail::to($account->email)->send(new ResetPassEmailVerificationAdmin($account, $verificationCode));
+            session()->put('success', 'Vui lòng xác minh đổi mật khẩu trong email!');
+        }
+        return redirect()->back();
+    }
+
+    public function resetPassAdmin(Request $request){
+        $password = $request->input('password');
+        $id = $request->input('account_id');
+        $token = $request->input('token');
+        $account = Account::where('id', $id)->where('verification_token', $token)->first();
+
+        if (!$account) {
+            session()->put('error', 'Đã có lỗi xảy ra');
+            return abort(404);
+        }
+        $account->password = bcrypt($password);
+        $account->verification_token = null;
+        $account->save();
+        session()->put('success', 'Đổi mật khẩu thành công');
+        Mail::to($account->email)->send(new ChangedPasswordAdmin($account));
+        return redirect()->route('index');
+    }
+
+    // =========================Auth for Public====================//
+    public function showLoginFormPublic()
+    {
+        return view('public.pages.auth.login');
+    }
+    
     public function login_public(Request $request){
         $account = Account::where('email', $request->email)->first();
         
@@ -55,31 +164,32 @@ class AuthController extends Controller
                 session(['auth_check'=>true]);
                 $account->qr_token = bcrypt($account->phone_number.$account->email.Str::random(40));
                 $account->save();
+                session()->put('success', 'Đăng nhập tài khoản thành công!');
                 return redirect()->route('home');
             }
             else{
-                return back()->withErrors(['error' => 'Tài khoản chưa xác thực email hoặc không hợp lệ.']);
+                session()->put('error', 'Tài khoản chưa xác thực email hoặc không hợp lệ.');
+                return redirect()->back();
             }
         }
-            return back()->withErrors(['error' => 'Email hoặc mật khẩu không đúng.']);
+        session()->put('error', 'Email hoặc mật khẩu không đúng.');
+        return redirect()->back();
     }
     
     public function check_qr($qrToken)
     {
         $account = Account::where('qr_token', '$2y$10$gmiOA3GJiMXgJ/.85EpYwejxxCTE5afj8FWcf6mSbFcdjrAjjQAhC')->first();
-        dd($account);
         if ($account) {
             if ($account->role == 2) {
                 session(['account' => $account]);
                 session(['auth_check' => true]);
 
-                //Check existing account is google account
                 if ($account->google_id !== null) {
                     $googleController = new GoogleController;
                     $googleRequest = Request::create('/login/google', 'GET');
                     return $googleController->callAction('handleGoogleCallback', [$googleRequest]);
                 }
-                //Check existing account is facebook account
+
                 if ($account->facebook_id !== null) {
                     $facebookController = new FacebookController;
                     $facebookRequest = Request::create('/login/facebook', 'GET');
@@ -97,29 +207,18 @@ class AuthController extends Controller
     {
         Auth::logout();
 
-        $account = Account::where('id', session('account')->id)->first();
-        $account->qr_token = null;
-        $account->save();
+        // $account = Account::where('id', session('account')->id)->first();
+        // $account->qr_token = null;
+        // $account->save();
 
         $request->session()->invalidate();
-
+        
         $request->session()->regenerateToken();
-
        
         return redirect()->route('public.login');
     }
     
-    public function logout_admin(Request $request)
-    {
-        Auth::logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
-       
-        return redirect()->route('admin.login');
-    }
+    
 
     public function showRegisterForm()
     {
@@ -128,17 +227,14 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        // Validate input data
         $validatedData = $request->validate([
-            'email' => 'required|email|unique:accounts',
+            'email' => 'required|email',
             'password' => 'required|min:6',
             'confirm_password' => 'required|same:password',
         ]);
         $existing_email = Account::where('email', $validatedData['email'])->first();
         if(!$existing_email){
-        // Generate verification code
         $verificationCode = Str::random(40);
-        // Create new account
         $account = new Account;
         $account->username = explode('@', $validatedData['email'])[0];
         $account->email = $validatedData['email'];
@@ -148,14 +244,12 @@ class AuthController extends Controller
         $account->verification_token = $verificationCode;
         $account->save();
 
-        // Send email verification
         Mail::to($account->email)->send(new EmailVerification($account, $verificationCode));
-        $request->session()->flash('message', 'Đăng ký thành công, vui lòng xác nhận email!');
-        }else{
-            $request->session()->flash('error', 'Đăng ký thất bại, email đã được sử dụng!');
+        session()->put('success', 'Đăng ký thành công, vui lòng xác nhận Email!');
+        return redirect()->back();
         }
-        // Redirect to a success page or show a success message
-        return redirect()->route('logup');
+        session()->put('error', 'Đăng ký thất bại, Email đã được sử dụng');
+        return redirect()->back();
     }
 
     public function verifyEmail($token)
@@ -163,67 +257,72 @@ class AuthController extends Controller
         $account = Account::where('verification_token', $token)->first();
 
         if (!$account) {
-            return redirect()->route('logup')->with('error', 'Invalid verification token.');
+            return abort(404);
         }
 
         $account->email_verified_at = now();
         $account->verification_token = null;
         $account->save();
-
-        // Chuyển hướng đến trang đăng nhập hoặc hiển thị thông báo xác minh thành công
-        return redirect()->route('public.login')->with('success', 'Email verification successful. Please log in.');
+        session()->put('success', 'Xác minh email thành công, vui lòng đăng nhập');
+        return redirect()->route('public.login');
     }
 
-    public function showRegisterFormAdmin()
+    public function showInputEmail()
     {
-        return view('Admin.pages.auth.logup');
+        return view('public.pages.auth.input-email');
     }
 
-    public function register_admin(Request $request)
+    public function showResetPassForm($id, $token)
     {
-        // Validate input data
-        $validatedData = $request->validate([
-            'email' => 'required|email|unique:accounts',
-            'password' => 'required|min:6',
-            'confirm_password' => 'required|same:password',
-        ]);
-        // Generate verification code
-        $verificationCode = Str::random(40);
-        // Create new account
-        $account = new Account;
-        $account->username = explode('@', $validatedData['email'])[0];
-        $account->email = $validatedData['email'];
-        $account->password = bcrypt($validatedData['password']);
-        $account->role = 1;
-        $account->verification_token = $verificationCode;
-        $account->save();
-
-        // Send email verification
-        Mail::to($account->email)->send(new EmailVerificationAdmin($account, $verificationCode));
-
-        // Redirect to a success page or show a success message
-        return redirect()->route('admin.logup');
-    }
-
-    public function verifyEmailAdmin($token)
-    {
-        $account = Account::where('verification_token', $token)->first();
-
-        if (!$account) {
-            return redirect()->route('admin.logup')->with('error', 'Invalid verification token.');
+        $account = Account::where('id', $id)->where('verification_token', $token)->first();
+        if(!$account){
+            return abort(404);
         }
-
-        $account->email_verified_at = now();
-        $account->verification_token = null;
-        $account->save();
-
-        // Chuyển hướng đến trang đăng nhập hoặc hiển thị thông báo xác minh thành công
-        return redirect()->route('admin.login')->with('success', 'Email verification successful. Please log in.');
-    }
-
-    public function showResetPassForm()
-    {
-        return view('public.pages.auth.reset-password');
+        return view('public.pages.auth.reset-password', compact('account'));
     }
     
+    public function SendEmailResetPass(Request $request){
+        $email = $request->input('email');
+        $verificationCode = Str::random(40);
+        $account = Account::where('email', $email)->first();
+
+        if (!$account) {
+            session()->put('error', 'Email chưa được đăng kí !');
+        }else{
+            $account->verification_token = $verificationCode;
+            $account->save();
+            Mail::to($account->email)->send(new ResetPassEmailVerification($account, $verificationCode));
+            session()->put('success', 'Vui lòng xác minh đổi mật khẩu trong email!');
+        }
+        return redirect()->back();
+    }
+
+    public function resetPass(Request $request){
+        $password = $request->input('password');
+        $id = $request->input('account_id');
+        $token = $request->input('token');
+        $account = Account::where('id', $id)->where('verification_token', $token)->first();
+
+        if (!$account) {
+            session()->put('error', 'Đã có lỗi xảy ra');
+            return abort(404);
+        }
+        $account->password = bcrypt($password);
+        $account->verification_token = null;
+        $account->save();
+        session()->put('success', 'Đổi mật khẩu thành công');
+        Mail::to($account->email)->send(new ChangedPassword($account));
+        if($account->role == 2)
+        {
+            session(['account' => $account]);
+            session(['auth_check'=>true]);
+            return redirect()->route('home');
+        }
+        else{
+            session(['account' => $account]);
+            session(['auth_check_admin'=>true]);
+            return redirect()->route('index');
+        }
+        return redirect()->route('home');
+    }
 }

@@ -159,7 +159,7 @@ class UserController extends Controller
     // Get list order for user
     public function orders(){
         $account_id = session('account')->id;
-        $orders = Invoice::where('account_id', '=', $account_id)->get();
+        $orders = Invoice::where('account_id', '=', $account_id)->orderBy('created_at', 'desc')->get();
         foreach ($orders as $order) {
             $order->order_date = Carbon::parse($order->order_date)->format('d/m/Y');
         }
@@ -185,16 +185,8 @@ class UserController extends Controller
     //Get info account
     public function dash_board(){
         $account_id = session('account')->id;
-        $orders = DB::table('invoices')
-        ->join('invoice_details', 'invoices.id', '=', 'invoice_details.invoice_id')
-        ->join('products', 'invoice_details.product_id', '=', 'products.id')
-        ->select('invoices.*', 'invoice_details.quantity', 'invoice_details.price', 'products.name as product_name')
-        ->where('invoices.account_id', '=', $account_id)
-        ->get();
-
-        foreach ($orders as $order) {
-            $order->order_date = Carbon::parse($order->order_date)->format('d/m/Y');
-        }
+        $invoice = Invoice::where('account_id', $account_id)->first();
+        $orders = InvoiceDetail::where('invoice_id', $invoice->id)->orderBy('created_at', 'desc')->get();
 
         $favorites = FavoriteDetail::join('favorites', 'favorite_details.favorite_id', '=', 'favorites.id')
         ->where('favorites.account_id', $account_id)

@@ -8,22 +8,21 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class EmailVerificationAdmin extends Mailable
+class ChangedPasswordAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $account;
     public $verificationToken;
 
-    public function __construct(Account $account, $verificationToken)
+    public function __construct(Account $account)
     {
         $this->account = $account;
-        $this->verificationToken = $verificationToken;
     }
 
     public function build()
     {
-        return $this->view('Admin.pages.auth.mail.verify-email')
-            ->subject('Xác minh Email');
+        return $this->view('admin.pages.auth.mail.changed-pass')
+            ->subject('Thay đổi mật khẩu thành công');
     }
 }

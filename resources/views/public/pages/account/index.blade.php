@@ -58,7 +58,6 @@
                                     <table class="table table-border table-lgpading">
                                         <tbody>
                                             <tr>
-                                                <th>STT</th>
                                                 <th>Code</th>
                                                 <th>Ngày đặt</th>
                                                 <th>Sản phẩm</th>
@@ -66,11 +65,12 @@
                                             </tr>
                                             @foreach ($orders as $order)
                                                 <tr>
-                                                    <td>{{ $loop->index }}</td>
-                                                    <td>{{ $order->code }}</td>
-                                                    <td>{{ $order->order_date }}</td>
-                                                    <td>{{ $order->product_name }}</td> <!-- Đóng dấu nháy đơn ở đây -->
-                                                    <td>{{ $order->price }}</td>
+                                                    <td>{{ $order->invoice->code ? $order->invoice->code : '' }}</td>
+                                                    <td>{{ $order->invoice->order_date ? \Carbon\Carbon::parse($order->invoice->order_date)->format('d/m/Y') : '' }}
+                                                    </td>
+                                                    <td>{{ $order->product->name ? $order->product->name : '' }}</td>
+                                                    <!-- Đóng dấu nháy đơn ở đây -->
+                                                    <td>{{ number_format($order->price, 0, ',', '.') }}đ</td>
                                                 </tr>
                                             @endforeach
                                         @else

@@ -3,7 +3,7 @@
 @section('title', 'Double-N shop')
 
 @section('styles')
-    <style>
+    {{-- <style>
         .jq-toast-wrap {
             z-index: 900000 !important;
             display: block;
@@ -381,22 +381,10 @@
             line-height: 24px;
             color: #7a7a7a;
         }
-    </style>
+    </style> --}}
 @endsection
 
 @section('content')
-    <!-- Shop Detail Start -->
-    <div class="jq-toast-wrap" role="alert" aria-live="polite" style="left: 643px; bottom: 20px;">
-        <div class="jq-toast-single" style="text-align: left;"><span class="jq-toast-loader"></span><span
-                class="close-jq-toast-single">×</span>
-            <div class="cart-msg">
-                <p><i class="fa-solid fa-check"></i> <span id="messageText">{{ session('message') }}</span>
-
-                </p>
-                <a class="button button-red" href="/account/wishlist">Quản lý danh sách</a>
-            </div>
-        </div>
-    </div>
     <div class="container-fluid pb-5">
         <div class="row px-xl-5">
             <div class="col-12">
@@ -500,8 +488,7 @@
                         <input type="hidden" name="id" value="{{ $product->id }}">
                         <input type="hidden" name="name" value="{{ $product->name }}">
                         <input type="hidden" name="price" value="{{ $product->discount_price }}">
-                        <input type="hidden" name="image"
-                            value="{{ optional($product->featured_image)->image_path }}">
+                        <input type="hidden" name="image" value="{{ optional($product->featured_image)->image_path }}">
                         <button class="btn btn-primary px-3 bg-number-left bg-number-right"><i
                                 class="fa fa-shopping-cart mr-1"></i> Thêm giỏ hàng</button>
                         </form>

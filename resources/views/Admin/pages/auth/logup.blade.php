@@ -35,7 +35,10 @@
                             <label>Mật khẩu</label>
                             <div class="pass-group">
                                 <input type="password" class="pass-input" name="password" id="password"
-                                    placeholder="Mật khẩu" required="" autofocus>
+                                    placeholder="Mật khẩu"
+                                    pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+                                    title="Mật khẩu phải có ít nhất 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt (@,$,!,%,*,?,&)"
+                                    autocomplete="new-password" required="" autofocus>
                                 <span class="fas toggle-password fa-eye-slash"></span>
                             </div>
                             <div class="text-danger pt-2">
@@ -45,7 +48,7 @@
                             <label>Nhập lại mật khẩu</label>
                             <div class="pass-group">
                                 <input type="password" class="pass-input" name="confirm_password" id="password"
-                                    placeholder="Xác nhận mật khẩu" required="" autofocus>
+                                    placeholder="Xác nhận mật khẩu" autocomplete="new-password" required="" autofocus>
                                 <span class="fas toggle-password fa-eye-slash"></span>
                             </div>
                             <div class="text-danger pt-2">
@@ -60,8 +63,7 @@
                     </div>
                 </div>
                 <div class="login-img">
-                    <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/login.jpg"
-                        alt="img">
+                    <img src="{{ asset('images/background-login.jpg') }}" alt="img">
                 </div>
             </div>
         </Form>

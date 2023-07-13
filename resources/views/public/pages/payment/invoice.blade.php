@@ -20,6 +20,20 @@
                         <div class="card-header">
                             Ngày đặt
                             <strong>{{ \Carbon\Carbon::parse($invoice->order_date)->format('d/m/Y') }}</strong>
+
+                            Trạng thái:@if ($invoice->status == 4)
+                                <strong class="pl-3"> Không thành công</strong>
+                            @elseif ($invoice->status == 3)
+                                <strong>Thành công</strong>
+                            @elseif($invoice->status == 2)
+                                <strong>Đang vận chuyển</strong>
+                            @elseif($invoice->status == 1)
+                                <strong>Đã tiếp nhận</strong>
+                            @else
+                                <strong>Đang xử lý</strong>
+                            @endif
+                            </strong>
+                            </span>
                             <span class="float-right"> <strong>Code:</strong> {{ $invoice->code }}</span>
                         </div>
                         <div class="card-body">
@@ -61,8 +75,11 @@
                                         @foreach ($order_items as $index => $item)
                                             <tr>
                                                 <td class="center">{{ $index + 1 }}</td>
-                                                <td class="left strong">{{ $item->product->name }}</td>
-                                                <td class="left">{{ $item->product->description }}</td>
+                                                <td class="left strong"><a
+                                                        class="text-dark name-product text-decoration-none"
+                                                        href="{{ route('product-detail', ['slug' => optional($item->product)->slug]) }}">{{ optional($item->product)->name }}</a>
+                                                </td>
+                                                <td class="left">{{ optional($item->product)->description }}</td>
                                                 <td class="right">{{ number_format($item->price, 0, ',', '.') }}đ</td>
                                                 <td class="center">{{ $item->quantity }}</td>
                                                 <td class="right">

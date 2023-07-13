@@ -59,9 +59,10 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/logup', [AuthController::class, 'showRegisterForm'])->name('logup')->middleware('guest.public');
     Route::post('/logup', [AuthController::class, 'register'])->name('logup.submit')->middleware('guest.public');
     Route::get('/verify-email/{token}', [AuthController::class, 'verifyEmail'])->name('verify-email');
-    Route::get('/reset-password', [AuthController::class, 'showResetPassForm'])->name('reset-pass.form')->middleware('guest.public');
-    Route::post('/reset-password', [AuthController::class, 'resetPass'])->name('reset-pass.submit')->middleware('guest.public');
-    Route::get('/reset-password/{token}', [AuthController::class, 'resetPass'])->name('reset-pass');
+    Route::get('/reset-password/input-email', [AuthController::class, 'showInputEmail'])->name('input-email.form')->middleware('guest.public');
+    Route::post('/reset-password/send-email', [AuthController::class, 'SendEmailResetPass'])->name('input-email.submit')->middleware('guest.public');
+    Route::get('/reset-password/userId={id}&code={token}', [AuthController::class, 'showResetPassForm'])->name('reset-pass.form');
+    Route::post('/reset-password', [AuthController::class, 'resetPass'])->name('reset-pass.submit');
     //Routes for login google
     Route::get('/login/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google'); 
     Route::get('/callback/google', [GoogleController::class, 'handleGoogleCallback']);
@@ -180,4 +181,8 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
     Route::get('/logup', [AuthController::class, 'showRegisterFormAdmin'])->name('admin.logup')->middleware('guest.admin');
     Route::post('/logup', [AuthController::class, 'register_admin'])->name('admin.logup.submit');
     Route::get('/verify-email/{token}', [AuthController::class, 'verifyEmailAdmin'])->name('admin.verify-email');
+    Route::get('/reset-password/input-email', [AuthController::class, 'showInputEmailAdmin'])->name('admin.input-email.form')->middleware('guest.admin');
+    Route::post('/reset-password/send-email', [AuthController::class, 'SendEmailResetPassAdmin'])->name('admin.input-email.submit')->middleware('guest.admin');
+    Route::get('/reset-password/userId={id}&code={token}', [AuthController::class, 'showResetPassFormAdmin'])->name('admin.reset-pass.form');
+    Route::post('/reset-password', [AuthController::class, 'resetPassAdmin'])->name('admin.reset-pass.submit');
 });

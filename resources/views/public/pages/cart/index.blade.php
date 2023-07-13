@@ -60,12 +60,15 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                            </form>
+
                                         </div>
                                     </td>
                                     <td class="align-middle pl-5">
                                         {{ number_format($item->quantity * $item->price, 0, ',', '.') }}đ</td>
                                     <td class="align-middle">
+                                        <button class="btn btn-sm btn-info container-xl bg-number-left bg-number-right"><i
+                                                class="fa-solid fa-arrows-rotate"></i></button>
+                                        </form>
                                         <form action="{{ route('cart.remove') }}" method="POST">
                                             @csrf
                                             <input type="hidden" value="{{ $item->id }}" name="id"><button
@@ -133,7 +136,6 @@
 
         // Thêm sự kiện "click" cho nút "tăng"
         btnPlus.addEventListener('click', (event) => {
-            // event.preventDefault(); // Ngăn chặn hành vi mặc định của form
             let value = parseInt(input.value);
             value += 1;
             input.value = value;
@@ -141,13 +143,19 @@
 
         // Thêm sự kiện "click" cho nút "giảm"
         btnMinus.addEventListener('click', (event) => {
-            // event.preventDefault(); // Ngăn chặn hành vi mặc định của form
             let value = parseInt(input.value);
             value -= 1;
             if (value < 1) {
                 value = 1;
             }
             input.value = value;
+        });
+
+        // Thêm sự kiện "keypress" cho ô input
+        input.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định của phím Enter
+            }
         });
     </script>
 @stop

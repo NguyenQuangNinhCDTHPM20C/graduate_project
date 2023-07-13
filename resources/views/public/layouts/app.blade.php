@@ -27,6 +27,7 @@
     {{-- Styles custom --}}
     <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{{ asset('css/Public/style.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" rel="stylesheet" />
     @yield('styles')
 </head>
 
@@ -35,40 +36,11 @@
         use Illuminate\Support\Str;
     @endphp
     <!-- Messenger Plugin chat Code -->
+
     <div id="fb-root"></div>
-
-    <!-- Your Plugin chat code -->
-    <div id="fb-customer-chat" class="fb-customerchat">
-    </div>
-
-    <script>
-        var chatbox = document.getElementById('fb-customer-chat');
-        chatbox.setAttribute("page_id", "102783876216743");
-        chatbox.setAttribute("attribution", "biz_inbox");
-    </script>
-
-    <!-- Your SDK code -->
-    <script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                xfbml: true,
-                version: 'v17.0'
-            });
-        };
-
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-    {{-- <div id="fb-root"></div>
     <script async defer crossorigin="anonymous"
         src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v17.0&appId=1284707605765260&autoLogAppEvents=1"
-        nonce="HZS5fH7a"></script> --}}
+        nonce="HZS5fH7a"></script>
     @include('Public.partial.header')
 
     @yield('slider')
@@ -84,7 +56,6 @@
     </div>
 
     @include('Public.partial.footer')
-
     {{-- Scripts js common --}}
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -98,6 +69,23 @@
 
     <!-- Template Javascript -->
     <script src="js/Public/main.js"></script>
+    <!-- JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.0/js/toastr.js"></script>
+    <script>
+        $(document).ready(function() {
+            toastr.options.timeOut = 5000;
+            @if (Session::has('error'))
+                toastr.error('{{ Session::get('error') }}');
+            @elseif (Session::has('success'))
+                toastr.success('{{ Session::get('success') }}');
+            @elseif (Session::has('info'))
+                toastr.info('{{ Session::get('info') }}');
+            @endif
+            @php
+                session()->forget(['success', 'error', 'info']);
+            @endphp
+        });
+    </script>
     @yield('scripts')
 
 </body>
