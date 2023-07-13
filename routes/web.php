@@ -111,6 +111,11 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
         //routes for color
         Route::get('/color/list', [ColorController::class, 'index'])->name('color.list');
+        Route::post('/color/add', [ColorController::class, 'store'])->name('color.store');
+        Route::get('/color/add', [ColorController::class, 'create'])->name('color.add');
+        Route::get('/color/edit/{id}', [ColorController::class, 'edit'])->name('color.edit');
+        Route::put('/color/{id}', [ColorController::class, 'update'])->name('color.update');
+        Route::delete('/color/{id}', [ColorController::class, 'destroy'])->name('color.delete');
         //Routes for category
         Route::get('/category/list', [CategoryController::class, 'index'])->name('category.list');
         Route::post('/category/add', [CategoryController::class, 'store'])->name('category.store');

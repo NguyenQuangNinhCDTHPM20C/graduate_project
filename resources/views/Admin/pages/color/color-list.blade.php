@@ -7,13 +7,13 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Phụ mục</h4>
-                    <h6>Xem và tìm kiếm phụ mục ở đây</h6>
+                    <h4>Màu sản phẩm</h4>
+                    <h6>Xem và tìm kiếm màu sản phẩm ở đây</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="{{ route('subcategory.add') }}" class="btn btn-added"><img
+                    <a href="{{ route('color.add') }}" class="btn btn-added"><img
                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
-                            class="me-2" alt="img"> Thêm phụ mục</a>
+                            class="me-2" alt="img"> Thêm màu</a>
                 </div>
             </div>
 
@@ -126,17 +126,16 @@
                                             {{ $_color->name }}
                                         </td>
                                         <td>
-                                            <a class="me-3"
-                                                href="{{ route('subcategory.edit', ['slug' => $_sub_category->slug]) }}">
-                                                <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/edit.svg"
-                                                    alt="img">
+                                        <a class="me-3"
+                                                href="{{ route('color.edit', ['id' => $_color->id]) }}">
+                                                <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3 confirm-text"
-                                                onclick="$.fn.showConfirmationDeleteAlert('sub_category_delete_{{ $_sub_category->id }}')">
+                                            <a class="confirm-text"
+                                                onclick="$.fn.showConfirmationDeleteAlert('color_delete_{{ $_color->id }}')">
                                                 <img src="{{ asset('images/delete.svg') }}" alt="img">
                                             </a>
-                                            <form id="sub_category_delete_{{ $_sub_category->id }}"
-                                                action="{{ route('subcategory.delete', ['id' => $_sub_category->id]) }}"
+                                            <form id="color_delete_{{ $_color->id }}"
+                                                action="{{ route('color.delete', ['id' => $_color->id]) }}"
                                                 method="POST" style="display: none">
                                                 @csrf
                                                 @method('DELETE')
