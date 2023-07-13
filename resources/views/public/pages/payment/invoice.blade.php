@@ -36,8 +36,6 @@
                             @else
                                 <strong>Chờ xác nhận</strong>
                             @endif
-                            </strong>
-                            </span>
                             <span class="float-right">Code: <strong>{{ $invoice->code }}</strong> </span>
                         </div>
                         <div class="card-body">

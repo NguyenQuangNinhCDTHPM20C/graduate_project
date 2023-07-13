@@ -47,28 +47,27 @@
                                                 <input type="hidden" name="id" value="{{ $item->id }}">
                                                 <div class="input-group quantity mr-3" style="width: 130px;">
                                                     <div class="input-group-btn">
-                                                        <button class="btn btn-primary btn-minus bg-number-left">
+                                                        <span
+                                                            class="btn btn-primary btn-minus bg-number-left border border-dark-subtle">
                                                             <i class="fa fa-minus"></i>
-                                                        </button>
+                                                        </span>
                                                     </div>
-                                                    <input type="text"
-                                                        class="form-control bg-radius-none bg-secondary border-0 text-center"
-                                                        name="quantity" value="{{ $item->quantity }}">
+                                                    <input type="number"
+                                                        class="form-control bg-radius-none text-center text-dark border border-dark-subtle p-0"
+                                                        name="quantity" min="1" value="{{ $item->quantity }}">
                                                     <div class="input-group-btn">
-                                                        <button class="btn btn-primary btn-plus bg-number-right">
+                                                        <span
+                                                            class="btn btn-primary btn-plus bg-number-right border border-dark-subtle">
                                                             <i class="fa fa-plus"></i>
-                                                        </button>
+                                                        </span>
                                                     </div>
                                                 </div>
-
+                                            </form>
                                         </div>
                                     </td>
                                     <td class="align-middle pl-5">
                                         {{ number_format($item->quantity * $item->price, 0, ',', '.') }}đ</td>
                                     <td class="align-middle">
-                                        <button class="btn btn-sm btn-info container-xl bg-number-left bg-number-right"><i
-                                                class="fa-solid fa-arrows-rotate"></i></button>
-                                        </form>
                                         <form action="{{ route('cart.remove') }}" method="POST">
                                             @csrf
                                             <input type="hidden" value="{{ $item->id }}" name="id"><button
@@ -130,32 +129,36 @@
 @stop
 @section('scripts')
     <script>
-        const input = document.querySelector('.quantity input');
-        const btnMinus = document.querySelector('.quantity .btn-minus');
-        const btnPlus = document.querySelector('.quantity .btn-plus');
+        // Lựa chọn tất cả các phần tử .quantity
+        const quantityContainers = document.querySelectorAll('.quantity');
 
-        // Thêm sự kiện "click" cho nút "tăng"
-        btnPlus.addEventListener('click', (event) => {
-            let value = parseInt(input.value);
-            value += 1;
-            input.value = value;
-        });
+        // Duyệt qua từng phần tử .quantity
+        quantityContainers.forEach(quantityContainer => {
+            const input = quantityContainer.querySelector('input');
+            const btnMinus = quantityContainer.querySelector('.btn-minus');
+            const btnPlus = quantityContainer.querySelector('.btn-plus');
+            const form = quantityContainer.closest('form');
 
-        // Thêm sự kiện "click" cho nút "giảm"
-        btnMinus.addEventListener('click', (event) => {
-            let value = parseInt(input.value);
-            value -= 1;
-            if (value < 1) {
-                value = 1;
-            }
-            input.value = value;
-        });
+            // Thêm sự kiện "click" cho nút "tăng"
+            btnPlus.addEventListener('click', (event) => {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+                let value = parseInt(input.value);
+                value += 1;
+                input.value = value;
+                form.submit(); // Gửi form
+            });
 
-        // Thêm sự kiện "keypress" cho ô input
-        input.addEventListener('keypress', (event) => {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // Ngăn chặn hành vi mặc định của phím Enter
-            }
+            // Thêm sự kiện "click" cho nút "giảm"
+            btnMinus.addEventListener('click', (event) => {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+                let value = parseInt(input.value);
+                value -= 1;
+                if (value < 1) {
+                    value = 1;
+                }
+                input.value = value;
+                form.submit(); // Gửi form
+            });
         });
     </script>
 @stop
