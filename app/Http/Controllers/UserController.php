@@ -160,9 +160,6 @@ class UserController extends Controller
     public function orders(){
         $account_id = session('account')->id;
         $orders = Invoice::where('account_id', '=', $account_id)->orderBy('created_at', 'desc')->get();
-        foreach ($orders as $order) {
-            $order->order_date = Carbon::parse($order->order_date)->format('d/m/Y');
-        }
         return view('public.pages.account.order', compact('orders'));
     }
 
@@ -312,5 +309,15 @@ class UserController extends Controller
 
     public function contact(){
         return view('public.pages.contact.index');
+    }
+
+    public function cancel_order(Request $request)
+    {
+        $id = $request->input('invoice_id');
+        $invoice = Invoice::findOrFail($id);
+        $invoice->status = $request->input('status');
+        $invoice->save();
+        session()->put('success', 'Hủy đơn hàng thành công');
+        return redirect()->back();
     }
 }

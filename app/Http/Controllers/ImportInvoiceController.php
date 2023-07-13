@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\PurchaseInvoice;
-use App\Models\PurchaseInvoiceDetail;
+use App\Models\ImportInvoice;
+use App\Models\ImportInvoiceDetail;
 use Illuminate\Http\Request;
 
-class PurchaseInvoiceController extends Controller
+class ImportInvoiceController extends Controller
 {
       /**
      * Display a listing of the resource.
@@ -14,8 +14,8 @@ class PurchaseInvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = PurchaseInvoice::all();
-        return view('admin.pages.purchase_invoice.index',compact('invoices'));
+        $invoices = ImportInvoice::all();
+        return view('admin.pages.import_invoice.index',compact('invoices'));
     }
 
     /**
@@ -25,12 +25,12 @@ class PurchaseInvoiceController extends Controller
      */
     public function create()
     {
-        return view('admin.pages.purchase_invoice.add');
+        return view('admin.pages.import_invoice.add');
     }
 
     public function create_detail()
     {
-        return view('admin.pages.purchase_invoice.add-detail');
+        return view('admin.pages.import_invoice.add-detail');
     }
 
     /**
@@ -41,33 +41,31 @@ class PurchaseInvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        $invoice = new PurchaseInvoice;
+        $invoice = new ImportInvoice;
         $invoice->code = $request->input('code');
-        $invoice->name = $request->input('name');
+        $invoice->account_id = $request->input('account_id');
         $invoice->phone_number = $request->input('phone_number');
-        $invoice->order_date = $request->input('order_date');
         $invoice->total = $request->input('total');
         $invoice->save();
-        return redirect()->route('purchase-invoice.list')->with('success', 'Invoice has been updated successfully');
+        return redirect()->route('import-invoice.list')->with('success', 'Invoice has been updated successfully');
     }
 
     public function store_detail(Request $request)
     {
-            $invoice = new PurchaseInvoiceDetail;
-            $invoice->purchase_invoice_id = $request->input('purcharse_invoice_id');
+            $invoice = new ImportInvoiceDetail;
+            $invoice->import_invoice_id = $request->input('purcharse_invoice_id');
             $invoice->product_code= $request->input('product_code');
             $invoice->quantity = $request->input('quantity');
-            $invoice->order_date = $request->input('price');
             $invoice->price = $request->input('price');
             $invoice->save();
         
-        return redirect()->route('purchase-invoice.list')->with('success', 'Invoice has been updated successfully');
+        return redirect()->route('import-invoice.list')->with('success', 'Invoice has been updated successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Invoice  $invoice
+     * @param  \App\Models\ImportInvoice  $invoice
      * @return \Illuminate\Http\Response
      */
     public function show($code)
@@ -83,27 +81,26 @@ class PurchaseInvoiceController extends Controller
      */
     public function edit($code)
     {
-        $invoice = PurchaseInvoice::where('code', $code)->first();
-        return view('admin.pages.purchase_invoice.edit', compact('invoice'));
+        $invoice = ImportInvoice::where('code', $code)->first();
+        return view('admin.pages.import_invoice.edit', compact('invoice'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\PurchaseInvoice  $invoice
+     * @param  \App\Models\ImportInvoice  $invoice
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $invoice = PurchaseInvoice::findOrFail($id);
+        $invoice = ImportInvoice::findOrFail($id);
         $invoice->code = $request->input('code');
-        $invoice->name = $request->input('name');
+        $invoice->account_id = $request->input('account_id');
         $invoice->phone_number = $request->input('phone_number');
-        $invoice->order_date = $request->input('order_date');
         $invoice->total = $request->input('total');
         $invoice->save();
-        return redirect()->route('purchase-invoice.list')->with('success', 'Invoice has been updated successfully');
+        return redirect()->route('import-invoice.list')->with('success', 'Invoice has been updated successfully');
     }
 
     /**
@@ -114,9 +111,9 @@ class PurchaseInvoiceController extends Controller
      */
     public function destroy($id)
     {
-        $invoice = PurchaseInvoice::findOrFail($id);
-        PurchaseInvoiceDetail::where('purchase_invoice_id', $invoice->id)->delete();
+        $invoice = ImportInvoice::findOrFail($id);
+        ImportInvoiceDetail::where('import_invoice_id', $invoice->id)->delete();
         $invoice->delete();
-        return redirect()->route('purchase-invoice.list')->with('Invoice has been deleted successfully');
+        return redirect()->route('import-invoice.list')->with('Invoice has been deleted successfully');
     }
 }

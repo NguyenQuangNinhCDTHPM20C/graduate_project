@@ -11,7 +11,7 @@
                     <h6>Quản lý đơn hàng của bạn</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="{{ route('purchase-invoice.add') }}" class="btn btn-added"><img
+                    <a href="{{ route('import-invoice.add') }}" class="btn btn-added"><img
                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
                             alt="img" class="me-1">Thêm hóa đơn</a>
                 </div>
@@ -97,7 +97,7 @@
                                         </label>
                                     </th>
                                     <th>Code</th>
-                                    <th>Tên người mua </th>
+                                    <th>Tên người nhập </th>
                                     <th>Số điện thoại</th>
                                     <th>Ngày đặt</th>
                                     <th>Tổng tiền</th>
@@ -114,14 +114,14 @@
                                             </label>
                                         </td>
                                         <td>{{ $_invoices->code }}</td>
-                                        <td>{{ $_invoices->name }}</td>
-                                        <td>{{ $_invoices->phone_number }}</td>
-                                        <td>{{ $_invoices->order_date }}</td>
+                                        <td>{{ optional($_invoices->account)->name }}</td>
+                                        <td>{{ optional($_invoices->account)->phone_number }}</td>
+                                        <td>{{ $_invoices->created_at }}</td>
                                         <td>{{ $_invoices->total }}</td>
                                         </td>
                                         <td>
                                             <a class="me-3"
-                                                href="{{ route('purchase-invoice.edit', ['code' => $_invoices->code]) }}">
+                                                href="{{ route('import-invoice.edit', ['code' => $_invoices->code]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
                                             <a class="me-3 confirm-text"
@@ -129,7 +129,7 @@
                                                 <img src="{{ asset('images/delete.svg') }}" alt="img">
                                             </a>
                                             <form id="invoices_delete_{{ $_invoices->id }}"
-                                                action="{{ route('purchase-invoice.delete', ['id' => $_invoices->id]) }}"
+                                                action="{{ route('import-invoice.delete', ['id' => $_invoices->id]) }}"
                                                 method="POST" style="display: none">
                                                 @csrf
                                                 @method('DELETE')

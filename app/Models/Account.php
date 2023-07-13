@@ -24,7 +24,6 @@ class Account extends Model implements Authenticatable
         'verification_token',
         'google_id',
         'facebook_id',
-        'qr_token'
     ];
 
         /**

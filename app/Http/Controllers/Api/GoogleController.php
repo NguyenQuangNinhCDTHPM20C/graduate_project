@@ -24,7 +24,6 @@ class GoogleController extends Controller
             
             $existingUser = Account::where('email', $user->email)->first();
             if ($existingUser) {
-                $existingUser->qr_token = bcrypt($existingUser->phone_number.$existingUser->email.Str::random(40));
                 $existingUser->save();
                 session(['account' => $existingUser]);
                 session(['auth_check'=>true]);
@@ -37,7 +36,6 @@ class GoogleController extends Controller
                 $account->photo = $user->avatar;
                 $account->role = 2;
                 $account->google_id = $user->id;
-                $account->qr_token = bcrypt($account->phone_number.$account->email.Str::random(40));
                 $account->save();
                 session(['account' => $account]);
                 session(['auth_check'=>true]);

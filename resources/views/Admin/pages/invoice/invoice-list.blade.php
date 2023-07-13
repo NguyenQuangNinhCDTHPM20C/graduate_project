@@ -110,7 +110,7 @@
                                         </td>
                                         <td>{{ $_invoices->code }}</td>
                                         <td>{{ $_invoices->name }}</td>
-                                        <td>{{ $_invoices->order_date }}</td>
+                                        <td>{{ $_invoices->created_at }}</td>
                                         <td>{{ $_invoices->total }}</td>
                                         <td>
                                             @if ($_invoices->status == 1)

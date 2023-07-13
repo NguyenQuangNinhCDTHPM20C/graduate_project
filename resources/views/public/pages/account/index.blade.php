@@ -66,7 +66,7 @@
                                             @foreach ($orders as $order)
                                                 <tr>
                                                     <td>{{ $order->invoice->code ? $order->invoice->code : '' }}</td>
-                                                    <td>{{ $order->invoice->order_date ? \Carbon\Carbon::parse($order->invoice->order_date)->format('d/m/Y') : '' }}
+                                                    <td>{{ $order->invoice->created_at ? \Carbon\Carbon::parse($order->invoice->created_at)->format('d/m/Y') : '' }}
                                                     </td>
                                                     <td>{{ $order->product->name ? $order->product->name : '' }}</td>
                                                     <!-- Đóng dấu nháy đơn ở đây -->
