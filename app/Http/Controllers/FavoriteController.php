@@ -57,13 +57,12 @@ class FavoriteController extends Controller
                  $favoriteDetail->favorite_id = $favoriteId;
                  $favoriteDetail->product_id = $productId;
                  $favoriteDetail->save();
-                //  $message = 'Sản phẩm đã được thêm vào mục yêu thích.';
-                 session(['message' => 'Phần tử đã được xóa khỏi danh sách yêu thích.']);
+                 session()->put('success', 'Sản phẩm đã được thêm vào mục yêu thích !');
                  return redirect()->back();
              } 
          } else {
-             // if no login
-             return redirect()->route('public.login')->with('error', 'Vui lòng đăng nhập để thêm sản phẩm vào mục yêu thích.');
+             session()->put('error', 'Vui lòng đăng nhập!');
+             return redirect()->route('public.login');
          }
      }
      
@@ -126,11 +125,14 @@ class FavoriteController extends Controller
         $favoriteDetail = FavoriteDetail::where('favorite_id', $id)->first();
 
         if ($favoriteDetail) {
-            session(['message' => 'Sản phẩm đã được thêm vào mục yêu thích.']);
-            $favoriteDetail->delete();            
-            return redirect()->back();
-        } 
-            return redirect()->back()->with('error', 'Không tìm thấy phần tử để xóa.');
+            $favoriteDetail->delete();   
+            session()->put('success', 'Đã xóa sản phẩm khỏi danh sách yêu thích !') ;
+        }
+        else
+        {
+            session()->put('error', 'Không tìm thấy phần tử để xóa.') ;    
+        }
+        return redirect()->back();
        
     }
 
@@ -141,12 +143,12 @@ class FavoriteController extends Controller
         $favorite_detail = FavoriteDetail::where('favorite_id', $favorite->id)->where('product_id', $id)->first();
 
         if ($favorite_detail) {
-            session(['message' => 'Sản phẩm đã được thêm vào mục yêu thích.']);
-            $favorite_detail->delete();            
-            return redirect()->back();
-        } 
-            return redirect()->back()->with('error', 'Không tìm thấy phần tử để xóa.');
-      
+            $favorite_detail->delete();  
+            session()->put('success', 'Đã xóa sản phẩm khỏi danh sách yêu thích !') ;          
+        }else{
+            session()->put('error', 'Không tìm thấy phần tử để xóa.') ;
+        }
+        return redirect()->back();
     }
 
 }

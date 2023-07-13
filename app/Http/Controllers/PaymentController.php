@@ -135,9 +135,9 @@ class PaymentController extends Controller
                     $invoice_detail->save();
                 }
     
-                // Xóa session sau khi tạo hóa đơn thành công
-                $request->session()->pull('paymentRequest');
-                session()->put('success', 'Payment successful.');
+                $request->session()->forget(['paymentRequest','cart.items']);
+                \Cart::clear();
+                session()->put('success', 'Thanh toán đơn hàng thành công');
                 session()->save();                
                 return redirect()->route('invoice', $invoice->code);
             } else {

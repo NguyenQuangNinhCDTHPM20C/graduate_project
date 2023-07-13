@@ -22,10 +22,10 @@ class Invoices extends Migration
             $table->string('address');
             $table->string('phone');
             $table->string('email');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->bigInteger('total');
             $table->string('payment_method');
-            $table->tinyInteger('status')->nullable()->default(1);
+            $table->tinyInteger('status')->nullable()->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->foreign('account_id')->references('id')->on('accounts');

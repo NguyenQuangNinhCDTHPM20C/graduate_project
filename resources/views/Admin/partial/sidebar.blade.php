@@ -71,7 +71,7 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"
-                                class="{{ request()->routeIs('sales.list') || request()->routeIs('invoice.edit') ? 'active' : '' }}"><i
+                                class="{{ request()->routeIs('invoice.list') || request()->routeIs('invoice.edit') ? 'active' : '' }}"><i
                                     data-feather="shopping-cart"></i><span>Quản
                                     lý bán hàng</span><span class="menu-arrow"></span></a>
                             <ul>
@@ -93,14 +93,17 @@
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);" class=""><i data-feather="file"></i><span>Quản
+                            <a href="javascript:void(0);"
+                                class="{{ request()->routeIs('purchase-invoice.list') || request()->routeIs('purchase-invoice.add') ? 'active' : '' }}"><i
+                                    data-feather="file"></i><span>Quản
                                     lý mua hàng</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li class="{{ request()->routeIs('sales.list') ? 'active' : '' }}"><a class=""
-                                        href="{{ route('sales.list') }}">Kênh bán hàng</a>
+                                <li class="{{ request()->routeIs('purchase-invoice.list') ? 'active' : '' }}"><a
+                                        class="" href="{{ route('purchase-invoice.list') }}">Danh sách hóa
+                                        đơn</a></li>
+                                <li class="{{ request()->routeIs('purchase-invoice.add') ? 'active' : '' }}"><a
+                                        class="" href="{{ route('purchase-invoice.add') }}">Thêm hóa đơn</a>
                                 </li>
-                                <li class="{{ request()->routeIs('invoice.list') ? 'active' : '' }}"><a class=""
-                                        href="{{ route('invoice.list') }}">Danh sách hóa đơn</a></li>
                             </ul>
                         </li>
                         <li class="submenu">

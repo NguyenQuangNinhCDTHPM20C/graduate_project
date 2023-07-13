@@ -97,7 +97,7 @@
                                         <label>Mật khẩu mới: </label>
                                         <div class="controls">
                                             <input type="password" name="password" id="PasswordHash"
-                                                placeholder="New password">
+                                                autocomplete="new-password" place-horder="Mật khẩu mới">
                                         </div>
                                     </div>
                                     <div class="form-controls">

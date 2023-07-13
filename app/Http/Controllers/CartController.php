@@ -5,8 +5,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-// use App\Models\Cart;
-// use App\Models\CartDetail;
 use App\Models\Product;
 
 class CartController extends Controller
@@ -14,7 +12,6 @@ class CartController extends Controller
         public function index()
         {
             $cartItems = \Cart::getContent();
-            // dd($cartItems);
             return view('public.pages.cart.index', compact('cartItems'));
         }
 
@@ -23,13 +20,10 @@ class CartController extends Controller
             $cartItems = \Cart::getContent();
 
             foreach ($cartItems as $item) {
-                // Kiểm tra nếu sản phẩm có cùng ID và khác màu sắc đã tồn tại trong giỏ hàng
                 if ($item->id === $request->id && $item->attributes->color !== $request->color) {
-                    continue; // Bỏ qua mục hiện tại và kiểm tra các mục khác
+                    continue; 
                 }
             }
-
-            // Thêm mục mới vào giỏ hàng
             \Cart::add([
                 'id' => $request->id,
                 'name' => $request->name,
@@ -41,8 +35,8 @@ class CartController extends Controller
                 ]
             ]);
 
-            session()->flash('success', 'Product is Added to Cart Successfully!');
-            return redirect()->route('cart.list');
+            session()->put('success', 'Thêm sản phẩm vào giỏ hàng thành công!');
+            return redirect()->back();
         }
         
 
@@ -58,7 +52,7 @@ class CartController extends Controller
                 ]
             );
     
-            session()->flash('success', 'Item Cart is Updated Successfully !');
+            session()->put('success', 'Cập nhật giỏ hàng thành công!');
     
             return redirect()->route('cart.list');
         }
@@ -67,7 +61,7 @@ class CartController extends Controller
         public function remove(Request $request)
         {
             \Cart::remove($request->id);
-            session()->flash('success', 'Item Cart Remove Successfully !');
+            session()->put('success', 'Đã xóa sản phẩm khỏi giỏ hàng!');
 
             return redirect()->route('cart.list');
         }
@@ -76,7 +70,7 @@ class CartController extends Controller
         {
             \Cart::clear();
 
-            session()->flash('success', 'All Item Cart Clear Successfully !');
+            session()->put('success', 'Xóa giỏ hàng thành công !');
 
             return redirect()->route('cart.list');
         }

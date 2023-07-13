@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class EmailVerificationAdmin extends Mailable
+class ResetPassEmailVerificationAdmin extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -23,7 +23,7 @@ class EmailVerificationAdmin extends Mailable
 
     public function build()
     {
-        return $this->view('Admin.pages.auth.mail.verify-email')
-            ->subject('Xác minh Email');
+        return $this->view('admin.pages.auth.mail.reset-pass-verify')
+            ->subject('Xác nhận thay đổi mật khẩu');
     }
 }
