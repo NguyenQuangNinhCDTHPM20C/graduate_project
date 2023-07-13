@@ -56,7 +56,6 @@
                             <button href="javascript:void(0);" type="submit" class="btn btn-submit me-2">THÊM</button>
                             <a href="{{ route('brand.list') }}" class="btn btn-cancel">THOÁT</a>
                         </div>
-
                     </div>
                 </div>
         </div>

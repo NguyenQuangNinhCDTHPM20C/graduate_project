@@ -32,7 +32,7 @@
                 </a>
                 <form action="#">
                     <div class="searchinputs">
-                        <input type="text" placeholder="Search">
+                        <input type="text" placeholder="Tìm kiếm..">
                         <div class="search-addon">
                             <span><i data-feather="search" class="feather-14"></i></span>
                         </div>
@@ -40,8 +40,6 @@
                 </form>
             </div>
         </li>
-
-
         <li class="nav-item dropdown has-arrow flag-nav nav-item-box">
             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="javascript:void(0);" role="button">
                 <i data-feather="globe"></i>

@@ -7,7 +7,7 @@
                         <li class="{{ request()->routeIs('index') ? 'active' : '' }}">
                             <a href="{{ route('index') }}"><i data-feather="grid"></i><span>Bảng điều khiển</span></a>
                         </li>
-                        <li class="submenu">
+                        {{-- <li class="submenu">
                             <a href="javascript:void(0);"
                                 class="{{ request()->routeIs('chat') || request()->routeIs('email') ? 'active' : '' }}"><i
                                     data-feather="smartphone"></i><span>Ứng
@@ -18,7 +18,7 @@
                                 <li class="{{ request()->routeIs('email') ? 'active' : '' }}"><a class=""
                                         href="{{ route('email') }}">Email</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="submenu">
                             <a href="javascript:void(0);"
                                 class="{{ request()->routeIs('product.list') || request()->routeIs('product.add') || request()->routeIs('product.edit') || request()->routeIs('product.detail') ? 'active' : '' }}"><i

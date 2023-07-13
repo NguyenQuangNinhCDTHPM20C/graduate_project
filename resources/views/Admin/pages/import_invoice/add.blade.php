@@ -17,7 +17,7 @@
             <form method="post" action="{{ route('import-invoice.store') }}" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
-                <input type="hidden" name="account_id" value="{{ session->has('account') ? session('account')->id : '' }}">
+                <input type="hidden" name="account_id" value="{{ session()->has('account') ? session('account')->id : '' }}">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
