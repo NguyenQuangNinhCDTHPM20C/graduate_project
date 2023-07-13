@@ -1,24 +1,25 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\SubCategoryController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\Api\GoogleController;
-use App\Http\Controllers\Api\FacebookController;
-use App\Http\Controllers\Api\ZaloController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Api\FacebookController;
+use App\Http\Controllers\Api\GoogleController;
+use App\Http\Controllers\Api\ZaloController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseInvoiceController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -108,6 +109,8 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::get('/product/edit/{slug}', [ProductController::class, 'edit'])->name('product.edit');
         Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+        //routes for color
+        Route::get('/color/list', [ColorController::class, 'index'])->name('color.list');
         //Routes for category
         Route::get('/category/list', [CategoryController::class, 'index'])->name('category.list');
         Route::post('/category/add', [CategoryController::class, 'store'])->name('category.store');

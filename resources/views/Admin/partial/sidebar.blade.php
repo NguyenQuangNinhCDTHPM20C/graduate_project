@@ -29,6 +29,8 @@
                                         href="{{ route('product.list') }}">Danh sách sản phẩm</a></li>
                                 <li class="{{ request()->routeIs('product.add') ? 'active' : '' }}"><a class=""
                                         href="{{ route('product.add') }}">Thêm sản phấm</a></li>
+                                <li class="{{ request()->routeIs('color.list') ? 'active' : '' }}"><a class=""
+                                        href="{{ route('color.list') }}">Danh sách màu sản phẩm</a></li>
                             </ul>
                         </li>
                         <li class="submenu">
