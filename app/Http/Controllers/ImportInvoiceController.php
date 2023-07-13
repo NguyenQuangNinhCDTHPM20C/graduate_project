@@ -14,7 +14,7 @@ class ImportInvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = ImportInvoice::all();
+        $invoices = ImportInvoice::get();
         return view('admin.pages.import_invoice.index',compact('invoices'));
     }
 

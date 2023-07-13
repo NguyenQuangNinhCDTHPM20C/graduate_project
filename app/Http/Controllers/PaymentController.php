@@ -66,7 +66,7 @@ class PaymentController extends Controller
             return redirect()->route('payment.status')->withErrors('Lỗi thanh toán Paypal.');
         }
     }else{
-        $invoice = new Invoice;
+                $invoice = new Invoice;
                 $invoice->code = Invoice::max('code') ? Invoice::max('code') + 1 : 1001;
                 $invoice->account_id = $request->input('account_id');
                 $invoice->name = $request->input('name');
@@ -87,6 +87,7 @@ class PaymentController extends Controller
                     $invoice_detail->price = $cartItem['price'];
                     $invoice_detail->save();
                 }
+                \Cart::clear();
                 return redirect()->route('invoice', $invoice->code);    
     }
     return redirect()->route('checkout')->withErrors('Thanh toán thất bại.');

@@ -11,13 +11,13 @@ class ImportInvoice extends Model
 
     public $table = "import_invoices";
     protected $fillable = [
-        'name',
-        'entity_type',
-        'entity_id',
-        'image_path'
+        'code',
+        'account_id',
+        'supplier',
+        'total',
     ];
 
     public function account(){
-        return $this->belongTos(Account::class);
+        return $this->belongsTo(Account::class);
     }
 }
