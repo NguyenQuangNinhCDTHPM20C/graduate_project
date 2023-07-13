@@ -22,8 +22,6 @@
                              Thông tin cần biết
                          </h5>
                          <div class="d-flex flex-column justify-content-start">
-                             <a class="text-secondary mb-2" href="#">Chính
-                                 sách đổi trả</a>
                              <a class="text-secondary mb-2" href="{{ route('account.order') }}">Tra cứu
                                  đơn hàng</a>
                              <a class="text-secondary mb-2" href="{{ route('blogs') }}">Tin

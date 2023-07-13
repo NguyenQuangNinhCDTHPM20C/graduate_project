@@ -64,12 +64,6 @@
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Số lượng</label>
-                                    <input type="text" name="quantity" id="quantity" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
                                     <label>Giá</label>
                                     <input type="text" name="selling_price" id="selling_price" class="form-control"
                                         required>

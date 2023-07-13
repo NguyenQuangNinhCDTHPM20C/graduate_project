@@ -7,13 +7,13 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Tin tức</h4>
-                    <h6>Quản lý tin tức của bạn</h6>
+                    <h4>Màu sản phẩm</h4>
+                    <h6>Xem và tìm kiếm màu sản phẩm ở đây</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="{{ route('blog.create') }}" class="btn btn-added"><img
+                    <a href="{{ route('color.add') }}" class="btn btn-added"><img
                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
-                            alt="img" class="me-1">Thêm tin tức</a>
+                            class="me-2" alt="img"> Thêm màu</a>
                 </div>
             </div>
 
@@ -60,26 +60,36 @@
                     <div class="card" id="filter_inputs">
                         <div class="card-body pb-0">
                             <div class="row">
-                                <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="col-lg-2 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Enter Name">
+                                        <label>Danh mục/label>
+                                            <select class="select">
+                                                <option>Chọn danh mục</option>
+                                                <option>Computers</option>
+                                            </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="col-lg-2 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <input type="text" placeholder="Enter Reference No">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3 col-sm-6 col-12">
-                                    <div class="form-group">
+                                        <label>Chọn phụ mục</label>
                                         <select class="select">
-                                            <option>Completed</option>
-                                            <option>Paid</option>
+                                            <option>Choose Sub Category</option>
+                                            <option>Fruits</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="col-lg-2 col-sm-6 col-12">
                                     <div class="form-group">
+                                        <label>Category Code</label>
+                                        <select class="select">
+                                            <option>CT001</option>
+                                            <option>CT002</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-sm-6 col-12 ms-auto">
+                                    <div class="form-group">
+                                        <label>&nbsp;</label>
                                         <a class="btn btn-filters ms-auto"><img
                                                 src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/search-whites.svg"
                                                 alt="img"></a>
@@ -99,16 +109,12 @@
                                             <span class="checkmarks"></span>
                                         </label>
                                     </th>
-                                    <th>Danh mục</th>
-                                    <th>Phụ mục</th>
-                                    <th>Tác giả</th>
-                                    <th>Hình ảnh</th>
-                                    <th>Tiêu đề</th>
+                                    <th>Tên màu</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($blogs as $blog)
+                                @foreach ($color as $_color)
                                     <tr>
                                         <td>
                                             <label class="checkboxs">
@@ -116,32 +122,21 @@
                                                 <span class="checkmarks"></span>
                                             </label>
                                         </td>
-                                        <td>{{ $blog->category->name }}</td>
-                                        <td>{{ $blog->sub_category->name }}</td>
-                                        <td>{{ $blog->author }}</td>
                                         <td class="productimgname">
-                                            <a href="{{ route('blog.show', ['slug' => $blog->slug]) }}" class="product-img">
-                                                <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}">
-                                            </a>
+                                            {{ $_color->name }}
                                         </td>
                                         <td>
-                                            <a
-                                                href="{{ route('blog.show', ['slug' => $blog->slug]) }}">{{ $blog->title }}</a>
-                                        </td>
-                                        <td>
-                                            <a class="me-3" href="{{ route('blog.show', ['slug' => $blog->slug]) }}">
-                                                <img src="{{ asset('images/eye.svg') }}" alt="img">
-                                            </a>
-                                            <a class="me-3" href="{{ route('blog.edit', ['slug' => $blog->slug]) }}">
+                                        <a class="me-3"
+                                                href="{{ route('color.edit', ['id' => $_color->id]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
                                             <a class="confirm-text"
-                                                onclick="$.fn.showConfirmationDeleteAlert('blog_delete_{{ $blog->id }}')">
+                                                onclick="$.fn.showConfirmationDeleteAlert('color_delete_{{ $_color->id }}')">
                                                 <img src="{{ asset('images/delete.svg') }}" alt="img">
                                             </a>
-                                            <form id="blog_delete_{{ $blog->id }}"
-                                                action="{{ route('blog.destroy', ['id' => $blog->id]) }}" method="POST"
-                                                style="display: none">
+                                            <form id="color_delete_{{ $_color->id }}"
+                                                action="{{ route('color.delete', ['id' => $_color->id]) }}"
+                                                method="POST" style="display: none">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

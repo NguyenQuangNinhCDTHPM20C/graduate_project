@@ -55,7 +55,7 @@
                         </div>
                         <div class="col-lg-12">
                             <button href="javascript:void(0);" type="submit" class="btn btn-submit me-2">THÊM</button>
-                            <a href="{{ route('brand.list') }}" class="btn btn-cancel">THOÁT</a>
+                            <a href="{{ route('import-invoice.list') }}" class="btn btn-cancel">THOÁT</a>
                         </div>
                     </div>
                 </div>

@@ -3,78 +3,188 @@
 @section('title', 'Double-N shop | Admin Management')
 
 @section('content')
-    <div class="page-wrapper">
+    <div class="page-wrapper" style="min-height: 347px;">
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h6>
-                        <a href="{{ route('import-invoice.list') }}">Hóa đơn /</a>
-                        <span>Thêm sản phẩm chi tiết cho hóa đơn</span>
-                    </h6>
-                    <h4>Thêm mới sản phẩm cho hóa đơn mua hàng của bạn</h4>
+                    <h4>Thêm sản phẩm vào mua hàng</h4>
+                    <h6>Thêm sản phẩm vào mua hàng</h6>
                 </div>
             </div>
-            <form method="post" action="{{ route('import-invoice.store_detail') }}" enctype="multipart/form-data">
-                @csrf
-                @method('POST')
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Code</label>
-                                    <input type="text" name="code" class="form-control" required>
+            <div class="card" data-select2-id="16">
+                <div class="card-body" data-select2-id="15">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-6 col-12" data-select2-id="14">
+                            <div class="form-group" data-select2-id="13">
+                                <label>Nhà cung cấp</label>
+                                <div class="row" data-select2-id="12">
+                                    <div class="col-lg-10 col-sm-10 col-10" data-select2-id="11">
+                                        <select class="select select2-hidden-accessible" data-select2-id="1" tabindex="-1"
+                                            aria-hidden="true">
+                                            <option data-select2-id="3">Select</option>
+                                            <option data-select2-id="18">Supplier</option>
+                                            <span
+                                            class="select2 select2-container select2-container--default select2-container--below"
+                                            dir="ltr" data-select2-id="2" style="width: 100%;"><span
+                                                class="selection"><span class="select2-selection select2-selection--single"
+                                                    role="combobox" aria-haspopup="true" aria-expanded="false"
+                                                    tabindex="0" aria-disabled="false"
+                                                    aria-labelledby="select2-5qbi-container"><span
+                                                        class="select2-selection__rendered" id="select2-5qbi-container"
+                                                        role="textbox" aria-readonly="true"
+                                                        title="Select">Select</span><span class="select2-selection__arrow"
+                                                        role="presentation"><b
+                                                            role="presentation"></b></span></span></span><span
+                                                class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-2 col-sm-2 col-2 ps-0">
+                                        <div class="add-icon">
+                                            <a href="javascript:void(0);"><img
+                                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus1.svg"
+                                                    alt="img"></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Người mua</label>
-                                    <input type="text" name="name" class="form-control" required">
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Ngày mua</label>
+                                <div class="input-groupicon">
+                                    <input type="text" placeholder="DD-MM-YYYY" class="datetimepicker">
+                                    <div class="addonset">
+                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/calendars.svg"
+                                            alt="img">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Ngày đặt</label>
-                                    <input type="datetime-local" name="created_at" class="form-control" id="birthdaytime"
-                                        required name="birthdaytime">
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Product Name</label>
+                                <select class="select select2-hidden-accessible" data-select2-id="4" tabindex="-1"
+                                    aria-hidden="true">
+                                    <option data-select2-id="6">Choose</option>
+                                    <option>Supplier Name</option>
+                                    <span class="select2 select2-container select2-container--default" dir="ltr"
+                                    data-select2-id="5" style="width: 100%;"><span class="selection"><span
+                                            class="select2-selection select2-selection--single" role="combobox"
+                                            aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false"
+                                            aria-labelledby="select2-frm3-container"><span
+                                                class="select2-selection__rendered" id="select2-frm3-container"
+                                                role="textbox" aria-readonly="true" title="Choose">Choose</span><span
+                                                class="select2-selection__arrow" role="presentation"><b
+                                                    role="presentation"></b></span></span></span><span
+                                        class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Reference No.</label>
+                                <input type="text">
+                            </div>
+                        </div>
+                        <div class="col-lg-12 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Tên sản phẩm</label>
+                                <div class="input-groupicon">
+                                    <input type="text" placeholder="Scan/Search Product by code and select...">
+                                    <div class="addonset">
+                                        <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/scanners.svg"
+                                            alt="img">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Số điện thoại</label>
-                                    <input type="text" name="phone_number" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Tổng tiền</label>
-                                    <input type="text" name="total" class="form-control" required>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Giá mua</th>
+                                        <th class="text-end">Tổng tiền</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="productimgname">
+                                            <a class="product-img">
+                                                <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/product/product7.jpg"
+                                                    alt="product">
+                                            </a>
+                                            <a href="javascript:void(0);">Apple Earpods</a>
+                                        </td>
+                                        <td>10.00</td>
+                                        <td>2000.00</td>
+                                        <td class="text-end">2000.00</td>
+                                        <td>
+                                            <a class="delete-set"><img
+                                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/delete.svg"
+                                                    alt="svg"></a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="productimgname">
+                                            <a class="product-img">
+                                                <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/product/product6.jpg"
+                                                    alt="product">
+                                            </a>
+                                            <a href="javascript:void(0);">Macbook Pro</a>
+                                        </td>
+                                        <td>15.00</td>
+                                        <td>6000.00</td>
+                                        <td class="text-end">1000.00</td>
+                                        <td>
+                                            <a class="delete-set"><img
+                                                    src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/delete.svg"
+                                                    alt="svg"></a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="form-group">
+                                <label>Status</label>
+                                <select class="select select2-hidden-accessible" data-select2-id="7" tabindex="-1"
+                                    aria-hidden="true">
+                                    <option data-select2-id="9">Choose Status</option>
+                                    <option>Completed</option>
+                                    <option>Inprogress</option>
+                                    <span class="select2 select2-container select2-container--default" dir="ltr"
+                                    data-select2-id="8" style="width: 100%;"><span class="selection"><span
+                                            class="select2-selection select2-selection--single" role="combobox"
+                                            aria-haspopup="true" aria-expanded="false" tabindex="0"
+                                            aria-disabled="false" aria-labelledby="select2-x0rx-container"><span
+                                                class="select2-selection__rendered" id="select2-x0rx-container"
+                                                role="textbox" aria-readonly="true" title="Choose Status">Choose
+                                                Status</span><span class="select2-selection__arrow" role="presentation"><b
+                                                    role="presentation"></b></span></span></span><span
+                                        class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-12">
-                            <button href="javascript:void(0);" type="submit" class="btn btn-submit me-2">THÊM</button>
-                            <a href="{{ route('brand.list') }}" class="btn btn-cancel">THOÁT</a>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <a href="javascript:void(0);" class="btn btn-submit me-2">Submit</a>
+                            <a href="https://dreamspos.dreamguystech.com/laravel/template/public/purchaselist"
+                                class="btn btn-cancel">Cancel</a>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
-        </form>
     </div>
-    </div>
-@endsection
-@section('scripts')
-    <script>
-        function previewImage(event) {
-            // Lấy đối tượng input file và đối tượng img
-            var input = event.target;
-            var img = document.getElementById('preview-image');
-
-            // Tạo URL từ tệp được chọn
-            var url = URL.createObjectURL(input.files[0]);
-
-            // Gán URL cho thuộc tính src của img
-            img.src = url;
-        }
-    </script>
 @endsection

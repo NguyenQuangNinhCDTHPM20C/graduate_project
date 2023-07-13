@@ -7,8 +7,8 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Add Blog</h4>
-                    <h6>Create the new blog</h6>
+                    <h4>Thêm tin tức</h4>
+                    <h6>Thêm tin tức ở đây</h6>
                 </div>
             </div>
             <form method="POST" action="{{ route('blog.store') }}" enctype="multipart/form-data">
@@ -23,19 +23,19 @@
                                 </div>
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label for="image">Image:</label>
+                                        <label for="image">Hình ảnh:</label>
                                         <input type="file" name="image" id="image">
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label for="author">Author:</label>
+                                        <label for="author">Tác giả:</label>
                                         <input type="text" name="author" id="author">
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label>Category</label>
+                                        <label>Danh mục</label>
                                         <select class="select" name="category" id="category" class="form-control" required>
                                             @foreach ($category as $_category)
                                                 <option>{{ $_category->name }}</option>
@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label>Sub Category</label>
+                                        <label>Phụ mục</label>
                                         <select class="select" name="sub_category" id="sub_category" class="form-control"
                                             required>
                                             @foreach ($sub_category as $_sub_category)
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label for="content">Content:</label>
+                                        <label for="content">Nội dung:</label>
                                         <textarea name="content" id="content"></textarea>
                                     </div>
                                 </div>

@@ -14,7 +14,7 @@
                     <h4>Cập nhật trạng thái hóa đơn của bạn</h4>
                 </div>
                 <div class="page-btn">
-                    <a href="" class="btn btn-added"><img
+                    <a href="{{ route('import-invoice.create_detail') }}" class="btn btn-added"><img
                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
                             alt="img" class="me-1">Thêm sản phẩm đơn hàng</a>
                 </div>

@@ -51,7 +51,6 @@ class BlogController extends Controller
         }
         $blog->content = $validatedData['content'];
         $blog->save();
-
         return redirect()->route('blog.index');
     }
 

@@ -1,24 +1,27 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\SubCategoryController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\Api\GoogleController;
-use App\Http\Controllers\Api\FacebookController;
-use App\Http\Controllers\Api\ZaloController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Api\FacebookController;
+use App\Http\Controllers\Api\GoogleController;
+use App\Http\Controllers\Api\ZaloController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseInvoiceController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImportInvoiceController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -109,6 +112,13 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::get('/product/edit/{slug}', [ProductController::class, 'edit'])->name('product.edit');
         Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+        //routes for color
+        Route::get('/color/list', [ColorController::class, 'index'])->name('color.list');
+        Route::post('/color/add', [ColorController::class, 'store'])->name('color.store');
+        Route::get('/color/add', [ColorController::class, 'create'])->name('color.add');
+        Route::get('/color/edit/{id}', [ColorController::class, 'edit'])->name('color.edit');
+        Route::put('/color/{id}', [ColorController::class, 'update'])->name('color.update');
+        Route::delete('/color/{id}', [ColorController::class, 'destroy'])->name('color.delete');
         //Routes for category
         Route::get('/category/list', [CategoryController::class, 'index'])->name('category.list');
         Route::post('/category/add', [CategoryController::class, 'store'])->name('category.store');
@@ -173,6 +183,7 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::post('/import-invoice/add/detail', [ImportInvoiceController::class, 'store_detail'])->name('import-invoice.store_detail');
         Route::get('/import-invoice/add/detail', [ImportInvoiceController::class, 'store_detail'])->name('import-invoice.add_detail');
         Route::get('/import-invoice/add', [ImportInvoiceController::class, 'create'])->name('import-invoice.add');
+        Route::get('/import-invoice/adddetail', [ImportInvoiceController::class, 'create_detail'])->name('import-invoice.create_detail');
         Route::get('/import-invoice/edit/{code}', [ImportInvoiceController::class, 'edit'])->name('import-invoice.edit');
         Route::put('/import-invoice/{id}', [ImportInvoiceController::class, 'update'])->name('import-invoice.update');
         Route::delete('/import-invoice/{id}', [ImportInvoiceController::class, 'destroy'])->name('import-invoice.delete');

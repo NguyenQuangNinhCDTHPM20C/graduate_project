@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 <label>Hình ảnh:</label>
                                 <img src="{{ asset($brand->image) }}" alt="{{ $brand->name }}">
-                                <input type="file" name="image" id="image" class="form-control" required
+                                <input type="file" name="image" id="image" class="form-control" 
                                     accept="image/jpeg, image/png, image/gif, image/svg+xml">
                             </div>
                         </div>

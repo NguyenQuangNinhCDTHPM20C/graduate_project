@@ -24,7 +24,7 @@
                         <div class="page-wrapper">
                             <div class="blog-title-area text-center">
                                 <span class="color-orange"><a class="bg-orange text-decoration-none"
-                                        href="tech-category-01.html" title="">Technology</a></span>
+                                        href="tech-category-01.html" title="">Công nghệ</a></span>
 
                                 <h3>{{ $blog->title }}</h3>
 
@@ -60,14 +60,6 @@
                             </div><!-- end content -->
 
                             <div class="blog-title-area">
-                                <div class="tag-cloud-single">
-                                    <span class="bg-orange">Tags</span>
-                                    <small><a href="#" title="">lifestyle</a></small>
-                                    <small><a href="#" title="">colorful</a></small>
-                                    <small><a href="#" title="">trending</a></small>
-                                    <small><a href="#" title="">another tag</a></small>
-                                </div><!-- end meta -->
-
                                 <div class="post-sharing">
                                     <ul class="list-inline">
                                         <li><a href="#" class="fb-button btn btn-primary"><i
@@ -149,7 +141,7 @@
                                                             title="{{ $random_blog->title }}">{{ $random_blog->title }}</a>
                                                     </h4>
                                                     <small><a href="blog-category-01.html"
-                                                            title="">Trends</a></small>
+                                                            title="">Xu hướng</a></small>
                                                     <small><a href="blog-category-01.html"
                                                             title="">{{ \Carbon\Carbon::parse($random_blog->created_at)->format('d/m/Y') }}</a></small>
                                                 </div><!-- end meta -->

@@ -119,7 +119,7 @@
                                         <td>{{ $user->phone_number }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                            {{ $user->address, $user->district, $user->province }}
+                                            {{ $user->address}}, {{$user->district}}, {{$user->province }}
                                         </td>
                                     </tr>
                                 @endforeach
