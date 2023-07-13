@@ -526,7 +526,7 @@
                     </div>
                     <div class="tab-content">
                         <div class="tab-pane fade show active" id="tab-pane-1">
-                            <h4 class="mb-3">Mô tả sản phấm</h4>
+                            <h4 class="mb-3">Mô tả sản phẩm</h4>
                             <p>{{ $product->description }}</p>
                         </div>
                         @if ($product->category->type == 'laptop' && $product_info)

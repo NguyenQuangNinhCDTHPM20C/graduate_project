@@ -78,7 +78,7 @@
                                                     title="">{{ $blog->sub_category_name }}</a></small>
                                             <small><a href="{{ route('blog-detail', ['slug' => $blog->slug]) }}"
                                                     title="">{{ $blog->created_at }}</a></small>
-                                            <small><a href="tech-author.html" title="">by
+                                            <small><a href="tech-author.html" title="">bởi
                                                     {{ $blog->author }}</a></small>
                                             <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i>
                                                     {{ $blog->view_count }}</a></small>

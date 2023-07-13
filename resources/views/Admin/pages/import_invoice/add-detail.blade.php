@@ -16,14 +16,14 @@
                     <div class="row">
                         <div class="col-lg-3 col-sm-6 col-12" data-select2-id="14">
                             <div class="form-group" data-select2-id="13">
-                                <label>Supplier Name</label>
+                                <label>Nhà cung cấp</label>
                                 <div class="row" data-select2-id="12">
                                     <div class="col-lg-10 col-sm-10 col-10" data-select2-id="11">
                                         <select class="select select2-hidden-accessible" data-select2-id="1" tabindex="-1"
                                             aria-hidden="true">
                                             <option data-select2-id="3">Select</option>
                                             <option data-select2-id="18">Supplier</option>
-                                        </select><span
+                                            <span
                                             class="select2 select2-container select2-container--default select2-container--below"
                                             dir="ltr" data-select2-id="2" style="width: 100%;"><span
                                                 class="selection"><span class="select2-selection select2-selection--single"
@@ -36,6 +36,7 @@
                                                         role="presentation"><b
                                                             role="presentation"></b></span></span></span><span
                                                 class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                        </select>
                                     </div>
                                     <div class="col-lg-2 col-sm-2 col-2 ps-0">
                                         <div class="add-icon">
@@ -49,7 +50,7 @@
                         </div>
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="form-group">
-                                <label>Purchase Date </label>
+                                <label>Ngày mua</label>
                                 <div class="input-groupicon">
                                     <input type="text" placeholder="DD-MM-YYYY" class="datetimepicker">
                                     <div class="addonset">
@@ -66,7 +67,7 @@
                                     aria-hidden="true">
                                     <option data-select2-id="6">Choose</option>
                                     <option>Supplier Name</option>
-                                </select><span class="select2 select2-container select2-container--default" dir="ltr"
+                                    <span class="select2 select2-container select2-container--default" dir="ltr"
                                     data-select2-id="5" style="width: 100%;"><span class="selection"><span
                                             class="select2-selection select2-selection--single" role="combobox"
                                             aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false"
@@ -76,6 +77,7 @@
                                                 class="select2-selection__arrow" role="presentation"><b
                                                     role="presentation"></b></span></span></span><span
                                         class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6 col-12">
@@ -86,7 +88,7 @@
                         </div>
                         <div class="col-lg-12 col-sm-6 col-12">
                             <div class="form-group">
-                                <label>Product Name</label>
+                                <label>Tên sản phẩm</label>
                                 <div class="input-groupicon">
                                     <input type="text" placeholder="Scan/Search Product by code and select...">
                                     <div class="addonset">
@@ -102,14 +104,10 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Product Name</th>
-                                        <th>QTY</th>
-                                        <th>Purchase Price($) </th>
-                                        <th>Discount($) </th>
-                                        <th>Tax %</th>
-                                        <th>Tax Amount($)</th>
-                                        <th class="text-end">Unit Cost($)</th>
-                                        <th class="text-end">Total Cost ($) </th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Số lượng</th>
+                                        <th>Giá mua</th>
+                                        <th class="text-end">Tổng tiền</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -124,10 +122,6 @@
                                         </td>
                                         <td>10.00</td>
                                         <td>2000.00</td>
-                                        <td>500.00</td>
-                                        <td>0.00</td>
-                                        <td>0.00</td>
-                                        <td class="text-end">2000.00</td>
                                         <td class="text-end">2000.00</td>
                                         <td>
                                             <a class="delete-set"><img
@@ -145,10 +139,6 @@
                                         </td>
                                         <td>15.00</td>
                                         <td>6000.00</td>
-                                        <td>100.00</td>
-                                        <td>0.00</td>
-                                        <td>0.00</td>
-                                        <td class="text-end">1000.00</td>
                                         <td class="text-end">1000.00</td>
                                         <td>
                                             <a class="delete-set"><img
@@ -160,49 +150,6 @@
                             </table>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12 float-md-right">
-                            <div class="total-order">
-                                <ul>
-                                    <li>
-                                        <h4>Order Tax</h4>
-                                        <h5>$ 0.00 (0.00%)</h5>
-                                    </li>
-                                    <li>
-                                        <h4>Discount </h4>
-                                        <h5>$ 0.00</h5>
-                                    </li>
-                                    <li>
-                                        <h4>Shipping</h4>
-                                        <h5>$ 0.00</h5>
-                                    </li>
-                                    <li class="total">
-                                        <h4>Grand Total</h4>
-                                        <h5>$ 0.00</h5>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label>Order Tax</label>
-                                <input type="text">
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label>Discount</label>
-                                <input type="text">
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label>Shipping</label>
-                                <input type="text">
-                            </div>
-                        </div>
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Status</label>
@@ -211,7 +158,7 @@
                                     <option data-select2-id="9">Choose Status</option>
                                     <option>Completed</option>
                                     <option>Inprogress</option>
-                                </select><span class="select2 select2-container select2-container--default" dir="ltr"
+                                    <span class="select2 select2-container select2-container--default" dir="ltr"
                                     data-select2-id="8" style="width: 100%;"><span class="selection"><span
                                             class="select2-selection select2-selection--single" role="combobox"
                                             aria-haspopup="true" aria-expanded="false" tabindex="0"
@@ -221,6 +168,7 @@
                                                 Status</span><span class="select2-selection__arrow" role="presentation"><b
                                                     role="presentation"></b></span></span></span><span
                                         class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                </select>
                             </div>
                         </div>
                         <div class="col-lg-12">

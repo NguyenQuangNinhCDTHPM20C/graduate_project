@@ -26,7 +26,7 @@
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
                                         <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}">
-                                        <label for="image">Image:</label>
+                                        <label for="image">Ảnh:</label>
                                         <input type="file" name="image" id="image">
                                     </div>
                                 </div>
