@@ -32,8 +32,7 @@ class Accounts extends Migration
             $table->string('verification_token')->nullable();
             $table->string('google_id')->nullable();
             $table->string('facebook_id')->nullable();
-            $table->string('qr_token')->nullable();
-            $table->timestamps(); // creawted_at, updated_at
+            $table->timestamps();
         });
     }
 

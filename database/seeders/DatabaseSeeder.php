@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductColorsTableSeeder::class);
         $this->call(LaptopsTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
-        $this->call(PurchaseInvoicesTableSeeder::class);
-        $this->call(PurchaseInvoiceDetailsTableSeeder::class);
+        $this->call(ImportInvoicesTableSeeder::class);
+        $this->call(ImportInvoiceDetailsTableSeeder::class);
     }
 }

@@ -46,7 +46,7 @@
                                                     <td>{{ $_order->code }}</td>
                                                     <td>{{ $_order->name }}</td>
                                                     <td>{{ $_order->phone }}</td>
-                                                    <td>{{ $_order->order_date }}</td>
+                                                    <td>{{ $_order->created_at }}</td>
                                                     <td>{{ $_order->payment_method }}</td>
                                                     <td>{{ number_format($_order->total, 0, ',', '.') }}đ</td>
                                                     <td><a href="{{ route('invoice', ['code' => $_order->code]) }}"

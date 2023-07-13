@@ -8,15 +8,16 @@
             <div class="page-header">
                 <div class="page-title">
                     <h6>
-                        <a href="{{ route('purchase-invoice.list') }}">Hóa đơn /</a>
+                        <a href="{{ route('import-invoice.list') }}">Hóa đơn /</a>
                         <span>Thêm</span>
                     </h6>
                     <h4>Thêm mới hóa đơn mua hàng của bạn</h4>
                 </div>
             </div>
-            <form method="post" action="{{ route('purchase-invoice.store') }}" enctype="multipart/form-data">
+            <form method="post" action="{{ route('import-invoice.store') }}" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
+                <input type="hidden" name="account_id" value="{{ session->has('account') ? session('account')->id : '' }}">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -26,16 +27,16 @@
                                     <input type="text" name="code" class="form-control" required>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
+                            {{-- <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Người mua</label>
                                     <input type="text" name="name" class="form-control" required">
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Ngày đặt</label>
-                                    <input type="datetime-local" name="order_date" class="form-control" id="birthdaytime"
+                                    <label>Ngày nhập</label>
+                                    <input type="datetime-local" name="created_at" class="form-control" id="birthdaytime"
                                         required name="birthdaytime">
                                 </div>
                             </div>
@@ -56,7 +57,6 @@
                             <button href="javascript:void(0);" type="submit" class="btn btn-submit me-2">THÊM</button>
                             <a href="{{ route('brand.list') }}" class="btn btn-cancel">THOÁT</a>
                         </div>
-
                     </div>
                 </div>
         </div>

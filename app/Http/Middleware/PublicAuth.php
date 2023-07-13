@@ -17,6 +17,7 @@ class PublicAuth
     public function handle($request, Closure $next)
     {
         if (!session::has('auth_check')) {
+            session()->put('info', 'Vui lòng đăng nhập');
             // Người dùng chưa đăng nhập, thực hiện xử lý tại đây
             return redirect()->route('public.login'); // Chuyển hướng đến trang đăng nhập
         }

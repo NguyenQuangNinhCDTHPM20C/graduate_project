@@ -69,7 +69,6 @@ class PaymentController extends Controller
         $invoice = new Invoice;
                 $invoice->code = Invoice::max('code') ? Invoice::max('code') + 1 : 1001;
                 $invoice->account_id = $request->input('account_id');
-                $invoice->order_date = Carbon::now();
                 $invoice->name = $request->input('name');
                 $invoice->address = $request->input('address').','.$request->input('district').','.$request->input('province');
                 $invoice->phone = $request->input('phone_number');
@@ -109,13 +108,11 @@ class PaymentController extends Controller
         try {
             $result = $payment->execute($execution, $this->apiContext);
             if ($result->getState() === 'approved') {
-                // Lấy các giá trị request từ session
                 $paymentRequest = $request->session()->get('paymentRequest');
     
                 $invoice = new Invoice;
                 $invoice->code = Invoice::max('code') ? Invoice::max('code') + 1 : 1001;
                 $invoice->account_id = $paymentRequest['account_id'];
-                $invoice->order_date = Carbon::now();
                 $invoice->name = $paymentRequest['name'];
                 $invoice->address = $paymentRequest['address'].','.$paymentRequest['district'].','.$paymentRequest['province'];
                 $invoice->phone = $paymentRequest['phone_number'];

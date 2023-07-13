@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PurchaseInvoiceDetails extends Migration
+class ImportInvoiceDetails extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class PurchaseInvoiceDetails extends Migration
      */
     public function up()
     {
-        Schema::create('purchase_invoice_details', function (Blueprint $table) {
+        Schema::create('import_invoice_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('purchase_invoice_id')->unsigned();
+            $table->integer('import_invoice_id')->unsigned();
             $table->string('product_code');
             $table->integer('quantity');
             $table->integer('price');
             $table->timestamps();
 
-            $table->foreign('purchase_invoice_id')->references('id')->on('purchase_invoices');
+            $table->foreign('import_invoice_id')->references('id')->on('import_invoices');
         });
     }
 
@@ -32,6 +32,6 @@ class PurchaseInvoiceDetails extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('purchase_invoice_details');
+        Schema::dropIfExists('import_invoice_details');
     }
 }

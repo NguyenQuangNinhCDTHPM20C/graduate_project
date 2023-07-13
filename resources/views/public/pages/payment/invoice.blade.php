@@ -18,23 +18,27 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            Ngày đặt
-                            <strong>{{ \Carbon\Carbon::parse($invoice->order_date)->format('d/m/Y') }}</strong>
+                            Ngày đặt:
+                            <strong
+                                class="pr-3">{{ \Carbon\Carbon::parse($invoice->created_at)->format('d/m/Y') }}</strong>
 
-                            Trạng thái:@if ($invoice->status == 4)
-                                <strong class="pl-3"> Không thành công</strong>
+                            Trạng thái:
+                            @if ($invoice->status == 5)
+                                <strong> Đã hủy</strong>
+                            @elseif ($invoice->status == 4)
+                                <strong> Không thành công</strong>
                             @elseif ($invoice->status == 3)
                                 <strong>Thành công</strong>
                             @elseif($invoice->status == 2)
                                 <strong>Đang vận chuyển</strong>
                             @elseif($invoice->status == 1)
-                                <strong>Đã tiếp nhận</strong>
+                                <strong>Đã xác nhận</strong>
                             @else
-                                <strong>Đang xử lý</strong>
+                                <strong>Chờ xác nhận</strong>
                             @endif
                             </strong>
                             </span>
-                            <span class="float-right"> <strong>Code:</strong> {{ $invoice->code }}</span>
+                            <span class="float-right">Code: <strong>{{ $invoice->code }}</strong> </span>
                         </div>
                         <div class="card-body">
                             <div class="row mb-4">
@@ -119,6 +123,24 @@
                                                 </td>
                                                 <td class="right">
                                                     <strong>{{ $invoice->payment_method }}</strong>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="left">
+
+                                                </td>
+                                                <td class="right">
+                                                    @if ($invoice->status == 0)
+                                                        <form action="{{ route('cancel_order') }}" method="post">
+                                                            @csrf
+                                                            <input type="hidden" name="invoice_id"
+                                                                value="{{ $invoice->id }}">
+                                                            <input type="hidden" name="status" value="5">
+                                                            <button type="submit"
+                                                                class="btn btn-block btn-custom font-weight-bold my-3 py-3 bg-number-left bg-number-right">HỦY
+                                                                ĐƠN HÀNG</button>
+                                                        </form>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         </tbody>

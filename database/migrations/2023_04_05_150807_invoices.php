@@ -17,7 +17,6 @@ class Invoices extends Migration
             $table->increments('id');
             $table->integer('code');
             $table->integer('account_id')->nullable()->unsigned();
-            $table->dateTime('order_date');
             $table->string('name',200);
             $table->string('address');
             $table->string('phone');

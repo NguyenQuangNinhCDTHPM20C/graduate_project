@@ -34,7 +34,6 @@ class AuthController extends Controller
              {
                 session(['account' => $account]);
                 session(['auth_check_admin'=>true]);
-                $account->qr_token = bcrypt($account->phone_number.$account->email.Str::random(40));
                 $account->save();
                 session()->put('success', 'Đăng nhập thành công');
                 return redirect()->route('index');
@@ -160,9 +159,8 @@ class AuthController extends Controller
         if ($account && Hash::check($request->password, $account->password)) {
             if($account->role == 2 && $account->email_verified_at != null)
              {
-                session(['account' => $account]); // Lưu tên người dùng vào session
+                session(['account' => $account]);
                 session(['auth_check'=>true]);
-                $account->qr_token = bcrypt($account->phone_number.$account->email.Str::random(40));
                 $account->save();
                 session()->put('success', 'Đăng nhập tài khoản thành công!');
                 return redirect()->route('home');
@@ -175,46 +173,12 @@ class AuthController extends Controller
         session()->put('error', 'Email hoặc mật khẩu không đúng.');
         return redirect()->back();
     }
-    
-    public function check_qr($qrToken)
-    {
-        $account = Account::where('qr_token', '$2y$10$gmiOA3GJiMXgJ/.85EpYwejxxCTE5afj8FWcf6mSbFcdjrAjjQAhC')->first();
-        if ($account) {
-            if ($account->role == 2) {
-                session(['account' => $account]);
-                session(['auth_check' => true]);
-
-                if ($account->google_id !== null) {
-                    $googleController = new GoogleController;
-                    $googleRequest = Request::create('/login/google', 'GET');
-                    return $googleController->callAction('handleGoogleCallback', [$googleRequest]);
-                }
-
-                if ($account->facebook_id !== null) {
-                    $facebookController = new FacebookController;
-                    $facebookRequest = Request::create('/login/facebook', 'GET');
-                    return $facebookController->callAction('handleFacebookCallback', [$facebookRequest]);
-                }
-
-                return redirect()->route('home');
-            }
-
-            return redirect()->route('public.login')->with('error', 'Vui lòng đăng nhập trước');
-        }
-    }
 
     public function logout_public(Request $request)
     {
         Auth::logout();
-
-        // $account = Account::where('id', session('account')->id)->first();
-        // $account->qr_token = null;
-        // $account->save();
-
         $request->session()->invalidate();
-        
         $request->session()->regenerateToken();
-       
         return redirect()->route('public.login');
     }
     

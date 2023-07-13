@@ -163,12 +163,6 @@
                                             @endif
                                         </form>
                                     </div>
-                                    @php
-                                        $qr_token = session('account')->qr_token;
-                                    @endphp
-                                    <div class="avt">
-                                        {!! QrCode::size(100)->generate(route('check-qr', ['qr_token' => $qr_token])) !!}
-                                    </div>
                                 </div>
                             </div>
                         </div>
