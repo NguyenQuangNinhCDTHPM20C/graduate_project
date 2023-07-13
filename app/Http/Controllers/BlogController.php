@@ -52,7 +52,7 @@ class BlogController extends Controller
         $blog->content = $validatedData['content'];
         $blog->save();
 
-        return redirect()->route('blog.show', $blog->id);
+        return redirect()->route('blog.index', $blog->id);
     }
 
     public function show($slug)
