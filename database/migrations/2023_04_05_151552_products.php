@@ -21,7 +21,7 @@ class Products extends Migration
             $table->integer('sub_category_id')->nullable()->unsigned();
             $table->string('name');
             $table->string('slug')->unique();
-            $table->integer('quantity');
+            $table->integer('quantity')->default(0);
             $table->integer('selling_price');
             $table->integer('discount_price');
             $table->text('description');

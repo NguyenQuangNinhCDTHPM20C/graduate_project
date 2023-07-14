@@ -133,7 +133,7 @@
             </div>
             <div class="card mb-0 mt-5">
                 <div class="card-body">
-                    <h4 class="card-title">Product Out Stock</h4>
+                    <h4 class="card-title">Sản phẩm sắp hết hàng</h4>
                     <div class="table-responsive dataview">
                         <table class="table datatable ">
                             <thead>

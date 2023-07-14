@@ -21,7 +21,7 @@
                         </li> --}}
                         <li class="submenu">
                             <a href="javascript:void(0);"
-                                class="{{ request()->routeIs('product.list') || request()->routeIs('product.add') || request()->routeIs('product.edit') || request()->routeIs('product.detail') ? 'active' : '' }}"><i
+                                class="{{ request()->routeIs('product.list') || request()->routeIs('product.add') || request()->routeIs('product.edit') || request()->routeIs('product.detail') || request()->routeIs('color.list') || request()->routeIs('color.edit') || request()->routeIs('color.add') ? 'active' : '' }}"><i
                                     data-feather="box"></i><span>Quản lý
                                     sản phẩm</span><span class="menu-arrow"></span></a>
                             <ul>
@@ -32,7 +32,7 @@
                                 <li class="{{ request()->routeIs('color.list') ? 'active' : '' }}"><a class=""
                                         href="{{ route('color.list') }}">Danh sách màu sản phẩm</a></li>
                                 <li class="{{ request()->routeIs('color.add') ? 'active' : '' }}"><a class=""
-                                href="{{ route('color.add') }}">Thêm màu sản phẩm</a></li>
+                                        href="{{ route('color.add') }}">Thêm màu sản phẩm</a></li>
                             </ul>
                         </li>
                         <li class="submenu">

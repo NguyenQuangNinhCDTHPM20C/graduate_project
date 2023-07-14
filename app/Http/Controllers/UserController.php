@@ -360,7 +360,7 @@ class UserController extends Controller
         $invoice->save();
         $invoice_details = InvoiceDetail::where('invoice_id', $invoice->id)->get();
         foreach($invoice_details as $invoice_detail){
-            $product = Product::find($invoice_detail->id);
+            $product = Product::find($invoice_detail->product_id);
             $product->quantity += $invoice_detail->quantity;
             $product->save();
         }
