@@ -8,7 +8,6 @@
             <div class="page-header">
                 <div class="page-title">
                     <h4>Thêm sản phẩm vào mua hàng</h4>
-                    <h6>Thêm sản phẩm vào mua hàng</h6>
                 </div>
             </div>
             <div class="card" data-select2-id="16">
@@ -21,21 +20,20 @@
                                     <div class="col-lg-10 col-sm-10 col-10" data-select2-id="11">
                                         <select class="select select2-hidden-accessible" data-select2-id="1" tabindex="-1"
                                             aria-hidden="true">
-                                            <option data-select2-id="3">Select</option>
                                             <option data-select2-id="18">Supplier</option>
                                             <span
-                                            class="select2 select2-container select2-container--default select2-container--below"
-                                            dir="ltr" data-select2-id="2" style="width: 100%;"><span
-                                                class="selection"><span class="select2-selection select2-selection--single"
-                                                    role="combobox" aria-haspopup="true" aria-expanded="false"
-                                                    tabindex="0" aria-disabled="false"
-                                                    aria-labelledby="select2-5qbi-container"><span
-                                                        class="select2-selection__rendered" id="select2-5qbi-container"
-                                                        role="textbox" aria-readonly="true"
-                                                        title="Select">Select</span><span class="select2-selection__arrow"
-                                                        role="presentation"><b
-                                                            role="presentation"></b></span></span></span><span
-                                                class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                                class="select2 select2-container select2-container--default select2-container--below"
+                                                dir="ltr" data-select2-id="2" style="width: 100%;"><span
+                                                    class="selection"><span
+                                                        class="select2-selection select2-selection--single" role="combobox"
+                                                        aria-haspopup="true" aria-expanded="false" tabindex="0"
+                                                        aria-disabled="false" aria-labelledby="select2-5qbi-container"><span
+                                                            class="select2-selection__rendered" id="select2-5qbi-container"
+                                                            role="textbox" aria-readonly="true"
+                                                            title="Select">Select</span><span
+                                                            class="select2-selection__arrow" role="presentation"><b
+                                                                role="presentation"></b></span></span></span><span
+                                                    class="dropdown-wrapper" aria-hidden="true"></span></span>
                                         </select>
                                     </div>
                                     <div class="col-lg-2 col-sm-2 col-2 ps-0">
@@ -50,7 +48,7 @@
                         </div>
                         <div class="col-lg-3 col-sm-6 col-12">
                             <div class="form-group">
-                                <label>Ngày mua</label>
+                                <label>Ngày mua </label>
                                 <div class="input-groupicon">
                                     <input type="text" placeholder="DD-MM-YYYY" class="datetimepicker">
                                     <div class="addonset">
@@ -65,18 +63,17 @@
                                 <label>Product Name</label>
                                 <select class="select select2-hidden-accessible" data-select2-id="4" tabindex="-1"
                                     aria-hidden="true">
-                                    <option data-select2-id="6">Choose</option>
                                     <option>Supplier Name</option>
                                     <span class="select2 select2-container select2-container--default" dir="ltr"
-                                    data-select2-id="5" style="width: 100%;"><span class="selection"><span
-                                            class="select2-selection select2-selection--single" role="combobox"
-                                            aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false"
-                                            aria-labelledby="select2-frm3-container"><span
-                                                class="select2-selection__rendered" id="select2-frm3-container"
-                                                role="textbox" aria-readonly="true" title="Choose">Choose</span><span
-                                                class="select2-selection__arrow" role="presentation"><b
-                                                    role="presentation"></b></span></span></span><span
-                                        class="dropdown-wrapper" aria-hidden="true"></span></span>
+                                        data-select2-id="5" style="width: 100%;"><span class="selection"><span
+                                                class="select2-selection select2-selection--single" role="combobox"
+                                                aria-haspopup="true" aria-expanded="false" tabindex="0"
+                                                aria-disabled="false" aria-labelledby="select2-frm3-container"><span
+                                                    class="select2-selection__rendered" id="select2-frm3-container"
+                                                    role="textbox" aria-readonly="true" title="Choose">Choose</span><span
+                                                    class="select2-selection__arrow" role="presentation"><b
+                                                        role="presentation"></b></span></span></span><span
+                                            class="dropdown-wrapper" aria-hidden="true"></span></span>
                                 </select>
                             </div>
                         </div>
@@ -86,6 +83,7 @@
                                 <input type="text">
                             </div>
                         </div>
+                        <button id="addProductButton" class="btn btn-submit me-2">Thêm</button>
                         <div class="col-lg-12 col-sm-6 col-12">
                             <div class="form-group">
                                 <label>Tên sản phẩm</label>
@@ -150,15 +148,14 @@
                             </table>
                         </div>
                     </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label>Status</label>
-                                <select class="select select2-hidden-accessible" data-select2-id="7" tabindex="-1"
-                                    aria-hidden="true">
-                                    <option data-select2-id="9">Choose Status</option>
-                                    <option>Completed</option>
-                                    <option>Inprogress</option>
-                                    <span class="select2 select2-container select2-container--default" dir="ltr"
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>Trạng thái</label>
+                            <select class="select select2-hidden-accessible" data-select2-id="7" tabindex="-1"
+                                aria-hidden="true">
+                                <option>Hoàng thành</option>
+                                <option>Chưa hoàng thành</option>
+                                <span class="select2 select2-container select2-container--default" dir="ltr"
                                     data-select2-id="8" style="width: 100%;"><span class="selection"><span
                                             class="select2-selection select2-selection--single" role="combobox"
                                             aria-haspopup="true" aria-expanded="false" tabindex="0"
@@ -168,23 +165,23 @@
                                                 Status</span><span class="select2-selection__arrow" role="presentation"><b
                                                     role="presentation"></b></span></span></span><span
                                         class="dropdown-wrapper" aria-hidden="true"></span></span>
-                                </select>
-                            </div>
+                            </select>
                         </div>
-                        <div class="col-lg-12">
-                            <div class="form-group">
-                                <label>Description</label>
-                                <textarea class="form-control"></textarea>
-                            </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Ghi chú: </label>
+                            <textarea class="form-control"></textarea>
                         </div>
-                        <div class="col-lg-12">
-                            <a href="javascript:void(0);" class="btn btn-submit me-2">Submit</a>
-                            <a href="https://dreamspos.dreamguystech.com/laravel/template/public/purchaselist"
-                                class="btn btn-cancel">Cancel</a>
-                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <a href="javascript:void(0);" class="btn btn-submit me-2">Thêm</a>
+                        <a href="https://dreamspos.dreamguystech.com/laravel/template/public/purchaselist"
+                            class="btn btn-cancel">Thoát</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection
