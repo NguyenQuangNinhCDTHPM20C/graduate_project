@@ -62,15 +62,33 @@
                                                 <th>Ngày đặt</th>
                                                 <th>Sản phẩm</th>
                                                 <th>Tổng tiền</th>
+                                                <th>Trạng thái</th>
                                             </tr>
                                             @foreach ($orders as $order)
                                                 <tr>
                                                     <td>{{ $order->invoice->code ? $order->invoice->code : '' }}</td>
                                                     <td>{{ $order->invoice->created_at ? \Carbon\Carbon::parse($order->invoice->created_at)->format('d/m/Y') : '' }}
                                                     </td>
-                                                    <td>{{ $order->product->name ? $order->product->name : '' }}</td>
-                                                    <!-- Đóng dấu nháy đơn ở đây -->
+                                                    <td class="text-truncate name-product">
+                                                        {{ $order->product->name ? $order->product->name : '' }}</td>
                                                     <td>{{ number_format($order->price, 0, ',', '.') }}đ</td>
+                                                    <td class="text-truncate">
+                                                        @if (optional($order->invoice)->status == 5)
+                                                            <strong> Đã hủy</strong>
+                                                        @elseif (optional($order->invoice)->status == 4)
+                                                            <strong> Không thành công</strong>
+                                                        @elseif (optional($order->invoice)->status == 3)
+                                                            <strong><a class="text-dark text-decoration-none name-product"
+                                                                    href="{{ route('product-detail', ['slug' => optional($order->product)->slug]) }}">Được
+                                                                    đánh giá</a></strong>
+                                                        @elseif(optional($order->invoice)->status == 2)
+                                                            <strong>Đang vận chuyển</strong>
+                                                        @elseif(optional($order->invoice)->status == 1)
+                                                            <strong>Đã tiếp nhận</strong>
+                                                        @else
+                                                            <strong>Chờ tiếp nhận</strong>
+                                                        @endif
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         @else
@@ -107,7 +125,7 @@
                                                         <div class="row">
                                                             @foreach ($favorites as $favorite)
                                                                 <div class="col-md-3 col-sm-6 pb-1">
-                                                                    <div class="product-item bg-light mb-4 item-p"
+                                                                    <div class="bg-light mb-4 item-p"
                                                                         style="border-bottom: 4px solid #00957E;">
                                                                         <div
                                                                             class="product-img position-relative overflow-hidden img-p">
@@ -120,11 +138,12 @@
                                                                                 href="{{ route('product-detail', ['slug' => $favorite->product->slug]) }}">{{ $favorite->product->name }}</a>
                                                                             <div
                                                                                 class="d-flex align-items-center justify-content-center mt-2">
-                                                                                <h5 style="color: #fd475a;">
-                                                                                    {{ $favorite->product->selling_price }}VND
+                                                                                <h5 style="color: #fd475a; font-size:1rem;">
+                                                                                    {{ number_format($favorite->product->discount_price, 0, ',', '.') }}đ
                                                                                 </h5>
-                                                                                <h6 class="text-muted ml-2">
-                                                                                    <del>{{ $favorite->product->discount_price }}VND</del>
+                                                                                <h6
+                                                                                    class="text-muted ml-2"style="font-size:0.9em;">
+                                                                                    <del>{{ number_format($favorite->product->selling_price, 0, ',', '.') }}đ</del>
                                                                                 </h6>
                                                                             </div>
                                                                             <div

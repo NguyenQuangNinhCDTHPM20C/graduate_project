@@ -20,7 +20,6 @@ class Invoice extends Model
         'total',
         'payment_method',
         'status',
-        'rememberToken'
     ];
     public function account(){
         return $this->belongsTo(Account::class, 'id', 'account_id');

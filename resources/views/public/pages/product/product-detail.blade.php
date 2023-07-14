@@ -3,385 +3,53 @@
 @section('title', 'Double-N shop')
 
 @section('styles')
-    {{-- <style>
-        .jq-toast-wrap {
-            z-index: 900000 !important;
-            display: block;
-            position: fixed;
-            width: 250px;
-            pointer-events: none !important;
-            letter-spacing: normal;
-            z-index: 2000000005 !important;
+    <style>
+        fieldset,
+        label {
+            margin: 0;
+            padding: 0;
         }
 
-        .jq-toast-single {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            margin: 0 0 5px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-family: arial, sans-serif;
-            line-height: 17px;
-            position: relative;
-            pointer-events: all !important;
-            background-color: #444;
-            color: #fff;
+        .rating {
+            border: none;
+            float: left;
         }
 
-        .jq-toast-loader {
-            display: block;
-            position: absolute;
-            top: -2px;
-            height: 5px;
-            width: 0;
-            left: 0;
-            border-radius: 5px;
-            background: red;
-        }
-
-        .close-jq-toast-single {
-            position: absolute;
-            top: 3px;
-            right: 7px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        .jq-toast-wrap .cart-msg {
-            color: #000;
-            margin: -11px;
-            padding: 12px;
-            background: #fff 0% 0% no-repeat padding-box;
-            box-shadow: 3px 4px 6px #00000029;
-            border-radius: 6px;
-            text-align: center;
-            width: 280px !important;
-            max-width: 280px !important;
-        }
-
-        .jq-toast-wrap .cart-msg p {
-            margin: 0 0 15px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .jq-toast-wrap .cart-msg p i.text-red {
-            background: #fd475a;
-        }
-
-        .jq-toast-wrap .cart-msg p i {
-            font-size: 9px;
-            background: #009981 0% 0% no-repeat padding-box;
-            width: 18px;
-            height: 18px;
-            line-height: 18px;
-            text-align: center;
-            color: #fff;
-            border-radius: 18px;
-            display: block;
-            margin-right: 5px;
-        }
-
-        .jq-toast-wrap .cart-msg a.button-red {
-            background: #fd475a;
-        }
-
-        .jq-toast-wrap .cart-msg a.button {
-            display: block;
-            background: #009a82 0% 0% no-repeat padding-box;
-            padding: 8px 10px;
-            font-weight: bold;
-            color: #fff;
-            font-size: 12px;
-            border-radius: 3px;
-            text-align: center;
-        }
-
-        .jq-toast-single {
-            text-align: left;
+        .rating>input {
             display: none;
         }
 
-        vz.pd-wrap {
-            padding: 40px 0;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .heading-section {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .sub-heading {
-            font-family: 'Poppins', sans-serif;
-            font-size: 12px;
-            display: block;
-            font-weight: 600;
-            color: #2e9ca1;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .heading-section h2 {
-            font-size: 32px;
-            font-weight: 500;
-            padding-top: 10px;
-            padding-bottom: 15px;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        .user-img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            position: relative;
-            min-width: 80px;
-            background-size: 100%;
-        }
-
-        .carousel-testimonial .item {
-            padding: 30px 10px;
-        }
-
-        .quote {
-            position: absolute;
-            top: -23px;
-            color: #2e9da1;
-            font-size: 27px;
-        }
-
-        .name {
-            margin-bottom: 0;
-            line-height: 14px;
-            font-size: 17px;
-            font-weight: 500;
-        }
-
-        .position {
-            color: #adadad;
-            font-size: 14px;
-        }
-
-        .owl-nav button {
-            position: absolute;
-            top: 50%;
-            transform: translate(0, -50%);
-            outline: none;
-            height: 25px;
-        }
-
-        .owl-nav button svg {
-            width: 25px;
-            height: 25px;
-        }
-
-        .owl-nav button.owl-prev {
-            left: 25px;
-        }
-
-        .owl-nav button.owl-next {
-            right: 25px;
-        }
-
-        .owl-nav button span {
-            font-size: 45px;
-        }
-
-        .product-thumb .item img {
-            height: 100px;
-        }
-
-        .product-name {
-            font-size: 22px;
-            font-weight: 500;
-            line-height: 22px;
-            margin-bottom: 4px;
-        }
-
-        .product-price-discount {
-            font-size: 22px;
-            font-weight: 400;
-            padding: 10px 0;
-            clear: both;
-        }
-
-        .product-price-discount span.line-through {
-            text-decoration: line-through;
-            margin-left: 10px;
-            font-size: 14px;
-            vertical-align: middle;
-            color: #a5a5a5;
-        }
-
-        .display-flex {
-            display: flex;
-        }
-
-        .align-center {
-            align-items: center;
-        }
-
-        .product-info {
-            width: 100%;
-        }
-
-        .reviews-counter {
-            font-size: 13px;
-        }
-
-        .reviews-counter span {
-            vertical-align: -2px;
-        }
-
-        .rate {
-            float: left;
-            padding: 0 10px 0 0;
-        }
-
-        .rate:not(:checked)>input {
-            position: absolute;
-            top: -9999px;
-        }
-
-        .rate:not(:checked)>label {
-            float: right;
-            width: 15px;
-            overflow: hidden;
-            white-space: nowrap;
-            cursor: pointer;
-            font-size: 21px;
-            color: #ccc;
-            margin-bottom: 0;
-            line-height: 21px;
-        }
-
-        .rate:not(:checked)>label:before {
-            content: '\2605';
-        }
-
-        .rate>input:checked~label {
-            color: #ffc700;
-        }
-
-        .rate:not(:checked)>label:hover,
-        .rate:not(:checked)>label:hover~label {
-            color: #deb217;
-        }
-
-        .rate>input:checked+label:hover,
-        .rate>input:checked+label:hover~label,
-        .rate>input:checked~label:hover,
-        .rate>input:checked~label:hover~label,
-        .rate>label:hover~input:checked~label {
-            color: #c59b08;
-        }
-
-        .product-dtl p {
-            font-size: 14px;
-            line-height: 24px;
-            color: #7a7a7a;
-        }
-
-        .product-dtl .form-control {
-            font-size: 15px;
-        }
-
-        .product-dtl label {
-            line-height: 16px;
-            font-size: 15px;
-        }
-
-        .form-control:focus {
-            outline: none;
-            box-shadow: none;
-        }
-
-        .product-count {
-            margin-top: 15px;
-        }
-
-        .product-count .qtyminus,
-        .product-count .qtyplus {
-            width: 34px;
-            height: 34px;
-            background: #212529;
-            text-align: center;
-            font-size: 19px;
-            line-height: 36px;
-            color: #fff;
-            cursor: pointer;
-        }
-
-        .product-count .qtyminus {
-            border-radius: 3px 0 0 3px;
-        }
-
-        .product-count .qtyplus {
-            border-radius: 0 3px 3px 0;
-        }
-
-        .product-count .qty {
-            width: 60px;
-            text-align: center;
-        }
-
-        .round-black-btn {
-            border-radius: 4px;
-            background: #212529;
-            color: #fff;
-            padding: 7px 45px;
+        .rating>label:before {
+            margin: 5px;
+            font-size: 1.25em;
+            font-family: FontAwesome;
             display: inline-block;
-            margin-top: 20px;
-            border: solid 2px #212529;
-            transition: all 0.5s ease-in-out 0s;
+            content: "\f005";
         }
 
-        .round-black-btn:hover,
-        .round-black-btn:focus {
-            background: transparent;
-            color: #212529;
-            text-decoration: none;
+        .rating>.half:before {
+            content: "\f089";
+            position: absolute;
         }
 
-        .product-info-tabs {
-            margin-top: 25px;
+        .rating>label {
+            color: #ddd;
+            float: right;
         }
 
-        .product-info-tabs .nav-tabs {
-            border-bottom: 2px solid #d8d8d8;
+        .rating>input:checked~label,
+        .rating>input:checked~label~label {
+            color: #FFD700;
         }
 
-        .product-info-tabs .nav-tabs .nav-item {
-            margin-bottom: 0;
+        .rating>.half:checked~label {
+            color: #FFED85;
         }
 
-        .product-info-tabs .nav-tabs .nav-link {
-            border: none;
-            border-bottom: 2px solid transparent;
-            color: #323232;
+        .rating>label:hover {
+            cursor: pointer;
         }
-
-        .product-info-tabs .nav-tabs .nav-item .nav-link:hover {
-            border: none;
-        }
-
-        .product-info-tabs .nav-tabs .nav-item.show .nav-link,
-        .product-info-tabs .nav-tabs .nav-link.active,
-        .product-info-tabs .nav-tabs .nav-link.active:hover {
-            border: none;
-            border-bottom: 2px solid #d8d8d8;
-            font-weight: bold;
-        }
-
-        .product-info-tabs .tab-content .tab-pane {
-            padding: 30px 20px;
-            font-size: 15px;
-            line-height: 24px;
-            color: #7a7a7a;
-        }
-    </style> --}}
+    </style>
 @endsection
 
 @section('content')
@@ -417,7 +85,8 @@
                             @endif
                         </div>
                         @foreach ($images as $key => $image)
-                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                            <div
+                                class="d-flex justify-content-center align-items-center carousel-item {{ $key == 0 ? 'active' : '' }}">
                                 <img class="w-100 h-100" src="{{ $image->image_path ? asset($image->image_path) : '' }}"
                                     alt="{{ optional($image->product)->name }}">
                             </div>
@@ -437,11 +106,24 @@
                     <h3>{{ $product->name }}</h3>
                     <div class="d-flex mb-3">
                         <div class="text-primary mr-2">
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star-half-alt"></small>
-                            <small class="far fa-star"></small>
+                            @php
+                                $full_stars = floor($average_rating);
+                                // dd($average_rating);
+                                $decimal_part = $average_rating - $full_stars;
+                                $half_star = $decimal_part >= 0.25 && $decimal_part < 0.75;
+                            @endphp
+
+
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $full_stars)
+                                    <small class="fas fa-star"></small>
+                                @elseif ($half_star && $i == floor($average_rating) + 1)
+                                    <small class="fas fa-star-half-alt"></small>
+                                @else
+                                    <small class="far fa-star"></small>
+                                @endif
+                            @endfor
+
                         </div>
                         <small class="pt-1">({{ $review_count }} Đánh giá)</small>
                     </div>
@@ -455,7 +137,7 @@
                     </div>
                     <div class="d-flex mb-4">
                         <strong class="text-grey mr-3">Màu sắc:</strong>
-                        <form action="{{ route('cart.add') }}" method="POST">
+                        <form id="add-to-cart" action="{{ route('cart.add') }}" method="POST">
                             @csrf
                             @foreach ($product_colors as $key => $product_color)
                                 <div class="radio-item"><input name="color" id="color-{{ $key }}" type="radio"
@@ -473,16 +155,17 @@
                     <div class="d-flex align-items-center mb-4 pt-2">
                         <div class="input-group quantity mr-3" style="width: 130px;">
                             <div class="input-group-btn">
-                                <button class="btn btn-primary btn-minus bg-number-left">
+                                <span class="btn btn-primary btn-minus bg-number-left border border-dark-subtle">
                                     <i class="fa fa-minus"></i>
-                                </button>
+                                </span>
                             </div>
-                            <input type="text" class="form-control bg-radius-none bg-secondary border-0 text-center"
-                                name="quantity" value="1">
+                            <input type="number"
+                                class="form-control bg-radius-none text-center text-dark border border-dark-subtle p-0"
+                                name="quantity" min="1" value="1">
                             <div class="input-group-btn">
-                                <button class="btn btn-primary btn-plus bg-number-right">
+                                <span class="btn btn-primary btn-plus bg-number-right border border-dark-subtle">
                                     <i class="fa fa-plus"></i>
-                                </button>
+                                </span>
                             </div>
                         </div>
                         <input type="hidden" name="id" value="{{ $product->id }}">
@@ -648,14 +331,21 @@
                                                 class="img-fluid mr-3 mt-1" style="width: 45px;">
                                             <div class="media-body">
                                                 <h6>{{ $_review->account_name }}<small> -
-                                                        <i>{{ $_review->created_at }}</i></small>
+                                                        <i>{{ \Carbon\Carbon::parse($_review->created_at)->format('d/m/Y') }}</i></small>
                                                 </h6>
                                                 <div class="text-primary mb-2">
-                                                    <i class="fas fa-star"></i>
+                                                    @for ($i = 1; $i <= $_review->rating; $i++)
+                                                        <i class="fas fa-star checked"></i>
+                                                    @endfor
+
+                                                    @for ($i = $_review->rating + 1; $i <= 5; $i++)
+                                                        <i class="far fa-star"></i>
+                                                    @endfor
+                                                    {{-- <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star-half-alt"></i>
-                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i> --}}
                                                 </div>
                                                 <p>{{ $_review->comment }}</p>
                                             </div>
@@ -670,7 +360,7 @@
                                         <img src="{{ asset(session()->has('account') ? session('account')->photo : '') }}
 "
                                             alt="{{ session()->has('account') ? session('account')->name : '' }}"
-                                            class="img-fluid mr-3 mt-1" style="width: 45px;">
+                                            class="img-fluid mr-3 mt-1" style="width: 45px; border-radius:50%;">
                                         <small>
                                             {{ session()->has('account') ? session('account')->name : '' }}
                                         </small>
@@ -680,16 +370,28 @@
                                             <div class="d-flex my-3">
                                                 <p class="mb-0 mr-2">Bình chọn* :</p>
                                                 <div class="text-primary">
-                                                    <i class="far fa-star" data-index="1"></i>
-                                                    <i class="far fa-star" data-index="2"></i>
-                                                    <i class="far fa-star" data-index="3"></i>
-                                                    <i class="far fa-star" data-index="4"></i>
-                                                    <i class="far fa-star" data-index="5"></i>
+                                                    <fieldset class="rating">
+                                                        <input type="radio" id="star5" name="rating"
+                                                            value="5" /><label class="full" for="star5"
+                                                            title="Xuất sắc"></label>
+                                                        <input type="radio" id="star4" name="rating"
+                                                            value="4" /><label class="full" for="star4"
+                                                            title="Tốt"></label>
+                                                        <input type="radio" id="star3" name="rating"
+                                                            value="3" /><label class="full" for="star3"
+                                                            title="Trung bình"></label>
+                                                        <input type="radio" id="star2" name="rating"
+                                                            value="2" /><label class="full" for="star2"
+                                                            title="Kém"></label>
+                                                        <input type="radio" id="star1" name="rating"
+                                                            value="1" /><label class="full" for="star1"
+                                                            title="Rất tệ"></label>
+                                                    </fieldset>
                                                 </div>
+
                                             </div>
                                             <input type="hidden" id="product_id" name="product_id"
                                                 value="{{ $product->id }}">
-                                            <input type="hidden" id="rating" name="rating" value="5">
                                             <div class="form-group">
                                                 <label for="message">Đánh giá *</label>
                                                 <textarea id="comment" name="comment" cols="30" rows="5" class="form-control"></textarea>
@@ -734,22 +436,5 @@
             }
             input.value = value;
         });
-
-        //==========================
-        const form = document.getElementById("favorite-form");
-        const toast = document.querySelector(".jq-toast-single");
-        form.addEventListener("submit", (event) => {
-            showToast();
-        });
-
-        function showToast(message) {
-            // messageText.textContent = message; // Cập nhật đoạn văn bản trong thông báo
-
-            toast.style.display = "block"; // Hiển thị thông báo
-
-            setTimeout(() => {
-                toast.style.display = "none"; // Ẩn thông báo sau 10 giây
-            }, 999999);
-        }
     </script>
 @stop

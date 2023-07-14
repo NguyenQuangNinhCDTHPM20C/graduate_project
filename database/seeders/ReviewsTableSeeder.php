@@ -13,11 +13,11 @@ class ReviewsTableSeeder extends Seeder
     public function run()
     {
         $reviews = [
-            ['account_id' => 1,'product_id' => 1,'comment' => 'Máy tính xách tay này thật tuyệt vời!','rating' => '5','status' => 1,'created_at' => now(),'updated_at' => now(),],
-            ['account_id' => 2,'product_id' => 1,'comment' => 'Tôi yêu máy tính này','rating' => '4','status' => 1,'created_at' => now(),'updated_at' => now(),],
-            ['account_id' => 1,'product_id' => 2,'comment' => 'Bàn phím và màn hình tuyệt vời!','rating' => '4','status' => 1,'created_at' => now(),'updated_at' => now(),],
-            ['account_id' => 2,'product_id' => 3,'comment' => 'Máy tính để bàn này thật tốt','rating' => '5','status' => 1,'created_at' => now(),'updated_at' => now(),],
-            ['account_id' => 2,'product_id' => 3,'comment' => 'Nhanh chóng và đáng tin cậy!','rating' => '4','status' => 1,'created_at' => now(),'updated_at' => now(),],
+            ['account_id' => 1,'product_id' => 1,'comment' => 'Máy tính xách tay này thật tuyệt vời!','rating' => '5','created_at' => now(),'updated_at' => now(),],
+            ['account_id' => 2,'product_id' => 1,'comment' => 'Tôi yêu máy tính này','rating' => '4','created_at' => now(),'updated_at' => now(),],
+            ['account_id' => 1,'product_id' => 2,'comment' => 'Bàn phím và màn hình tuyệt vời!','rating' => '4','created_at' => now(),'updated_at' => now(),],
+            ['account_id' => 2,'product_id' => 3,'comment' => 'Máy tính để bàn này thật tốt','rating' => '5','created_at' => now(),'updated_at' => now(),],
+            ['account_id' => 2,'product_id' => 3,'comment' => 'Nhanh chóng và đáng tin cậy!','rating' => '4','created_at' => now(),'updated_at' => now(),],
         ];
         
         DB::table('reviews')->insert($reviews);

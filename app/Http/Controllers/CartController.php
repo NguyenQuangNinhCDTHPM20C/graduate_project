@@ -24,24 +24,34 @@ class CartController extends Controller
                     continue; 
                 }
             }
-            \Cart::add([
-                'id' => $request->id,
-                'name' => $request->name,
-                'price' => $request->price,
-                'quantity' => $request->quantity,
-                'attributes' => [
-                    'image' => $request->image,
-                    'color' => $request->color,
-                ]
-            ]);
 
-            session()->put('success', 'Thêm sản phẩm vào giỏ hàng thành công!');
+            $product = Product::where('id', $request->id)->first();
+            if($product->quantity < $request->quantity){
+                session()->put('error', 'Sản phẩm không đủ số lượng');
+            }else{
+                \Cart::add([
+                    'id' => $request->id,
+                    'name' => $request->name,
+                    'price' => $request->price,
+                    'quantity' => $request->quantity,
+                    'attributes' => [
+                        'image' => $request->image,
+                        'color' => $request->color,
+                    ]
+                ]);
+                session()->put('success', 'Thêm sản phẩm vào giỏ hàng thành công!');
+            }
             return redirect()->back();
         }
         
 
         public function update(Request $request)
         {
+            $product = Product::where('id', $request->id)->first();
+            // dd($product->quantity < $request->quantity);
+            if($product->quantity < $request->quantity){
+                session()->put('error', 'Sản phẩm không đủ số lượng');
+            }else{
             \Cart::update(
                 $request->id,
                 [
@@ -51,9 +61,8 @@ class CartController extends Controller
                     ],
                 ]
             );
-    
             session()->put('success', 'Cập nhật giỏ hàng thành công!');
-    
+            }
             return redirect()->route('cart.list');
         }
 

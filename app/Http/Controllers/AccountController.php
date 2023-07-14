@@ -41,9 +41,11 @@ class AccountController extends Controller
             $account->province = $request->input('province');
             $account->phone_number = $request->input('phone_number');
             $account->save();
+            session()->put('success', 'Chỉnh sửa thông tin thành công!');
             session(['account' => $account]);
-            return redirect()->back()->with('success', 'Edit account information successfully!');
+            return redirect()->back();
         }
-        return redirect()->back()->with('error', 'Edit account information failed!');
+        session()->put('error', 'Chỉnh sửa thông tin thất bại!');
+        return redirect()->back();
     }
 }

@@ -9,7 +9,7 @@
         <div class="row px-xl-5">
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
-                    <a class="breadcrumb-item text-dark text-decoration-none" href="#">Trang chủ</a>
+                    <a class="breadcrumb-item text-dark text-decoration-none" href="{{ route('home') }}">Trang chủ</a>
                     <span class="breadcrumb-item active">{{ $category->name }}</span>
                 </nav>
             </div>
@@ -335,17 +335,32 @@
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <h5 style="color: #fd475a; font-size:1rem;">
                                     {{ number_format($product->discount_price, 0, ',', '.') }}đ</h5>
-                                <h6 class="text-muted ml-2"style="font-size:0.9em;">
-                                    <del>{{ number_format($product->selling_price, 0, ',', '.') }}đ</del>
-                                </h6>
+                                @if ($product->selling_price != $product->discount_price)
+                                    <h6 class="text-muted ml-2"style="font-size:0.9em;">
+                                        <del>{{ number_format($product->discount_price, 0, ',', '.') }}đ</del>
+                                    </h6>
+                                @endif
                             </div>
+                            @php
+                                $reviewCount = $product->reviews->count();
+                                $averageRating = $product->reviews->avg('rating');
+                                $roundedRating = round($averageRating, 1);
+                                $fullStars = $reviewCount > 0 ? floor($roundedRating) : 5;
+                                $decimalPart = $roundedRating - $fullStars;
+                                $halfStar = $reviewCount > 0 ? $decimalPart >= 0.25 && $decimalPart < 0.75 : false;
+                            @endphp
+
                             <div class="d-flex align-items-center justify-content-center mb-1">
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small class="fa fa-star text-primary mr-1"></small>
-                                <small>(99)</small>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @if ($i <= $fullStars)
+                                        <small class="fa fa-star text-primary mr-1"></small>
+                                    @elseif ($halfStar && $i == $fullStars + 1)
+                                        <small class="fa fa-star-half-alt text-primary mr-1"></small>
+                                    @else
+                                        <small class="far fa-star text-primary mr-1"></small>
+                                    @endif
+                                @endfor
+                                <small>({{ $reviewCount }})</small>
                             </div>
                         </div>
                     </div>

@@ -36,8 +36,6 @@
                             @else
                                 <strong>Chờ xác nhận</strong>
                             @endif
-                            </strong>
-                            </span>
                             <span class="float-right">Code: <strong>{{ $invoice->code }}</strong> </span>
                         </div>
                         <div class="card-body">
@@ -83,7 +81,8 @@
                                                         class="text-dark name-product text-decoration-none"
                                                         href="{{ route('product-detail', ['slug' => optional($item->product)->slug]) }}">{{ optional($item->product)->name }}</a>
                                                 </td>
-                                                <td class="left">{{ optional($item->product)->description }}</td>
+                                                <td class="left description">{{ optional($item->product)->description }}
+                                                </td>
                                                 <td class="right">{{ number_format($item->price, 0, ',', '.') }}đ</td>
                                                 <td class="center">{{ $item->quantity }}</td>
                                                 <td class="right">
