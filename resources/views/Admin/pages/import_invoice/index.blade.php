@@ -121,16 +121,6 @@
                                                 href="{{ route('import-invoice.edit', ['code' => $_invoices->code]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3 confirm-text"
-                                                onclick="$.fn.showConfirmationDeleteAlert('invoices_delete_{{ $_invoices->id }}')">
-                                                <img src="{{ asset('images/delete.svg') }}" alt="img">
-                                            </a>
-                                            <form id="invoices_delete_{{ $_invoices->id }}"
-                                                action="{{ route('import-invoice.delete', ['id' => $_invoices->id]) }}"
-                                                method="POST" style="display: none">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

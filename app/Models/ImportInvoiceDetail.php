@@ -12,12 +12,15 @@ class ImportInvoiceDetail extends Model
     public $table = "import_invoice_details";
     protected $fillable = [
         'import_invoice_id',
-        'product_code',
+        'product_id',
         'quantity',
         'price'
     ];
 
     public function import_invoice(){
         return $this->belongsTo(ImportInvoice::class, 'account_id', 'id');
+    }
+    public function product(){
+        return $this->belongsTo(Product::class, 'product_id', 'id');
     }
 }

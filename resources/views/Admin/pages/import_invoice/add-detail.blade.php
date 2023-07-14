@@ -12,43 +12,46 @@
             </div>
             <div class="card" data-select2-id="16">
                 <div class="card-body" data-select2-id="15">
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label>Mã đơn hàng</label>
-                                <input type="text" name="code" placeholder="Vui lòng nhập mã đơn hàng" required>
-                                <input type="hidden" name="account_id"
-                                    value="{{ session()->has('account') ? session('account')->id : '' }}" required>
+                    <form action="{{ route('import-invoice.store_detail') }}" method="post">
+                        @csrf
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Mã đơn hàng</label>
+                                    <input type="text" name="code" placeholder="Vui lòng nhập mã đơn hàng" required>
+                                    <input type="hidden" name="account_id"
+                                        value="{{ session()->has('account') ? session('account')->id : '' }}" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-12" data-select2-id="14">
-                            <div class="form-group" data-select2-id="13">
-                                <label>Nhà cung cấp</label>
-                                <input type="text" name="supplier" placeholder="Vui lòng nhập tên nhà cung cấp" required>
+                            <div class="col-lg-3 col-sm-6 col-12" data-select2-id="14">
+                                <div class="form-group" data-select2-id="13">
+                                    <label>Nhà cung cấp</label>
+                                    <input type="text" name="supplier" placeholder="Vui lòng nhập tên nhà cung cấp"
+                                        required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label>Ngày nhập</label>
-                                <div class="input-groupicon">
-                                    <input type="text" placeholder="DD-MM-YYYY" class="datetimepicker">
-                                    <div class="addonset">
-                                        <img src="{{ asset('images/calendars.svg') }}" alt="img">
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Ngày nhập</label>
+                                    <div class="input-groupicon">
+                                        <input type="text" placeholder="DD-MM-YYYY" class="datetimepicker">
+                                        <div class="addonset">
+                                            <img src="{{ asset('images/calendars.svg') }}" alt="img">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="form-group">
-                                <label> Trạng thái</label>
-                                <select class="select" name="status" id="status" class="form-control" required>
-                                    <option value="1">Còn bán</option>
-                                    <option value="0">Hết bán</option>
-                                </select>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label> Trạng thái</label>
+                                    <select class="select" name="status" id="status" class="form-control" required>
+                                        <option value="1">Hoàn thành</option>
+                                        <option value="0">Chưa hoàn thành</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <a href="javascript:void(0);" class="btn btn-submit me-2" id="addProductBtn">Thêm sản phẩm</a>
+                        <a href="javascript:void(0);" class="btn btn-submit me-2" id="addProductBtn">Thêm sản phẩm</a>
                 </div>
                 <div class="row">
                     <div class="table-responsive">
@@ -63,8 +66,8 @@
                             </thead>
                             <tbody>
                                 <tr class="productRow">
-                                    <td colspan="2" class="productimgname" style="width: 50%;">
-                                        <select class="select form-control" name="product_id[]" required
+                                    <td class="productimgname">
+                                        <select class="select form-control productSelect" name="product_id[]" required
                                             style="width: 100%;">
                                             @foreach ($products as $product)
                                                 <option value="{{ $product->id }}">{{ $product->name }}</option>
@@ -89,10 +92,11 @@
                     </div>
                 </div>
                 <div class="col-lg-12 mt-5 mb-3">
-                    <a href="javascript:void(0);" class="btn btn-submit me-2">THÊM</a>
+                    <button href="javascript:void(0);" class="btn btn-submit me-2">THÊM</button>
                     <a href="{{ route('import-invoice.list') }}" class="btn btn-cancel">THOÁT</a>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 @endsection
@@ -102,12 +106,13 @@
             // Thêm hàng nhập liệu
             $('#addProductBtn').click(function() {
                 var newRow = $('.productRow').first().clone(); // Sao chép hàng gốc
-                newRow.find('input, select').val(''); // Xóa giá trị nhập liệu của hàng mới
+                newRow.find('input').val(''); // Xóa giá trị nhập liệu của các thẻ input
+                newRow.find('.select2-container').remove(); // Loại bỏ thẻ select2-container dư thừa
 
                 $('#productTable tbody').append(newRow); // Thêm hàng mới vào bảng
 
                 // Khởi tạo lại Select2 cho các thẻ select trong hàng mới
-                newRow.find('select').select2();
+                newRow.find('.productSelect').select2();
             });
 
             // Xóa hàng nhập liệu
@@ -121,7 +126,7 @@
             });
 
             // Khởi tạo Select2 cho hàng đầu tiên khi tải trang
-            $('.productRow').first().find('select').select2();
+            $('.productRow').first().find('.productSelect').select2();
         });
     </script>
 @endsection
