@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\ImportInvoice;
 use App\Models\ImportInvoiceDetail;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ImportInvoiceController extends Controller
@@ -30,7 +31,8 @@ class ImportInvoiceController extends Controller
 
     public function create_detail()
     {
-        return view('admin.pages.import_invoice.add-detail');
+        $products = Product::get();
+        return view('admin.pages.import_invoice.add-detail', compact('products'));
     }
 
     /**

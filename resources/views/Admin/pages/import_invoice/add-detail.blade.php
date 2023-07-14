@@ -48,31 +48,37 @@
                             </div>
                         </div>
                     </div>
-                    <a href="javascript:void(0);" class="btn btn-submit me-2">Thêm sản phẩm</a>
+                    <a href="javascript:void(0);" class="btn btn-submit me-2" id="addProductBtn">Thêm sản phẩm</a>
                 </div>
                 <div class="row">
                     <div class="table-responsive">
-                        <table class="table">
+                        <table class="table" id="productTable">
                             <thead>
                                 <tr>
                                     <th>Sản phẩm</th>
                                     <th>Số lượng</th>
                                     <th>Giá mua</th>
-                                    <th class="text-end">Tổng tiền</th>
                                     <th>Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="productimgname">
-                                        <select class="select" name="status" id="status" class="form-control" required>
-                                            <option value="1">Còn bán</option>
-                                            <option value="0">Hết bán</option>
+                                <tr class="productRow">
+                                    <td colspan="2" class="productimgname" style="width: 50%;">
+                                        <select class="select form-control" name="product_id[]" required
+                                            style="width: 100%;">
+                                            @foreach ($products as $product)
+                                                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                            @endforeach
                                         </select>
                                     </td>
-                                    <td>10.00</td>
-                                    <td>2000.00</td>
-                                    <td class="text-end">2000.00</td>
+                                    <td>
+                                        <input class="form-control" type="number" name="quantity[]" placeholder="Số lượng"
+                                            required>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" name="price[]" placeholder="Giá tiền"
+                                            required>
+                                    </td>
                                     <td>
                                         <a class="delete-set"><img src="{{ asset('images/delete.svg') }}"
                                                 alt="svg"></a>
@@ -82,13 +88,40 @@
                         </table>
                     </div>
                 </div>
-                <div class="col-lg-12 mt-5">
+                <div class="col-lg-12 mt-5 mb-3">
                     <a href="javascript:void(0);" class="btn btn-submit me-2">THÊM</a>
                     <a href="{{ route('import-invoice.list') }}" class="btn btn-cancel">THOÁT</a>
                 </div>
             </div>
         </div>
     </div>
-    </div>
-    </div>
+@endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            // Thêm hàng nhập liệu
+            $('#addProductBtn').click(function() {
+                var newRow = $('.productRow').first().clone(); // Sao chép hàng gốc
+                newRow.find('input, select').val(''); // Xóa giá trị nhập liệu của hàng mới
+
+                $('#productTable tbody').append(newRow); // Thêm hàng mới vào bảng
+
+                // Khởi tạo lại Select2 cho các thẻ select trong hàng mới
+                newRow.find('select').select2();
+            });
+
+            // Xóa hàng nhập liệu
+            $(document).on('click', '.delete-set', function() {
+                var rowCount = $('#productTable tbody tr').length; // Số dòng trong bảng
+                if (rowCount > 1) { // Kiểm tra nếu số dòng lớn hơn 1
+                    $(this).closest('tr').remove(); // Xóa hàng chứa nút xóa được nhấn
+                } else {
+                    alert("Không thể xóa dòng cuối cùng");
+                }
+            });
+
+            // Khởi tạo Select2 cho hàng đầu tiên khi tải trang
+            $('.productRow').first().find('select').select2();
+        });
+    </script>
 @endsection

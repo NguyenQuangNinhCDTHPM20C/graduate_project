@@ -98,15 +98,17 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"
-                                class="{{ request()->routeIs('import-invoice.list') || request()->routeIs('import-invoice.add') ? 'active' : '' }}"><i
+                                class="{{ request()->routeIs('import-invoice.list') || request()->routeIs('import-invoice.create_detail') ? 'active' : '' }}"><i
                                     data-feather="file"></i><span>Quản
                                     lý mua hàng</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li class="{{ request()->routeIs('import-invoice.list') ? 'active' : '' }}"><a
-                                        class="" href="{{ route('import-invoice.list') }}">Danh sách hóa
-                                        đơn</a></li>
-                                <li class="{{ request()->routeIs('import-invoice.add') ? 'active' : '' }}"><a
-                                        class="" href="{{ route('import-invoice.add') }}">Thêm hóa đơn</a>
+                                <li class="{{ request()->routeIs('import-invoice.list') ? 'active' : '' }}">
+                                    <a class="" href="{{ route('import-invoice.list') }}">Danh sách hóa
+                                        đơn</a>
+                                </li>
+                                <li class="{{ request()->routeIs('import-invoice.create_detail') ? 'active' : '' }}"><a
+                                        class="" href="{{ route('import-invoice.create_detail') }}">Thêm hóa
+                                        đơn</a>
                                 </li>
                             </ul>
                         </li>
