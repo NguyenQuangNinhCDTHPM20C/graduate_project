@@ -203,7 +203,7 @@ class ProductController extends Controller
         $exsiting_images = Image::where('entity_id', $product->id)->get();
         $product->name = $request->input('name');
         $product->code = $request->input('code');
-        $product->quantity = $request->input('quantity');
+        $product->quantity = 0;
         $product->selling_price = $request->input('selling_price');
         $product->description = $request->input('description');
         $product->status = $request->input('status');
