@@ -25,7 +25,6 @@ class Invoices extends Migration
             $table->bigInteger('total');
             $table->string('payment_method');
             $table->tinyInteger('status')->nullable()->default(0);
-            $table->rememberToken();
             $table->timestamps();
             $table->foreign('account_id')->references('id')->on('accounts');
         });

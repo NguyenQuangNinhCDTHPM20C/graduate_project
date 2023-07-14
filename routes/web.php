@@ -21,7 +21,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ImportInvoiceController;
-
+use App\Http\Controllers\DiscountCodeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,6 +39,8 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/products', [UserController::class, 'products'])->name('products');
     Route::get('/product/{slug}', [UserController::class, 'product_detail'])->name('product-detail');
     Route::get('/products/{type}', [UserController::class, 'products_type'])->name('product-type');
+    Route::get('/products/accessories/{slug}', [UserController::class, 'products_type_1'])->name('product-type-1');
+    Route::get('/products/laptop/{slug}', [UserController::class, 'products_type_1'])->name('product-type-2');
     Route::get('/search', [UserController::class, 'search'])->name('search');
     //Routes for shopping cart
     Route::get('cart', [CartController::class, 'index'])->name('cart.list');
@@ -46,6 +48,7 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::post('cart/update', [CartController::class, 'update'])->name('cart.update');
     Route::post('cart/remove', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('clear', [CartController::class, 'clear'])->name('cart.clear');
+    Route::post('/apply-discount', [DiscountCodeController::class, 'apply_discount'])->name('apply-discount');
     //Route for contact
     Route::get('/contact', [UserController::class, 'contact'])->name('contact');
     //Route for add product to favorite
@@ -53,7 +56,7 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::delete('/favorite/{id}', [FavoriteController::class, 'destroy_2'])->name('favorite.delete')->middleware('auth.public');
     //Route for add review product
     Route::post('/review/add', [ReviewController::class, 'store'])->name('review.add');
-    Route::get('/checkout',[UserController::class, 'checkout'])->name('checkout');
+    Route::get('/checkout',[UserController::class, 'checkout'])->name('checkout')->middleware('cartNotEmpty');
     Route::get('/invoice/{code}',[UserController::class, 'invoice'])->name('invoice');
     //Routes for authenticate
     Route::get('/login', [AuthController::class, 'showLoginFormPublic'])->name('public.login')->middleware('guest.public');

@@ -10,7 +10,9 @@
             <div class="col-12">
                 <nav class="breadcrumb bg-light mb-30">
                     <a class="breadcrumb-item text-dark text-decoration-none" href="{{ route('home') }}">Trang chủ</a>
-                    <span class="breadcrumb-item active">Sản phẩm</span>
+                    <a class="breadcrumb-item text-dark text-decoration-none"
+                        href="{{ route('product-type', ['type' => optional($sub->category)->type]) }}">{{ optional($sub->category)->name }}</a>
+                    <span class="breadcrumb-item active">{{ $sub->name }}</span>
                 </nav>
             </div>
         </div>
@@ -316,7 +318,6 @@
                 </div>
             </div>
         </div>
-
         <h5 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
             <span class="pr-3"></span>
         </h5>
@@ -336,32 +337,32 @@
                             <div class="d-flex align-items-center justify-content-center mt-2">
                                 <h5 style="color: #fd475a; font-size:1rem;">
                                     {{ number_format($product->discount_price, 0, ',', '.') }}đ</h5>
-                                @if ($product->discount_price != $product->selling_price)
+                                @if ($product->selling_price != $product->discount_price)
                                     <h6 class="text-muted ml-2"style="font-size:0.9em;">
-                                        <del>{{ number_format($product->selling_price, 0, ',', '.') }}đ</del>
+                                        <del>{{ number_format($product->discount_price, 0, ',', '.') }}đ</del>
                                     </h6>
                                 @endif
                             </div>
-                            <div class="d-flex align-items-center justify-content-center mb-1 text-primary">
-                                @php
-                                    $reviewCount = $product->reviews->count();
-                                    $averageRating = $product->reviews->avg('rating');
-                                    $roundedRating = round($averageRating, 1);
-                                    $fullStars = $reviewCount > 0 ? floor($roundedRating) : 5;
-                                    $decimalPart = $roundedRating - $fullStars;
-                                    $halfStar = $reviewCount > 0 ? $decimalPart >= 0.25 && $decimalPart < 0.75 : false;
-                                @endphp
+                            @php
+                                $reviewCount = $product->reviews->count();
+                                $averageRating = $product->reviews->avg('rating');
+                                $roundedRating = round($averageRating, 1);
+                                $fullStars = $reviewCount > 0 ? floor($roundedRating) : 5;
+                                $decimalPart = $roundedRating - $fullStars;
+                                $halfStar = $reviewCount > 0 ? $decimalPart >= 0.25 && $decimalPart < 0.75 : false;
+                            @endphp
 
+                            <div class="d-flex align-items-center justify-content-center mb-1">
                                 @for ($i = 1; $i <= 5; $i++)
                                     @if ($i <= $fullStars)
-                                        <small class="fas fa-star"></small>
+                                        <small class="fa fa-star text-primary mr-1"></small>
                                     @elseif ($halfStar && $i == $fullStars + 1)
-                                        <small class="fas fa-star-half-alt"></small>
+                                        <small class="fa fa-star-half-alt text-primary mr-1"></small>
                                     @else
-                                        <small class="far fa-star"></small>
+                                        <small class="far fa-star text-primary mr-1"></small>
                                     @endif
                                 @endfor
-                                <small>({{ $productReviewsCount[$product->id] }})</small>
+                                <small>({{ $reviewCount }})</small>
                             </div>
                         </div>
                     </div>

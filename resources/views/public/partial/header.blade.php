@@ -128,12 +128,14 @@
                             <i class="fa fa-angle-right float-right mt-1"></i></a>
                         <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                             @foreach ($header_laptop_sub_ctg as $item)
-                                <a href="" class="dropdown-item">{{ $item->name }}</a>
+                                <a href="{{ route('product-type-2', ['slug' => $item->slug]) }}"
+                                    class="dropdown-item">{{ $item->name }}</a>
                             @endforeach
                         </div>
                     </div>
                     @foreach ($header_accessory_sub_ctg as $item)
-                        <a href="" class="nav-item nav-link">{{ $item->name }}</a>
+                        <a href="{{ route('product-type-1', ['slug' => $item->slug]) }}"
+                            class="nav-item nav-link">{{ $item->name }}</a>
                     @endforeach
                 </div>
             </nav>

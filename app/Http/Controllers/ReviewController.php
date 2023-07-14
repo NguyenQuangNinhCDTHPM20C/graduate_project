@@ -46,7 +46,7 @@ class ReviewController extends Controller
 
         if (Session::has('account')) {
             $account_id = Session('account')->id;
-            $invoice = Invoice::where('account_id', $account_id)->where('status', 1)->first();
+            $invoice = Invoice::where('account_id', $account_id)->where('status', 3)->first();
 
             if ($invoice) {
                 $invoice_detail = InvoiceDetail::where('invoice_id', $invoice->id)->where('product_id', $product_id)->first();
@@ -56,14 +56,13 @@ class ReviewController extends Controller
                     $review -> product_id = $product_id;
                     $review -> comment = $comment;
                     $review -> rating = $rating;
-                    $review -> status = 1;
                     $review->save();
                     session()->put('success', 'Đánh giá sản phẩm thành công !');
                 }else{
                     session()->put('info', 'Vui lòng mua sản phẩm !');
                 }
             }else{
-                session()->put('info', 'Vui lòng mua sản phẩm !');
+                session()->put('info', 'Bạn chưa thể đánh giá sản phẩm!');
             }
         }else{
             session()->put('info', 'Vui lòng đăng nhập!');

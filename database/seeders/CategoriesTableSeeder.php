@@ -13,9 +13,9 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
         $categories = [
-            ['name' => 'Laptops', 'slug' => 'laptops', 'type' => 'laptop',  'status' => 1, 'created_at' => now(),'updated_at' => now()],
-            ['name' => 'Accessories', 'slug' => 'accessories', 'type' => 'accessory', 'status' => 1,'created_at' => now(),'updated_at' => now(),],
-            ['name' => 'Blogs','slug' => 'blogs', 'type' => 'blog', 'status' => 1,'created_at' => now(),'updated_at' => now(),],
+            ['name' => 'Laptop', 'slug' => 'laptops', 'type' => 'laptop',  'status' => 1, 'created_at' => now(),'updated_at' => now()],
+            ['name' => 'Phụ kiện', 'slug' => 'accessories', 'type' => 'accessory', 'status' => 1,'created_at' => now(),'updated_at' => now(),],
+            ['name' => 'Tin tức','slug' => 'blogs', 'type' => 'blog', 'status' => 1,'created_at' => now(),'updated_at' => now(),],
         ];
         
         DB::table('categories')->insert($categories);

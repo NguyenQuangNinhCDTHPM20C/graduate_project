@@ -34,9 +34,12 @@
                                     @method('POST')
                                     <div class="form-controls">
                                         <label>Họ tên:</label>
-                                        <div class="controls">
-                                            <input type="text" value="{{ session('account')->name }}" name="name"
-                                                id="Title" placeholder="Vui lòng nhập họ tên *" data-required="1">
+                                        <div class="controls text-dark">
+                                            <input type="text"
+                                                pattern="[A-Za-z\sàáảãạăắằẵặẳâấầẫậẩđèéẻẽẹêếềễệểìíỉĩịòóỏõọôốồỗộổơớờỡợởùúủũụưứừữựửỳýỷỹỵđÀÁẢÃẠĂẮẰẴẶẲÂẤẦẪẬẨĐÈÉẺẼẸÊẾỀỄỆỂÌÍỈĨỊÒÓỎÕỌÔỐỒỖỘỔƠỚỜỠỢỞÙÚỦŨỤƯỨỪỮỰỬỲÝỶỸỴĐ]+"
+                                                title="Vui lòng không nhập chữ số hay kí tự đặc biệt" type="text"
+                                                placeholder="Nhập họ tên *" value="{{ session('account')->name }}"
+                                                name="name" id="Title" data-required="1" required>
                                         </div>
                                     </div>
                                     <div class="form-controls">
@@ -44,30 +47,33 @@
                                         <div class="controls">
                                             <input type="tel" value="{{ session('account')->phone_number }}"
                                                 name="phone_number" id="PhoneNumber"
-                                                placeholder="Vui lòng nhập số điện thoại *" data-required="1">
+                                                placeholder="Vui lòng nhập số điện thoại *" pattern="[0-9]{10}"
+                                                placeholder="Vui lòng nhập số điện thoại"
+                                                title="Vui lòng nhập đúng định dạng số điện thoại" data-required="1"
+                                                required>
                                         </div>
                                     </div>
 
                                     <div class="form-controls">
                                         <label>Email:</label>
-                                        <div class="controls">
-                                            <input type="text" value="{{ session('account')->email }}" name="email"
-                                                id="Email" placeholder="Email *" data-required="1">
+                                        <div class="controls text-dark">
+                                            <input type="email" value="{{ session('account')->email }}" name="email"
+                                                id="Email" placeholder="Email *" data-required="1" required>
                                         </div>
                                     </div>
-
                                     <div class="form-controls">
                                         <label>Địa chỉ:</label>
-                                        <div class="controls">
+                                        <div class="controls text-dark">
                                             <input type="text" value="{{ session('account')->address }}" name="address"
-                                                id="Address" placeholder="Vui lòng nhập địa chỉ *" data-required="1">
+                                                id="Address" placeholder="Vui lòng nhập địa chỉ *" data-required="1"
+                                                required>
                                         </div>
                                     </div>
 
                                     <div class="form-controls">
                                         <label>Tỉnh/Thành phố:</label>
                                         <div class="controls">
-                                            <select name="province" id="SystemCityID" placeholder="Province/City">
+                                            <select name="province" id="SystemCityID" placeholder="Province/City" required>
                                                 <option value="">
                                                     Chọn tỉnh, thành
                                                 </option>
@@ -79,7 +85,7 @@
                                         <label>Quận/huyện:</label>
                                         <div class="controls">
                                             <select id="SystemDistrictID" name="district" placeholder="Quận, huyện *"
-                                                data-required="1">
+                                                data-required="1" required>
                                                 <option value=" ">
                                                     Chọn quận, huyện
                                                 </option>
@@ -91,8 +97,6 @@
                                             <p style="text-align:center;">Để trống nếu không muốn thay đổi mật khẩu.</p>
                                         </div>
                                     </div>
-
-
                                     <div class="form-controls">
                                         <label>Mật khẩu mới: </label>
                                         <div class="controls">
@@ -134,7 +138,7 @@
                                             <input type="hidden" name="ReturnUrl" value="/account/info">
                                             <p>
                                                 <img src="{{ asset('images/login-facebook.png') }}">
-                                                <strong>{{ !empty(session('account')->facebook_id) ? 'Linked' : 'Unlinked' }}</strong>
+                                                <strong>{{ !empty(session('account')->facebook_id) ? 'Đã liên kết' : 'Chưa liên kêt' }}</strong>
                                             </p>
                                             @if (!session('account')->facebook_id)
                                                 <button class="btn-extlogin btn-facebook" title="Facebook account link"
@@ -176,47 +180,65 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        fetch('/provinces.json')
+        fetch('/data.json') // Thay thế bằng đường dẫn đến file JSON của bạn
             .then(response => response.json())
-            .then(provinceData => {
-                fetch('/dicstricts.json')
-                    .then(response => response.json())
-                    .then(districtData => {
-                        const citySelect = document.getElementById('SystemCityID');
-                        const selectedProvinceCode = ''; // Giá trị tỉnh đã được tải lên từ cơ sở dữ liệu
-                        const selectedDistrictCode = ''; // Giá trị quận đã được tải lên từ cơ sở dữ liệu
+            .then(data => {
+                const citySelect = document.getElementById('SystemCityID');
+                const districtSelect = document.getElementById('SystemDistrictID');
 
-                        provinceData.forEach(province => {
-                            const option = document.createElement('option');
-                            option.value = province.code;
-                            option.textContent = province.name;
-                            if (province.code === selectedProvinceCode) {
-                                option.selected = true; // Đánh dấu tùy chọn đã chọn cho tỉnh
-                            }
-                            citySelect.appendChild(option);
-                        });
+                const selectedProvinceName = '{!! session('account')->province !!}';
+                const selectedDistrictName = '{!! session('account')->district !!}';
 
-                        const districtSelect = document.getElementById('SystemDistrictID');
-                        citySelect.addEventListener('change', () => {
-                            const selectedProvinceCode = citySelect.value;
-                            districtSelect.innerHTML = '<option value="">Chọn quận, huyện</option>';
-                            const filteredDistricts = districtData.filter(district => district
-                                .parent_code === selectedProvinceCode);
-                            filteredDistricts.forEach(district => {
-                                const option = document.createElement('option');
-                                option.value = district.code;
-                                option.textContent = district.name;
-                                if (district.code === selectedDistrictCode) {
-                                    option.selected = true; // Đánh dấu tùy chọn đã chọn cho quận
-                                }
-                                districtSelect.appendChild(option);
-                            });
-                        });
+                const provinceSet = new Set(); // Sử dụng Set để lưu trữ tên tỉnh duy nhất
+                const districtMap = new Map(); // Sử dụng Map để lưu trữ danh sách huyện theo tỉnh
 
-                        // Trigger sự kiện change để tải dữ liệu quận ban đầu
-                        const event = new Event('change');
-                        citySelect.dispatchEvent(event);
+                data.forEach(item => {
+                    const {
+                        province_name,
+                        district_name
+                    } = item;
+
+                    provinceSet.add(province_name);
+
+                    if (districtMap.has(province_name)) {
+                        const districts = districtMap.get(province_name);
+                        districts.add(district_name);
+                    } else {
+                        const districts = new Set();
+                        districts.add(district_name);
+                        districtMap.set(province_name, districts);
+                    }
+                });
+
+                provinceSet.forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province;
+                    option.textContent = province;
+                    if (province === selectedProvinceName) {
+                        option.selected = true; // Đánh dấu tùy chọn đã chọn cho tỉnh/thành phố
+                    }
+                    citySelect.appendChild(option);
+                });
+
+                citySelect.addEventListener('change', () => {
+                    const selectedProvinceName = citySelect.value;
+                    const districts = districtMap.get(selectedProvinceName);
+
+                    districtSelect.innerHTML = '<option value="">Chọn quận, huyện</option>';
+
+                    districts.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district;
+                        option.textContent = district;
+                        if (district === selectedDistrictName) {
+                            option.selected = true; // Đánh dấu tùy chọn đã chọn cho quận/huyện
+                        }
+                        districtSelect.appendChild(option);
                     });
+                });
+
+                const event = new Event('change');
+                citySelect.dispatchEvent(event);
             });
     </script>
 @stop

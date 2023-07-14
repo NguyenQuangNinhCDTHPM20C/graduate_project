@@ -30,8 +30,8 @@
                         <tbody class="align-middle">
                             @foreach ($cartItems as $key => $item)
                                 <tr>
-                                    <td class="align-middle"><img src="{{ asset($item->attributes->image) }}" alt=""
-                                            style="width: 50px;">
+                                    <td class="align-middle description"><img src="{{ asset($item->attributes->image) }}"
+                                            alt="" style="width: 50px;">
                                         {{ $item->name }}
                                     </td>
                                     <td class="align-middle">{{ $item->attributes->color }}</td>
@@ -81,9 +81,11 @@
                     </table>
                 </div>
                 <div class="col-lg-4">
-                    <form class="mb-30" action="">
+                    <form class="mb-30" action="{{ route('apply-discount') }}" method="post">
+                        @csrf
                         <div class="input-group">
-                            <input type="text" class="form-control border-0 p-4" placeholder="Mã giảm giá">
+                            <input type="text" name="code" class="form-control border-0 p-4" placeholder="Mã giảm giá"
+                                required>
                             <button class="btn btn-send">Áp dụng</button>
                         </div>
                     </form>
@@ -95,13 +97,18 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <h6 class="font-weight-medium">Giá giảm</h6>
-                                <h6 class="font-weight-medium">{{ number_format(10000, 0, ',', '.') }}đ</h6>
+                                @php
+                                    $discount_amount = session()->get('discount_amount');
+                                    $price_discount = $discount_amount ? Cart::getTotal() * ($discount_amount / 100) : 0;
+                                @endphp
+
+                                <h6 class="font-weight-medium">-{{ number_format($price_discount, 0, ',', '.') }}đ</h6>
                             </div>
                         </div>
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Tổng tiền</h5>
-                                <h5>{{ number_format(Cart::getTotal() - 10000, 0, ',', '.') }}đ</h5>
+                                <h5>{{ number_format(Cart::getTotal() - $price_discount, 0, ',', '.') }}đ</h5>
                             </div>
 
                             <a href="{{ route('checkout') }}"

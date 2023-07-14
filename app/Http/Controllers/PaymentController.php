@@ -14,6 +14,7 @@ use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
+use App\Models\Product;
 use Illuminate\Support\Facades\Session;
 use Ramsey\Uuid\Uuid;
 use Carbon\Carbon;
@@ -86,7 +87,12 @@ class PaymentController extends Controller
                     $invoice_detail->quantity = $cartItem['quantity'];
                     $invoice_detail->price = $cartItem['price'];
                     $invoice_detail->save();
+
+                    $product = Product::find($cartItem['id']);
+                    $product->quantity -= $cartItem['quantity'];
+                    $product->save();
                 }
+                session()->forget('discount_amount');
                 \Cart::clear();
                 return redirect()->route('invoice', $invoice->code);    
     }
@@ -131,10 +137,15 @@ class PaymentController extends Controller
                     $invoice_detail->quantity = $cartItem['quantity'];
                     $invoice_detail->price = $cartItem['price'];
                     $invoice_detail->save();
+
+                    $product = Product::find($cartItem['id']);
+                    $product->quantity -= $cartItem['quantity'];
+                    $product->save();
                 }
     
                 $request->session()->forget(['paymentRequest','cart.items']);
                 \Cart::clear();
+                session()->forget('discount_amount');
                 session()->put('success', 'Thanh toán đơn hàng thành công');
                 session()->save();                
                 return redirect()->route('invoice', $invoice->code);

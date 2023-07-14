@@ -3,7 +3,6 @@
 @section('title', 'Double-N shop')
 
 @section('styles')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         fieldset,
         label {
@@ -45,6 +44,10 @@
 
         .rating>.half:checked~label {
             color: #FFED85;
+        }
+
+        .rating>label:hover {
+            cursor: pointer;
         }
     </style>
 @endsection
@@ -103,11 +106,24 @@
                     <h3>{{ $product->name }}</h3>
                     <div class="d-flex mb-3">
                         <div class="text-primary mr-2">
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star"></small>
-                            <small class="fas fa-star-half-alt"></small>
-                            <small class="far fa-star"></small>
+                            @php
+                                $full_stars = floor($average_rating);
+                                // dd($average_rating);
+                                $decimal_part = $average_rating - $full_stars;
+                                $half_star = $decimal_part >= 0.25 && $decimal_part < 0.75;
+                            @endphp
+
+
+                            @for ($i = 1; $i <= 5; $i++)
+                                @if ($i <= $full_stars)
+                                    <small class="fas fa-star"></small>
+                                @elseif ($half_star && $i == floor($average_rating) + 1)
+                                    <small class="fas fa-star-half-alt"></small>
+                                @else
+                                    <small class="far fa-star"></small>
+                                @endif
+                            @endfor
+
                         </div>
                         <small class="pt-1">({{ $review_count }} Đánh giá)</small>
                     </div>
@@ -318,11 +334,18 @@
                                                         <i>{{ \Carbon\Carbon::parse($_review->created_at)->format('d/m/Y') }}</i></small>
                                                 </h6>
                                                 <div class="text-primary mb-2">
-                                                    <i class="fas fa-star"></i>
+                                                    @for ($i = 1; $i <= $_review->rating; $i++)
+                                                        <i class="fas fa-star checked"></i>
+                                                    @endfor
+
+                                                    @for ($i = $_review->rating + 1; $i <= 5; $i++)
+                                                        <i class="far fa-star"></i>
+                                                    @endfor
+                                                    {{-- <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star"></i>
                                                     <i class="fas fa-star-half-alt"></i>
-                                                    <i class="far fa-star"></i>
+                                                    <i class="far fa-star"></i> --}}
                                                 </div>
                                                 <p>{{ $_review->comment }}</p>
                                             </div>
@@ -346,27 +369,29 @@
                                             @method('POST')
                                             <div class="d-flex my-3">
                                                 <p class="mb-0 mr-2">Bình chọn* :</p>
-                                                <fieldset class="rating">
-                                                    <input type="radio" id="star5" name="rating"
-                                                        value="5" /><label class="full" for="star5"
-                                                        title="Xuất sắc"></label>
-                                                    <input type="radio" id="star4" name="rating"
-                                                        value="4" /><label class="full" for="star4"
-                                                        title="Tốt"></label>
-                                                    <input type="radio" id="star3" name="rating"
-                                                        value="3" /><label class="full" for="star3"
-                                                        title="Trung bình"></label>
-                                                    <input type="radio" id="star2" name="rating"
-                                                        value="2" /><label class="full" for="star2"
-                                                        title="Kém"></label>
-                                                    <input type="radio" id="star1" name="rating"
-                                                        value="1" /><label class="full" for="star1"
-                                                        title="Rất tệ"></label>
-                                                </fieldset>
+                                                <div class="text-primary">
+                                                    <fieldset class="rating">
+                                                        <input type="radio" id="star5" name="rating"
+                                                            value="5" /><label class="full" for="star5"
+                                                            title="Xuất sắc"></label>
+                                                        <input type="radio" id="star4" name="rating"
+                                                            value="4" /><label class="full" for="star4"
+                                                            title="Tốt"></label>
+                                                        <input type="radio" id="star3" name="rating"
+                                                            value="3" /><label class="full" for="star3"
+                                                            title="Trung bình"></label>
+                                                        <input type="radio" id="star2" name="rating"
+                                                            value="2" /><label class="full" for="star2"
+                                                            title="Kém"></label>
+                                                        <input type="radio" id="star1" name="rating"
+                                                            value="1" /><label class="full" for="star1"
+                                                            title="Rất tệ"></label>
+                                                    </fieldset>
+                                                </div>
+
                                             </div>
                                             <input type="hidden" id="product_id" name="product_id"
                                                 value="{{ $product->id }}">
-                                            <input type="hidden" id="rating" name="rating" value="5">
                                             <div class="form-group">
                                                 <label for="message">Đánh giá *</label>
                                                 <textarea id="comment" name="comment" cols="30" rows="5" class="form-control"></textarea>

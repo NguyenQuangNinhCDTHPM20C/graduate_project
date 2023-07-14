@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Discountcodes extends Model
+class DiscountCode extends Model
 {
     use HasFactory;
     public $table = "discount_codes";

@@ -69,7 +69,7 @@
                                                     <td>{{ $order->invoice->code ? $order->invoice->code : '' }}</td>
                                                     <td>{{ $order->invoice->created_at ? \Carbon\Carbon::parse($order->invoice->created_at)->format('d/m/Y') : '' }}
                                                     </td>
-                                                    <td class="text-truncate"">
+                                                    <td class="text-truncate name-product">
                                                         {{ $order->product->name ? $order->product->name : '' }}</td>
                                                     <td>{{ number_format($order->price, 0, ',', '.') }}đ</td>
                                                     <td class="text-truncate">
@@ -78,7 +78,9 @@
                                                         @elseif (optional($order->invoice)->status == 4)
                                                             <strong> Không thành công</strong>
                                                         @elseif (optional($order->invoice)->status == 3)
-                                                            <strong>Thành công</strong>
+                                                            <strong><a class="text-dark text-decoration-none name-product"
+                                                                    href="{{ route('product-detail', ['slug' => optional($order->product)->slug]) }}">Được
+                                                                    đánh giá</a></strong>
                                                         @elseif(optional($order->invoice)->status == 2)
                                                             <strong>Đang vận chuyển</strong>
                                                         @elseif(optional($order->invoice)->status == 1)

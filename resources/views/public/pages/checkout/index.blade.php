@@ -76,14 +76,6 @@
                                 <textarea class="form-control" rows="8" name="notes" id="message" placeholder="Nhập ghi chú"></textarea>
                                 <p class="help-block text-danger"></p>
                             </div>
-                            @if (!session()->has('account'))
-                                <div class="col-md-12 form-group">
-                                    <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input" id="newaccount">
-                                        <label class="custom-control-label" for="newaccount">Tạo tài khoản</label>
-                                    </div>
-                                </div>
-                            @endif
                         </div>
                     </div>
                 </div>
@@ -107,13 +99,17 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <h6 class="font-weight-medium">Giá giảm</h6>
-                                <h6 class="font-weight-medium">{{ number_format(10000, 0, ',', '.') }}đ</h6>
+                                @php
+                                    $discount_amount = session()->get('discount_amount');
+                                    $price_discount = $discount_amount ? Cart::getTotal() * ($discount_amount / 100) : 0;
+                                @endphp
+                                <h6 class="font-weight-medium">-{{ number_format($price_discount, 0, ',', '.') }}đ</h6>
                             </div>
                         </div>
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Tổng tiền</h5>
-                                <h5>{{ number_format(Cart::getTotal() - 10000, 0, ',', '.') }}đ</h5>
+                                <h5>{{ number_format(Cart::getTotal() - $price_discount, 0, ',', '.') }}đđ</h5>
                             </div>
                         </div>
                     </div>
@@ -124,8 +120,8 @@
                         <div class="bg-light p-30 bg-radius">
                             <div class="form-group">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input" name="payment_method"
-                                        value="paypal" id="paypal" required>
+                                    <input type="radio" class="custom-control-input" name="payment_method" value="paypal"
+                                        id="paypal" required>
                                     <label class="custom-control-label" for="paypal">
                                         <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png"
                                             border="0" alt="Check out with PayPal">
@@ -142,7 +138,7 @@
                                 </div>
                             </div>
                             @php
-                                $total = Cart::getTotal() - 10000;
+                                $total = Cart::getTotal() - $price_discount;
                             @endphp
                             <input type="hidden" name="total" value="{{ $total }}">
                             <button type="submit" class="btn btn-block btn-custom font-weight-bold py-3">Xác nhận đặt
@@ -157,52 +153,65 @@
 @stop
 @section('scripts')
     <script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/provinces.json')
-                .then(response => response.json())
-                .then(provinceData => {
-                    fetch('/dicstricts.json')
-                        .then(response => response.json())
-                        .then(districtData => {
-                            const citySelect = document.getElementById('SystemCityID');
-                            const selectedProvinceCode =
-                                'provinceCode'; // Thay 'provinceCode' bằng giá trị thực tế
-                            const selectedDistrictCode =
-                                'districtCode'; // Thay 'districtCode' bằng giá trị thực tế
+        fetch('/data.json') // Thay thế bằng đường dẫn đến file JSON của bạn
+            .then(response => response.json())
+            .then(data => {
+                const citySelect = document.getElementById('SystemCityID');
+                const districtSelect = document.getElementById('SystemDistrictID');
 
-                            provinceData.forEach(province => {
-                                const option = document.createElement('option');
-                                option.value = province.code;
-                                option.textContent = province.name;
-                                if (province.code === selectedProvinceCode) {
-                                    option.selected = true;
-                                }
-                                citySelect.appendChild(option);
-                            });
+                const selectedProvinceName = '{!! session('account')->province !!}';
+                const selectedDistrictName = '{!! session('account')->district !!}';
 
-                            const districtSelect = document.getElementById('SystemDistrictID');
-                            citySelect.addEventListener('change', () => {
-                                const selectedProvinceCode = citySelect.value;
-                                districtSelect.innerHTML =
-                                    '<option value="">Chọn quận, huyện</option>';
-                                const filteredDistricts = districtData.filter(district => district
-                                    .parent_code === selectedProvinceCode);
-                                filteredDistricts.forEach(district => {
-                                    const option = document.createElement('option');
-                                    option.value = district.code;
-                                    option.textContent = district.name;
-                                    if (district.code === selectedDistrictCode) {
-                                        option.selected = true;
-                                    }
-                                    districtSelect.appendChild(option);
-                                });
-                            });
+                const provinceSet = new Set(); // Sử dụng Set để lưu trữ tên tỉnh duy nhất
+                const districtMap = new Map(); // Sử dụng Map để lưu trữ danh sách huyện theo tỉnh
 
-                            // Trigger sự kiện change để tải dữ liệu quận ban đầu
-                            const event = new Event('change');
-                            citySelect.dispatchEvent(event);
-                        });
+                data.forEach(item => {
+                    const {
+                        province_name,
+                        district_name
+                    } = item;
+
+                    provinceSet.add(province_name);
+
+                    if (districtMap.has(province_name)) {
+                        const districts = districtMap.get(province_name);
+                        districts.add(district_name);
+                    } else {
+                        const districts = new Set();
+                        districts.add(district_name);
+                        districtMap.set(province_name, districts);
+                    }
                 });
-        });
+
+                provinceSet.forEach(province => {
+                    const option = document.createElement('option');
+                    option.value = province;
+                    option.textContent = province;
+                    if (province === selectedProvinceName) {
+                        option.selected = true; // Đánh dấu tùy chọn đã chọn cho tỉnh/thành phố
+                    }
+                    citySelect.appendChild(option);
+                });
+
+                citySelect.addEventListener('change', () => {
+                    const selectedProvinceName = citySelect.value;
+                    const districts = districtMap.get(selectedProvinceName);
+
+                    districtSelect.innerHTML = '<option value="">Chọn quận, huyện</option>';
+
+                    districts.forEach(district => {
+                        const option = document.createElement('option');
+                        option.value = district;
+                        option.textContent = district;
+                        if (district === selectedDistrictName) {
+                            option.selected = true; // Đánh dấu tùy chọn đã chọn cho quận/huyện
+                        }
+                        districtSelect.appendChild(option);
+                    });
+                });
+
+                const event = new Event('change');
+                citySelect.dispatchEvent(event);
+            });
     </script>
 @endsection

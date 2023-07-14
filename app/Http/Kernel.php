@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'auth.public' =>  \App\Http\Middleware\PublicAuth::class,
         'auth.admin' => \App\Http\Middleware\AdminAuth::class,
         'guest.admin' => \App\Http\Middleware\AuthenticatedAdmin::class,
+        'cartNotEmpty' => \App\Http\Middleware\CartNotEmpty::class,
     ];
 }
