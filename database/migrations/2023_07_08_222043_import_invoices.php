@@ -19,6 +19,7 @@ class ImportInvoices extends Migration
             $table->integer('account_id')->unsigned();
             $table->string('supplier');
             $table->bigInteger('total');
+            $table->tinyInteger('status')->nullable()->default(0);
             $table->timestamps();
 
             $table->foreign('account_id')->references('id')->on('accounts');

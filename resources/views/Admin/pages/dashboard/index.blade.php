@@ -53,7 +53,7 @@
                 <div class="col-lg-3 col-sm-6 col-12 d-flex">
                     <div class="dash-count">
                         <div class="dash-counts">
-                            <h4>{{ $count_customer }}</h4>
+                            <h4>{{ $total_customer }}</h4>
                             <h5>Khách hàng</h5>
                         </div>
                         <div class="dash-imgs">
@@ -64,8 +64,8 @@
                 <div class="col-lg-3 col-sm-6 col-12 d-flex">
                     <div class="dash-count das1">
                         <div class="dash-counts">
-                            <h4>{{ $count_brand }}</h4>
-                            <h5>Nhà cung cấp</h5>
+                            <h4>{{ $count_user }}</h4>
+                            <h5>Người dùng</h5>
                         </div>
                         <div class="dash-imgs">
                             <i data-feather="user-check"></i>
@@ -97,33 +97,34 @@
             </div>
             <div class="card mb-0">
                 <div class="card-body">
-                    <h4 class="card-title">Product Out Stock</h4>
+                    <h4 class="card-title">Sản phẩm mới bán được</h4>
                     <div class="table-responsive dataview">
                         <table class="table datatable ">
                             <thead>
                                 <tr>
-                                    <th>SNo</th>
-                                    <th>Product Code</th>
-                                    <th>Product Name</th>
-                                    <th>Brand Name</th>
-                                    <th>Category Name</th>
+                                    <th>Code</th>
+                                    <th>Sản phẩm</th>
+                                    <th>Thương hiệu</th>
+                                    <th>Danh mục</th>
+                                    <th>Số lượng</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($product_out_stock as $key => $product)
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
                                         <td><a href="javascript:void(0);">{{ $product->code }}</a></td>
                                         <td class="productimgname">
                                             <a class="product-img"
                                                 href="{{ route('product.detail', ['slug' => $product->slug]) }}">
-                                                <img src="{{ asset('assets/product/' . $product->image) }}" alt="product">
+                                                <img src="{{ $product->featured_image ? asset($product->featured_image->image_path) : '' }}"
+                                                    alt="product">
                                             </a>
                                             <a
                                                 href="{{ route('product.detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
                                         </td>
                                         <td>{{ $product->brand->name }}</td>
                                         <td>{{ $product->category->name }}</td>
+                                        <td>{{ $product->quantity }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -138,28 +139,29 @@
                         <table class="table datatable ">
                             <thead>
                                 <tr>
-                                    <th>SNo</th>
-                                    <th>Product Code</th>
-                                    <th>Product Name</th>
-                                    <th>Brand Name</th>
-                                    <th>Category Name</th>
+                                    <th>Code</th>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Thương hiệu</th>
+                                    <th>Danh mục</th>
+                                    <th>Số lượng</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($product_out_stock as $key => $product)
                                     <tr>
-                                        <td>{{ $key + 1 }}</td>
                                         <td><a href="javascript:void(0);">{{ $product->code }}</a></td>
                                         <td class="productimgname">
                                             <a class="product-img"
                                                 href="{{ route('product.detail', ['slug' => $product->slug]) }}">
-                                                <img src="{{ asset('assets/product/' . $product->image) }}" alt="product">
+                                                <img src="{{ $product->featured_image ? asset($product->featured_image->image_path) : '' }}"
+                                                    alt="{{ $product->name }}">
                                             </a>
                                             <a
                                                 href="{{ route('product.detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
                                         </td>
-                                        <td>{{ $product->brand->name }}</td>
-                                        <td>{{ $product->category->name }}</td>
+                                        <td>{{ optional($product->brand)->name }}</td>
+                                        <td>{{ optional($product->category)->name }}</td>
+                                        <td>{{ $product->quantity }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

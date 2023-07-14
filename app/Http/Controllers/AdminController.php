@@ -9,15 +9,18 @@ use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\Blog;
 use App\Models\Setting;
+use App\Models\ImportInvoice;
+use App\Models\ImportInvoiceDetail;
 class AdminController extends Controller
 {
     public function dash_board(){
-        $count_customer = Account::where('role', 2)->count();
-        $count_brand = Brand::count();
+        $count_user = Account::where('role', 2)->count();
+        $count_customer = Invoice::where('account_id', null)->count();
+        $total_customer = $count_user + $count_customer;
         $count_sale_invoice = Invoice::count();
-        $product_out_stock = Product::where('quantity', '<' , '5')->get();
+        $product_out_stock = Product::where('quantity', '<' , 50)->get();
         $recent_added_product = Product::latest()->take(4)->get();
-        return view('admin.pages.dashboard.index', compact('count_customer', 'count_brand', 'count_sale_invoice', 'product_out_stock', 'recent_added_product'));
+        return view('admin.pages.dashboard.index', compact('count_user', 'total_customer', 'count_sale_invoice', 'product_out_stock', 'recent_added_product'));
     }
 
     public function users(){
