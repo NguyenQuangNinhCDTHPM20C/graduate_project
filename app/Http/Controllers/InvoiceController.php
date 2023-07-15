@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
+use Barryvdh\DomPDF\Facade AS PDF;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -91,5 +92,17 @@ class InvoiceController extends Controller
         InvoiceDetail::where('invoice_id', $invoice->id)->delete();
         $invoice->delete();
         return redirect()->route('invoice.list')->with('Invoice has been deleted successfully');
+    }
+    public function print($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+
+        $data = [
+            'invoice' => $invoice,
+        ];
+
+        $pdf = PDF::loadView('invoices.print', $data);
+
+        return $pdf->stream('invoice.pdf');
     }
 }

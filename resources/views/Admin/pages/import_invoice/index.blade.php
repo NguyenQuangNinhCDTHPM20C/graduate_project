@@ -11,9 +11,8 @@
                     <h6>Quản lý đơn hàng của bạn</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="{{ route('import-invoice.add') }}" class="btn btn-added"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
-                            alt="img" class="me-1">Thêm hóa đơn</a>
+                    <a href="{{ route('import-invoice.create_detail') }}" class="btn btn-added"><img
+                            src="{{ asset('images/plus.svg') }}" alt="img" class="me-1">Thêm hóa đơn</a>
                 </div>
             </div>
 
@@ -69,8 +68,7 @@
                                         <div class="input-groupicon">
                                             <input type="text" placeholder="To Date" class="datetimepicker">
                                             <div class="addonset">
-                                                <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/calendars.svg"
-                                                    alt="img">
+                                                <img src="{{ asset('images/calendar.svg') }}" alt="img">
                                             </div>
                                         </div>
                                     </div>
@@ -78,8 +76,7 @@
                                 <div class="col-lg-1 col-sm-6 col-12 ms-auto">
                                     <div class="form-group">
                                         <a class="btn btn-filters ms-auto"><img
-                                                src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/search-whites.svg"
-                                                alt="img"></a>
+                                                src="{{ asset('images/search-whites.svg') }}" alt="img"></a>
                                     </div>
                                 </div>
                             </div>
@@ -124,16 +121,6 @@
                                                 href="{{ route('import-invoice.edit', ['code' => $_invoices->code]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3 confirm-text"
-                                                onclick="$.fn.showConfirmationDeleteAlert('invoices_delete_{{ $_invoices->id }}')">
-                                                <img src="{{ asset('images/delete.svg') }}" alt="img">
-                                            </a>
-                                            <form id="invoices_delete_{{ $_invoices->id }}"
-                                                action="{{ route('import-invoice.delete', ['id' => $_invoices->id]) }}"
-                                                method="POST" style="display: none">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach

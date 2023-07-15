@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\ImportInvoice;
 use App\Models\ImportInvoiceDetail;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class ImportInvoiceController extends Controller
@@ -30,7 +31,8 @@ class ImportInvoiceController extends Controller
 
     public function create_detail()
     {
-        return view('admin.pages.import_invoice.add-detail');
+        $products = Product::get();
+        return view('admin.pages.import_invoice.add-detail', compact('products'));
     }
 
     /**
@@ -52,14 +54,36 @@ class ImportInvoiceController extends Controller
 
     public function store_detail(Request $request)
     {
-            $invoice = new ImportInvoiceDetail;
-            $invoice->import_invoice_id = $request->input('purcharse_invoice_id');
-            $invoice->product_code= $request->input('product_code');
-            $invoice->quantity = $request->input('quantity');
-            $invoice->price = $request->input('price');
-            $invoice->save();
-        
-        return redirect()->route('import-invoice.list')->with('success', 'Invoice has been updated successfully');
+        // Lưu thông tin hóa đơn nhập
+        $importInvoice = new ImportInvoice();
+        $importInvoice->code = $request->input('code');
+        $importInvoice->account_id = $request->input('account_id');
+        $importInvoice->supplier = $request->input('supplier');
+        // Tính tổng giá trị hóa đơn nhập
+        $total = 0;
+        $quantities = $request->input('quantity');
+        $prices = $request->input('price');
+        foreach ($quantities as $key => $quantity) {
+            $total += $quantity * $prices[$key];
+        }
+        $importInvoice->total = $total;
+        $importInvoice->status = $request->input('status');
+        $importInvoice->created_at = $request->input('created_at');
+        $importInvoice->updated_at = $request->input('updated_at');
+        $importInvoice->save();
+
+        // Lưu thông tin chi tiết hóa đơn nhập
+        $productIds = $request->input('product_id');
+        foreach ($productIds as $key => $productId) {
+            $importInvoiceDetail = new ImportInvoiceDetail();
+            $importInvoiceDetail->import_invoice_id = $importInvoice->id;
+            $importInvoiceDetail->product_id = $productId;
+            $importInvoiceDetail->quantity = $quantities[$key];
+            $importInvoiceDetail->price = $prices[$key];
+            $importInvoiceDetail->save();
+        }
+
+        return redirect()->route('import-invoice.list')->with('success', 'Hóa đơn nhập đã được tạo thành công.');
     }
 
     /**
@@ -81,39 +105,40 @@ class ImportInvoiceController extends Controller
      */
     public function edit($code)
     {
-        $invoice = ImportInvoice::where('code', $code)->first();
-        return view('admin.pages.import_invoice.edit', compact('invoice'));
+        $importInvoice = ImportInvoice::where('code', $code)->first();
+        $importInvoiceDetail = ImportInvoiceDetail::where('import_invoice_id',  $importInvoice->id)->get();
+
+        return view('Admin.pages.import_invoice.edit', compact('importInvoice', 'importInvoiceDetail'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ImportInvoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
+    // Cập nhật hóa đơn mua hàng
     public function update(Request $request, $id)
     {
-        $invoice = ImportInvoice::findOrFail($id);
-        $invoice->code = $request->input('code');
-        $invoice->account_id = $request->input('account_id');
-        $invoice->phone_number = $request->input('phone_number');
-        $invoice->total = $request->input('total');
-        $invoice->save();
-        return redirect()->route('import-invoice.list')->with('success', 'Invoice has been updated successfully');
-    }
+        $importInvoice = ImportInvoice::findOrFail($id);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Invoice  $invoice
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        $invoice = ImportInvoice::findOrFail($id);
-        ImportInvoiceDetail::where('import_invoice_id', $invoice->id)->delete();
-        $invoice->delete();
-        return redirect()->route('import-invoice.list')->with('Invoice has been deleted successfully');
+        // Kiểm tra và cập nhật trạng thái hóa đơn
+        if ($request->has('status')) {
+            $status = $request->input('status');
+            $importInvoice->status = $status;
+            $importInvoice->save();
+        }
+
+        // Kiểm tra và cập nhật số lượng sản phẩm
+        if ($request->has('quantity')) {
+            $quantityData = $request->input('quantity');
+
+            foreach ($quantityData as $productId => $quantity) {
+                $importDetail = ImportInvoiceDetail::where('import_invoice_id', $importInvoice->id)
+                    ->where('product_id', $productId)
+                    ->first();
+
+                if ($importDetail) {
+                    $importDetail->quantity = $quantity;
+                    $importDetail->save();
+                }
+            }
+        }
+
+        return redirect()->route('import-invoice.list')->with('success', 'Cập nhật hóa đơn thành công.');
     }
 }

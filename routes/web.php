@@ -151,6 +151,7 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::get('/invoice/edit/{code}', [InvoiceController::class, 'edit'])->name('invoice.edit');
         Route::put('/invoice/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
         Route::delete('/invoice/delete/{id}', [InvoiceController::class, 'destroy'])->name('invoice.delete');
+        Route::get('/invoices/{id}/print', [InvoiceController::class, 'print'])->name('invoices.print');
         //Routes for auth
         Route::post('/logout', [AuthController::class, 'logout_admin'])->name('admin.logout');
         Route::get('/invoice/report', function () {
@@ -186,7 +187,7 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::post('/import-invoice/add/detail', [ImportInvoiceController::class, 'store_detail'])->name('import-invoice.store_detail');
         Route::get('/import-invoice/add/detail', [ImportInvoiceController::class, 'store_detail'])->name('import-invoice.add_detail');
         Route::get('/import-invoice/add', [ImportInvoiceController::class, 'create'])->name('import-invoice.add');
-        Route::get('/import-invoice/adddetail', [ImportInvoiceController::class, 'create_detail'])->name('import-invoice.create_detail');
+        Route::get('/import-invoice/add-detail', [ImportInvoiceController::class, 'create_detail'])->name('import-invoice.create_detail');
         Route::get('/import-invoice/edit/{code}', [ImportInvoiceController::class, 'edit'])->name('import-invoice.edit');
         Route::put('/import-invoice/{id}', [ImportInvoiceController::class, 'update'])->name('import-invoice.update');
         Route::delete('/import-invoice/{id}', [ImportInvoiceController::class, 'destroy'])->name('import-invoice.delete');
