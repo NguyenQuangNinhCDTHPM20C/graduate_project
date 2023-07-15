@@ -17,16 +17,14 @@ class Invoices extends Migration
             $table->increments('id');
             $table->integer('code');
             $table->integer('account_id')->nullable()->unsigned();
-            $table->dateTime('order_date');
             $table->string('name',200);
             $table->string('address');
             $table->string('phone');
             $table->string('email');
-            $table->text('notes');
+            $table->text('notes')->nullable();
             $table->bigInteger('total');
             $table->string('payment_method');
-            $table->tinyInteger('status')->nullable()->default(1);
-            $table->rememberToken();
+            $table->tinyInteger('status')->nullable()->default(0);
             $table->timestamps();
             $table->foreign('account_id')->references('id')->on('accounts');
         });

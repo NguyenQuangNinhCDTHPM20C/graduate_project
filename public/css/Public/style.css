@@ -10896,3 +10896,15 @@ ul.pagination .page-item.active .page-link {
     display: block;
     padding: 3px 40px 0 20px;
 }
+td.description {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+td.name-product {
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

@@ -14,6 +14,7 @@
             </div>
             <form method="POST" action="{{ route('blog.update', $blog->id) }}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="card">
                     <div class="card-body">
                         <div class="container">
@@ -25,7 +26,7 @@
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
                                         <img src="{{ asset($blog->image) }}" alt="{{ $blog->title }}">
-                                        <label for="image">Image:</label>
+                                        <label for="image">Ảnh:</label>
                                         <input type="file" name="image" id="image">
                                     </div>
                                 </div>
@@ -68,7 +69,7 @@
                                         <textarea name="content" id="content"></textarea>
                                     </div>
                                 </div>
-                                <button type="submit" class="btn btn-primary form-control">TẠO BÀI VIẾT</button>
+                                <button type="submit" class="btn btn-primary form-control">CẬP NHẬT BÀI VIẾT</button>
                             </div>
                         </div>
                     </div>

@@ -537,7 +537,7 @@ section.account {
     border: none;
     padding: 8px 20px;
     font-weight: 600;
-    color: #858585;
+    /* color: #858585; */
 }
 .form-controls .controls {
     display: flex;

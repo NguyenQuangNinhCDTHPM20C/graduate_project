@@ -37,8 +37,8 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Ngày đặt</label>
-                                    <input type="text" name="order_date" class="form-control"
-                                        value="{{ $invoice->order_date }}" disabled>
+                                    <input type="text" name="created_at" class="form-control"
+                                        value="{{ $invoice->created_at }}" disabled>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
@@ -93,7 +93,7 @@
                         <div class="col-lg-12">
                             <button href="javascript:void(0);" type="submit" class="btn btn-submit me-2">CẬP
                                 NHẬT</button>
-                            <a href="{{ route('brand.list') }}" class="btn btn-cancel">THOÁT</a>
+                            <a href="{{ route('invoice.list') }}" class="btn btn-cancel">THOÁT</a>
                         </div>
 
                     </div>

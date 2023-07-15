@@ -22,8 +22,6 @@
                              Thông tin cần biết
                          </h5>
                          <div class="d-flex flex-column justify-content-start">
-                             <a class="text-secondary mb-2" href="#">Chính
-                                 sách đổi trả</a>
                              <a class="text-secondary mb-2" href="{{ route('account.order') }}">Tra cứu
                                  đơn hàng</a>
                              <a class="text-secondary mb-2" href="{{ route('blogs') }}">Tin
@@ -69,7 +67,7 @@
                          <div class="d-flex">
                              <a class=" btn-square mr-2 btn-link twitter" href="#"><i
                                      class="fab fa-twitter"></i></a>
-                             <a class="btn-square mr-2 btn-link facebook" href="#"><i
+                             <a class="btn-square mr-2 btn-link facebook" href="{{ $settings->link_facebook }}"><i
                                      class="fab fa-facebook-f"></i></a>
                              <a class=" btn-square mr-2 btn-link instagram" href="#"><i
                                      class="fab fa-instagram"></i></a>

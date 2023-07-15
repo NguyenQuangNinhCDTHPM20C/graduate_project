@@ -30,8 +30,8 @@
                         <tbody class="align-middle">
                             @foreach ($cartItems as $key => $item)
                                 <tr>
-                                    <td class="align-middle"><img src="{{ asset($item->attributes->image) }}" alt=""
-                                            style="width: 50px;">
+                                    <td class="align-middle description"><img src="{{ asset($item->attributes->image) }}"
+                                            alt="" style="width: 50px;">
                                         {{ $item->name }}
                                     </td>
                                     <td class="align-middle">{{ $item->attributes->color }}</td>
@@ -47,17 +47,19 @@
                                                 <input type="hidden" name="id" value="{{ $item->id }}">
                                                 <div class="input-group quantity mr-3" style="width: 130px;">
                                                     <div class="input-group-btn">
-                                                        <button class="btn btn-primary btn-minus bg-number-left">
+                                                        <span
+                                                            class="btn btn-primary btn-minus bg-number-left border border-dark-subtle">
                                                             <i class="fa fa-minus"></i>
-                                                        </button>
+                                                        </span>
                                                     </div>
-                                                    <input type="text"
-                                                        class="form-control bg-radius-none bg-secondary border-0 text-center"
-                                                        name="quantity" value="{{ $item->quantity }}">
+                                                    <input type="number"
+                                                        class="form-control bg-radius-none text-center text-dark border border-dark-subtle p-0"
+                                                        name="quantity" min="1" value="{{ $item->quantity }}">
                                                     <div class="input-group-btn">
-                                                        <button class="btn btn-primary btn-plus bg-number-right">
+                                                        <span
+                                                            class="btn btn-primary btn-plus bg-number-right border border-dark-subtle">
                                                             <i class="fa fa-plus"></i>
-                                                        </button>
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </form>
@@ -79,9 +81,11 @@
                     </table>
                 </div>
                 <div class="col-lg-4">
-                    <form class="mb-30" action="">
+                    <form class="mb-30" action="{{ route('apply-discount') }}" method="post">
+                        @csrf
                         <div class="input-group">
-                            <input type="text" class="form-control border-0 p-4" placeholder="Mã giảm giá">
+                            <input type="text" name="code" class="form-control border-0 p-4" placeholder="Mã giảm giá"
+                                required>
                             <button class="btn btn-send">Áp dụng</button>
                         </div>
                     </form>
@@ -93,13 +97,18 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <h6 class="font-weight-medium">Giá giảm</h6>
-                                <h6 class="font-weight-medium">{{ number_format(10000, 0, ',', '.') }}đ</h6>
+                                @php
+                                    $discount_amount = session()->get('discount_amount');
+                                    $price_discount = $discount_amount ? Cart::getTotal() * ($discount_amount / 100) : 0;
+                                @endphp
+
+                                <h6 class="font-weight-medium">-{{ number_format($price_discount, 0, ',', '.') }}đ</h6>
                             </div>
                         </div>
                         <div class="pt-2">
                             <div class="d-flex justify-content-between mt-2">
                                 <h5>Tổng tiền</h5>
-                                <h5>{{ number_format(Cart::getTotal() - 10000, 0, ',', '.') }}đ</h5>
+                                <h5>{{ number_format(Cart::getTotal() - $price_discount, 0, ',', '.') }}đ</h5>
                             </div>
 
                             <a href="{{ route('checkout') }}"
@@ -127,27 +136,36 @@
 @stop
 @section('scripts')
     <script>
-        const input = document.querySelector('.quantity input');
-        const btnMinus = document.querySelector('.quantity .btn-minus');
-        const btnPlus = document.querySelector('.quantity .btn-plus');
+        // Lựa chọn tất cả các phần tử .quantity
+        const quantityContainers = document.querySelectorAll('.quantity');
 
-        // Thêm sự kiện "click" cho nút "tăng"
-        btnPlus.addEventListener('click', (event) => {
-            // event.preventDefault(); // Ngăn chặn hành vi mặc định của form
-            let value = parseInt(input.value);
-            value += 1;
-            input.value = value;
-        });
+        // Duyệt qua từng phần tử .quantity
+        quantityContainers.forEach(quantityContainer => {
+            const input = quantityContainer.querySelector('input');
+            const btnMinus = quantityContainer.querySelector('.btn-minus');
+            const btnPlus = quantityContainer.querySelector('.btn-plus');
+            const form = quantityContainer.closest('form');
 
-        // Thêm sự kiện "click" cho nút "giảm"
-        btnMinus.addEventListener('click', (event) => {
-            // event.preventDefault(); // Ngăn chặn hành vi mặc định của form
-            let value = parseInt(input.value);
-            value -= 1;
-            if (value < 1) {
-                value = 1;
-            }
-            input.value = value;
+            // Thêm sự kiện "click" cho nút "tăng"
+            btnPlus.addEventListener('click', (event) => {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+                let value = parseInt(input.value);
+                value += 1;
+                input.value = value;
+                form.submit(); // Gửi form
+            });
+
+            // Thêm sự kiện "click" cho nút "giảm"
+            btnMinus.addEventListener('click', (event) => {
+                event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+                let value = parseInt(input.value);
+                value -= 1;
+                if (value < 1) {
+                    value = 1;
+                }
+                input.value = value;
+                form.submit(); // Gửi form
+            });
         });
     </script>
 @stop

@@ -13,9 +13,9 @@ class ColorsTableSeeder extends Seeder
     public function run()
     {
         $colors = [
-            ['name' => 'Black','created_at' => now(),'updated_at' => now(),],
-            ['name' => 'Red','created_at' => now(),'updated_at' => now(),],
-            ['name' => 'White','created_at' => now(),'updated_at' => now(),],
+            ['name' => 'Đen','created_at' => now(),'updated_at' => now(),],
+            ['name' => 'Đỏ','created_at' => now(),'updated_at' => now(),],
+            ['name' => 'Trắng','created_at' => now(),'updated_at' => now(),],
         ];
 
         DB::table('colors')->insert($colors);

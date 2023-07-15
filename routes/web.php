@@ -1,23 +1,27 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\BrandController;
-use App\Http\Controllers\SubCategoryController;
-use App\Http\Controllers\InvoiceController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\FavoriteController;
-use App\Http\Controllers\ReviewController;
-use App\Http\Controllers\Api\GoogleController;
-use App\Http\Controllers\Api\FacebookController;
-use App\Http\Controllers\Api\ZaloController;
-use App\Http\Controllers\PaymentController;
-use App\Http\Controllers\BlogController;
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Api\FacebookController;
+use App\Http\Controllers\Api\GoogleController;
+use App\Http\Controllers\Api\ZaloController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BrandController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseInvoiceController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SubCategoryController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ImportInvoiceController;
+use App\Http\Controllers\DiscountCodeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,9 +37,10 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/',[UserController::class, 'index'])->name('home');
     //Routes for product
     Route::get('/products', [UserController::class, 'products'])->name('products');
-    Route::post('/products', [UserController::class, 'products']);
     Route::get('/product/{slug}', [UserController::class, 'product_detail'])->name('product-detail');
     Route::get('/products/{type}', [UserController::class, 'products_type'])->name('product-type');
+    Route::get('/products/accessories/{slug}', [UserController::class, 'products_type_1'])->name('product-type-1');
+    Route::get('/products/laptop/{slug}', [UserController::class, 'products_type_1'])->name('product-type-2');
     Route::get('/search', [UserController::class, 'search'])->name('search');
     //Routes for shopping cart
     Route::get('cart', [CartController::class, 'index'])->name('cart.list');
@@ -43,6 +48,7 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::post('cart/update', [CartController::class, 'update'])->name('cart.update');
     Route::post('cart/remove', [CartController::class, 'remove'])->name('cart.remove');
     Route::post('clear', [CartController::class, 'clear'])->name('cart.clear');
+    Route::post('/apply-discount', [DiscountCodeController::class, 'apply_discount'])->name('apply-discount');
     //Route for contact
     Route::get('/contact', [UserController::class, 'contact'])->name('contact');
     //Route for add product to favorite
@@ -50,7 +56,7 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::delete('/favorite/{id}', [FavoriteController::class, 'destroy_2'])->name('favorite.delete')->middleware('auth.public');
     //Route for add review product
     Route::post('/review/add', [ReviewController::class, 'store'])->name('review.add');
-    Route::get('/checkout',[UserController::class, 'checkout'])->name('checkout');
+    Route::get('/checkout',[UserController::class, 'checkout'])->name('checkout')->middleware('cartNotEmpty');
     Route::get('/invoice/{code}',[UserController::class, 'invoice'])->name('invoice');
     //Routes for authenticate
     Route::get('/login', [AuthController::class, 'showLoginFormPublic'])->name('public.login')->middleware('guest.public');
@@ -59,6 +65,10 @@ Route::group(['domain' => env('APP_URL')], function () {
     Route::get('/logup', [AuthController::class, 'showRegisterForm'])->name('logup')->middleware('guest.public');
     Route::post('/logup', [AuthController::class, 'register'])->name('logup.submit')->middleware('guest.public');
     Route::get('/verify-email/{token}', [AuthController::class, 'verifyEmail'])->name('verify-email');
+    Route::get('/reset-password/input-email', [AuthController::class, 'showInputEmail'])->name('input-email.form')->middleware('guest.public');
+    Route::post('/reset-password/send-email', [AuthController::class, 'SendEmailResetPass'])->name('input-email.submit')->middleware('guest.public');
+    Route::get('/reset-password/userId={id}&code={token}', [AuthController::class, 'showResetPassForm'])->name('reset-pass.form');
+    Route::post('/reset-password', [AuthController::class, 'resetPass'])->name('reset-pass.submit');
     //Routes for login google
     Route::get('/login/google', [GoogleController::class, 'redirectToGoogle'])->name('login.google'); 
     Route::get('/callback/google', [GoogleController::class, 'handleGoogleCallback']);
@@ -73,7 +83,8 @@ Route::group(['domain' => env('APP_URL')], function () {
     //Routes for blog
     Route::get('/blogs',[UserController::class, 'blogs'])->name('blogs');
     Route::get('/blog-detail/{slug}',[UserController::class, 'blog_detail'])->name('blog-detail');
-    Route::get('/check-qr/{qr_token}', [AuthController::class, 'check_qr'])->name('check-qr');
+    //Route for cancle order
+    Route::post('/order/cancle', [UserController::class, 'cancel_order'])->name('cancel_order');
     //Routes for account
     Route::group(['prefix' => 'account', 'middleware' => 'auth.public'], function () {
         Route::get('/', [UserController::class, 'dash_board'])->name('account.index');
@@ -104,6 +115,13 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::get('/product/edit/{slug}', [ProductController::class, 'edit'])->name('product.edit');
         Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+        //routes for color
+        Route::get('/color/list', [ColorController::class, 'index'])->name('color.list');
+        Route::post('/color/add', [ColorController::class, 'store'])->name('color.store');
+        Route::get('/color/add', [ColorController::class, 'create'])->name('color.add');
+        Route::get('/color/edit/{id}', [ColorController::class, 'edit'])->name('color.edit');
+        Route::put('/color/{id}', [ColorController::class, 'update'])->name('color.update');
+        Route::delete('/color/{id}', [ColorController::class, 'destroy'])->name('color.delete');
         //Routes for category
         Route::get('/category/list', [CategoryController::class, 'index'])->name('category.list');
         Route::post('/category/add', [CategoryController::class, 'store'])->name('category.store');
@@ -154,6 +172,7 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
             return view('admin.pages.setting.setting');
         })->name('setting');
         Route::post('/setting', [AdminController::class, 'update_setting'])->name('setting.update');
+        //Routes for blogs
         Route::get('/blog/list', [BlogController::class, 'index'])->name('blog.index');
         Route::get('/blog/add', [BlogController::class, 'create'])->name('blog.create');
         Route::post('/blog/add', [BlogController::class, 'store'])->name('blog.store');
@@ -161,10 +180,24 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::put('/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
         Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
         Route::delete('/delete/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
+        //Routes for import_invoice
+        Route::get('/import-invoice/list',[ImportInvoiceController::class, 'index'])->name('import-invoice.list');
+        Route::post('/import-invoice/add', [ImportInvoiceController::class, 'store'])->name('import-invoice.store');
+        Route::post('/import-invoice/add/detail', [ImportInvoiceController::class, 'store_detail'])->name('import-invoice.store_detail');
+        Route::get('/import-invoice/add/detail', [ImportInvoiceController::class, 'store_detail'])->name('import-invoice.add_detail');
+        Route::get('/import-invoice/add', [ImportInvoiceController::class, 'create'])->name('import-invoice.add');
+        Route::get('/import-invoice/add-detail', [ImportInvoiceController::class, 'create_detail'])->name('import-invoice.create_detail');
+        Route::get('/import-invoice/edit/{code}', [ImportInvoiceController::class, 'edit'])->name('import-invoice.edit');
+        Route::put('/import-invoice/{id}', [ImportInvoiceController::class, 'update'])->name('import-invoice.update');
+        Route::delete('/import-invoice/{id}', [ImportInvoiceController::class, 'destroy'])->name('import-invoice.delete');
     });
     Route::get('/login', [AuthController::class, 'showLoginFormAdmin'])->name('admin.login')->middleware('guest.admin');
     Route::post('/login', [AuthController::class, 'login_admin'])->middleware('guest.admin');
     Route::get('/logup', [AuthController::class, 'showRegisterFormAdmin'])->name('admin.logup')->middleware('guest.admin');
     Route::post('/logup', [AuthController::class, 'register_admin'])->name('admin.logup.submit');
     Route::get('/verify-email/{token}', [AuthController::class, 'verifyEmailAdmin'])->name('admin.verify-email');
+    Route::get('/reset-password/input-email', [AuthController::class, 'showInputEmailAdmin'])->name('admin.input-email.form')->middleware('guest.admin');
+    Route::post('/reset-password/send-email', [AuthController::class, 'SendEmailResetPassAdmin'])->name('admin.input-email.submit')->middleware('guest.admin');
+    Route::get('/reset-password/userId={id}&code={token}', [AuthController::class, 'showResetPassFormAdmin'])->name('admin.reset-pass.form');
+    Route::post('/reset-password', [AuthController::class, 'resetPassAdmin'])->name('admin.reset-pass.submit');
 });

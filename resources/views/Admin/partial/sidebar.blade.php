@@ -7,7 +7,7 @@
                         <li class="{{ request()->routeIs('index') ? 'active' : '' }}">
                             <a href="{{ route('index') }}"><i data-feather="grid"></i><span>Bảng điều khiển</span></a>
                         </li>
-                        <li class="submenu">
+                        {{-- <li class="submenu">
                             <a href="javascript:void(0);"
                                 class="{{ request()->routeIs('chat') || request()->routeIs('email') ? 'active' : '' }}"><i
                                     data-feather="smartphone"></i><span>Ứng
@@ -18,10 +18,10 @@
                                 <li class="{{ request()->routeIs('email') ? 'active' : '' }}"><a class=""
                                         href="{{ route('email') }}">Email</a></li>
                             </ul>
-                        </li>
+                        </li> --}}
                         <li class="submenu">
                             <a href="javascript:void(0);"
-                                class="{{ request()->routeIs('product.list') || request()->routeIs('product.add') || request()->routeIs('product.edit') || request()->routeIs('product.detail') ? 'active' : '' }}"><i
+                                class="{{ request()->routeIs('product.list') || request()->routeIs('product.add') || request()->routeIs('product.edit') || request()->routeIs('product.detail') || request()->routeIs('color.list') || request()->routeIs('color.edit') || request()->routeIs('color.add') ? 'active' : '' }}"><i
                                     data-feather="box"></i><span>Quản lý
                                     sản phẩm</span><span class="menu-arrow"></span></a>
                             <ul>
@@ -29,6 +29,10 @@
                                         href="{{ route('product.list') }}">Danh sách sản phẩm</a></li>
                                 <li class="{{ request()->routeIs('product.add') ? 'active' : '' }}"><a class=""
                                         href="{{ route('product.add') }}">Thêm sản phấm</a></li>
+                                <li class="{{ request()->routeIs('color.list') ? 'active' : '' }}"><a class=""
+                                        href="{{ route('color.list') }}">Danh sách màu sản phẩm</a></li>
+                                <li class="{{ request()->routeIs('color.add') ? 'active' : '' }}"><a class=""
+                                        href="{{ route('color.add') }}">Thêm màu sản phẩm</a></li>
                             </ul>
                         </li>
                         <li class="submenu">
@@ -71,7 +75,7 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"
-                                class="{{ request()->routeIs('sales.list') || request()->routeIs('invoice.edit') ? 'active' : '' }}"><i
+                                class="{{ request()->routeIs('invoice.list') || request()->routeIs('invoice.edit') ? 'active' : '' }}"><i
                                     data-feather="shopping-cart"></i><span>Quản
                                     lý bán hàng</span><span class="menu-arrow"></span></a>
                             <ul>
@@ -93,14 +97,19 @@
                             </ul>
                         </li>
                         <li class="submenu">
-                            <a href="javascript:void(0);" class=""><i data-feather="file"></i><span>Quản
+                            <a href="javascript:void(0);"
+                                class="{{ request()->routeIs('import-invoice.list') || request()->routeIs('import-invoice.create_detail') ? 'active' : '' }}"><i
+                                    data-feather="file"></i><span>Quản
                                     lý mua hàng</span><span class="menu-arrow"></span></a>
                             <ul>
-                                <li class="{{ request()->routeIs('sales.list') ? 'active' : '' }}"><a class=""
-                                        href="{{ route('sales.list') }}">Kênh bán hàng</a>
+                                <li class="{{ request()->routeIs('import-invoice.list') ? 'active' : '' }}">
+                                    <a class="" href="{{ route('import-invoice.list') }}">Danh sách hóa
+                                        đơn</a>
                                 </li>
-                                <li class="{{ request()->routeIs('invoice.list') ? 'active' : '' }}"><a class=""
-                                        href="{{ route('invoice.list') }}">Danh sách hóa đơn</a></li>
+                                <li class="{{ request()->routeIs('import-invoice.create_detail') ? 'active' : '' }}"><a
+                                        class="" href="{{ route('import-invoice.create_detail') }}">Thêm hóa
+                                        đơn</a>
+                                </li>
                             </ul>
                         </li>
                         <li class="submenu">

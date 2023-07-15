@@ -57,7 +57,7 @@ class ProductController extends Controller
     
         $product->name = $request->input('name');
         $product->code = $request->input('code');
-        $product->quantity = $request->input('quantity');
+        $product->quantity = 0;
         $product->selling_price = $request->input('selling_price');
         $product->description = $request->input('description');
         $product->status = $request->input('status');
@@ -79,12 +79,12 @@ class ProductController extends Controller
         $product->discount_price = $discountedPrice;
         
         $category_id = $request->input('category');
-        $brand_name = $request->input('brand');
-        $sub_category_name = $request->input('sub_category');
+        $brand_id = $request->input('brand');
+        $sub_category_id = $request->input('sub_category');
     
         $category = Category::where('id', $category_id)->first();
-        $brand = Brand::where('name', $brand_name)->first();
-        $subCategory = SubCategory::where('name', $sub_category_name)->first();
+        $brand = Brand::where('id', $brand_id)->first();
+        $subCategory = SubCategory::where('id', $sub_category_id)->first();
     
         $product->category_id = $category->id;
         $product->brand_id = $brand->id;
@@ -203,7 +203,7 @@ class ProductController extends Controller
         $exsiting_images = Image::where('entity_id', $product->id)->get();
         $product->name = $request->input('name');
         $product->code = $request->input('code');
-        $product->quantity = $request->input('quantity');
+        $product->quantity = 0;
         $product->selling_price = $request->input('selling_price');
         $product->description = $request->input('description');
         $product->status = $request->input('status');

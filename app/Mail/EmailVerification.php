@@ -23,7 +23,7 @@ class EmailVerification extends Mailable
 
     public function build()
     {
-        return $this->view('Public.pages.auth.verify-email')
-            ->subject('Email Verification');
+        return $this->view('Public.pages.auth.mail.verify-email')
+            ->subject('Xác minh Email');
     }
 }

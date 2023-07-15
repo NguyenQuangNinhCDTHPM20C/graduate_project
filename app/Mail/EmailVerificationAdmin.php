@@ -23,7 +23,7 @@ class EmailVerificationAdmin extends Mailable
 
     public function build()
     {
-        return $this->view('Admin.pages.auth.verify-email')
-            ->subject('Email Verification');
+        return $this->view('Admin.pages.auth.mail.verify-email')
+            ->subject('Xác minh Email');
     }
 }

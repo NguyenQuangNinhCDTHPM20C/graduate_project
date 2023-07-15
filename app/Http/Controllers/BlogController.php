@@ -51,8 +51,7 @@ class BlogController extends Controller
         }
         $blog->content = $validatedData['content'];
         $blog->save();
-
-        return redirect()->route('blog.show', $blog->id);
+        return redirect()->route('blog.index');
     }
 
     public function show($slug)
@@ -86,6 +85,7 @@ class BlogController extends Controller
             $file->move(public_path('assets/blog/'), $fileName);
             $blog->image = 'assets/blog/'.$fileName;
         }
+        if($request->input('content') != null)
         $blog->content = $request->input('content');
         $blog->save();
         return redirect()->route('blog.index');

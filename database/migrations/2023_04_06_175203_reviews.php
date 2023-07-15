@@ -18,9 +18,8 @@ class Reviews extends Migration
             $table->integer('account_id')->unsigned();
             $table->integer('product_id')->unsigned();
             $table->string('comment');
-            $table->string('rating');
-            $table->tinyInteger('status')->nullable()->default(1);
-            $table->timestamps(); // creawted_at, updated_at
+            $table->double('rating');
+            $table->timestamps();
             $table->foreign('account_id')->references('id')->on('accounts');
             $table->foreign('product_id')->references('id')->on('products');
         });

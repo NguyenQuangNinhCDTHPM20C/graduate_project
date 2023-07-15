@@ -40,36 +40,34 @@ class ReviewController extends Controller
      */
     public function store(Request $request)
     {
-        $productId = $request->input('product_id');
+        $product_id = $request->input('product_id');
         $comment = $request->input('comment');
         $rating = $request->input('rating');
 
-        // Check login or not 
         if (Session::has('account')) {
-            $userId = Session('account')->id;
-            
-            // Check user bought or not
-            $invoice = Invoice::join('invoice_detail', 'invoices.id', '=', 'invoice_detail.invoice_id')
-                ->where('invoices.account_id', $userId)
-                ->where('invoices.status', 1)
-                ->where('invoice_detail.product_id', $productId)
-                ->first();
+            $account_id = Session('account')->id;
+            $invoice = Invoice::where('account_id', $account_id)->where('status', 3)->first();
 
             if ($invoice) {
-                $review = new Review;
-                $review -> account_id = $userId;
-                $review -> product_id = $productId;
-                $review -> comment = $comment;
-                $review -> rating = $rating;
-                $review -> status = 1;
-                // Save review to database
-                $review->save();
-
-                return redirect()->back()->with('success', 'Đánh giá sản phẩm thành công.');
+                $invoice_detail = InvoiceDetail::where('invoice_id', $invoice->id)->where('product_id', $product_id)->first();
+                if($invoice_detail){
+                    $review = new Review;
+                    $review -> account_id = $account_id;
+                    $review -> product_id = $product_id;
+                    $review -> comment = $comment;
+                    $review -> rating = $rating;
+                    $review->save();
+                    session()->put('success', 'Đánh giá sản phẩm thành công !');
+                }else{
+                    session()->put('info', 'Vui lòng mua sản phẩm !');
+                }
+            }else{
+                session()->put('info', 'Bạn chưa thể đánh giá sản phẩm!');
             }
+        }else{
+            session()->put('info', 'Vui lòng đăng nhập!');
         }
-
-        return redirect()->back()->with('error', 'Không thể đánh giá sản phẩm.');
+        return redirect()->back();
     }
 
 

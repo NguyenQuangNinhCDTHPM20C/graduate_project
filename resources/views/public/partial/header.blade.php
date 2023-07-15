@@ -3,10 +3,10 @@
     <div class="row bg-secondary py-1 px-xl-5">
         <div class="col-lg-6 d-none d-lg-block">
             <div class="d-inline-flex align-items-center h-100">
-                <a class="text-body mr-3" href=""><i
+                <a class="text-body mr-3" href="tel:{{ $settings->phone_number }}"><i
                         class="fa fa-phone-alt text-primary mr-3"></i>{{ $settings->phone_number }}</a>
                 <a class="text-body mr-3" href=""></a>
-                <a class="text-body mr-3" href=""><i
+                <a class="text-body mr-3" href="mailto:{{ $settings->email }}"><i
                         class="fa fa-envelope text-primary mr-3"></i>{{ $settings->email }}</a>
             </div>
         </div>
@@ -123,17 +123,19 @@
                 id="navbar-vertical" style="width: calc(100% - 30px); z-index: 999">
                 <div class="navbar-nav w-100">
                     <div class="nav-item dropdown dropright nav-menu">
-                        <a href="#" class="nav-link dropdown-toggle"
-                            data-toggle="dropdown">{{ $header_laptop_ctg->name }}
+                        <a href="{{ route('product-type', ['type' => $header_laptop_ctg->type]) }}"
+                            class="nav-link dropdown-toggle" data-toggle="dropdown">{{ $header_laptop_ctg->name }}
                             <i class="fa fa-angle-right float-right mt-1"></i></a>
                         <div class="dropdown-menu position-absolute rounded-0 border-0 m-0">
                             @foreach ($header_laptop_sub_ctg as $item)
-                                <a href="" class="dropdown-item">{{ $item->name }}</a>
+                                <a href="{{ route('product-type-2', ['slug' => $item->slug]) }}"
+                                    class="dropdown-item">{{ $item->name }}</a>
                             @endforeach
                         </div>
                     </div>
                     @foreach ($header_accessory_sub_ctg as $item)
-                        <a href="" class="nav-item nav-link">{{ $item->name }}</a>
+                        <a href="{{ route('product-type-1', ['slug' => $item->slug]) }}"
+                            class="nav-item nav-link">{{ $item->name }}</a>
                     @endforeach
                 </div>
             </nav>

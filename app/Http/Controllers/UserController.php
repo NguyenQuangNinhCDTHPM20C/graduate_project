@@ -22,13 +22,14 @@ use App\Models\Blog;
 use App\Models\Image;
 use App\Models\ProductColor;
 use App\Models\Laptop;
+use App\Http\Controllers\FilterController;
 
 class UserController extends Controller
 {
     // Show home
     public function index(){
-        $products = Product::paginate(10);
-        $new_products = Product::where('created_at', '>=', Carbon::now()->subDays(7))->get();
+        $products = Product::with('reviews')->paginate(10);
+        $new_products = Product::where('created_at', '>=', Carbon::now()->subDays(7))->with('reviews')->get();
         $brands = Brand::all();
         $category_accessory = Category::where('type', 'accessory')->first();
         $accsessories = SubCategory::where('category_id', $category_accessory->id)->get();
@@ -57,16 +58,22 @@ class UserController extends Controller
         $dedicated_graphics = Laptop::distinct('dedicated_graphics')->pluck('dedicated_graphics');
         $products_query = Product::query();
 
-        if ($request->has('category_filter')) {
-            $selected_categories = $category->where('name', 'LIKE', '%' . $request->input('category_filter') . '%')->first();
-            $products_query->whereIn('category_id', $selected_categories->id);
-        }
+        $filterController = new FilterController();
+        $products_query = $filterController->filterProducts($request);
+
         $products = $products_query->paginate(12);
         $brands = Brand::distinct('name')->pluck('name');
+
+        $productReviewsCount = [];
+        foreach ($products as $product) {
+            $product->loadCount('reviews');
+            $productReviewsCount[$product->id] = $product->reviews_count;
+        }
+        
         return view('public.pages.product.product-list', 
         compact('products', 'categories', 'sub_categories', 'laptop_properties',
          'brands', 'cpu_brands', 'cpu_series', 'cpu_models', 'display_resolutions', 
-         'display_sizes', 'ram_sizes', 'storage_capacitys', 'dedicated_graphics'));
+         'display_sizes', 'ram_sizes', 'storage_capacitys', 'dedicated_graphics', 'productReviewsCount'));
     }
 
     // Show product detail 
@@ -94,33 +101,106 @@ class UserController extends Controller
         ->where('reviews.product_id', $product->id)
         ->select('reviews.*', 'accounts.photo as account_photo', 'accounts.name as account_name')
         ->get();
-
         $review_count = $reviews->count();
-        return view('public.pages.product.product-detail', compact('product', 'images', 'product_colors', 'reviews', 'review_count', 'existingFavoriteDetail', 'product_info'));
+        $average_rating = 5.00;
+        if($review_count > 0){
+        $total_rating = 0;
+        foreach($reviews as $review){
+            $total_rating += $review->rating;
+        }
+        $average_rating = $total_rating / $review_count;}
+        return view('public.pages.product.product-detail', compact('product', 'images', 'product_colors', 'reviews', 'review_count', 'existingFavoriteDetail', 'product_info', 'average_rating'));
     }
 
-    public function products_type($type)
+    public function products_type(Request $request, $type)
     {
         $category = Category::where('type',$type) ->first();
-        $products = Product::where('category_id', $category->id)->paginate(12);
-        return view('public.pages.product.product-type', compact('products', 'category'));
+        $products = Product::where('category_id', $category->id)->with('reviews')->paginate(12);
+        $categories = Category::where('type', '!=', 'blog')->get();
+        $blog_category = Category::where('type', 'blog')->first();
+        $sub_categories = SubCategory::where('category_id','!=', $blog_category->id)->distinct('name')->pluck('name');
+        $laptop_properties = Laptop::get();
+        $cpu_brands = Laptop::distinct('cpu_brand')->pluck('cpu_brand');
+        $cpu_series = Laptop::distinct('cpu_series')->pluck('cpu_series');
+        $cpu_models = Laptop::distinct('cpu_model')->pluck('cpu_model');
+        $display_resolutions = Laptop::distinct('display_resolution')->pluck('display_resolution');
+        $display_sizes = Laptop::distinct('display_size')->pluck('display_size');
+        $ram_sizes = Laptop::distinct('ram_size')->pluck('ram_size');
+        $storage_capacitys = Laptop::distinct('storage_capacity')->pluck('storage_capacity');
+        $dedicated_graphics = Laptop::distinct('dedicated_graphics')->pluck('dedicated_graphics');
+        $products_query = Product::query();
+        if($request){
+        $filterController = new FilterController();
+        $products_query = $filterController->filterProducts($request);
+        }
+        // $products = $products_query->paginate(12);
+        $brands = Brand::distinct('name')->pluck('name');
+        return view('public.pages.product.product-type', compact('products', 'category', 'categories', 'sub_categories', 'laptop_properties',
+        'brands', 'cpu_brands', 'cpu_series', 'cpu_models', 'display_resolutions', 
+        'display_sizes', 'ram_sizes', 'storage_capacitys', 'dedicated_graphics'));
+    }
+
+    public function products_type_1(Request $request, $slug)
+    {
+        $sub = SubCategory::where('slug', $slug)->first();
+        // $category = Category::where('type',$type) ->first();
+        $products = Product::where('sub_category_id', $sub->id)->with('reviews')->paginate(12);
+        $categories = Category::where('type', '!=', 'blog')->get();
+        $blog_category = Category::where('type', 'blog')->first();
+        $sub_categories = SubCategory::where('category_id','!=', $blog_category->id)->distinct('name')->pluck('name');
+        $laptop_properties = Laptop::get();
+        $cpu_brands = Laptop::distinct('cpu_brand')->pluck('cpu_brand');
+        $cpu_series = Laptop::distinct('cpu_series')->pluck('cpu_series');
+        $cpu_models = Laptop::distinct('cpu_model')->pluck('cpu_model');
+        $display_resolutions = Laptop::distinct('display_resolution')->pluck('display_resolution');
+        $display_sizes = Laptop::distinct('display_size')->pluck('display_size');
+        $ram_sizes = Laptop::distinct('ram_size')->pluck('ram_size');
+        $storage_capacitys = Laptop::distinct('storage_capacity')->pluck('storage_capacity');
+        $dedicated_graphics = Laptop::distinct('dedicated_graphics')->pluck('dedicated_graphics');
+        $products_query = Product::query();
+        if($request){
+        $filterController = new FilterController();
+        $products_query = $filterController->filterProducts($request);
+        }
+        $brands = Brand::distinct('name')->pluck('name');
+        return view('public.pages.product.product-type-1', compact('products', 'sub', 'categories', 'sub_categories', 'laptop_properties',
+        'brands', 'cpu_brands', 'cpu_series', 'cpu_models', 'display_resolutions', 
+        'display_sizes', 'ram_sizes', 'storage_capacitys', 'dedicated_graphics'));
     }
 
     // Search product
     public function search(Request $request)
     {
         $slug = $request->input('slug');
-        $products = Product::where('slug', 'LIKE', '%' . $slug . '%')->get();
-        return view('public.pages.product.product-search', compact('products'));
+        $products = Product::where('slug', 'LIKE', '%' . $slug . '%')->with('reviews')->get();
+        $categories = Category::where('type', '!=', 'blog')->get();
+        $blog_category = Category::where('type', 'blog')->first();
+        $sub_categories = SubCategory::where('category_id','!=', $blog_category->id)->distinct('name')->pluck('name');
+        $laptop_properties = Laptop::get();
+        $cpu_brands = Laptop::distinct('cpu_brand')->pluck('cpu_brand');
+        $cpu_series = Laptop::distinct('cpu_series')->pluck('cpu_series');
+        $cpu_models = Laptop::distinct('cpu_model')->pluck('cpu_model');
+        $display_resolutions = Laptop::distinct('display_resolution')->pluck('display_resolution');
+        $display_sizes = Laptop::distinct('display_size')->pluck('display_size');
+        $ram_sizes = Laptop::distinct('ram_size')->pluck('ram_size');
+        $storage_capacitys = Laptop::distinct('storage_capacity')->pluck('storage_capacity');
+        $dedicated_graphics = Laptop::distinct('dedicated_graphics')->pluck('dedicated_graphics');
+        $products_query = Product::query();
+
+        $filterController = new FilterController();
+        $products_query = $filterController->filterProducts($request);
+
+        // $products = $products_query->paginate(12);
+        $brands = Brand::distinct('name')->pluck('name');
+        return view('public.pages.product.product-search', compact('products', 'categories', 'sub_categories', 'laptop_properties',
+        'brands', 'cpu_brands', 'cpu_series', 'cpu_models', 'display_resolutions', 
+        'display_sizes', 'ram_sizes', 'storage_capacitys', 'dedicated_graphics'));
     }
 
     // Get list order for user
     public function orders(){
         $account_id = session('account')->id;
-        $orders = Invoice::where('account_id', '=', $account_id)->get();
-        foreach ($orders as $order) {
-            $order->order_date = Carbon::parse($order->order_date)->format('d/m/Y');
-        }
+        $orders = Invoice::where('account_id', '=', $account_id)->orderBy('created_at', 'desc')->get();
         return view('public.pages.account.order', compact('orders'));
     }
 
@@ -143,16 +223,8 @@ class UserController extends Controller
     //Get info account
     public function dash_board(){
         $account_id = session('account')->id;
-        $orders = DB::table('invoices')
-        ->join('invoice_details', 'invoices.id', '=', 'invoice_details.invoice_id')
-        ->join('products', 'invoice_details.product_id', '=', 'products.id')
-        ->select('invoices.*', 'invoice_details.quantity', 'invoice_details.price', 'products.name as product_name')
-        ->where('invoices.account_id', '=', $account_id)
-        ->get();
-
-        foreach ($orders as $order) {
-            $order->order_date = Carbon::parse($order->order_date)->format('d/m/Y');
-        }
+        $invoice = Invoice::where('account_id', $account_id)->get();
+        $orders = InvoiceDetail::whereIn('invoice_id', $invoice->pluck('id'))->orderBy('created_at', 'desc')->get();
 
         $favorites = FavoriteDetail::join('favorites', 'favorite_details.favorite_id', '=', 'favorites.id')
         ->where('favorites.account_id', $account_id)
@@ -278,5 +350,21 @@ class UserController extends Controller
 
     public function contact(){
         return view('public.pages.contact.index');
+    }
+
+    public function cancel_order(Request $request)
+    {
+        $id = $request->input('invoice_id');
+        $invoice = Invoice::findOrFail($id);
+        $invoice->status = $request->input('status');
+        $invoice->save();
+        $invoice_details = InvoiceDetail::where('invoice_id', $invoice->id)->get();
+        foreach($invoice_details as $invoice_detail){
+            $product = Product::find($invoice_detail->product_id);
+            $product->quantity += $invoice_detail->quantity;
+            $product->save();
+        }
+        session()->put('success', 'Hủy đơn hàng thành công');
+        return redirect()->back();
     }
 }

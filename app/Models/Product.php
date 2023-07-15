@@ -42,4 +42,10 @@ class Product extends Model
     {
         return $this->belongsTo(Image::class, 'featured_image_id', 'id');
     }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 }

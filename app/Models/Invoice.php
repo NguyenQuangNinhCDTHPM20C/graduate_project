@@ -12,7 +12,6 @@ class Invoice extends Model
     protected $fillable = [
         'code',
         'account_id',
-        'order_date',
         'name',
         'address',
         'phone',
@@ -21,7 +20,6 @@ class Invoice extends Model
         'total',
         'payment_method',
         'status',
-        'rememberToken'
     ];
     public function account(){
         return $this->belongsTo(Account::class, 'id', 'account_id');

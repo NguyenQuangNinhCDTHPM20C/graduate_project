@@ -35,7 +35,7 @@
                             <label>Mật khẩu</label>
                             <div class="pass-group">
                                 <input type="password" class="pass-input" name="password" id="password"
-                                    placeholder="Mật khẩu" required="" autofocus>
+                                    placeholder="Mật khẩu" autocomplete="new-password" required="" autofocus>
                                 <span class="fas toggle-password fa-eye-slash"></span>
                             </div>
                             <div class="text-danger pt-2">
@@ -43,8 +43,7 @@
                         </div>
                         <div class="form-login">
                             <div class="alreadyuser">
-                                <h4><a href="https://dreamspos.dreamguystech.com/laravel/template/public/forgetpassword"
-                                        class="hover-a">Quên mật khẩu?</a></h4>
+                                <h4><a href="{{ route('admin.input-email.form') }}" class="hover-a">Quên mật khẩu?</a></h4>
                             </div>
                         </div>
                         <div class="form-login">
@@ -56,8 +55,7 @@
                     </div>
                 </div>
                 <div class="login-img">
-                    <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/login.jpg"
-                        alt="img">
+                    <img src="{{ asset('images/background-login.jpg') }}" alt="img">
                 </div>
             </div>
         </Form>
