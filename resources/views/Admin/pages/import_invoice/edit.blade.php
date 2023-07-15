@@ -70,7 +70,6 @@
                                             <th>Sản phẩm</th>
                                             <th>Số lượng</th>
                                             <th>Giá mua</th>
-                                            <th>Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -98,10 +97,6 @@
                                                         value="{{ $importDetail->price }}" placeholder="Giá tiền" required
                                                         {{ $importInvoice->status == 1 ? 'readonly' : '' }}>
                                                 </td>
-                                                <td>
-                                                    <a class="delete-set"><img src="{{ asset('images/delete.svg') }}"
-                                                            alt="svg"></a>
-                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -117,35 +112,4 @@
             </div>
         </div>
     </div>
-@endsection
-
-@section('scripts')
-    <script>
-        $(document).ready(function() {
-            // Thêm hàng nhập liệu
-            $('#addProductBtn').click(function() {
-                var newRow = $('.productRow').first().clone(); // Sao chép hàng gốc
-                newRow.find('input').val(''); // Xóa giá trị nhập liệu của các thẻ input
-                newRow.find('.select2-container').remove(); // Loại bỏ thẻ select2-container dư thừa
-
-                $('#productTable tbody').append(newRow); // Thêm hàng mới vào bảng
-
-                // Khởi tạo lại Select2 cho các thẻ select trong hàng mới
-                newRow.find('.productSelect').select2();
-            });
-
-            // Xóa hàng nhập liệu
-            $(document).on('click', '.delete-set', function() {
-                var rowCount = $('#productTable tbody tr').length; // Số dòng trong bảng
-                if (rowCount > 1) { // Kiểm tra nếu số dòng lớn hơn 1
-                    $(this).closest('tr').remove(); // Xóa hàng chứa nút xóa được nhấn
-                } else {
-                    alert("Không thể xóa dòng cuối cùng");
-                }
-            });
-
-            // Khởi tạo Select2 cho hàng đầu tiên khi tải trang
-            $('.productRow').first().find('.productSelect').select2();
-        });
-    </script>
 @endsection

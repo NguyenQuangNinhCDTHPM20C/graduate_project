@@ -90,11 +90,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="col-lg-12">
-                        <a href="javascript:void(0);" class="btn btn-submit me-2">Thêm</a>
-                        <a href="https://dreamspos.dreamguystech.com/laravel/template/public/purchaselist"
-                            class="btn btn-cancel">Thoát</a>
-                    </div>
                 </div>
                 <div class="col-lg-12 mt-5 mb-3">
                     <button href="javascript:void(0);" class="btn btn-submit me-2">THÊM</button>
