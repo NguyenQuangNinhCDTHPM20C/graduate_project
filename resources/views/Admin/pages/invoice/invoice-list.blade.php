@@ -110,8 +110,8 @@
                                         </td>
                                         <td>{{ $_invoices->code }}</td>
                                         <td>{{ $_invoices->name }}</td>
-                                        <td>{{ $_invoices->created_at }}</td>
-                                        <td>{{ $_invoices->total }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($_invoices->created_at)->format('d/m/Y') }}</td>
+                                        <td>{{ number_format($_invoices->total) }}đ</td>
                                         <td>
                                             @if ($_invoices->status == 1)
                                                 <span class="badges bg-lightgreen">Hoàn thành</span>
