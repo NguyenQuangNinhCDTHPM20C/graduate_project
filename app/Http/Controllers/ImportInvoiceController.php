@@ -68,6 +68,8 @@ class ImportInvoiceController extends Controller
         }
         $importInvoice->total = $total;
         $importInvoice->status = $request->input('status');
+        $importInvoice->created_at = $request->input('created_at');
+        $importInvoice->updated_at = $request->input('updated_at');
         $importInvoice->save();
 
         // Lưu thông tin chi tiết hóa đơn nhập

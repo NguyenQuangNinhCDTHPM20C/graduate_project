@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use App\Models\Account;
 use App\Models\Brand;
 use App\Models\Invoice;
@@ -19,8 +21,18 @@ class AdminController extends Controller
         $total_customer = $count_user + $count_customer;
         $count_sale_invoice = Invoice::count();
         $product_out_stock = Product::where('quantity', '<' , 50)->get();
-        $recent_added_product = Product::latest()->take(4)->get();
-        return view('admin.pages.dashboard.index', compact('count_user', 'total_customer', 'count_sale_invoice', 'product_out_stock', 'recent_added_product'));
+        $total_import_invoice = ImportInvoice::where('status', 1)->sum('total');
+        $total_invoice = Invoice::where('status', 3)->sum('total');
+        $firstDayOfMonth = Carbon::now()->startOfMonth();
+        $lastDayOfMonth = Carbon::now()->endOfMonth();
+        $total_purchase_month = ImportInvoice::whereBetween('created_at', [$firstDayOfMonth, $lastDayOfMonth])
+        ->sum('total');
+        $total_sale_month = Invoice::whereBetween('created_at', [$firstDayOfMonth, $lastDayOfMonth])
+        ->sum('total');
+        return view('admin.pages.dashboard.index', 
+        compact('count_user', 'total_customer', 'count_sale_invoice',
+        'product_out_stock','total_import_invoice',
+        'total_invoice', 'total_purchase_month', 'total_sale_month'));
     }
 
     public function users(){
