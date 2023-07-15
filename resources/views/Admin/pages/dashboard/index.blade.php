@@ -12,7 +12,9 @@
                             <span><img src="{{ asset('images/dash2.svg') }}" alt="img"></span>
                         </div>
                         <div class="dash-widgetcontent">
-                            <h5>$<span class="counters" data-count="307144.00">$307,144.00</span></h5>
+                            <h5><span class="counters"
+                                    data-count="{{ $total_sale_month }}">{{ number_format($total_sale_month, 0, ',', '.') }}đ</span>
+                            </h5>
                             <h6>Tiền bán tháng này</h6>
                         </div>
                     </div>
@@ -23,7 +25,9 @@
                             <span><img src="{{ asset('images/dash1.svg') }}" alt="img"></span>
                         </div>
                         <div class="dash-widgetcontent">
-                            <h5>$<span class="counters" data-count="4385.00">$4,385.00</span></h5>
+                            <h5><span class="counters"
+                                    data-count="{{ $total_purchase_month }}">{{ number_format($total_purchase_month, 0, ',', '.') }}đ</span>
+                            </h5>
                             <h6>Tiền mua tháng này</h6>
                         </div>
                     </div>
@@ -34,7 +38,9 @@
                             <span><img src="{{ asset('images/dash3.svg') }}" alt="img"></span>
                         </div>
                         <div class="dash-widgetcontent">
-                            <h5>$<span class="counters" data-count="385656.50">385,656.50</span></h5>
+                            <h5><span class="counters"
+                                    data-count="{{ $total_invoice }}">{{ number_format($total_invoice, 0, ',', '.') }}đ</span>
+                            </h5>
                             <h6>Tổng tiền đã thu</h6>
                         </div>
                     </div>
@@ -45,7 +51,9 @@
                             <span><img src="{{ asset('images/dash4.svg') }}" alt="img"></span>
                         </div>
                         <div class="dash-widgetcontent">
-                            <h5>$<span class="counters" data-count="40000.00">400.00</span></h5>
+                            <h5><span class="counters"
+                                    data-count="{{ $total_import_invoice }}">{{ number_format($total_import_invoice, 0, ',', '.') }}đ</span>
+                            </h5>
                             <h6>Tổng tiền đã chi</h6>
                         </div>
                     </div>
