@@ -236,6 +236,7 @@ return [
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
         'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];

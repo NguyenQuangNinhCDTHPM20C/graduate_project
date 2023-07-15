@@ -27,6 +27,7 @@
                                         alt="img"></a>
                             </div>
                         </div>
+                        @foreach ($invoices as $_invoices)
                         <div class="wordset">
                             <ul>
                                 <li>
@@ -38,11 +39,12 @@
                                             src="{{ asset('images/excel.svg') }}" alt="img"></a>
                                 </li>
                                 <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
+                                    <a href="{{ route('invoice.print', ['id' => $_invoices->id]) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
                                             src="{{ asset('images/printer.svg') }}" alt="img"></a>
                                 </li>
                             </ul>
                         </div>
+                        @endforeach
                     </div>
 
                     <div class="card" id="filter_inputs">

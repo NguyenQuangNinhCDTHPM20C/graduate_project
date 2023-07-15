@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
-use Barryvdh\DomPDF\Facade AS PDF;
+use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -103,6 +103,6 @@ class InvoiceController extends Controller
 
         $pdf = PDF::loadView('invoices.print', $data);
 
-        return $pdf->stream('invoice.pdf');
+        return $pdf->stream('invoice'. $invoice -> code.'pdf');
     }
 }
