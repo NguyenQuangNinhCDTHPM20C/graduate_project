@@ -27,24 +27,7 @@
                                         alt="img"></a>
                             </div>
                         </div>
-                        <div class="wordset">
-                            <ul>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                            src="{{ asset('images/pdf.svg') }}" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                            src="{{ asset('images/excel.svg') }}" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                            src="{{ asset('images/printer.svg') }}" alt="img"></a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
-
                     <div class="card" id="filter_inputs">
                         <div class="card-body pb-0">
                             <div class="row">
@@ -96,7 +79,7 @@
                                     <th>Ngày đặt</th>
                                     <th>Tổng tiền</th>
                                     <th>Trạng thái</th>
-                                    <th>Chức năng</th>
+                                    <th class="text-center">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -121,14 +104,21 @@
                                                 <span class="badges bg-lightred">Thất bại</span>
                                             @endif
                                         </td>
-
-                                        </td>
-                                        <td>
+                                        <td class="text-center">
                                             <a class="me-3"
                                                 href="{{ route('invoice.edit', ['code' => $_invoices->code]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3 confirm-text"
+                                            <a class="me-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="pdf"><img src="{{ asset('images/pdf.svg') }}" alt="img"></a>
+                                            <a class="me-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="excel"><img src="{{ asset('images/excel.svg') }}"
+                                                    alt="img"></a>
+
+                                            <a class="me-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="print"><img src="{{ asset('images/printer.svg') }}"
+                                                    alt="img"></a>
+                                            {{-- <a class="me-3 confirm-text"
                                                 onclick="$.fn.showConfirmationDeleteAlert('invoices_delete_{{ $_invoices->id }}')">
                                                 <img src="{{ asset('images/delete.svg') }}" alt="img">
                                             </a>
@@ -137,7 +127,7 @@
                                                 method="POST" style="display: none">
                                                 @csrf
                                                 @method('DELETE')
-                                            </form>
+                                            </form> --}}
                                         </td>
                                     </tr>
                                 @endforeach
