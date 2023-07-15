@@ -113,8 +113,8 @@
                                         <td>{{ $_invoices->code }}</td>
                                         <td>{{ optional($_invoices->account)->name }}</td>
                                         <td>{{ optional($_invoices->account)->phone_number }}</td>
-                                        <td>{{ $_invoices->created_at }}</td>
-                                        <td>{{ $_invoices->total }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($_invoices->created_at)->format('d/m/Y') }}</td>
+                                        <td>{{ number_format($_invoices->total) }}đ</td>
                                         </td>
                                         <td>
                                             <a class="me-3"

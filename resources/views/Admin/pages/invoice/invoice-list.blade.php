@@ -27,26 +27,7 @@
                                         alt="img"></a>
                             </div>
                         </div>
-                        @foreach ($invoices as $_invoices)
-                        <div class="wordset">
-                            <ul>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                            src="{{ asset('images/pdf.svg') }}" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                            src="{{ asset('images/excel.svg') }}" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('invoice.print', ['id' => $_invoices->id]) }}" data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                            src="{{ asset('images/printer.svg') }}" alt="img"></a>
-                                </li>
-                            </ul>
-                        </div>
-                        @endforeach
                     </div>
-
                     <div class="card" id="filter_inputs">
                         <div class="card-body pb-0">
                             <div class="row">
@@ -98,7 +79,7 @@
                                     <th>Ngày đặt</th>
                                     <th>Tổng tiền</th>
                                     <th>Trạng thái</th>
-                                    <th>Chức năng</th>
+                                    <th class="text-center">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -112,8 +93,8 @@
                                         </td>
                                         <td>{{ $_invoices->code }}</td>
                                         <td>{{ $_invoices->name }}</td>
-                                        <td>{{ $_invoices->created_at }}</td>
-                                        <td>{{ $_invoices->total }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($_invoices->created_at)->format('d/m/Y') }}</td>
+                                        <td>{{ number_format($_invoices->total) }}đ</td>
                                         <td>
                                             @if ($_invoices->status == 1)
                                                 <span class="badges bg-lightgreen">Hoàn thành</span>
@@ -123,14 +104,21 @@
                                                 <span class="badges bg-lightred">Thất bại</span>
                                             @endif
                                         </td>
-
-                                        </td>
-                                        <td>
+                                        <td class="text-center">
                                             <a class="me-3"
                                                 href="{{ route('invoice.edit', ['code' => $_invoices->code]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3 confirm-text"
+                                            <a class="me-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="pdf"><img src="{{ asset('images/pdf.svg') }}" alt="img"></a>
+                                            <a class="me-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="excel"><img src="{{ asset('images/excel.svg') }}"
+                                                    alt="img"></a>
+
+                                            <a class="me-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="print"><img src="{{ asset('images/printer.svg') }}"
+                                                    alt="img"></a>
+                                            {{-- <a class="me-3 confirm-text"
                                                 onclick="$.fn.showConfirmationDeleteAlert('invoices_delete_{{ $_invoices->id }}')">
                                                 <img src="{{ asset('images/delete.svg') }}" alt="img">
                                             </a>
@@ -139,7 +127,7 @@
                                                 method="POST" style="display: none">
                                                 @csrf
                                                 @method('DELETE')
-                                            </form>
+                                            </form> --}}
                                         </td>
                                     </tr>
                                 @endforeach

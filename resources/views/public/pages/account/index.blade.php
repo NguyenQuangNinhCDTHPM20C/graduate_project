@@ -146,19 +146,29 @@
                                                                                     <del>{{ number_format($favorite->product->selling_price, 0, ',', '.') }}đ</del>
                                                                                 </h6>
                                                                             </div>
+                                                                            @php
+                                                                                $reviewCount = optional($favorite->product)->reviews->count();
+                                                                                $averageRating = optional($favorite->product)->reviews->avg('rating');
+                                                                                $roundedRating = round($averageRating, 1);
+                                                                                $fullStars = $reviewCount > 0 ? floor($roundedRating) : 5;
+                                                                                $decimalPart = $roundedRating - $fullStars;
+                                                                                $halfStar = $reviewCount > 0 ? $decimalPart >= 0.25 && $decimalPart < 0.75 : false;
+                                                                            @endphp
                                                                             <div
                                                                                 class="d-flex align-items-center justify-content-center mb-1">
-                                                                                <small
-                                                                                    class="fa fa-star text-primary mr-1"></small>
-                                                                                <small
-                                                                                    class="fa fa-star text-primary mr-1"></small>
-                                                                                <small
-                                                                                    class="fa fa-star text-primary mr-1"></small>
-                                                                                <small
-                                                                                    class="fa fa-star text-primary mr-1"></small>
-                                                                                <small
-                                                                                    class="fa fa-star text-primary mr-1"></small>
-                                                                                <small>(99)</small>
+                                                                                @for ($i = 1; $i <= 5; $i++)
+                                                                                    @if ($i <= $fullStars)
+                                                                                        <small
+                                                                                            class="fa fa-star text-primary mr-1"></small>
+                                                                                    @elseif($halfStar && $i == $fullStars + 1)
+                                                                                        <small
+                                                                                            class="fa fa-star-half-alt text-primary mr-1"></small>
+                                                                                    @else
+                                                                                        <small
+                                                                                            class="far fa-star text-primary mr-1"></small>
+                                                                                    @endif
+                                                                                @endfor
+                                                                                <small>({{ $reviewCount }})</small>
                                                                             </div>
                                                                         </div>
                                                                     </div>

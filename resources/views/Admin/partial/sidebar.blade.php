@@ -98,7 +98,7 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"
-                                class="{{ request()->routeIs('import-invoice.list') || request()->routeIs('import-invoice.create_detail') ? 'active' : '' }}"><i
+                                class="{{ request()->routeIs('import-invoice.list') || request()->routeIs('import-invoice.create_detail') || request()->routeIs('import-invoice.edit') ? 'active' : '' }}"><i
                                     data-feather="file"></i><span>Quản
                                     lý mua hàng</span><span class="menu-arrow"></span></a>
                             <ul>

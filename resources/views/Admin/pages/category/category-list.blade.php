@@ -98,8 +98,7 @@
                                                 <span class="checkmarks"></span>
                                             </label>
                                         </td>
-
-                                        <td class="productimgname">
+                                        <td>
                                             <a
                                                 href="{{ route('category.edit', ['slug' => $_category->slug]) }}">{{ $_category->name }}</a>
                                         </td>
