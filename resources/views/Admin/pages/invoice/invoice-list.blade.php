@@ -117,6 +117,11 @@
                                         </td>
                                         <td class="text-center">
                                             <a class="me-3"
+                                                href="{{ route('invoice.show', ['code' => $_invoices->code]) }}"
+                                                title="Xem chi tiết">
+                                                <img src="{{ asset('images/eye.svg') }}" alt="eye">
+                                            </a>
+                                            <a class="me-3"
                                                 href="{{ route('invoice.edit', ['code' => $_invoices->code]) }}"
                                                 title="Chỉnh sửa">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">

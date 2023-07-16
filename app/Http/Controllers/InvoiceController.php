@@ -120,14 +120,22 @@ class InvoiceController extends Controller
     public function exportPDF($id)
     {
         $invoice = Invoice::findOrFail($id);
-
+        $invoice_details = InvoiceDetail::where('invoice_id', $invoice->id)->get();
+        $total = 0;
+        foreach($invoice_details as $invoice_detail)
+        {
+            $total += $invoice_detail->quantity * $invoice_detail->price;
+        }
+        $discount_total = $invoice->total - $total;
         $data = [
             'invoice' => $invoice,
+            'invoice_details'=> $invoice_details,
+            'discount_total'=>$discount_total
         ];
 
         $pdf = new Dompdf();
-        $pdf = PDF::loadView('admin.pages.pdf.pdf', $data);
+        $pdf = PDF::loadView('admin.pages.invoice.pdf', $data);
 
-        return $pdf->stream('invoice'. $invoice -> code.'pdf');
+        return $pdf->stream('invoice'. $invoice -> code.'.pdf');
     }
 }

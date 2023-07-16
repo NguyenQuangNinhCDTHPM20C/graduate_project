@@ -96,10 +96,15 @@
                                         </td>
                                         <td>
                                             <a class="me-3"
+                                                href="{{ route('import-invoice.show', ['code' => $_invoices->code]) }}"
+                                                title="Xem chi tiết">
+                                                <img src="{{ asset('images/eye.svg') }}" alt="eye">
+                                            </a>
+                                            <a class="me-3"
                                                 href="{{ route('import-invoice.edit', ['code' => $_invoices->code]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
-                                            <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
+                                            <a href="{{route('import-invoice.pdf',['id' => $_invoices->id])}}" data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
                                                     src="{{ asset('images/pdf.svg') }}" alt="img"></a>
                                         </td>
                                     </tr>

@@ -88,7 +88,7 @@
                                                         <font style="vertical-align: inherit;">
                                                             <font
                                                                 style="vertical-align: inherit;font-size: 14px;color:#000;font-weight: 400;">
-                                                                Email: {{ $invoice->emai }}</font>
+                                                                Email: {{ $invoice->email }}</font>
                                                         </font><br>
                                                         <font style="vertical-align: inherit;">
                                                             <font

@@ -5,6 +5,8 @@ use App\Exports\ImportInvoicesExport;
 use App\Models\ImportInvoice;
 use App\Models\ImportInvoiceDetail;
 use App\Models\Product;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -150,5 +152,26 @@ class ImportInvoiceController extends Controller
     public function export()
     {
         return Excel::download(new ImportInvoicesExport, 'hoadonnhap.xlsx');
+    }
+    public function exportPDF($id)
+    {
+        $importInvoice = ImportInvoice::findOrFail($id);
+        $importInvoiceDetails = ImportInvoiceDetail::where('import_invoice_id',  $importInvoice->id)->get();
+        $total = 0;
+        foreach($importInvoiceDetails as $importInvoiceDetail)
+        {
+            $total += $importInvoiceDetail->quantity * $importInvoiceDetail->price;
+        }
+        $discount_total = $importInvoice->total - $total;
+        $data = [
+            'importInvoice' => $importInvoice,
+            'importInvoiceDetail'=> $importInvoiceDetails,
+            'discount_total'=>$discount_total
+        ];
+
+        $pdf = new Dompdf();
+        $pdf = Pdf::loadView('admin.pages.import_invoice.pdf', $data);
+
+        return $pdf->stream('importInvoice'. $importInvoice -> code.'.pdf');
     }
 }
