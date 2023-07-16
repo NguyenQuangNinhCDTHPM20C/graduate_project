@@ -3,79 +3,141 @@
 @section('title', 'Double-N shop | Admin Management')
 
 @section('content')
-    <div class="page-wrapper">
+    <div class="page-wrapper" style="min-height: 347px;">
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h6>
-                        <a href="{{ route('import-invoice.list') }}">Hóa đơn /</a>
-                        <span>Thêm</span>
-                    </h6>
-                    <h4>Thêm mới hóa đơn mua hàng của bạn</h4>
+                    <h4>Thêm hóa đơn mua hàng</h4>
                 </div>
             </div>
-            <form method="post" action="{{ route('import-invoice.store') }}" enctype="multipart/form-data">
-                @csrf
-                @method('POST')
-                <input type="hidden" name="account_id" value="{{ session()->has('account') ? session('account')->id : '' }}">
-                <div class="card">
-                    <div class="card-body">
+            <div class="card" data-select2-id="16">
+                <div class="card-body" data-select2-id="15">
+                    <form action="{{ route('import-invoice.store') }}" method="post">
+                        @csrf
                         <div class="row">
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Code</label>
-                                    <input type="text" name="code" class="form-control" required>
+                                    <label>Mã đơn hàng</label>
+                                    <input type="text" name="code" placeholder="Vui lòng nhập mã đơn hàng" required>
+                                    <input type="hidden" name="account_id"
+                                        value="{{ session()->has('account') ? session('account')->id : '' }}" required>
                                 </div>
                             </div>
-                            {{-- <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Người mua</label>
-                                    <input type="text" name="name" class="form-control" required">
+                            <div class="col-lg-3 col-sm-6 col-12" data-select2-id="14">
+                                <div class="form-group" data-select2-id="13">
+                                    <label>Nhà cung cấp</label>
+                                    <input type="text" name="supplier" placeholder="Vui lòng nhập tên nhà cung cấp"
+                                        required>
                                 </div>
-                            </div> --}}
+                            </div>
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Ngày nhập</label>
-                                    <input type="datetime-local" name="created_at" class="form-control" id="birthdaytime"
-                                        required name="birthdaytime">
+                                    <input type="datetime-local" id="created_at" name="created_at"
+                                        max="<?php echo date('Y-m-d\TH:i'); ?>" />
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Số điện thoại</label>
-                                    <input type="text" name="phone_number" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Tổng tiền</label>
-                                    <input type="text" name="total" class="form-control" required>
+                                    <label> Trạng thái</label>
+                                    <select class="select" name="status" id="status" class="form-control" required>
+                                        <option value="0">Chưa hoàn thành</option>
+                                        <option value="1">Hoàn thành</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-12">
-                            <button href="javascript:void(0);" type="submit" class="btn btn-submit me-2">THÊM</button>
+                        <a href="javascript:void(0);" class="btn btn-submit me-2" id="addProductBtn">Thêm sản phẩm</a>
+                </div>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table" id="productTable">
+                            <thead>
+                                <tr>
+                                    <th>Sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Giá mua</th>
+                                    <th>Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="productRow">
+                                    <td class="name-add">
+                                        <select class="select form-control productSelect" name="product_id[]" required>
+                                            @foreach ($products as $product)
+                                                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td style="width: 150px;">
+                                        <input class="form-control" type="number" min="1" name="quantity[]"
+                                            placeholder="Số lượng" required>
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="number" min="1" max="500000000"
+                                            title="Chỉ có thể nhập giá trị nhỏ hơn hoặc bằng 500.000.000đ" name="price[]"
+                                            placeholder="Giá tiền" required>
+                                    </td>
+                                    <td>
+                                        <a class="delete-set"><img src="{{ asset('images/delete.svg') }}"
+                                                alt="svg"></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="mt-5 mb-3">
+                            <button style="margin-left: 10px;" href="javascript:void(0);"
+                                class="btn btn-submit me-2">THÊM</button>
                             <a href="{{ route('import-invoice.list') }}" class="btn btn-cancel">THOÁT</a>
                         </div>
                     </div>
                 </div>
+            </div>
+            </form>
         </div>
-        </form>
     </div>
     </div>
 @endsection
 @section('scripts')
     <script>
-        function previewImage(event) {
-            // Lấy đối tượng input file và đối tượng img
-            var input = event.target;
-            var img = document.getElementById('preview-image');
+        $(document).ready(function() {
+            // Thêm hàng nhập liệu
+            $('#addProductBtn').click(function() {
+                var newRow = $('.productRow').first().clone(); // Sao chép hàng gốc
+                newRow.find('input').val(''); // Xóa giá trị nhập liệu của các thẻ input
+                newRow.find('.select2-container').remove(); // Loại bỏ thẻ select2-container dư thừa
 
-            // Tạo URL từ tệp được chọn
-            var url = URL.createObjectURL(input.files[0]);
+                $('#productTable tbody').append(newRow); // Thêm hàng mới vào bảng
 
-            // Gán URL cho thuộc tính src của img
-            img.src = url;
-        }
+                // Khởi tạo lại Select2 cho các thẻ select trong hàng mới
+                newRow.find('.productSelect').select2();
+            });
+
+            // Xóa hàng nhập liệu
+            $(document).on('click', '.delete-set', function() {
+                var rowCount = $('#productTable tbody tr').length; // Số dòng trong bảng
+                if (rowCount > 1) { // Kiểm tra nếu số dòng lớn hơn 1
+                    $(this).closest('tr').remove(); // Xóa hàng chứa nút xóa được nhấn
+                } else {
+                    alert("Không thể xóa dòng cuối cùng");
+                }
+            });
+
+            // Khởi tạo Select2 cho hàng đầu tiên khi tải trang
+            $('.productRow').first().find('.productSelect').select2();
+
+            ////
+            // Lấy ngày giờ hiện tại
+            var currentDate = new Date();
+            var currentDateString = currentDate.toLocaleDateString('en-GB'); // Định dạng ngày tháng theo DD-MM-YYYY
+
+            // Đặt giá trị tối đa cho trường nhập liệu
+            document.getElementById('created_at_input').setAttribute('max', currentDateString);
+
+        });
     </script>
 @endsection

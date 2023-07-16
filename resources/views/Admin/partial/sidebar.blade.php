@@ -111,7 +111,7 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"
-                                class="{{ request()->routeIs('import-invoice.list') || request()->routeIs('import-invoice.create_detail') || request()->routeIs('import-invoice.edit') ? 'active' : '' }}"><i
+                                class="{{ request()->routeIs('import-invoice.list') || request()->routeIs('import-invoice.create') || request()->routeIs('import-invoice.edit') || request()->routeIs('import-invoice.show') ? 'active' : '' }}"><i
                                     data-feather="file"></i><span>Quản
                                     lý mua hàng</span><span class="menu-arrow"></span></a>
                             <ul>
@@ -119,8 +119,8 @@
                                     <a class="" href="{{ route('import-invoice.list') }}">Danh sách hóa
                                         đơn</a>
                                 </li>
-                                <li class="{{ request()->routeIs('import-invoice.create_detail') ? 'active' : '' }}"><a
-                                        class="" href="{{ route('import-invoice.create_detail') }}">Thêm hóa
+                                <li class="{{ request()->routeIs('import-invoice.create') ? 'active' : '' }}"><a
+                                        class="" href="{{ route('import-invoice.create') }}">Thêm hóa
                                         đơn</a>
                                 </li>
                             </ul>

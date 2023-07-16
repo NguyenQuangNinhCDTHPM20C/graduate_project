@@ -11,7 +11,7 @@
                     <h6>Quản lý đơn hàng của bạn</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="{{ route('import-invoice.create_detail') }}" class="btn btn-added"><img
+                    <a href="{{ route('import-invoice.create') }}" class="btn btn-added"><img
                             src="{{ asset('images/plus.svg') }}" alt="img" class="me-1">Thêm hóa đơn</a>
                 </div>
             </div>
@@ -75,16 +75,11 @@
                         <table class="table datanew">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label class="checkboxs">
-                                            <input type="checkbox" id="select-all">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
                                     <th>Code</th>
                                     <th>Tên người nhập </th>
                                     <th>Số điện thoại</th>
-                                    <th>Ngày đặt</th>
+                                    <th>Ngày nhập</th>
+                                    <th>Ngày cập nhật</th>
                                     <th>Tổng tiền</th>
                                     <th>Chức năng</th>
                                 </tr>
@@ -92,16 +87,11 @@
                             <tbody>
                                 @foreach ($invoices as $_invoices)
                                     <tr>
-                                        <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
-                                        </td>
                                         <td>{{ $_invoices->code }}</td>
                                         <td>{{ optional($_invoices->account)->name }}</td>
                                         <td>{{ optional($_invoices->account)->phone_number }}</td>
                                         <td>{{ \Carbon\Carbon::parse($_invoices->created_at)->format('d/m/Y') }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($_invoices->updated_at)->format('d/m/Y') }}</td>
                                         <td>{{ number_format($_invoices->total) }}đ</td>
                                         </td>
                                         <td>

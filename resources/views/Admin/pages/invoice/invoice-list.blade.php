@@ -44,8 +44,7 @@
                                         <div class="input-groupicon">
                                             <input type="text" placeholder="From Date" class="datetimepicker">
                                             <div class="addonset">
-                                                <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/calendars.svg"
-                                                    alt="img">
+                                                <img src="{{ asset('images/calendars.svg') }}" alt="img">
                                             </div>
                                         </div>
                                     </div>
@@ -55,8 +54,7 @@
                                         <div class="input-groupicon">
                                             <input type="text" placeholder="To Date" class="datetimepicker">
                                             <div class="addonset">
-                                                <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/calendars.svg"
-                                                    alt="img">
+                                                <img src="{{ asset('images/calendars.svg') }}" alt="img">
                                             </div>
                                         </div>
                                     </div>
@@ -64,8 +62,7 @@
                                 <div class="col-lg-1 col-sm-6 col-12 ms-auto">
                                     <div class="form-group">
                                         <a class="btn btn-filters ms-auto"><img
-                                                src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/search-whites.svg"
-                                                alt="img"></a>
+                                                src="{{ asset('images/search-whites.svg') }}" alt="img"></a>
                                     </div>
                                 </div>
                             </div>
@@ -104,17 +101,24 @@
                                         <td>{{ \Carbon\Carbon::parse($_invoices->created_at)->format('d/m/Y') }}</td>
                                         <td>{{ number_format($_invoices->total) }}đ</td>
                                         <td>
-                                            @if ($_invoices->status == 1)
-                                                <span class="badges bg-lightgreen">Hoàn thành</span>
-                                            @elseif ($_invoices->status == 0)
-                                                <span class="badges bg-lightred">Chưa hoàn thành</span>
+                                            @if ($_invoices->status == 5)
+                                                <span class="badges bg-lightred">Đã hủy</span>
+                                            @elseif ($_invoices->status == 4)
+                                                <span class="badges bg-lightred">Không thành công</span>
+                                            @elseif ($_invoices->status == 3)
+                                                <span class="badges bg-lightgreen">Thành công</span>
+                                            @elseif($_invoices->status == 2)
+                                                <span class="badges bg-lightyellow">Đang vận chuyển</span>
+                                            @elseif($_invoices->status == 1)
+                                                <span class="badges bg-lightgreen">Đã xác nhận</span>
                                             @else
-                                                <span class="badges bg-lightred">Thất bại</span>
+                                                <span class="badges bg-lightyellow">Chờ xác nhận</span>
                                             @endif
                                         </td>
                                         <td class="text-center">
                                             <a class="me-3"
-                                                href="{{ route('invoice.edit', ['code' => $_invoices->code]) }}">
+                                                href="{{ route('invoice.edit', ['code' => $_invoices->code]) }}"
+                                                title="Chỉnh sửa">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
                                             <a class="me-3" data-bs-toggle="tooltip" data-bs-placement="top"
@@ -122,13 +126,8 @@
                                             {{-- <a class="me-3 confirm-text"
                                                 onclick="$.fn.showConfirmationDeleteAlert('invoices_delete_{{ $_invoices->id }}')">
                                                 <img src="{{ asset('images/delete.svg') }}" alt="img">
+
                                             </a>
-                                            <form id="invoices_delete_{{ $_invoices->id }}"
-                                                action="{{ route('invoice.delete', ['id' => $_invoices->id]) }}"
-                                                method="POST" style="display: none">
-                                                @csrf
-                                                @method('DELETE')
-                                            </form> --}}
                                         </td>
                                     </tr>
                                 @endforeach

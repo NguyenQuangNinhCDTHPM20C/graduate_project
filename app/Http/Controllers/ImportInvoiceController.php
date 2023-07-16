@@ -27,14 +27,9 @@ class ImportInvoiceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        return view('admin.pages.import_invoice.add');
-    }
-
-    public function create_detail()
-    {
+    {   
         $products = Product::get();
-        return view('admin.pages.import_invoice.add-detail', compact('products'));
+        return view('admin.pages.import_invoice.add', compact('products'));
     }
 
     /**
@@ -43,21 +38,16 @@ class ImportInvoiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
     public function store(Request $request)
     {
-        $invoice = new ImportInvoice;
-        $invoice->code = $request->input('code');
-        $invoice->account_id = $request->input('account_id');
-        $invoice->phone_number = $request->input('phone_number');
-        $invoice->total = $request->input('total');
-        $invoice->save();
-        return redirect()->route('import-invoice.list')->with('success', 'Invoice has been updated successfully');
-    }
-
-    public function store_detail(Request $request)
-    {
+        $import_invoice = ImportInvoice::where('code', $request->input('code'))->first();
+        if($import_invoice){
+            session()->put('error', 'Mã hóa đơn đã tồn tại');
+            return redirect()->back();
+        }else{
         // Lưu thông tin hóa đơn nhập
-        $importInvoice = new ImportInvoice();
+        $importInvoice = new ImportInvoice;
         $importInvoice->code = $request->input('code');
         $importInvoice->account_id = $request->input('account_id');
         $importInvoice->supplier = $request->input('supplier');
@@ -71,20 +61,29 @@ class ImportInvoiceController extends Controller
         $importInvoice->total = $total;
         $importInvoice->status = $request->input('status');
         $importInvoice->created_at = $request->input('created_at');
-        $importInvoice->updated_at = $request->input('updated_at');
+        $importInvoice->updated_at = $request->input('created_at');
         $importInvoice->save();
 
         // Lưu thông tin chi tiết hóa đơn nhập
         $productIds = $request->input('product_id');
         foreach ($productIds as $key => $productId) {
-            $importInvoiceDetail = new ImportInvoiceDetail();
-            $importInvoiceDetail->import_invoice_id = $importInvoice->id;
-            $importInvoiceDetail->product_id = $productId;
-            $importInvoiceDetail->quantity = $quantities[$key];
-            $importInvoiceDetail->price = $prices[$key];
-            $importInvoiceDetail->save();
+            $check_existing = ImportInvoiceDetail::where('product_id', $productId)->first();
+            if($check_existing){
+                $check_existing->quantity += $quantities[$key];
+                $check_existing->save();
+            }else{
+                $importInvoiceDetail = new ImportInvoiceDetail();
+                $importInvoiceDetail->import_invoice_id = $importInvoice->id;
+                $importInvoiceDetail->product_id = $productId;
+                $importInvoiceDetail->quantity = $quantities[$key];
+                $importInvoiceDetail->price = $prices[$key];
+                $importInvoiceDetail->save();
+            }
+            $product = Product::where('id', $productId)->first();
+            $product->quantity += $quantities[$key];
+            $product->save();
         }
-
+        }
         return redirect()->route('import-invoice.list')->with('success', 'Hóa đơn nhập đã được tạo thành công.');
     }
 
@@ -96,7 +95,10 @@ class ImportInvoiceController extends Controller
      */
     public function show($code)
     {
-        
+        $importInvoice = ImportInvoice::where('code', $code)->first();
+        $importInvoiceDetail = ImportInvoiceDetail::where('import_invoice_id',  $importInvoice->id)->get();
+
+        return view('Admin.pages.import_invoice.detail', compact('importInvoice', 'importInvoiceDetail'));
     }
 
     /**
@@ -109,6 +111,7 @@ class ImportInvoiceController extends Controller
     {
         $importInvoice = ImportInvoice::where('code', $code)->first();
         $importInvoiceDetail = ImportInvoiceDetail::where('import_invoice_id',  $importInvoice->id)->get();
+        // dd($importInvoiceDetail);
 
         return view('Admin.pages.import_invoice.edit', compact('importInvoice', 'importInvoiceDetail'));
     }
@@ -122,6 +125,7 @@ class ImportInvoiceController extends Controller
         if ($request->has('status')) {
             $status = $request->input('status');
             $importInvoice->status = $status;
+            $importInvoice->updated_at = $status;
             $importInvoice->save();
         }
 
