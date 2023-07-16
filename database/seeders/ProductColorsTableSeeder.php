@@ -21,6 +21,11 @@ class ProductColorsTableSeeder extends Seeder
             ['product_id' => '3', 'color_id' => '3', 'created_at' => now(),'updated_at' => now(),],
             ['product_id' => '4', 'color_id' => '1', 'created_at' => now(),'updated_at' => now(),],
             ['product_id' => '4', 'color_id' => '2', 'created_at' => now(),'updated_at' => now(),],
+            ['product_id' => '5', 'color_id' => '1', 'created_at' => now(),'updated_at' => now(),],
+            ['product_id' => '6', 'color_id' => '1', 'created_at' => now(),'updated_at' => now(),],
+            ['product_id' => '7', 'color_id' => '1', 'created_at' => now(),'updated_at' => now(),],
+            ['product_id' => '8', 'color_id' => '1', 'created_at' => now(),'updated_at' => now(),],
+            ['product_id' => '9', 'color_id' => '1', 'created_at' => now(),'updated_at' => now(),],
         ];
 
         DB::table('product_colors')->insert($product_colors);

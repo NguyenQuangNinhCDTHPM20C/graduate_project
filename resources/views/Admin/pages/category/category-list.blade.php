@@ -77,12 +77,6 @@
                         <table class="table  datanew">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label class="checkboxs">
-                                            <input type="checkbox" id="select-all">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
                                     <th>Tên danh mục</th>
                                     <th>Loại</th>
                                     <th>Trạng thái</th>
@@ -92,12 +86,6 @@
                             <tbody>
                                 @foreach ($category as $_category)
                                     <tr>
-                                        <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
-                                        </td>
                                         <td>
                                             <a
                                                 href="{{ route('category.edit', ['slug' => $_category->slug]) }}">{{ $_category->name }}</a>

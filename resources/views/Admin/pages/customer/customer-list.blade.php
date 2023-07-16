@@ -94,12 +94,6 @@
                         <table class="table  datanew">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
                                     <th>Họ tên </th>
                                     <th>Số điện thoại</th>
                                     <th>Email</th>
@@ -109,17 +103,11 @@
                             <tbody>
                                 @foreach ($users as $key => $user)
                                     <tr>
-                                        <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
-                                        </td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->phone_number }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>
-                                            {{ $user->address}}, {{$user->district}}, {{$user->province }}
+                                            {{ $user->address }}, {{ $user->district }}, {{ $user->province }}
                                         </td>
                                     </tr>
                                 @endforeach

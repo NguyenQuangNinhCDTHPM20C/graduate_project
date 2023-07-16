@@ -18,13 +18,14 @@
                         <div class="container">
                             <div class="row">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="title" id="title"
-                                        placeholder="Title" />
+                                    <input type="text" class="form-control" name="title" id="title" required
+                                        placeholder="Vui lòng nhập tiêu đề" />
                                 </div>
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="image">Hình ảnh:</label>
-                                        <input type="file" name="image" id="image">
+                                        <input type="file" name="image" id="image" class="form-control" required
+                                            accept="image/jpeg, image/png, image/gif, image/svg+xml">
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6 col-12">
@@ -61,8 +62,6 @@
                                     </div>
                                 </div>
                                 <button type="submit" class="btn btn-primary form-control">Tạo bài blog</button>
-
-
                             </div>
                         </div>
                     </div>
@@ -74,7 +73,7 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="https://cdn.ckeditor.com/ckeditor5/29.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#content'))

@@ -71,33 +71,21 @@
                         <table class="table datanew">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label class="checkboxs">
-                                            <input type="checkbox" id="select-all">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
-                                    <th>Hình ảnh</th>
-                                    <th>Tên thương hiệu</th>
-                                    <th>Chức năng</th>
+                                    <th class="text-center">Hình ảnh</th>
+                                    <th class="text-center">Tên thương hiệu</th>
+                                    <th class="text-center">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($brand as $_brand)
                                     <tr>
-                                        <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
-                                        </td>
-                                        <td>
+                                        <td class="text-center">
                                             <a class="product-img">
                                                 <img src="{{ asset($_brand->image) }}" alt="{{ $_brand->name }}">
                                             </a>
                                         </td>
-                                        <td>{{ $_brand->name }}</td>
-                                        <td>
+                                        <td class="text-center">{{ $_brand->name }}</td>
+                                        <td class="text-center">
                                             <a class="me-3" href="{{ route('brand.edit', ['slug' => $_brand->slug]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>

@@ -11,8 +11,7 @@
                     <h6>Xem và tìm kiếm phụ mục ở đây</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="{{ route('subcategory.add') }}" class="btn btn-added"><img
-                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
+                    <a href="{{ route('subcategory.add') }}" class="btn btn-added"><img src="{{ asset('images/plus.svg') }}"
                             class="me-2" alt="img"> Thêm phụ mục</a>
                 </div>
             </div>
@@ -23,8 +22,7 @@
                         <div class="search-set">
                             <div class="search-path">
                                 <a class="btn btn-filter" id="filter_search">
-                                    <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/filter.svg"
-                                        alt="img">
+                                    <img src="{{ asset('images/filter.svg') }}" alt="img">
                                     <span><img
                                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/closes.svg"
                                             alt="img"></span>
@@ -62,11 +60,11 @@
                             <div class="row">
                                 <div class="col-lg-2 col-sm-6 col-12">
                                     <div class="form-group">
-                                        <label>Danh mục/label>
-                                            <select class="select">
-                                                <option>Chọn danh mục</option>
-                                                <option>Computers</option>
-                                            </select>
+                                        <label>Danh mục</label>
+                                        <select class="select">
+                                            <option>Chọn danh mục</option>
+                                            <option>Computers</option>
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-2 col-sm-6 col-12">
@@ -103,12 +101,6 @@
                         <table class="table  datanew">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label class="checkboxs">
-                                            <input type="checkbox" id="select-all">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
                                     <th>Phụ mục</th>
                                     <th>Danh mục</th>
                                     <th>Trạng thái</th>
@@ -118,24 +110,17 @@
                             <tbody>
                                 @foreach ($sub_category as $_sub_category)
                                     <tr>
-                                        <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
-                                        </td>
-                                        <td class="productimgname">
+                                        <td class="productimgname" style="max-width:600px;">
                                             <img src="{{ asset($_sub_category->image) }}" alt="{{ $_sub_category->name }}">
                                             {{ $_sub_category->name }}
                                         </td>
-                                        <td>{{ $_sub_category->category->name }}</td>
-                                        <td>{{ $_sub_category->status == '1' ? 'Active' : 'Inactive' }}</td>
+                                        <td>{{ optional($_sub_category->category)->name }}</td>
+                                        <td>{{ $_sub_category->status == '1' ? 'Hoạt động' : 'Không hoạt động' }}</td>
                                         </td>
                                         <td>
                                             <a class="me-3"
                                                 href="{{ route('subcategory.edit', ['slug' => $_sub_category->slug]) }}">
-                                                <img src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/edit.svg"
-                                                    alt="img">
+                                                <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
                                             <a class="me-3 confirm-text"
                                                 onclick="$.fn.showConfirmationDeleteAlert('sub_category_delete_{{ $_sub_category->id }}')">
