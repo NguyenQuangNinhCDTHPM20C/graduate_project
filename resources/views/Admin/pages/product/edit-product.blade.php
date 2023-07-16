@@ -23,7 +23,7 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Tên sản phẩm</label>
-                                    <input type="text" name="name" id="name" class="form-control"
+                                    <input type="text" name="name" id="name" class="form-control" maxlength="255"
                                         value="{{ $product->name }}" required>
                                 </div>
                             </div>
@@ -78,6 +78,8 @@
                                 <div class="form-group">
                                     <label>Giá</label>
                                     <input type="text" name="selling_price" id="selling_price" class="form-control"
+                                        min="1" max="500000000"
+                                        title="Chỉ có thể nhập giá trị nhỏ hơn hoặc bằng 500.000.000đ"
                                         value="{{ $product->selling_price }}" required>
                                 </div>
                             </div>
@@ -122,7 +124,7 @@
                                         </div>
                                     </div>
                                     <input type="file" name="images[]" id="image" class="form-control" multiple
-                                         accept="image/jpeg, image/png, image/gif, image/svg+xml">
+                                        accept="image/jpeg, image/png, image/gif, image/svg+xml">
                                 </div>
                             </div>
                             @if ($is_laptop)
@@ -132,7 +134,7 @@
                                             <div class="form-group">
                                                 <label>Hãng CPU</label>
                                                 <input type="text" name="cpu_brand" id="cpu_brand" class="form-control"
-                                                    value="{{ $is_laptop->cpu_brand }}" required>
+                                                    maxlength="255" value="{{ $is_laptop->cpu_brand }}" required>
                                             </div>
                                         </div>
 
@@ -140,7 +142,8 @@
                                             <div class="form-group">
                                                 <label>Loại CPU</label>
                                                 <input type="text" name="cpu_series" id="cpu_series"
-                                                    class="form-control" value="{{ $is_laptop->cpu_series }}" required>
+                                                    class="form-control" value="{{ $is_laptop->cpu_series }}"
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -148,7 +151,8 @@
                                             <div class="form-group">
                                                 <label>Model CPU</label>
                                                 <input type="text" name="cpu_model" id="cpu_model"
-                                                    class="form-control" value="{{ $is_laptop->cpu_model }}" required>
+                                                    class="form-control" value="{{ $is_laptop->cpu_model }}"
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -157,7 +161,7 @@
                                                 <label>Tần số cơ bản CPU</label>
                                                 <input type="text" name="cpu_base_clock" id="cpu_base_clock"
                                                     class="form-control" value="{{ $is_laptop->cpu_base_lock }}"
-                                                    required>
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -165,7 +169,8 @@
                                             <div class="form-group">
                                                 <label>Dung lượng bộ nhớ cache CPU</label>
                                                 <input type="text" name="cpu_cache" id="cpu_cache"
-                                                    class="form-control" value="{{ $is_laptop->cpu_cache }}" required>
+                                                    class="form-control" value="{{ $is_laptop->cpu_cache }}"
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -173,7 +178,8 @@
                                             <div class="form-group">
                                                 <label>Tần số tối đa CPU</label>
                                                 <input type="text" name="cpu_max_clock" id="cpu_max_clock"
-                                                    class="form-control" value="{{ $is_laptop->cpu_max_lock }}" required>
+                                                    class="form-control" value="{{ $is_laptop->cpu_max_lock }}"
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -181,7 +187,8 @@
                                             <div class="form-group">
                                                 <label>Số lõi CPU</label>
                                                 <input type="text" name="cpu_cores" id="cpu_cores"
-                                                    class="form-control" value="{{ $is_laptop->cpu_cores }}" required>
+                                                    class="form-control" value="{{ $is_laptop->cpu_cores }}"
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -189,7 +196,8 @@
                                             <div class="form-group">
                                                 <label>Số luồng CPU</label>
                                                 <input type="text" name="cpu_threads" id="cpu_threads"
-                                                    class="form-control" value="{{ $is_laptop->cpu_threads }}" required>
+                                                    class="form-control" value="{{ $is_laptop->cpu_threads }}"
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -197,7 +205,8 @@
                                             <div class="form-group">
                                                 <label>Dung lượng RAM</label>
                                                 <input type="text" name="ram_size" id="ram_size"
-                                                    class="form-control" value="{{ $is_laptop->ram_size }}" required>
+                                                    class="form-control" value="{{ $is_laptop->ram_size }}"
+                                                    maxlength="255"required>
                                             </div>
                                         </div>
 
@@ -205,7 +214,8 @@
                                             <div class="form-group">
                                                 <label>Tiêu chuẩn RAM</label>
                                                 <input type="text" name="ram_standard" id="ram_standard"
-                                                    class="form-control" value="{{ $is_laptop->ram_standard }}" required>
+                                                    class="form-control" value="{{ $is_laptop->ram_standard }}"
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -213,7 +223,8 @@
                                             <div class="form-group">
                                                 <label>Tốc độ RAM</label>
                                                 <input type="text" name="ram_speed" id="ram_speed"
-                                                    class="form-control" value="{{ $is_laptop->ram_speed }}" required>
+                                                    class="form-control" value="{{ $is_laptop->ram_speed }}"
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -222,7 +233,7 @@
                                                 <label>Dung lượng lưu trữ</label>
                                                 <input type="text" name="storage_capacity" id="storage_capacity"
                                                     class="form-control" value="{{ $is_laptop->storage_capacity }}"
-                                                    required>
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -232,7 +243,7 @@
                                                 <label>Loại socket RAM</label>
                                                 <input type="text" name="ram_socket_type" id="ram_socket_type"
                                                     class="form-control" value="{{ $is_laptop->ram_socket_type }}"
-                                                    required>
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -240,7 +251,8 @@
                                             <div class="form-group">
                                                 <label>Loại lưu trữ</label>
                                                 <input type="text" name="storage_type" id="storage_type"
-                                                    class="form-control" value="{{ $is_laptop->storage_type }}" required>
+                                                    class="form-control" value="{{ $is_laptop->storage_type }}"
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -248,7 +260,8 @@
                                             <div class="form-group">
                                                 <label>Kích thước màn hình</label>
                                                 <input type="text" name="display_size" id="display_size"
-                                                    class="form-control" value="{{ $is_laptop->display_size }}" required>
+                                                    class="form-control" value="{{ $is_laptop->display_size }}"
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -257,7 +270,7 @@
                                                 <label>Độ phân giải màn hình</label>
                                                 <input type="text" name="display_resolution" id="display_resolution"
                                                     class="form-control" value="{{ $is_laptop->display_resolution }}"
-                                                    required>
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -266,7 +279,7 @@
                                                 <label>Công nghệ màn hình</label>
                                                 <input type="text" name="display_technology" id="display_technology"
                                                     class="form-control" value="{{ $is_laptop->display_technology }}"
-                                                    required>
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -274,7 +287,8 @@
                                             <div class="form-group">
                                                 <label>Tốc độ làm mới màn hình</label>
                                                 <input type="text" name="refresh_rate" id="refresh_rate"
-                                                    class="form-control" value="{{ $is_laptop->refresh_rate }}" required>
+                                                    class="form-control" value="{{ $is_laptop->refresh_rate }}"
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
                                         <div class="col-lg-3 col-sm-6 col-12">
@@ -282,7 +296,7 @@
                                                 <label>Dung lượng VRAM card đồ họa</label>
                                                 <input type="text" name="graphics_vram" id="graphics_vram"
                                                     class="form-control" value="{{ $is_laptop->graphics_vram }}"
-                                                    required>
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -291,7 +305,7 @@
                                                 <label>Card đồ họa tích hợp</label>
                                                 <input type="text" name="onboard_graphics" id="onboard_graphics"
                                                     class="form-control" value="{{ $is_laptop->onboard_graphics }}"
-                                                    required>
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -300,7 +314,7 @@
                                                 <label>Card đồ họa rời</label>
                                                 <input type="text" name="dedicated_graphics" id="dedicated_graphics"
                                                     class="form-control" value="{{ $is_laptop->dedicated_graphics }}"
-                                                    required>
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -308,7 +322,7 @@
                                             <div class="form-group">
                                                 <label>Kết nối mạng không dây</label>
                                                 <input type="text" name="wireless_connectivity"
-                                                    id="wireless_connectivity" class="form-control"
+                                                    id="wireless_connectivity" class="form-control" maxlength="255"
                                                     value="{{ $is_laptop->wireless_connectivity }}" required>
                                             </div>
                                         </div>
@@ -318,7 +332,7 @@
                                                 <label>Hệ điều hành</label>
                                                 <input type="text" name="operating_system" id="operating_system"
                                                     class="form-control" value="{{ $is_laptop->operating_system }}"
-                                                    required>
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -326,7 +340,8 @@
                                             <div class="form-group">
                                                 <label>Kích thước</label>
                                                 <input type="text" name="dimensions" id="dimensions"
-                                                    class="form-control" value="{{ $is_laptop->dimensions }}" required>
+                                                    class="form-control" value="{{ $is_laptop->dimensions }}"
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
 
@@ -334,7 +349,7 @@
                                             <div class="form-group">
                                                 <label>Trọng lượng</label>
                                                 <input type="text" name="weight" id="weight" class="form-control"
-                                                    value="{{ $is_laptop->weight }}" required>
+                                                    value="{{ $is_laptop->weight }}" maxlength="20" required>
                                             </div>
                                         </div>
 
@@ -343,7 +358,7 @@
                                                 <label>Dung lượng pin</label>
                                                 <input type="text" name="battery_capacity" id="battery_capacity"
                                                     class="form-control" value="{{ $is_laptop->battery_capacity }}"
-                                                    required>
+                                                    maxlength="255" required>
                                             </div>
                                         </div>
                                     </div>

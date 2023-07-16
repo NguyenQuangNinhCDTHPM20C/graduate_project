@@ -105,7 +105,7 @@
                                                     <strong>Giảm giá</strong>
                                                 </td>
                                                 <td class="right">
-                                                    <strong>{{ number_format(10000, 0, ',', '.') }}đ</strong>
+                                                    <strong>{{ number_format($discount_total, 0, ',', '.') }}đ</strong>
                                                 </td>
                                             </tr>
                                             <tr>

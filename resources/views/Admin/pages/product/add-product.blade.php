@@ -22,7 +22,8 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Tên sản phẩm</label>
-                                    <input type="text" name="name" id="name" class="form-control" required>
+                                    <input type="text" name="name" id="name" class="form-control" maxlength="255"
+                                        required>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
@@ -59,14 +60,17 @@
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Code</label>
-                                    <input type="text" name="code" id="code" class="form-control" required>
+                                    <input type="text" name="code" id="code" class="form-control"
+                                        maxlength="255">
+                                    required>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Giá</label>
-                                    <input type="text" name="selling_price" id="selling_price" class="form-control"
-                                        required>
+                                    <input type="number" name="selling_price" id="selling_price" class="form-control"
+                                        min="1" max="500000000"
+                                        title="Chỉ có thể nhập giá trị nhỏ hơn hoặc bằng 500.000.000đ" required>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
@@ -122,7 +126,7 @@
                                     <div class="form-group">
                                         <label>Hãng CPU</label>
                                         <input type="text" name="cpu_brand" id="cpu_brand" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
@@ -130,7 +134,7 @@
                                     <div class="form-group">
                                         <label>Loại CPU</label>
                                         <input type="text" name="cpu_series" id="cpu_series" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
@@ -138,14 +142,14 @@
                                     <div class="form-group">
                                         <label>Model CPU</label>
                                         <input type="text" name="cpu_model" id="cpu_model" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label>Tần số cơ bản CPU</label>
-                                        <input type="text" name="cpu_base_clock" id="cpu_base_clock"
+                                        <input type="text" name="cpu_base_clock" id="cpu_base_clock" maxlength="255"
                                             class="form-control" required>
                                     </div>
                                 </div>
@@ -154,14 +158,14 @@
                                     <div class="form-group">
                                         <label>Dung lượng bộ nhớ cache CPU</label>
                                         <input type="text" name="cpu_cache" id="cpu_cache" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label>Tần số tối đa CPU</label>
-                                        <input type="text" name="cpu_max_clock" id="cpu_max_clock"
+                                        <input type="text" name="cpu_max_clock" id="cpu_max_clock" maxlength="255"
                                             class="form-control" required>
                                     </div>
                                 </div>
@@ -170,7 +174,7 @@
                                     <div class="form-group">
                                         <label>Số lõi CPU</label>
                                         <input type="text" name="cpu_cores" id="cpu_cores" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
@@ -178,7 +182,7 @@
                                     <div class="form-group">
                                         <label>Số luồng CPU</label>
                                         <input type="text" name="cpu_threads" id="cpu_threads" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
@@ -186,7 +190,7 @@
                                     <div class="form-group">
                                         <label>Dung lượng RAM</label>
                                         <input type="text" name="ram_size" id="ram_size" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
@@ -194,7 +198,7 @@
                                     <div class="form-group">
                                         <label>Tiêu chuẩn RAM</label>
                                         <input type="text" name="ram_standard" id="ram_standard" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
@@ -202,7 +206,7 @@
                                     <div class="form-group">
                                         <label>Tốc độ RAM</label>
                                         <input type="text" name="ram_speed" id="ram_speed" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
@@ -210,7 +214,7 @@
                                     <div class="form-group">
                                         <label>Dung lượng lưu trữ</label>
                                         <input type="text" name="storage_capacity" id="storage_capacity"
-                                            class="form-control" required>
+                                            maxlength="255" class="form-control" required>
                                     </div>
                                 </div>
 
@@ -219,7 +223,7 @@
                                     <div class="form-group">
                                         <label>Loại socket RAM</label>
                                         <input type="text" name="ram_socket_type" id="ram_socket_type"
-                                            class="form-control" required>
+                                            maxlength="255" class="form-control" required>
                                     </div>
                                 </div>
 
@@ -227,7 +231,7 @@
                                     <div class="form-group">
                                         <label>Loại lưu trữ</label>
                                         <input type="text" name="storage_type" id="storage_type" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
@@ -235,7 +239,7 @@
                                     <div class="form-group">
                                         <label>Kích thước màn hình</label>
                                         <input type="text" name="display_size" id="display_size" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
@@ -243,7 +247,7 @@
                                     <div class="form-group">
                                         <label>Độ phân giải màn hình</label>
                                         <input type="text" name="display_resolution" id="display_resolution"
-                                            class="form-control" required>
+                                            maxlength="255" class="form-control" required>
                                     </div>
                                 </div>
 
@@ -251,7 +255,7 @@
                                     <div class="form-group">
                                         <label>Công nghệ màn hình</label>
                                         <input type="text" name="display_technology" id="display_technology"
-                                            class="form-control" required>
+                                            maxlength="255" class="form-control" required>
                                     </div>
                                 </div>
 
@@ -259,13 +263,13 @@
                                     <div class="form-group">
                                         <label>Tốc độ làm mới màn hình</label>
                                         <input type="text" name="refresh_rate" id="refresh_rate" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
                                 <div class="col-lg-3 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label>Dung lượng VRAM card đồ họa</label>
-                                        <input type="text" name="graphics_vram" id="graphics_vram"
+                                        <input type="text" name="graphics_vram" id="graphics_vram" maxlength="255"
                                             class="form-control" required>
                                     </div>
                                 </div>
@@ -274,7 +278,7 @@
                                     <div class="form-group">
                                         <label>Card đồ họa tích hợp</label>
                                         <input type="text" name="onboard_graphics" id="onboard_graphics"
-                                            class="form-control" required>
+                                            maxlength="255" class="form-control" required>
                                     </div>
                                 </div>
 
@@ -282,7 +286,7 @@
                                     <div class="form-group">
                                         <label>Card đồ họa rời</label>
                                         <input type="text" name="dedicated_graphics" id="dedicated_graphics"
-                                            class="form-control" required>
+                                            maxlength="255" class="form-control" required>
                                     </div>
                                 </div>
 
@@ -290,7 +294,7 @@
                                     <div class="form-group">
                                         <label>Kết nối mạng không dây</label>
                                         <input type="text" name="wireless_connectivity" id="wireless_connectivity"
-                                            class="form-control" required>
+                                            maxlength="255" class="form-control" required>
                                     </div>
                                 </div>
 
@@ -298,7 +302,7 @@
                                     <div class="form-group">
                                         <label>Hệ điều hành</label>
                                         <input type="text" name="operating_system" id="operating_system"
-                                            class="form-control" required>
+                                            maxlength="255" class="form-control" required>
                                     </div>
                                 </div>
 
@@ -306,7 +310,7 @@
                                     <div class="form-group">
                                         <label>Kích thước</label>
                                         <input type="text" name="dimensions" id="dimensions" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
@@ -314,7 +318,7 @@
                                     <div class="form-group">
                                         <label>Trọng lượng</label>
                                         <input type="text" name="weight" id="weight" class="form-control"
-                                            required>
+                                            maxlength="255" required>
                                     </div>
                                 </div>
 
@@ -322,7 +326,7 @@
                                     <div class="form-group">
                                         <label>Dung lượng pin</label>
                                         <input type="text" name="battery_capacity" id="battery_capacity"
-                                            class="form-control" required>
+                                            maxlength="255" class="form-control" required>
                                     </div>
                                 </div>
                             </div>

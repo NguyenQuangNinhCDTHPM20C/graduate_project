@@ -28,7 +28,7 @@ class UserController extends Controller
 {
     // Show home
     public function index(){
-        $products = Product::with('reviews')->paginate(10);
+        $products = Product::where('status', 1)->with('reviews')->paginate(10);
         $new_products = Product::where('created_at', '>=', Carbon::now()->subDays(7))->with('reviews')->get();
         $brands = Brand::all();
         $category_accessory = Category::where('type', 'accessory')->first();
@@ -61,7 +61,7 @@ class UserController extends Controller
         $filterController = new FilterController();
         $products_query = $filterController->filterProducts($request);
 
-        $products = $products_query->paginate(12);
+        $products = $products_query->where('status', 1)->paginate(12);
         $brands = Brand::distinct('name')->pluck('name');
 
         $productReviewsCount = [];
@@ -115,7 +115,7 @@ class UserController extends Controller
     public function products_type(Request $request, $type)
     {
         $category = Category::where('type',$type) ->first();
-        $products = Product::where('category_id', $category->id)->with('reviews')->paginate(12);
+        $products = Product::where('category_id', $category->id)->where('status', 1)->with('reviews')->paginate(12);
         $categories = Category::where('type', '!=', 'blog')->get();
         $blog_category = Category::where('type', 'blog')->first();
         $sub_categories = SubCategory::where('category_id','!=', $blog_category->id)->distinct('name')->pluck('name');
@@ -276,7 +276,13 @@ class UserController extends Controller
     public function invoice($code){
         $invoice = Invoice::where('code', $code)->first();
         $order_items = InvoiceDetail::where('invoice_id', $invoice->id)->get();
-        return view('Public.pages.payment.invoice', compact('invoice', 'order_items'));
+        $total = 0;
+        foreach($order_items as $invoice_detail)
+        {
+            $total += $invoice_detail->quantity * $invoice_detail->price;
+        }
+        $discount_total = $invoice->total - $total;
+        return view('Public.pages.payment.invoice', compact('invoice', 'order_items', 'discount_total'));
     }
 
     public function blogs()

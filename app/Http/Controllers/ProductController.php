@@ -26,7 +26,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::get();
+        $products = Product::where('status', 1)->get();
         $brands = Brand::all();
         $category = Category::all();
         $sub_category = SubCategory::all();
@@ -41,8 +41,10 @@ class ProductController extends Controller
     public function create()
     {
         $brands = Brand::all();
-        $category = Category::all();
-        $sub_category = SubCategory::all();
+        $category = Category::where('type', '!=', 'blog')->get();
+        $sub_category = SubCategory::whereHas('category', function ($query) {
+            $query->where('type', '!=','blog');
+        })->get();
         return view('Admin.pages.product.add-product', compact('brands', 'category', 'sub_category'));
     }
 
@@ -184,8 +186,10 @@ class ProductController extends Controller
     public function edit($slug)
     {
         $product = Product::where('slug', $slug)->first();
-        $category = Category::all();
-        $sub_category = SubCategory::all();
+        $category = Category::where('type', '!=', 'blog');
+        $sub_category = SubCategory::whereHas('category', function ($query) {
+            $query->where('type', 'blog');
+        })->get();
         $brands = Brand::all();
         $discount_percentage = (($product->selling_price - $product->discount_price) / $product->selling_price) * 100;
         $images = Image::where('entity_id', $product->id)->get();
@@ -327,19 +331,20 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         if($product){
-            InvoiceDetail::where('product_id', $product->id)->update(['product_id' => null]);
-            ImportInvoiceDetail::where('product_id', $product->id)->update(['product_id' => null]);
-            ProductColor::where('product_id', $product->id)->delete();
-            Review::where('product_id', $product->id)->delete();
-            Laptop::where('product_id', $product->id)->delete();
-            $product->featured_image_id = null;
-            $product->save();
-            Image::where('entity_type', 'product')->where('entity_id', $product->id)->delete();
+            // InvoiceDetail::where('product_id', $product->id)->update(['product_id' => null]);
+            // ImportInvoiceDetail::where('product_id', $product->id)->update(['product_id' => null]);
+            // ProductColor::where('product_id', $product->id)->delete();
+            // Review::where('product_id', $product->id)->delete();
+            // Laptop::where('product_id', $product->id)->delete();
+            // $product->featured_image_id = null;
+            // $product->save();
+            // Image::where('entity_type', 'product')->where('entity_id', $product->id)->delete();
             FavoriteDetail::where('product_id', $product->id)->delete();
-            $product->delete();
-            session()->flash('success', 'Product has been deleted successfully');
+            $product->status = 0;
+            $product->save();
+            session()->flash('success', 'Xóa sản phẩm thành công');
         }
-        session()->flash('error', 'Product has been delete failed');
+        session()->flash('error', 'Xóa sản phẩm thất bại');
         return redirect()->route('product.list');
     }
 }

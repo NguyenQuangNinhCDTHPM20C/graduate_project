@@ -137,6 +137,7 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::put('/brand/{id}', [BrandController::class, 'update'])->name('brand.update');
         Route::delete('/brand/{id}', [BrandController::class, 'destroy'])->name('brand.delete');
         //Routes for sub category
+        Route::get('/api/sub-category', [SubCategoryController::class, 'api']);
         Route::get('/sub-category/list', [SubCategoryController::class, 'index'])->name('subcategory.list');
         Route::post('/sub-category/add', [SubCategoryController::class, 'store'])->name('subcategory.store');
         Route::get('/sub-category/add', [SubCategoryController::class, 'create'])->name('subcategory.add');
