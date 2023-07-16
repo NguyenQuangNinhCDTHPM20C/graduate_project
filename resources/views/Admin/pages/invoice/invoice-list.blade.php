@@ -121,12 +121,11 @@
                                                 title="Chỉnh sửa">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                            <a href="{{route('invoice.pdf',['id' => $_invoices->id])}}" class="me-3" data-bs-toggle="tooltip" data-bs-placement="top"
                                                 title="pdf"><img src="{{ asset('images/pdf.svg') }}" alt="img"></a>
                                             {{-- <a class="me-3 confirm-text"
                                                 onclick="$.fn.showConfirmationDeleteAlert('invoices_delete_{{ $_invoices->id }}')">
-                                                <img src="{{ asset('images/delete.svg') }}" alt="img">
-
+                                                <img src="{{ asset('images/delete.svg') }}" alt="img">--}}
                                             </a>
                                         </td>
                                     </tr>

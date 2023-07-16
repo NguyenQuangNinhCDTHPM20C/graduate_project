@@ -159,7 +159,7 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::get('/invoice/edit/{code}', [InvoiceController::class, 'edit'])->name('invoice.edit');
         Route::put('/invoice/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
         Route::delete('/invoice/delete/{id}', [InvoiceController::class, 'destroy'])->name('invoice.delete');
-        Route::get('/invoices/{id}/print', [InvoiceController::class, 'print'])->name('invoice.print');
+        Route::get('/invoices/{id}/print', [InvoiceController::class, 'exportPDF'])->name('invoice.pdf');
         Route::get('/invoices/export', [InvoiceController::class, 'export'])->name('invoice.export');
         //Routes for auth
         Route::post('/logout', [AuthController::class, 'logout_admin'])->name('admin.logout');

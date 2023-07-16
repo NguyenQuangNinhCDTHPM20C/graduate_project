@@ -8,7 +8,7 @@
             <div class="page-header">
                 <div class="page-title">
                     <h6>
-                        <a href="{{ route('subcategory.list') }}">Mã giảm giá/</a>
+                        <a href="{{ route('discountcode.list') }}">Mã giảm giá/</a>
                         <span>Thêm</span>
                     </h6>
                     <h4>Thêm mã giảm giá</h4>
@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <button href="javascript:void(0);" type="submit" class="btn btn-submit me-2">THÊM</button>
-                                <a href="{{ route('subcategory.list') }}"
+                                <a href="{{ route('discountcode.list') }}"
                                     class="btn btn-cancel">THOÁT</a>
                             </div>
                         </div>

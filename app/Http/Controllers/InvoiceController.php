@@ -6,6 +6,7 @@ use App\Exports\InvoicesExport;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use Barryvdh\DomPDF\Facade\PDF;
+use Dompdf\Dompdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
@@ -116,7 +117,7 @@ class InvoiceController extends Controller
     {
         return Excel::download(new InvoicesExport, 'hoadonban.xlsx');
     }
-    public function print($id)
+    public function exportPDF($id)
     {
         $invoice = Invoice::findOrFail($id);
 
@@ -124,7 +125,8 @@ class InvoiceController extends Controller
             'invoice' => $invoice,
         ];
 
-        $pdf = PDF::loadView('invoices.print', $data);
+        $pdf = new Dompdf();
+        $pdf = PDF::loadView('admin.pages.pdf.pdf', $data);
 
         return $pdf->stream('invoice'. $invoice -> code.'pdf');
     }
