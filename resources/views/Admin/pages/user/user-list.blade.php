@@ -129,11 +129,11 @@
                                                 data-cfemail="44302c2b29253704213c25293428216a272b29">[{{ $user->email }}]</a>
                                         </td>
                                         <td>
-                                            <div class="status-toggle d-flex justify-content-between align-items-center">
-                                                <input type="checkbox" id="user{{ $key }}" class="check"
-                                                    checked="{{ $user->status == 1 ? true : false }}">
-                                                <label for="user{{ $key }}" class="checktoggle">checkbox</label>
-                                            </div>
+                                            @if ($user->status == 1)
+                                                <span class="badges bg-lightgreen">Hoạt Động</span>
+                                            @else
+                                                <span class="badges bg-lightred">Chưa hoàn thành</span>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

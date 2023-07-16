@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InvoicesExport;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
 use Barryvdh\DomPDF\Facade\PDF;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class InvoiceController extends Controller
 {
@@ -92,6 +95,11 @@ class InvoiceController extends Controller
         InvoiceDetail::where('invoice_id', $invoice->id)->delete();
         $invoice->delete();
         return redirect()->route('invoice.list')->with('Invoice has been deleted successfully');
+    }
+    
+    public function export()
+    {
+        return Excel::download(new InvoicesExport, 'hoadonban.xlsx');
     }
     public function print($id)
     {

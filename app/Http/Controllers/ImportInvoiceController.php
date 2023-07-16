@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Exports\ImportInvoicesExport;
 use App\Models\ImportInvoice;
 use App\Models\ImportInvoiceDetail;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ImportInvoiceController extends Controller
 {
@@ -140,5 +142,9 @@ class ImportInvoiceController extends Controller
         }
 
         return redirect()->route('import-invoice.list')->with('success', 'Cập nhật hóa đơn thành công.');
+    }
+    public function export()
+    {
+        return Excel::download(new ImportInvoicesExport, 'hoadonnhap.xlsx');
     }
 }
