@@ -198,7 +198,7 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
         if (!$product) {
-            return redirect()->back()->with('error', 'Product not found');
+            return redirect()->back()->with('error', 'Không tìm thấy sản phẩm');
         }
         $exsiting_images = Image::where('entity_id', $product->id)->get();
         $product->name = $request->input('name');

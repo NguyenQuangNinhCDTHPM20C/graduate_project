@@ -26,21 +26,14 @@
     <ul class="nav user-menu">
 
         <li class="nav-item nav-searchinputs">
-            <div class="top-nav-search">
-                <a href="javascript:void(0);" class="responsive-search">
-                    <i class="fa fa-search"></i>
+
+        </li>
+        <li >
+            <a class="dropdown-item" href="{{ route('setting') }}"><i class="me-2" data-feather="settings"></i>
                 </a>
-                <form action="#">
-                    <div class="searchinputs">
-                        <input type="text" placeholder="Tìm kiếm..">
-                        <div class="search-addon">
-                            <span><i data-feather="search" class="feather-14"></i></span>
-                        </div>
-                    </div>
-                </form>
-            </div>
         </li>
         <li class="nav-item dropdown has-arrow main-drop">
+           
             <a href="javascript:void(0);" class="dropdown-toggle nav-link userset" data-bs-toggle="dropdown">
                 <span class="user-info">
                     <span class="user-letter">
