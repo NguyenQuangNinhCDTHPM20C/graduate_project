@@ -27,6 +27,14 @@
                                         alt="img"></a>
                             </div>
                         </div>
+                        <div class="wordset">
+                            <ul>
+                                <li>
+                                    <a href="{{route('invoice.export')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
+                                            src="{{ asset('images/excel.svg') }}" alt="img"></a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="card" id="filter_inputs">
                         <div class="card-body pb-0">
@@ -98,17 +106,20 @@
                                         </td>
                                         <td class="text-center">
                                             <a class="me-3"
+                                                href="{{ route('invoice.show', ['code' => $_invoices->code]) }}"
+                                                title="Xem chi tiết">
+                                                <img src="{{ asset('images/eye.svg') }}" alt="eye">
+                                            </a>
+                                            <a class="me-3"
                                                 href="{{ route('invoice.edit', ['code' => $_invoices->code]) }}"
                                                 title="Chỉnh sửa">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                                                title="In"><img src="{{ asset('images/printer.svg') }}"
-                                                    alt="printer"></a>
-                                            <a class="me-3"
-                                                href="{{ route('invoice.detail', ['code' => $_invoices->code]) }}"
-                                                title="Xem chi tiết">
-                                                <img src="{{ asset('images/eye.svg') }}" alt="eye">
+                                            <a href="{{route('invoice.pdf',['id' => $_invoices->id])}}" class="me-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                                                title="pdf"><img src="{{ asset('images/pdf.svg') }}" alt="img"></a>
+                                            {{-- <a class="me-3 confirm-text"
+                                                onclick="$.fn.showConfirmationDeleteAlert('invoices_delete_{{ $_invoices->id }}')">
+                                                <img src="{{ asset('images/delete.svg') }}" alt="img">--}}
                                             </a>
                                         </td>
                                     </tr>

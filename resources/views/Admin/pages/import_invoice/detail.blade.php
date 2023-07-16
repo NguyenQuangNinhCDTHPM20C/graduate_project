@@ -15,16 +15,6 @@
                 </div>
                 <div class="page-btn">
                     <ul class="row d-inline">
-                        <li class="d-inline">
-                            <a href="{{ route('import-invoice.edit', ['code' => $importInvoice->code]) }}"><img
-                                    src="{{ asset('images/edit.svg') }}" alt="img"></a>
-                        </li>
-                        <li class="d-inline">
-                            <a href="javascript:void(0);"><img src="{{ asset('images/pdf.svg') }}" alt="img"></a>
-                        </li>
-                        <li class="d-inline">
-                            <a href="javascript:void(0);"><img src="{{ asset('images/printer.svg') }}" alt="img"></a>
-                        </li>
                     </ul>
                 </div>
             </div>

@@ -12,7 +12,7 @@
                 </div>
 
                 <div class="summer">
-                    <p><strong>{{ session('account')->username }}</strong></p>
+                    <p><strong>{{ session('account')->name }}</strong></p>
                     <p class="change-avatar"><a href="javascript:;"
                             onclick="$('#avtImage').trigger('click'); return false;"><i class="fal fa fa-user"></i>
                             Thay đổi ảnh đại diện</a></p>

@@ -18,7 +18,7 @@
                             <a class="text-body drop-btn" href="#"><img
                                     src="{{ asset(session('account')->photo) }}" alt="Avatar"
                                     style="width: 25px; border-radius: 50%; margin-right: 10px;"> Xin chào,
-                                {{ session('account')->username }}</a>
+                                {{ session('account')->name }}</a>
                             <div class="dropdown-menu dropdown-menu-right drop-down-content">
                                 <a href="{{ route('account.index') }}" class="profile-link text-left">
                                     <i class="fal fa fa-user-circle"></i>

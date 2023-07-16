@@ -84,13 +84,11 @@
                                         <a class="h6 text-decoration-none text-truncate name-product"
                                             href="{{ route('product-detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
                                         <div class="d-flex align-items-center justify-content-center mt-2">
-                                            <h5 style="color: #fd475a; font-size:1rem;">
-                                                {{ number_format($product->selling_price, 0, ',', '.') }}đ</h5>
-                                            @if ($product->selling_price != $product->discount_price)
-                                                <h6 class="text-muted ml-2"style="font-size:0.9em;">
-                                                    <del>{{ number_format($product->discount_price, 0, ',', '.') }}đ</del>
-                                                </h6>
-                                            @endif
+                                            <h5 style="color: #fd475a; font-size:0.7rem;">
+                                                {{ number_format($product->discount_price, 0, ',', '.') }}đ</h5>
+                                            <h6 class="text-muted ml-2"style="font-size:0.7em;">
+                                                <del>{{ number_format($product->selling_price, 0, ',', '.') }}đ</del>
+                                            </h6>
                                         </div>
                                         @php
                                             $reviewCount = $product->reviews->count();

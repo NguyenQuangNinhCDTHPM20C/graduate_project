@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InvoicesExport;
 use App\Models\Invoice;
 use App\Models\InvoiceDetail;
+use Barryvdh\DomPDF\Facade\PDF;
+use Dompdf\Dompdf;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class InvoiceController extends Controller
 {
@@ -106,5 +111,31 @@ class InvoiceController extends Controller
         InvoiceDetail::where('invoice_id', $invoice->id)->delete();
         $invoice->delete();
         return redirect()->route('invoice.list')->with('Invoice has been deleted successfully');
+    }
+    
+    public function export()
+    {
+        return Excel::download(new InvoicesExport, 'hoadonban.xlsx');
+    }
+    public function exportPDF($id)
+    {
+        $invoice = Invoice::findOrFail($id);
+        $invoice_details = InvoiceDetail::where('invoice_id', $invoice->id)->get();
+        $total = 0;
+        foreach($invoice_details as $invoice_detail)
+        {
+            $total += $invoice_detail->quantity * $invoice_detail->price;
+        }
+        $discount_total = $invoice->total - $total;
+        $data = [
+            'invoice' => $invoice,
+            'invoice_details'=> $invoice_details,
+            'discount_total'=>$discount_total
+        ];
+
+        $pdf = new Dompdf();
+        $pdf = PDF::loadView('admin.pages.invoice.pdf', $data);
+
+        return $pdf->stream('invoice'. $invoice -> code.'.pdf');
     }
 }

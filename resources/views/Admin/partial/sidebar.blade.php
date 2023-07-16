@@ -37,6 +37,19 @@
                         </li>
                         <li class="submenu">
                             <a href="javascript:void(0);"
+                                class="{{ request()->routeIs('subcategory.list') || request()->routeIs('subcategory.add') || request()->routeIs('subcategory.edit') ? 'active' : '' }}"><i
+                                    data-feather="speaker"></i><span>Quản lý
+                                    mã giảm giá</span><span class="menu-arrow"></span></a>
+                            <ul>
+                                <li class="{{ request()->routeIs('discountcode.list') ? 'active' : '' }}"><a
+                                        class="" href="{{ route('discountcode.list') }}">Danh sách mã giảm giá</a>
+                                </li>
+                                <li class="{{ request()->routeIs('subcategory.add') ? 'active' : '' }}"><a
+                                        class="" href="{{ route('subcategory.add') }}">Thêm phụ mục</a></li>
+                            </ul>
+                        </li>
+                        <li class="submenu">
+                            <a href="javascript:void(0);"
                                 class="{{ request()->routeIs('category.list') || request()->routeIs('category.add') || request()->routeIs('category.edit') ? 'active' : '' }}"><i
                                     data-feather="codepen"></i><span>Quản lý
                                     danh mục</span><span class="menu-arrow"></span></a>

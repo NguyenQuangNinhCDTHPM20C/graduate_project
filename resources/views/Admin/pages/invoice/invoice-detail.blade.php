@@ -13,18 +13,7 @@
                     </h6>
                 </div>
                 <div class="page-btn">
-                    <ul class="row d-inline">
-                        <li class="d-inline">
-                            <a href="{{ route('invoice.edit', ['code' => $invoice->code]) }}"><img
-                                    src="{{ asset('images/edit.svg') }}" alt="img"></a>
-                        </li>
-                        <li class="d-inline">
-                            <a href="javascript:void(0);"><img src="{{ asset('images/pdf.svg') }}" alt="img"></a>
-                        </li>
-                        <li class="d-inline">
-                            <a href="javascript:void(0);"><img src="{{ asset('images/printer.svg') }}" alt="img"></a>
-                        </li>
-                    </ul>
+
                 </div>
             </div>
             <div class="card" data-select2-id="9">
@@ -88,7 +77,7 @@
                                                         <font style="vertical-align: inherit;">
                                                             <font
                                                                 style="vertical-align: inherit;font-size: 14px;color:#000;font-weight: 400;">
-                                                                Email: {{ $invoice->emai }}</font>
+                                                                Email: {{ $invoice->email }}</font>
                                                         </font><br>
                                                         <font style="vertical-align: inherit;">
                                                             <font

@@ -133,16 +133,16 @@
                                                                                 src="{{ asset($favorite->product->featured_image->image_path) }}"
                                                                                 alt="{{ $favorite->product->name }}" />
                                                                         </div>
-                                                                        <div class="text-center py-4 px-4 overflow-text">
+                                                                        <div class="text-center py-3 px-4 overflow-text">
                                                                             <a class="h6 text-decoration-none text-truncate name-product"
                                                                                 href="{{ route('product-detail', ['slug' => $favorite->product->slug]) }}">{{ $favorite->product->name }}</a>
                                                                             <div
                                                                                 class="d-flex align-items-center justify-content-center mt-2">
-                                                                                <h5 style="color: #fd475a; font-size:1rem;">
+                                                                                <h5 style="color: #fd475a; font-size:0.7rem;">
                                                                                     {{ number_format($favorite->product->discount_price, 0, ',', '.') }}đ
                                                                                 </h5>
                                                                                 <h6
-                                                                                    class="text-muted ml-2"style="font-size:0.9em;">
+                                                                                    class="text-muted ml-2"style="font-size:0.7em;">
                                                                                     <del>{{ number_format($favorite->product->selling_price, 0, ',', '.') }}đ</del>
                                                                                 </h6>
                                                                             </div>

@@ -32,25 +32,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="wordset">
-                            <ul>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/pdf.svg"
-                                            alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/excel.svg"
-                                            alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                            src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/printer.svg"
-                                            alt="img"></a>
-                                </li>
-                            </ul>
-                        </div>
+                    
                     </div>
 
                     <div class="card" id="filter_inputs">
@@ -99,7 +81,7 @@
                                     <th class="text-center">Tên người dùng </th>
                                     <th class="text-center">Số điện thoại</th>
                                     <th class="text-center">Email</th>
-                                    <th>Trạng thái</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -115,13 +97,6 @@
                                         <td class="text-center">{{ $user->phone_number }}</td>
                                         <td class="text-center"><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
                                                 data-cfemail="44302c2b29253704213c25293428216a272b29">[{{ $user->email }}]</a>
-                                        </td>
-                                        <td class="text-center">
-                                            <div class="status-toggle d-flex justify-content-between align-items-center">
-                                                <input type="checkbox" id="user{{ $key }}" class="check"
-                                                    checked="{{ $user->status == 1 ? true : false }}">
-                                                <label for="user{{ $key }}" class="checktoggle">checkbox</label>
-                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

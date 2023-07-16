@@ -61,7 +61,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <button href="javascript:void(0);" class="btn btn-submit me-2">CẬP NHẬT </button>
-                                <a href="https://dreamspos.dreamguystech.com/laravel/template/public/subcategorylist"
+                                <a href="{{ route('subcategory.list') }}"
                                     class="btn btn-cancel">THOÁT</a>
                             </div>
                         </div>

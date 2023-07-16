@@ -7,13 +7,13 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Màu sản phẩm</h4>
-                    <h6>Xem và tìm kiếm màu sản phẩm ở đây</h6>
+                    <h4>Mã giảm giá</h4>
+                    <h6>Xem và tìm kiếm mã giảm giá ở đây</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="{{ route('color.add') }}" class="btn btn-added"><img
+                    <a href="{{ route('discountcode.add') }}" class="btn btn-added"><img
                             src="https://dreamspos.dreamguystech.com/laravel/template/public/assets/img/icons/plus.svg"
-                            class="me-2" alt="img"> Thêm màu</a>
+                            class="me-2" alt="img"> Thêm mã giảm giá</a>
                 </div>
             </div>
 
@@ -84,27 +84,31 @@
                         <table class="table  datanew">
                             <thead>
                                 <tr>
-                                    <th class="text-center">Tên màu</th>
+                                    <th class="text-center">Mã giảm</th>
+                                    <th class="text-center">Tỉ lệ %</th>
                                     <th class="text-center">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($color as $_color)
+                                @foreach ($discount_code as $_discountcode)
                                     <tr>
                                         <td class="text-center">
-                                            {{ $_color->name }}
+                                            {{ $_discountcode->code }}
+                                        </td>
+                                        <td class="text-center">
+                                            {{ $_discountcode->discount_amount }}
                                         </td>
                                         <td class="text-center">
                                         <a class="me-3"
-                                                href="{{ route('color.edit', ['id' => $_color->id]) }}">
+                                                href="{{ route('discountcode.edit', ['id' => $_discountcode->id]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
                                             <a class="confirm-text"
-                                                onclick="$.fn.showConfirmationDeleteAlert('color_delete_{{ $_color->id }}')">
+                                                onclick="$.fn.showConfirmationDeleteAlert('discountcode_delete_{{ $_discountcode->id }}')">
                                                 <img src="{{ asset('images/delete.svg') }}" alt="img">
                                             </a>
-                                            <form id="color_delete_{{ $_color->id }}"
-                                                action="{{ route('color.delete', ['id' => $_color->id]) }}"
+                                            <form id="discountcode_delete_{{ $_discountcode->id }}"
+                                                action="{{ route('discountcode.delete', ['id' => $_discountcode->id]) }}"
                                                 method="POST" style="display: none">
                                                 @csrf
                                                 @method('DELETE')

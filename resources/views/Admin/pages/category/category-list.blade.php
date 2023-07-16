@@ -32,22 +32,6 @@
                                         alt="img"></a>
                             </div>
                         </div>
-                        <div class="wordset">
-                            <ul>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                            src="{{ asset('images/pdf.svg') }}" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                            src="{{ asset('images/excel.svg') }}" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                            src="{{ asset('images/printer.svg') }}" alt="img"></a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
 
                     <div class="card" id="filter_inputs">
@@ -77,22 +61,22 @@
                         <table class="table  datanew">
                             <thead>
                                 <tr>
-                                    <th>Tên danh mục</th>
-                                    <th>Loại</th>
-                                    <th>Trạng thái</th>
-                                    <th>Chức năng</th>
+                                    <th class="text-center">Tên danh mục</th>
+                                    <th class="text-center">Loại</th>
+                                    <th class="text-center">Trạng thái</th>
+                                    <th class="text-center">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($category as $_category)
                                     <tr>
-                                        <td>
+                                        <td class="text-center">
                                             <a
                                                 href="{{ route('category.edit', ['slug' => $_category->slug]) }}">{{ $_category->name }}</a>
                                         </td>
-                                        <td>{{ $_category->type }}</td>
-                                        <td>{{ $_category->status == '1' ? 'Active' : 'Inactive' }}</td>
-                                        <td>
+                                        <td class="text-center">{{ $_category->type }}</td>
+                                        <td class="text-center">{{ $_category->status == '1' ? 'Active' : 'Inactive' }}</td>
+                                        <td class="text-center">
                                             <a class="me-3"
                                                 href="{{ route('category.edit', ['slug' => $_category->slug]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">

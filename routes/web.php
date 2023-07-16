@@ -115,6 +115,13 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::get('/product/edit/{slug}', [ProductController::class, 'edit'])->name('product.edit');
         Route::put('/product/{id}', [ProductController::class, 'update'])->name('product.update');
         Route::delete('/product/delete/{id}', [ProductController::class, 'destroy'])->name('product.delete');
+        //routes for discountcode
+        Route::get('/discountcode/list', [DiscountCodeController::class, 'index'])->name('discountcode.list');
+        Route::post('/discountcode/add', [DiscountCodeController::class, 'store'])->name('discountcode.store');
+        Route::get('/discountcode/add', [DiscountCodeController::class, 'create'])->name('discountcode.add');
+        Route::get('/discountcode/edit/{id}', [DiscountCodeController::class, 'edit'])->name('discountcode.edit');
+        Route::put('/discountcode/{id}', [DiscountCodeController::class, 'update'])->name('discountcode.update');
+        Route::delete('/discountcode/{id}', [DiscountCodeController::class, 'destroy'])->name('discountcode.delete');
         //routes for color
         Route::get('/color/list', [ColorController::class, 'index'])->name('color.list');
         Route::post('/color/add', [ColorController::class, 'store'])->name('color.store');
@@ -150,9 +157,12 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         //Routes for invoice
         Route::get('/invoice/list',[InvoiceController::class, 'index'])->name('invoice.list');
         Route::get('/invoice/{code}',[InvoiceController::class, 'show'])->name('invoice.detail');
+        Route::get('/invoice/{code}', [InvoiceController::class, 'show'])->name('invoice.show');
         Route::get('/invoice/edit/{code}', [InvoiceController::class, 'edit'])->name('invoice.edit');
         Route::put('/invoice/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
         Route::delete('/invoice/delete/{id}', [InvoiceController::class, 'destroy'])->name('invoice.delete');
+        Route::get('/invoices/{id}/print', [InvoiceController::class, 'exportPDF'])->name('invoice.pdf');
+        Route::get('/invoices/export', [InvoiceController::class, 'export'])->name('invoice.export');
         //Routes for auth
         Route::post('/logout', [AuthController::class, 'logout_admin'])->name('admin.logout');
         Route::get('/invoice/report', function () {
@@ -190,6 +200,8 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::get('/import-invoice/edit/{code}', [ImportInvoiceController::class, 'edit'])->name('import-invoice.edit');
         Route::put('/import-invoice/{id}', [ImportInvoiceController::class, 'update'])->name('import-invoice.update');
         Route::delete('/import-invoice/{id}', [ImportInvoiceController::class, 'destroy'])->name('import-invoice.delete');
+        Route::get('/import-invoice/{id}/print', [ImportInvoiceController::class, 'exportPDF'])->name('import-invoice.pdf');
+        Route::get('/import-invoice/export', [ImportInvoiceController::class, 'export'])->name('import-invoice.export');
     });
     Route::get('/login', [AuthController::class, 'showLoginFormAdmin'])->name('admin.login')->middleware('guest.admin');
     Route::post('/login', [AuthController::class, 'login_admin'])->middleware('guest.admin');

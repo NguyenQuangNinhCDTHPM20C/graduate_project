@@ -32,20 +32,8 @@
                             </div>
                         </div>
                         <div class="wordset">
-                            <ul>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
-                                            src="{{ asset('images/pdf.svg') }}" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                            src="{{ asset('images/excel.svg') }}" alt="img"></a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="print"><img
-                                            src="{{ asset('images/printer.svg') }}" alt="img"></a>
-                                </li>
-                            </ul>
+                            <a href="{{route('import-invoice.export')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
+                                    src="{{ asset('images/excel.svg') }}" alt="img"></a>
                         </div>
                     </div>
 
@@ -108,14 +96,16 @@
                                         </td>
                                         <td>
                                             <a class="me-3"
-                                                href="{{ route('import-invoice.edit', ['code' => $_invoices->code]) }}">
-                                                <img src="{{ asset('images/edit.svg') }}" alt="img">
-                                            </a>
-                                            <a class="me-3"
                                                 href="{{ route('import-invoice.show', ['code' => $_invoices->code]) }}"
                                                 title="Xem chi tiết">
                                                 <img src="{{ asset('images/eye.svg') }}" alt="eye">
                                             </a>
+                                            <a class="me-3"
+                                                href="{{ route('import-invoice.edit', ['code' => $_invoices->code]) }}">
+                                                <img src="{{ asset('images/edit.svg') }}" alt="img">
+                                            </a>
+                                            <a href="{{route('import-invoice.pdf',['id' => $_invoices->id])}}" data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
+                                                    src="{{ asset('images/pdf.svg') }}" alt="img"></a>
                                         </td>
                                     </tr>
                                 @endforeach
