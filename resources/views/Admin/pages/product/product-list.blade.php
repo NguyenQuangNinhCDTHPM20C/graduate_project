@@ -84,12 +84,6 @@
                         <table class="table  datanew">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label class="checkboxs">
-                                            <input type="checkbox" id="select-all">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
                                     <th>Sản phẩm</th>
                                     <th>Danh mục</th>
                                     <th>Phụ mục</th>
@@ -103,12 +97,6 @@
                             <tbody>
                                 @foreach ($products as $product)
                                     <tr>
-                                        <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
-                                        </td>
                                         <td class="productimgname">
                                             <a href="{{ route('product.detail', ['slug' => $product->slug]) }}"
                                                 class="product-img">

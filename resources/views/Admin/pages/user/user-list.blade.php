@@ -76,46 +76,27 @@
                         <table class="table  datanew">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label class="checkboxs">
-                                            <input type="checkbox">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
-                                    <th>Hình đại diện</th>
-                                    <th>Họ tên </th>
-                                    <th>Tên người dùng </th>
-                                    <th>Số điện thoại</th>
-                                    <th>Email</th>
-                                    <th>Trạng thái</th>
+                                    <th class="text-center">Hình đại diện</th>
+                                    <th class="text-center">Họ tên </th>
+                                    <th class="text-center">Tên người dùng </th>
+                                    <th class="text-center">Số điện thoại</th>
+                                    <th class="text-center">Email</th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($users as $key => $user)
                                     <tr>
-                                        <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
-                                        </td>
-                                        <td class="productimgname">
+                                        <td class="productimgname align-center">
                                             <a href="javascript:void(0);" class="product-img">
                                                 <img src="{{ asset($user->photo) }}" alt="{{ $user->name }}">
                                             </a>
                                         </td>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->username }}</td>
-                                        <td>{{ $user->phone_number }}</td>
-                                        <td><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                        <td class="text-center">{{ $user->name }}</td>
+                                        <td class="text-center">{{ $user->username }}</td>
+                                        <td class="text-center">{{ $user->phone_number }}</td>
+                                        <td class="text-center"><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
                                                 data-cfemail="44302c2b29253704213c25293428216a272b29">[{{ $user->email }}]</a>
-                                        </td>
-                                        <td>
-                                            @if ($user->status == 1)
-                                                <span class="badges bg-lightgreen">Hoạt Động</span>
-                                            @else
-                                                <span class="badges bg-lightred">Chưa hoàn thành</span>
-                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

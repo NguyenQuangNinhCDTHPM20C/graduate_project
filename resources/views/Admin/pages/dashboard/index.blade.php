@@ -12,8 +12,7 @@
                             <span><img src="{{ asset('images/dash2.svg') }}" alt="img"></span>
                         </div>
                         <div class="dash-widgetcontent">
-                            <h5><span class="counters"
-                                    data-count="{{ $total_sale_month }}">{{ number_format($total_sale_month, 0, ',', '.') }}đ</span>
+                            <h5><span class="counters">{{ number_format($total_sale_month, 0, ',', '.') }}đ</span>
                             </h5>
                             <h6>Tiền bán tháng này</h6>
                         </div>
@@ -25,8 +24,7 @@
                             <span><img src="{{ asset('images/dash1.svg') }}" alt="img"></span>
                         </div>
                         <div class="dash-widgetcontent">
-                            <h5><span class="counters"
-                                    data-count="{{ $total_purchase_month }}">{{ number_format($total_purchase_month, 0, ',', '.') }}đ</span>
+                            <h5><span class="counters">{{ number_format($total_purchase_month, 0, ',', '.') }}đ</span>
                             </h5>
                             <h6>Tiền mua tháng này</h6>
                         </div>
@@ -38,8 +36,7 @@
                             <span><img src="{{ asset('images/dash3.svg') }}" alt="img"></span>
                         </div>
                         <div class="dash-widgetcontent">
-                            <h5><span class="counters"
-                                    data-count="{{ $total_invoice }}">{{ number_format($total_invoice, 0, ',', '.') }}đ</span>
+                            <h5><span class="counters">{{ number_format($total_invoice, 0, ',', '.') }}đ</span>
                             </h5>
                             <h6>Tổng tiền đã thu</h6>
                         </div>
@@ -51,8 +48,7 @@
                             <span><img src="{{ asset('images/dash4.svg') }}" alt="img"></span>
                         </div>
                         <div class="dash-widgetcontent">
-                            <h5><span class="counters"
-                                    data-count="{{ $total_import_invoice }}">{{ number_format($total_import_invoice, 0, ',', '.') }}đ</span>
+                            <h5><span class="counters">{{ number_format($total_import_invoice, 0, ',', '.') }}đ</span>
                             </h5>
                             <h6>Tổng tiền đã chi</h6>
                         </div>
@@ -83,7 +79,7 @@
                 <div class="col-lg-3 col-sm-6 col-12 d-flex">
                     <div class="dash-count das2">
                         <div class="dash-counts">
-                            <h4>100</h4>
+                            <h4>{{ $count_sale_invoice }}</h4>
                             <h5>Hóa đơn mua hàng</h5>
                         </div>
                         <div class="dash-imgs">
@@ -118,21 +114,21 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($product_out_stock as $key => $product)
+                                @foreach ($new_invoices as $key => $item)
                                     <tr>
-                                        <td><a href="javascript:void(0);">{{ $product->code }}</a></td>
-                                        <td class="productimgname">
+                                        <td><a href="javascript:void(0);">{{ optional($item->product)->code }}</a></td>
+                                        <td class="productimgname" style="max-width: 600px;">
                                             <a class="product-img"
-                                                href="{{ route('product.detail', ['slug' => $product->slug]) }}">
-                                                <img src="{{ $product->featured_image ? asset($product->featured_image->image_path) : '' }}"
-                                                    alt="product">
+                                                href="{{ route('product.detail', ['slug' => optional($item->product)->slug]) }}">
+                                                <img src="{{ $item->product->featured_image ? asset($item->product->featured_image->image_path) : '' }}"
+                                                    alt="{{ optional($item->product)->name }}">
                                             </a>
-                                            <a
-                                                href="{{ route('product.detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
+                                            <a class="name-p"
+                                                href="{{ route('product.detail', ['slug' => optional($item->product)->slug]) }}">{{ optional($item->product)->name }}</a>
                                         </td>
-                                        <td>{{ $product->brand->name }}</td>
-                                        <td>{{ $product->category->name }}</td>
-                                        <td>{{ $product->quantity }}</td>
+                                        <td>{{ optional($item->product->brand)->name }}</td>
+                                        <td>{{ optional($item->product->category)->name }}</td>
+                                        <td>{{ $item->quantity }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -148,7 +144,7 @@
                             <thead>
                                 <tr>
                                     <th>Code</th>
-                                    <th>Tên sản phẩm</th>
+                                    <th>Sản phẩm</th>
                                     <th>Thương hiệu</th>
                                     <th>Danh mục</th>
                                     <th>Số lượng</th>
@@ -158,13 +154,13 @@
                                 @foreach ($product_out_stock as $key => $product)
                                     <tr>
                                         <td><a href="javascript:void(0);">{{ $product->code }}</a></td>
-                                        <td class="productimgname">
+                                        <td class="productimgname" style="max-width: 600px;">
                                             <a class="product-img"
                                                 href="{{ route('product.detail', ['slug' => $product->slug]) }}">
                                                 <img src="{{ $product->featured_image ? asset($product->featured_image->image_path) : '' }}"
                                                     alt="{{ $product->name }}">
                                             </a>
-                                            <a
+                                            <a class="name-p"
                                                 href="{{ route('product.detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
                                         </td>
                                         <td>{{ optional($product->brand)->name }}</td>

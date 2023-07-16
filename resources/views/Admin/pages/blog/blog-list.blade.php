@@ -74,12 +74,6 @@
                         <table class="table  datanew">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label class="checkboxs">
-                                            <input type="checkbox" id="select-all">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
                                     <th>Danh mục</th>
                                     <th>Phụ mục</th>
                                     <th>Tác giả</th>
@@ -91,12 +85,6 @@
                             <tbody>
                                 @foreach ($blogs as $blog)
                                     <tr>
-                                        <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
-                                        </td>
                                         <td>{{ $blog->category->name }}</td>
                                         <td>{{ $blog->sub_category->name }}</td>
                                         <td>{{ $blog->author }}</td>

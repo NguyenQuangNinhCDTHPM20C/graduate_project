@@ -73,34 +73,23 @@
                         <table class="table datanew">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label class="checkboxs">
-                                            <input type="checkbox" id="select-all">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
-                                    <th>Code</th>
+                                    <th class="text-center">Code</th>
                                     <th>Tên khách hàng </th>
-                                    <th>Ngày đặt</th>
-                                    <th>Tổng tiền</th>
-                                    <th>Trạng thái</th>
+                                    <th class="text-center">Ngày đặt</th>
+                                    <th class="text-center">Tổng tiền</th>
+                                    <th class="text-center">Trạng thái</th>
                                     <th class="text-center">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($invoices as $_invoices)
                                     <tr>
-                                        <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
-                                        </td>
-                                        <td>{{ $_invoices->code }}</td>
+                                        <td class="text-center">{{ $_invoices->code }}</td>
                                         <td>{{ $_invoices->name }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($_invoices->created_at)->format('d/m/Y') }}</td>
-                                        <td>{{ number_format($_invoices->total) }}đ</td>
-                                        <td>
+                                        <td class="text-center">
+                                            {{ \Carbon\Carbon::parse($_invoices->created_at)->format('d/m/Y') }}</td>
+                                        <td class="text-center">{{ number_format($_invoices->total) }}đ</td>
+                                        <td class="text-center">
                                             @if ($_invoices->status == 5)
                                                 <span class="badges bg-lightred">Đã hủy</span>
                                             @elseif ($_invoices->status == 4)

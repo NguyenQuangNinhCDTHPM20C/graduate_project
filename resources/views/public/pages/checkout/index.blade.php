@@ -28,15 +28,16 @@
                             <div class="col-md-6 form-group">
                                 <label>Họ tên: </label>
                                 <input name="name" class="form-control"
-                                    pattern="[A-Za-z\sàáảãạăắằẵặẳâấầẫậẩđèéẻẽẹêếềễệểìíỉĩịòóỏõọôốồỗộổơớờỡợởùúủũụưứừữựửỳýỷỹỵđÀÁẢÃẠĂẮẰẴẶẲÂẤẦẪẬẨĐÈÉẺẼẸÊẾỀỄỆỂÌÍỈĨỊÒÓỎÕỌÔỐỒỖỘỔƠỚỜỠỢỞÙÚỦŨỤƯỨỪỮỰỬỲÝỶỸỴĐ]+"
-                                    title="Vui lòng không nhập chữ số hay kí tự đặc biệt" type="text"
+                                    pattern="[A-Za-z\sàáảãạăắằẵặẳâấầẫậẩđèéẻẽẹêếềễệểìíỉĩịòóỏõọôốồỗộổơớờỡợởùúủũụưứừữựửỳýỷỹỵđÀÁẢÃẠĂẮẰẴẶẲÂẤẦẪẬẨĐÈÉẺẼẸÊẾỀỄỆỂÌÍỈĨỊÒÓỎÕỌÔỐỒỖỘỔƠỚỜỠỢỞÙÚỦŨỤƯỨỪỮỰỬỲÝỶỸỴĐ]{1,200}"
+                                    title="Vui lòng không nhập chữ số hay kí tự đặc biệt và không quá dài" type="text"
                                     placeholder="Nhập họ tên *"
                                     value="{{ session()->has('account') ? session('account')->name : '' }}" required>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>E-mail: </label>
                                 <input name="email" class="form-control" type="email" placeholder="Enter your email *"
-                                    value="{{ session()->has('account') ? session('account')->email : '' }}" required>
+                                    maxlength="200" value="{{ session()->has('account') ? session('account')->email : '' }}"
+                                    required>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>Số điện thoại: </label>
@@ -159,8 +160,8 @@
                 const citySelect = document.getElementById('SystemCityID');
                 const districtSelect = document.getElementById('SystemDistrictID');
 
-                const selectedProvinceName = '{!! session('account')->province !!}';
-                const selectedDistrictName = '{!! session('account')->district !!}';
+                const selectedProvinceName = '{{ session()->has('account') ? session('account')->province : '' }}';
+                const selectedDistrictName = '{{ session()->has('account') ? session('account')->district : '' }}';
 
                 const provinceSet = new Set(); // Sử dụng Set để lưu trữ tên tỉnh duy nhất
                 const districtMap = new Map(); // Sử dụng Map để lưu trữ danh sách huyện theo tỉnh

@@ -84,34 +84,21 @@
                         <table class="table  datanew">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label class="checkboxs">
-                                            <input type="checkbox" id="select-all">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
-                                    <th>Mã giảm</th>
-                                    <th>Tỉ lệ %</th>
-                                    <th>Chức năng</th>
+                                    <th class="text-center">Mã giảm</th>
+                                    <th class="text-center">Tỉ lệ %</th>
+                                    <th class="text-center">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($discount_code as $_discountcode)
                                     <tr>
-                                        <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
-                                        </td>
-
-                                        <td >
+                                        <td class="text-center">
                                             {{ $_discountcode->code }}
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                             {{ $_discountcode->discount_amount }}
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                         <a class="me-3"
                                                 href="{{ route('discountcode.edit', ['id' => $_discountcode->id]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">

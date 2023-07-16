@@ -7,10 +7,11 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Models\Account;
 use App\Models\Brand;
-use App\Models\Invoice;
 use App\Models\Product;
 use App\Models\Blog;
 use App\Models\Setting;
+use App\Models\Invoice;
+use App\Models\InvoiceDetail;
 use App\Models\ImportInvoice;
 use App\Models\ImportInvoiceDetail;
 class AdminController extends Controller
@@ -20,7 +21,8 @@ class AdminController extends Controller
         $count_customer = Invoice::where('account_id', null)->count();
         $total_customer = $count_user + $count_customer;
         $count_sale_invoice = Invoice::count();
-        $product_out_stock = Product::where('quantity', '<' , 50)->get();
+        $count_sale_invoice = ImportInvoice::count();
+        $product_out_stock = Product::where('quantity', '<' , 10)->get();
         $total_import_invoice = ImportInvoice::where('status', 1)->sum('total');
         $total_invoice = Invoice::where('status', 3)->sum('total');
         $firstDayOfMonth = Carbon::now()->startOfMonth();
@@ -29,10 +31,15 @@ class AdminController extends Controller
         ->sum('total');
         $total_sale_month = Invoice::whereBetween('created_at', [$firstDayOfMonth, $lastDayOfMonth])
         ->sum('total');
+
+        $currentTime = Carbon::now();
+        $previousTime = $currentTime->copy()->subDay();
+        $new_invoices = InvoiceDetail::whereBetween('created_at', [$previousTime, $currentTime])->get();
+        
         return view('admin.pages.dashboard.index', 
         compact('count_user', 'total_customer', 'count_sale_invoice',
-        'product_out_stock','total_import_invoice',
-        'total_invoice', 'total_purchase_month', 'total_sale_month'));
+        'product_out_stock','total_import_invoice', 'count_sale_invoice',
+        'total_invoice', 'total_purchase_month', 'total_sale_month', 'new_invoices'));
     }
 
     public function users(){

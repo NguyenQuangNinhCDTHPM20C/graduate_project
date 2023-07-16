@@ -30,9 +30,9 @@
                                 <li class="{{ request()->routeIs('product.add') ? 'active' : '' }}"><a class=""
                                         href="{{ route('product.add') }}">Thêm sản phấm</a></li>
                                 <li class="{{ request()->routeIs('color.list') ? 'active' : '' }}"><a class=""
-                                        href="{{ route('color.list') }}">Danh sách màu sản phẩm</a></li>
+                                        href="{{ route('color.list') }}">Danh sách màu sắc</a></li>
                                 <li class="{{ request()->routeIs('color.add') ? 'active' : '' }}"><a class=""
-                                        href="{{ route('color.add') }}">Thêm màu sản phẩm</a></li>
+                                        href="{{ route('color.add') }}">Thêm màu sắc</a></li>
                             </ul>
                         </li>
                         <li class="submenu">

@@ -84,29 +84,17 @@
                         <table class="table  datanew">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label class="checkboxs">
-                                            <input type="checkbox" id="select-all">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
-                                    <th>Tên màu</th>
-                                    <th>Chức năng</th>
+                                    <th class="text-center">Tên màu</th>
+                                    <th class="text-center">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($color as $_color)
                                     <tr>
-                                        <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
-                                        </td>
-                                        <td class="productimgname">
+                                        <td class="text-center">
                                             {{ $_color->name }}
                                         </td>
-                                        <td>
+                                        <td class="text-center">
                                         <a class="me-3"
                                                 href="{{ route('color.edit', ['id' => $_color->id]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">

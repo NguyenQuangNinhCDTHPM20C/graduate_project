@@ -61,34 +61,22 @@
                         <table class="table  datanew">
                             <thead>
                                 <tr>
-                                    <th>
-                                        <label class="checkboxs">
-                                            <input type="checkbox" id="select-all">
-                                            <span class="checkmarks"></span>
-                                        </label>
-                                    </th>
-                                    <th>Tên danh mục</th>
-                                    <th>Loại</th>
-                                    <th>Trạng thái</th>
-                                    <th>Chức năng</th>
+                                    <th class="text-center">Tên danh mục</th>
+                                    <th class="text-center">Loại</th>
+                                    <th class="text-center">Trạng thái</th>
+                                    <th class="text-center">Chức năng</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($category as $_category)
                                     <tr>
-                                        <td>
-                                            <label class="checkboxs">
-                                                <input type="checkbox">
-                                                <span class="checkmarks"></span>
-                                            </label>
-                                        </td>
-                                        <td>
+                                        <td class="text-center">
                                             <a
                                                 href="{{ route('category.edit', ['slug' => $_category->slug]) }}">{{ $_category->name }}</a>
                                         </td>
-                                        <td>{{ $_category->type }}</td>
-                                        <td>{{ $_category->status == '1' ? 'Active' : 'Inactive' }}</td>
-                                        <td>
+                                        <td class="text-center">{{ $_category->type }}</td>
+                                        <td class="text-center">{{ $_category->status == '1' ? 'Active' : 'Inactive' }}</td>
+                                        <td class="text-center">
                                             <a class="me-3"
                                                 href="{{ route('category.edit', ['slug' => $_category->slug]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
