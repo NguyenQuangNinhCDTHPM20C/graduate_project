@@ -49,7 +49,15 @@ class InvoiceController extends Controller
      */
     public function show($code)
     {
-        
+        $invoice = Invoice::where('code', $code)->first();
+        $invoice_details = InvoiceDetail::where('invoice_id', $invoice->id)->get();
+        $total = 0;
+        foreach($invoice_details as $invoice_detail)
+        {
+            $total += $invoice_detail->quantity * $invoice_detail->price;
+        }
+        $discount_total = $invoice->total - $total;
+        return view('admin.pages.invoice.invoice-detail', compact('invoice', 'invoice_details', 'discount_total'));
     }
 
     /**
@@ -61,7 +69,14 @@ class InvoiceController extends Controller
     public function edit($code)
     {
         $invoice = Invoice::where('code', $code)->first();
-        return view('admin.pages.invoice.invoice-edit', compact('invoice'));
+        $invoice_details = InvoiceDetail::where('invoice_id', $invoice->id)->get();
+        $total = 0;
+        foreach($invoice_details as $invoice_detail)
+        {
+            $total += $invoice_detail->quantity * $invoice_detail->price;
+        }
+        $discount_total = $invoice->total - $total;
+        return view('admin.pages.invoice.invoice-edit', compact('invoice', 'invoice_details', 'discount_total'));
     }
 
     /**

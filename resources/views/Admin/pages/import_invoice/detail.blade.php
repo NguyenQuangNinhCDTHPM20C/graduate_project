@@ -3,6 +3,121 @@
 @section('title', 'Double-N shop | Admin Management')
 
 @section('content')
+    <div class="page-wrapper" style="min-height: 347px;">
+        <div class="content">
+            <div class="page-header">
+                <div class="page-title">
+                    <h4>Chỉnh sửa hóa đơn mua hàng</h4>
+                </div>
+            </div>
+            <div class="card" data-select2-id="16">
+                <div class="card-body" data-select2-id="15">
+                    <form action="{{ route('import-invoice.update', $importInvoice->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Mã đơn hàng</label>
+                                    <input type="text" name="code" placeholder="Vui lòng nhập mã đơn hàng" required
+                                        value="{{ $importInvoice->code }}"
+                                        {{ $importInvoice->status == 1 ? 'readonly' : '' }}>
+                                    <input type="hidden" name="account_id"
+                                        value="{{ session()->has('account') ? session('account')->id : '' }}" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12" data-select2-id="14">
+                                <div class="form-group" data-select2-id="13">
+                                    <label>Nhà cung cấp</label>
+                                    <input type="text" name="supplier" placeholder="Vui lòng nhập tên nhà cung cấp"
+                                        required value="{{ $importInvoice->supplier }}"
+                                        {{ $importInvoice->status == 1 ? 'readonly' : '' }}>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Ngày nhập</label>
+                                    <div class="input-groupicon">
+                                        <input type="text" placeholder="DD-MM-YYYY" class="datetimepicker"
+                                            value="{{ $importInvoice->created_at }}"
+                                            {{ $importInvoice->status == 1 ? 'readonly' : '' }}>
+                                        <div class="addonset">
+                                            <img src="{{ asset('images/calendars.svg') }}" alt="img">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Trạng thái</label>
+                                    <select class="select" name="status" id="status" class="form-control"
+                                        {{ $importInvoice->status == 1 ? 'disabled' : '' }}>
+                                        <option value="1" {{ $importInvoice->status == 1 ? 'selected' : '' }}>
+                                            Hoàn thành
+                                        </option>
+                                        <option value="0" {{ $importInvoice->status == 0 ? 'selected' : '' }}>
+                                            Chưa hoàn thành
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="table-responsive">
+                                <table class="table" id="productTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Sản phẩm</th>
+                                            <th>Số lượng</th>
+                                            <th>Giá mua</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($importInvoiceDetail as $importDetail)
+                                            <tr class="productRow">
+                                                <td class="productimgname">
+                                                    <select class="select form-control productSelect"
+                                                        name="product_quantity[{{ $importDetail->id }}]" required
+                                                        style="width: 100%;"
+                                                        {{ $importInvoice->status == 1 ? 'disabled' : '' }}>
+                                                        <option value="{{ $importDetail->id }}" selected>
+                                                            {{ $importDetail->product->name }}
+                                                        </option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" type="number"
+                                                        name="quantity[{{ $importDetail->id }}]"
+                                                        value="{{ $importDetail->quantity }}" placeholder="Số lượng"
+                                                        required>
+                                                </td>
+                                                <td>
+                                                    <input class="form-control" type="number"
+                                                        name="price[{{ $importDetail->id }}]"
+                                                        value="{{ $importDetail->price }}" placeholder="Giá tiền" required
+                                                        {{ $importInvoice->status == 1 ? 'readonly' : '' }}>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mt-5 mb-3">
+                            <button href="javascript:void(0);" class="btn btn-submit me-2">CẬP NHẬT</button>
+                            <a href="{{ route('import-invoice.list') }}" class="btn btn-cancel">THOÁT</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection --}}
+{{-- @extends('Admin.layouts.app')
+
+@section('title', 'Double-N shop | Admin Management')
+
+@section('content')
     <div class="page-wrapper">
         <div class="content">
             <div class="page-header">
@@ -128,15 +243,15 @@
             <div class="page-header">
                 <div class="page-title">
                     <h6>
-                        <a href="{{ route('invoice.list') }}">Hóa đơn /</a>
-                        <span>Chỉnh sửa</span>
+                        <a href="{{ route('import-invoice.list') }}">Hóa đơn /</a>
+                        <span>Chi tiết</span>
                     </h6>
-                    <h4>Cập nhật trạng thái hóa đơn của bạn</h4>
+                    <h4>Chi tiết đơn hàng của bạn</h4>
                 </div>
                 <div class="page-btn">
                     <ul class="row d-inline">
                         <li class="d-inline">
-                            <a href="{{ route('invoice.edit', ['code' => $invoice->code]) }}"><img
+                            <a href="{{ route('import-invoice.edit', ['code' => $importInvoice->code]) }}"><img
                                     src="{{ asset('images/edit.svg') }}" alt="img"></a>
                         </li>
                         <li class="d-inline">
@@ -151,8 +266,8 @@
             <div class="card" data-select2-id="9">
                 <div class="card-body" data-select2-id="8">
                     <div class="card-sales-split">
-                        <h2>Hóa đơn : {{ $invoice->code }}</h2>
-                        <h2>Ngày đặt : {{ \Carbon\Carbon::parse($invoice->created_at)->format('d/m/Y') }}</h2>
+                        <h2>Hóa đơn : {{ $importInvoice->code }}</h2>
+                        <h2>Ngày nhập : {{ \Carbon\Carbon::parse($importInvoice->created_at)->format('d/m/Y') }}</h2>
                     </div>
                     <div class="invoice-box table-height"
                         style="max-width: 1600px;width:100%;overflow: auto;margin:15px auto;padding: 0;font-size: 14px;line-height: 24px;color: #555;">
@@ -199,27 +314,12 @@
                                                         <font style="vertical-align: inherit;margin-bottom:25px;">
                                                             <font
                                                                 style="vertical-align: inherit;font-size:14px;color:#7367F0;font-weight:600;line-height: 35px; ">
-                                                                Khách hàng</font>
+                                                                Nhà cung cấp</font>
                                                         </font><br>
                                                         <font style="vertical-align: inherit;">
                                                             <font
                                                                 style="vertical-align: inherit;font-size: 14px;color:#000;font-weight: 400;">
-                                                                {{ $invoice->name }} </font>
-                                                        </font><br>
-                                                        <font style="vertical-align: inherit;">
-                                                            <font
-                                                                style="vertical-align: inherit;font-size: 14px;color:#000;font-weight: 400;">
-                                                                Email: {{ $invoice->emai }}</font>
-                                                        </font><br>
-                                                        <font style="vertical-align: inherit;">
-                                                            <font
-                                                                style="vertical-align: inherit;font-size: 14px;color:#000;font-weight: 400;">
-                                                                Số điện thoại: {{ $invoice->phone }}</font>
-                                                        </font><br>
-                                                        <font style="vertical-align: inherit;">
-                                                            <font
-                                                                style="vertical-align: inherit;font-size: 14px;color:#000;font-weight: 400;">
-                                                                Địa chỉ: {{ $invoice->address }}</font>
+                                                                {{ $importInvoice->supplier }} </font>
                                                         </font><br>
                                                     </td>
                                                 </tr>
@@ -245,7 +345,7 @@
                                         Tổng phụ
                                     </td>
                                 </tr>
-                                @foreach ($invoice_details as $invoice_detail)
+                                @foreach ($importInvoiceDetail as $invoice_detail)
                                     <tr class="details" style="border-bottom:1px solid #E9ECEF ;">
                                         <td style="padding: 10px;vertical-align: top; display: flex;align-items: center;">
                                             <img src="{{ asset(optional($invoice_detail->product->featured_image)->image_path) }}"
@@ -253,7 +353,8 @@
                                             {{ optional($invoice_detail->product)->name }}
                                         </td>
                                         <td style="padding: 10px;vertical-align: top; ">
-                                            {{ $invoice_detail->quantity }}
+                                            <input class="form-control" type="number" name="quantity[]"
+                                                placeholder="Số lượng" required>
                                         </td>
                                         <td style="padding: 10px;vertical-align: top; ">
                                             {{ number_format($invoice_detail->price, 0, ',', '.') }}đ
@@ -266,82 +367,26 @@
                             </tbody>
                         </table>
                     </div>
-                    <form method="post" action="{{ route('invoice.update', $invoice->id) }}"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
-                        <div class="row justify-content-end">
-                            <div class="col-lg-6  ">
-                                <div class="total-order w-100 max-widthauto m-auto mb-4">
-                                    <ul>
-                                        <li>
-                                            <h4>Giá giảm</h4>
-                                            <h5>{{ number_format($discount_total, 0, ',', '.') }}đ</h5>
-                                        </li>
-                                        <li class="total">
-                                            <h4>Tổng tiền</h4>
-                                            <h5>{{ number_format($invoice->total, 0, ',', '.') }}đ</h5>
-                                        </li>
-                                        <li>
-                                            <h4>Trạng thái</h4>
-                                            <h5>
-                                                <select @if ($invoice->status == 5 || $invoice->status == 4 || $invoice->status == 3) ? disabled : '' @endif
-                                                    class="select text-left" name="status" id="status"
-                                                    class="form-control" required>
-                                                    @if ($invoice->status == 0)
-                                                        <option class="text-left" value="0">
-                                                            Chờ xác nhận
-                                                        </option>
-                                                        <option class="text-left" value="1">
-                                                            Xác nhận
-                                                        </option>
-                                                    @elseif($invoice->status == 1)
-                                                        <option class="text-left" value="1">
-                                                            Đã xác nhận
-                                                        </option>
-                                                        <option class="text-left" value="2">
-                                                            Đang vận chuyển
-                                                        </option>
-                                                    @elseif($invoice->status == 2)
-                                                        <option class="text-left" value="2">
-                                                            Đang vận chuyển
-                                                        </option>
-                                                        <option class="text-left" value="3">
-                                                            Thành công
-                                                        </option>
-                                                        <option class="text-left" value="4">
-                                                            Không thành công
-                                                        </option>
-                                                    @elseif($invoice->status == 3)
-                                                        <option class="text-left" value="3">
-                                                            Thành công
-                                                        </option>
-                                                    @elseif($invoice->status == 4)
-                                                        <option class="text-left" value="5">
-                                                            Không thành công
-                                                        </option>
-                                                    @else
-                                                        <option class="text-left" value="5">
-                                                            Đã hủy
-                                                        </option>
-                                                    @endif
-                                                </select>
-
-                                            </h5>
-                                        </li>
-                                    </ul>
-                                </div>
+                    <div class="row justify-content-end">
+                        <div class="col-lg-6  ">
+                            <div class="total-order w-100 max-widthauto m-auto mb-4">
+                                <ul>
+                                    <li class="total">
+                                        <h4>Tổng tiền</h4>
+                                        <h5>{{ number_format($importInvoice->total, 0, ',', '.') }}đ</h5>
+                                    </li>
+                                    <li>
+                                        <h4>Trạng thái</h4>
+                                        <h5>
+                                            {{ $importInvoice->status == 0 ? 'Chưa hoàn thành' : 'Hoàn thành' }}
+                                        </h5>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="col-lg-12">
-                            <button href="javascript:void(0);" type="submit" class="btn btn-submit me-2">CẬP
-                                NHẬT</button>
-                            <a href="{{ route('invoice.list') }}" class="btn btn-cancel">THOÁT</a>
-                        </div>
+                    </div>
                 </div>
-                </form>
             </div>
         </div>
-    </div>
     </div>
 @stop

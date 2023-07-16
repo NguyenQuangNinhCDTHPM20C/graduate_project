@@ -2009,7 +2009,8 @@ a:hover {
     }
 }
 .form-group input[type="text"],
-.form-group input[type="password"] {
+.form-group input[type="password"],
+.form-group input[type="datetime-local"] {
     border: 1px solid rgba(145, 158, 171, 0.32);
     height: 40px;
     width: 100%;
@@ -9521,4 +9522,28 @@ span.select2-container.select2-container--default.select2-container--open {
 
 .radio-button-container p {
     margin: 0;
+}
+td.productimgname {
+    max-width: 200px;
+}
+.productimgname a.name-p {
+    color: #212b36;
+    font-weight: 500;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+#select2-status-container {
+    text-align: left;
+}
+.select2-selection__rendered {
+    max-width: 500px;
+    overflow: hidden;
+}
+.name-add {
+    padding-right: 10px;
+    overflow: hidden;
+    width: 600px;
+    max-width: 600px;
+    text-overflow: ellipsis;
 }

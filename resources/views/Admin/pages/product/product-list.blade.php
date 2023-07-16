@@ -131,11 +131,11 @@
                                                 <img src="{{ $product->featured_image ? asset($product->featured_image->image_path) : '' }}"
                                                     alt="{{ $product->name }}">
                                             </a>
-                                            <a
+                                            <a class="name-p"
                                                 href="{{ route('product.detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
                                         </td>
                                         <td>{{ optional($product->category)->name }}</td>
-                                        <td>{{ optional($product->sub_category)->name }}.000</td>
+                                        <td>{{ optional($product->sub_category)->name }}</td>
                                         <td>{{ optional($product->brand)->name }}</td>
                                         <td>{{ $product->selling_price }}</td>
                                         <td>{{ $product->code }}</td>

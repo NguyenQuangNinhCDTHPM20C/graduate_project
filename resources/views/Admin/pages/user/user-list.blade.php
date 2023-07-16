@@ -119,7 +119,7 @@
                                         </td>
                                         <td class="productimgname">
                                             <a href="javascript:void(0);" class="product-img">
-                                                <img src="{{ asset($user->photo) }}" alt="product">
+                                                <img src="{{ asset($user->photo) }}" alt="{{ $user->name }}">
                                             </a>
                                         </td>
                                         <td>{{ $user->name }}</td>

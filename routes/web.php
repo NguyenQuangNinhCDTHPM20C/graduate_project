@@ -148,6 +148,7 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         })->name('sales.list');
         //Routes for invoice
         Route::get('/invoice/list',[InvoiceController::class, 'index'])->name('invoice.list');
+        Route::get('/invoice/{code}',[InvoiceController::class, 'show'])->name('invoice.detail');
         Route::get('/invoice/edit/{code}', [InvoiceController::class, 'edit'])->name('invoice.edit');
         Route::put('/invoice/{id}', [InvoiceController::class, 'update'])->name('invoice.update');
         Route::delete('/invoice/delete/{id}', [InvoiceController::class, 'destroy'])->name('invoice.delete');
@@ -182,11 +183,9 @@ Route::group(['domain' => env('APP_ADMIN_URL')], function () {
         Route::delete('/delete/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
         //Routes for import_invoice
         Route::get('/import-invoice/list',[ImportInvoiceController::class, 'index'])->name('import-invoice.list');
+        Route::get('/import-invoice/add', [ImportInvoiceController::class, 'create'])->name('import-invoice.create');
         Route::post('/import-invoice/add', [ImportInvoiceController::class, 'store'])->name('import-invoice.store');
-        Route::post('/import-invoice/add/detail', [ImportInvoiceController::class, 'store_detail'])->name('import-invoice.store_detail');
-        Route::get('/import-invoice/add/detail', [ImportInvoiceController::class, 'store_detail'])->name('import-invoice.add_detail');
-        Route::get('/import-invoice/add', [ImportInvoiceController::class, 'create'])->name('import-invoice.add');
-        Route::get('/import-invoice/add-detail', [ImportInvoiceController::class, 'create_detail'])->name('import-invoice.create_detail');
+        Route::get('/import-invoice/{code}', [ImportInvoiceController::class, 'show'])->name('import-invoice.show');
         Route::get('/import-invoice/edit/{code}', [ImportInvoiceController::class, 'edit'])->name('import-invoice.edit');
         Route::put('/import-invoice/{id}', [ImportInvoiceController::class, 'update'])->name('import-invoice.update');
         Route::delete('/import-invoice/{id}', [ImportInvoiceController::class, 'destroy'])->name('import-invoice.delete');
