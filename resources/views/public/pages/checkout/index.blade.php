@@ -104,7 +104,7 @@
                                     $discount_amount = session()->get('discount_amount');
                                     $price_discount = $discount_amount ? Cart::getTotal() * ($discount_amount / 100) : 0;
                                 @endphp
-                                <h6 class="font-weight-medium">-{{ number_format($price_discount, 0, ',', '.') }}đ</h6>
+                                <h6 class="font-weight-medium">{{ number_format($price_discount, 0, ',', '.') }}đ</h6>
                             </div>
                         </div>
                         <div class="pt-2">

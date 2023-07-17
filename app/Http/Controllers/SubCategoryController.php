@@ -133,4 +133,5 @@ class SubCategoryController extends Controller
         $sub_category->delete();
         return redirect()->route('subcategory.list')->with('Sub Category has been deleted successfully');
     }
+    
 }

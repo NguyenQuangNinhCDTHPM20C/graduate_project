@@ -27,9 +27,9 @@ class AdminController extends Controller
         $total_invoice = Invoice::where('status', 3)->sum('total');
         $firstDayOfMonth = Carbon::now()->startOfMonth();
         $lastDayOfMonth = Carbon::now()->endOfMonth();
-        $total_purchase_month = ImportInvoice::whereBetween('created_at', [$firstDayOfMonth, $lastDayOfMonth])
+        $total_purchase_month = ImportInvoice::whereBetween('created_at', [$firstDayOfMonth, $lastDayOfMonth])->where('status', 1)
         ->sum('total');
-        $total_sale_month = Invoice::whereBetween('created_at', [$firstDayOfMonth, $lastDayOfMonth])
+        $total_sale_month = Invoice::whereBetween('created_at', [$firstDayOfMonth, $lastDayOfMonth])->where('status', 3)
         ->sum('total');
 
         $currentTime = Carbon::now();

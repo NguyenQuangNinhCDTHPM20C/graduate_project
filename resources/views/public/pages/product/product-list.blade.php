@@ -29,8 +29,6 @@
                         </ul>
                     </div>
                 </div>
-
-
                 <div class="facet">
                     <label>
                         <a href="javascript:;">Dòng CPU <i class="fa fa-angle-down mt-1"></i></a>
