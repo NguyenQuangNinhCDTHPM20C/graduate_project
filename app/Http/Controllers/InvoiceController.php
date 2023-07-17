@@ -61,7 +61,7 @@ class InvoiceController extends Controller
         {
             $total += $invoice_detail->quantity * $invoice_detail->price;
         }
-        $discount_total = $invoice->total - $total;
+        $discount_total =  abs($invoice->total - $total);
         return view('admin.pages.invoice.invoice-detail', compact('invoice', 'invoice_details', 'discount_total'));
     }
 
@@ -80,7 +80,7 @@ class InvoiceController extends Controller
         {
             $total += $invoice_detail->quantity * $invoice_detail->price;
         }
-        $discount_total = $invoice->total - $total;
+        $discount_total = abs($invoice->total - $total);
         return view('admin.pages.invoice.invoice-edit', compact('invoice', 'invoice_details', 'discount_total'));
     }
 
@@ -94,9 +94,14 @@ class InvoiceController extends Controller
     public function update(Request $request, $id)
     {
         $invoice = Invoice::findOrFail($id);
-        $invoice->status = $request->input('status');
-        $invoice->save();
-        return redirect()->route('invoice.list')->with('success', 'Invoice has been updated successfully');
+        if($invoice){
+            $invoice->status = $request->input('status');
+            $invoice->save();
+            session()->put('success', 'Cập nhật trạng thái đơn hàng thành công!');
+        }else{
+            session()->put('error', 'Cập nhật trạng thái đơn hàng thất bại!');
+        }
+        return redirect()->route('invoice.list');
     }
 
     /**
@@ -126,7 +131,7 @@ class InvoiceController extends Controller
         {
             $total += $invoice_detail->quantity * $invoice_detail->price;
         }
-        $discount_total = $invoice->total - $total;
+        $discount_total = abs($invoice->total - $total);
         $data = [
             'invoice' => $invoice,
             'invoice_details'=> $invoice_details,

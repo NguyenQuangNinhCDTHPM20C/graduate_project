@@ -27,7 +27,7 @@
                                         value="{{ $category->name }}" required>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
+                            {{-- <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label> Trạng thái</label>
                                     <select class="select" name="status" id="status" class="form-control" required>
@@ -37,7 +37,7 @@
                                         </option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Loại danh mục</label>

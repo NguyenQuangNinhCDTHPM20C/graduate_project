@@ -19,7 +19,7 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        $sub_category = SubCategory::get();
+        $sub_category = SubCategory::where('status',1)->get();
         return view('admin.pages.subcategory.subcategory-list', compact('sub_category'));
     }
 
@@ -30,7 +30,7 @@ class SubCategoryController extends Controller
      */
     public function create()
     {
-        $category = Category::all();
+        $category = Category::where('status', 1)->get();
         return view('Admin.pages.subcategory.add-subcategory', compact('category'));
     }
 
@@ -56,7 +56,7 @@ class SubCategoryController extends Controller
             $sub_category->image = 'assets/subcategory/'.$fileName;
         }
         $sub_category->slug = Str::slug($request->input('name'), '-');
-        $sub_category->status = $request->input('status');
+        $sub_category->status = 1;
         
         $sub_category->save();
         return redirect()->route('subcategory.list')->with('success', 'Sub Category has been added successfully');
@@ -113,7 +113,7 @@ class SubCategoryController extends Controller
             $sub_category->image = 'assets/subcategory/'.$file_name;
         }
         $sub_category->slug = Str::slug($request->input('name'), '-');
-        $sub_category->status = $request->input('status');
+        $sub_category->status = 1;
         
         $sub_category->save();
         return redirect()->route('subcategory.list')->with('success', 'Sub Category has been updated successfully');
@@ -127,10 +127,11 @@ class SubCategoryController extends Controller
      */
     public function destroy($id)
     {
-        Product::where('sub_category_id', $id)->update(['sub_category_id' => null]);
-        Blog::where('sub_category_id', $id)->update(['sub_category_id' => null]);
+        // Product::where('sub_category_id', $id)->update(['sub_category_id' => null]);
+        // Blog::where('sub_category_id', $id)->update(['sub_category_id' => null]);
         $sub_category = SubCategory::findOrFail($id);
-        $sub_category->delete();
+        $sub_category->status = 0;
+        $sub_category->save();
         return redirect()->route('subcategory.list')->with('Sub Category has been deleted successfully');
     }
     

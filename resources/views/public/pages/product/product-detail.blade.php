@@ -373,19 +373,19 @@
                                                     <fieldset class="rating">
                                                         <input type="radio" id="star5" name="rating"
                                                             value="5" /><label class="full" for="star5"
-                                                            title="Xuất sắc"></label>
+                                                            title="Xuất sắc" required></label>
                                                         <input type="radio" id="star4" name="rating"
-                                                            value="4" /><label class="full" for="star4"
-                                                            title="Tốt"></label>
+                                                            value="4" required /><label class="full"
+                                                            for="star4" title="Tốt"></label>
                                                         <input type="radio" id="star3" name="rating"
-                                                            value="3" /><label class="full" for="star3"
-                                                            title="Trung bình"></label>
+                                                            value="3" required /><label class="full"
+                                                            for="star3" title="Trung bình"></label>
                                                         <input type="radio" id="star2" name="rating"
-                                                            value="2" /><label class="full" for="star2"
-                                                            title="Kém"></label>
+                                                            value="2" required /><label class="full"
+                                                            for="star2" title="Kém"></label>
                                                         <input type="radio" id="star1" name="rating"
-                                                            value="1" /><label class="full" for="star1"
-                                                            title="Rất tệ"></label>
+                                                            value="1" required /><label class="full"
+                                                            for="star1" title="Rất tệ"></label>
                                                     </fieldset>
                                                 </div>
 
@@ -394,7 +394,7 @@
                                                 value="{{ $product->id }}">
                                             <div class="form-group">
                                                 <label for="message">Đánh giá *</label>
-                                                <textarea id="comment" name="comment" cols="30" rows="5" class="form-control"></textarea>
+                                                <textarea id="comment" name="comment" cols="30" rows="5" class="form-control" required></textarea>
                                             </div>
                                             <div class="form-group mb-0">
                                                 <input type="submit" value="Gửi" class="btn btn-custom px-3">

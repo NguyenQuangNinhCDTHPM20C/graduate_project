@@ -20,14 +20,16 @@ class AdminController extends Controller
         $count_user = Account::where('role', 2)->count();
         $count_customer = Invoice::where('account_id', null)->count();
         $total_customer = $count_user + $count_customer;
-        $count_sale_invoice = Invoice::count();
-        $count_sale_invoice = ImportInvoice::count();
+        $order_complete = Invoice::where('status', 3)->count();
+        $order_pending = Invoice::where('status', 0)->count();
+        $order_error = Invoice::where('status', 5)->where('status', 4)->count();
+        $order_tax = Invoice::where('status', 2)->count();
         $product_out_stock = Product::where('quantity', '<' , 10)->get();
         $total_import_invoice = ImportInvoice::where('status', 1)->sum('total');
         $total_invoice = Invoice::where('status', 3)->sum('total');
         $firstDayOfMonth = Carbon::now()->startOfMonth();
         $lastDayOfMonth = Carbon::now()->endOfMonth();
-        $total_purchase_month = ImportInvoice::whereBetween('created_at', [$firstDayOfMonth, $lastDayOfMonth])->where('status', 1)
+        $total_purchase_month = ImportInvoice::whereBetween('created_at', [$firstDayOfMonth, $lastDayOfMonth])->where('status', 3)
         ->sum('total');
         $total_sale_month = Invoice::whereBetween('created_at', [$firstDayOfMonth, $lastDayOfMonth])->where('status', 3)
         ->sum('total');
@@ -36,10 +38,31 @@ class AdminController extends Controller
         $previousTime = $currentTime->copy()->subDay();
         $new_invoices = InvoiceDetail::whereBetween('created_at', [$previousTime, $currentTime])->get();
         
+        $products = Product::get();
+        $inventory_number = 0;
+        foreach($products as $product){
+            $inventory_number += $product->quantity;
+        }
+
+        $today = Carbon::now()->toDateString();
+        $total_purchase_today = Invoice::whereDate('created_at', $today)
+            ->where('status', 3)
+            ->sum('total');
+
+        $currentYear = date('Y');
+        $firstDayOfYear = Carbon::createFromDate($currentYear, 1, 1)->startOfDay();
+        $lastDayOfYear = Carbon::createFromDate($currentYear, 12, 31)->endOfDay();
+        
+        $totalIncomeYear = Invoice::whereBetween('created_at', [$firstDayOfYear, $lastDayOfYear])
+            ->where('status', 3)
+            ->sum('total');
+            
+
         return view('admin.pages.dashboard.index', 
-        compact('count_user', 'total_customer', 'count_sale_invoice',
-        'product_out_stock','total_import_invoice', 'count_sale_invoice',
-        'total_invoice', 'total_purchase_month', 'total_sale_month', 'new_invoices'));
+        compact('count_user', 'total_customer',
+        'product_out_stock','total_import_invoice',
+        'total_invoice', 'total_purchase_month', 'total_sale_month', 'new_invoices', 
+        'total_purchase_today', 'inventory_number', 'totalIncomeYear', 'order_tax', 'order_error', 'order_complete', 'order_pending'));
     }
 
     public function users(){

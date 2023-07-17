@@ -7,26 +7,14 @@
         <div class="content">
             <div class="row">
                 <div class="col-lg-3 col-sm-6 col-12">
-                    <div class="dash-widget dash1">
-                        <div class="dash-widgetimg">
-                            <span><img src="{{ asset('images/dash2.svg') }}" alt="img"></span>
-                        </div>
-                        <div class="dash-widgetcontent">
-                            <h5><span class="counters">{{ number_format($total_sale_month, 0, ',', '.') }}đ</span>
-                            </h5>
-                            <h6>Tiền bán tháng này</h6>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-12">
                     <div class="dash-widget">
                         <div class="dash-widgetimg">
                             <span><img src="{{ asset('images/dash1.svg') }}" alt="img"></span>
                         </div>
                         <div class="dash-widgetcontent">
-                            <h5><span class="counters">{{ number_format($total_purchase_month, 0, ',', '.') }}đ</span>
+                            <h5><span class="counters">{{ $inventory_number }} </span>
                             </h5>
-                            <h6>Tiền mua tháng này</h6>
+                            <h6>Sản phẩm tồn kho</h6>
                         </div>
                     </div>
                 </div>
@@ -36,9 +24,21 @@
                             <span><img src="{{ asset('images/dash3.svg') }}" alt="img"></span>
                         </div>
                         <div class="dash-widgetcontent">
-                            <h5><span class="counters">{{ number_format($total_invoice, 0, ',', '.') }}đ</span>
+                            <h5><span class="counters">{{ number_format($total_purchase_today, 0, ',', '.') }}đ</span>
                             </h5>
-                            <h6>Tổng tiền đã thu</h6>
+                            <h6>Thu nhập hôm nay</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-12">
+                    <div class="dash-widget dash1">
+                        <div class="dash-widgetimg">
+                            <span><img src="{{ asset('images/dash2.svg') }}" alt="img"></span>
+                        </div>
+                        <div class="dash-widgetcontent">
+                            <h5><span class="counters">{{ number_format($total_sale_month, 0, ',', '.') }}đ</span>
+                            </h5>
+                            <h6>Thu nhập tháng này</h6>
                         </div>
                     </div>
                 </div>
@@ -48,17 +48,17 @@
                             <span><img src="{{ asset('images/dash4.svg') }}" alt="img"></span>
                         </div>
                         <div class="dash-widgetcontent">
-                            <h5><span class="counters">{{ number_format($total_import_invoice, 0, ',', '.') }}đ</span>
+                            <h5><span class="counters">{{ number_format($totalIncomeYear, 0, ',', '.') }}đ</span>
                             </h5>
-                            <h6>Tổng tiền đã chi</h6>
+                            <h6>Thu nhập năm nay</h6>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 col-12 d-flex">
                     <div class="dash-count">
                         <div class="dash-counts">
-                            <h4>{{ $total_customer }}</h4>
-                            <h5>Khách hàng</h5>
+                            <h4>{{ $order_pending }}</h4>
+                            <h5>Đơn hàng chờ xác nhận</h5>
                         </div>
                         <div class="dash-imgs">
                             <i data-feather="user"></i>
@@ -66,21 +66,10 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 col-12 d-flex">
-                    <div class="dash-count das1">
-                        <div class="dash-counts">
-                            <h4>{{ $count_user }}</h4>
-                            <h5>Người dùng</h5>
-                        </div>
-                        <div class="dash-imgs">
-                            <i data-feather="user-check"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-12 d-flex">
                     <div class="dash-count das2">
                         <div class="dash-counts">
-                            <h4>{{ $count_sale_invoice }}</h4>
-                            <h5>Hóa đơn mua hàng</h5>
+                            <h4>{{ $order_tax }}</h4>
+                            <h5>Đơn hàng đang vận chuyển</h5>
                         </div>
                         <div class="dash-imgs">
                             <i data-feather="file-text"></i>
@@ -90,11 +79,22 @@
                 <div class="col-lg-3 col-sm-6 col-12 d-flex">
                     <div class="dash-count das3">
                         <div class="dash-counts">
-                            <h4>{{ $count_sale_invoice }}</h4>
-                            <h5>Hóa đơn bán hàng</h5>
+                            <h4>{{ $order_complete }}</h4>
+                            <h5>Đơn hàng thành công</h5>
                         </div>
                         <div class="dash-imgs">
                             <i data-feather="file"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-12 d-flex">
+                    <div class="dash-count das1">
+                        <div class="dash-counts">
+                            <h4>{{ $order_error }}</h4>
+                            <h5>Đơn hàng không thành công</h5>
+                        </div>
+                        <div class="dash-imgs">
+                            <i data-feather="user-check"></i>
                         </div>
                     </div>
                 </div>

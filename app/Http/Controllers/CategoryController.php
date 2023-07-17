@@ -17,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::get();
+        $category = Category::where('status', 1)->get();
         return view('admin.pages.category.category-list', compact('category'));
     }
 
@@ -44,7 +44,7 @@ class CategoryController extends Controller
         $category->name = $request->input('name');
         $category->slug = Str::slug($request->input('name'), '-');
         $category->type = $request->input('type');
-        $category->status = $request->input('status');
+        $category->status = 1;
        
         $category->save();
         return redirect()->route('category.list')->with('success', 'Category has been added successfully');
@@ -92,7 +92,7 @@ class CategoryController extends Controller
         }
         $category->type = $request->input('type');
         $category->slug = Str::slug($request->input('name'), '-');
-        $category->status = $request->input('status');
+        $category->status = 1;
        
         $category->save();
         return redirect()->route('category.list')->with('success', 'Category updateed successfully');
@@ -106,11 +106,12 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {    
-        Product::where('category_id', $id)->update(['category_id' => null]);
-        Subcategory::where('category_id', $id)->update(['category_id' => null]);
-        Blog::where('category_id', $id)->update(['category_id' => null]);
+        // Product::where('category_id', $id)->update(['category_id' => null]);
+        // Subcategory::where('category_id', $id)->update(['category_id' => null]);
+        // Blog::where('category_id', $id)->update(['category_id' => null]);
         $category = Category::findOrFail($id);
-        $category->delete();
+        $category->status = 0;
+        $category->save();
         return redirect()->route('category.list')->with('Category has been deleted successfully');
     }
 }

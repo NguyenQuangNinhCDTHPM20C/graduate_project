@@ -41,10 +41,10 @@ class ProductController extends Controller
     public function create()
     {
         $brands = Brand::all();
-        $category = Category::where('type', '!=', 'blog')->get();
+        $category = Category::where('type', '!=', 'blog')->where('status', 1)->get();
         $sub_category = SubCategory::whereHas('category', function ($query) {
             $query->where('type', '!=','blog');
-        })->get();
+        })->where('status', 1)->get();
         return view('Admin.pages.product.add-product', compact('brands', 'category', 'sub_category'));
     }
 

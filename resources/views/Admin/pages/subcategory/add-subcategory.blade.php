@@ -36,7 +36,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
+                            {{-- <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label> Trạng thái</label>
                                     <select class="select" name="status" id="status" class="form-control" required>
@@ -44,7 +44,7 @@
                                         <option value="0">Inactive</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Hình ảnh phụ mục:</label>
@@ -54,8 +54,7 @@
                             </div>
                             <div class="col-lg-12">
                                 <button href="javascript:void(0);" type="submit" class="btn btn-submit me-2">THÊM</button>
-                                <a href="{{ route('subcategory.list') }}"
-                                    class="btn btn-cancel">THOÁT</a>
+                                <a href="{{ route('subcategory.list') }}" class="btn btn-cancel">THOÁT</a>
                             </div>
                         </div>
                     </div>

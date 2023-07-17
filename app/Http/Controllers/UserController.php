@@ -44,9 +44,9 @@ class UserController extends Controller
     // Get list product
     public function products(Request $request)
     {
-        $categories = Category::where('type', '!=', 'blog')->get();
+        $categories = Category::where('type', '!=', 'blog')->where('status', 1)->get();
         $blog_category = Category::where('type', 'blog')->first();
-        $sub_categories = SubCategory::where('category_id','!=', $blog_category->id)->distinct('name')->pluck('name');
+        $sub_categories = SubCategory::where('category_id','!=', $blog_category->id)->where('status', 1)->distinct('name')->pluck('name');
         $laptop_properties = Laptop::get();
         $cpu_brands = Laptop::distinct('cpu_brand')->pluck('cpu_brand');
         $cpu_series = Laptop::distinct('cpu_series')->pluck('cpu_series');

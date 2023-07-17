@@ -40,7 +40,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
+                            {{-- <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label> Trạng thái</label>
                                     <select class="select" name="status" id="status" class="form-control" required>
@@ -50,19 +50,18 @@
                                         </option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Hình ảnh phụ mục:</label>
                                     <img src="{{ asset($sub_category->image) }}" alt="{{ $sub_category->name }}">
-                                    <input type="file" name="image" id="image" class="form-control" 
+                                    <input type="file" name="image" id="image" class="form-control"
                                         accept="image/jpeg, image/png, image/gif, image/svg+xml">
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <button href="javascript:void(0);" class="btn btn-submit me-2">CẬP NHẬT </button>
-                                <a href="{{ route('subcategory.list') }}"
-                                    class="btn btn-cancel">THOÁT</a>
+                                <a href="{{ route('subcategory.list') }}" class="btn btn-cancel">THOÁT</a>
                             </div>
                         </div>
                     </div>

@@ -6,13 +6,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Models\Product;
+use App\Models\DiscountCode;
 
 class CartController extends Controller
 {
         public function index()
         {
             $cartItems = \Cart::getContent();
-            return view('public.pages.cart.index', compact('cartItems'));
+            $discount_codes = DiscountCode::get();
+            return view('public.pages.cart.index', compact('cartItems', 'discount_codes'));
         }
 
         public function add(Request $request)

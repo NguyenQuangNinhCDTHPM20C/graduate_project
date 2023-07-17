@@ -122,31 +122,34 @@ class ImportInvoiceController extends Controller
     public function update(Request $request, $id)
     {
         $importInvoice = ImportInvoice::findOrFail($id);
-
-        // Kiểm tra và cập nhật trạng thái hóa đơn
-        if ($request->has('status')) {
-            $status = $request->input('status');
-            $importInvoice->status = $status;
-            $importInvoice->updated_at = $status;
-            $importInvoice->save();
-        }
+        $totalAmount = 0;
 
         // Kiểm tra và cập nhật số lượng sản phẩm
         if ($request->has('quantity')) {
             $quantityData = $request->input('quantity');
-
-            foreach ($quantityData as $productId => $quantity) {
+            $productIds = $request->input('product_id');
+        
+            foreach ($quantityData as $index => $quantity) {
+                $productId = $productIds[$index];
+        
                 $importDetail = ImportInvoiceDetail::where('import_invoice_id', $importInvoice->id)
                     ->where('product_id', $productId)
                     ->first();
-
+        
                 if ($importDetail) {
-                    $importDetail->quantity = $quantity;
+                    $importDetail->quantity += $quantity;
                     $importDetail->save();
+                    $product = Product::where('id', $productId)->first();
+                    $product->quantity += $quantity;
+                    $product->save();
+                    $totalAmount += $importDetail->quantity * $importDetail->price;
                 }
             }
         }
-
+        
+        $importInvoice->total = $totalAmount;
+        $importInvoice->save();
+        
         return redirect()->route('import-invoice.list')->with('success', 'Cập nhật hóa đơn thành công.');
     }
     public function export()

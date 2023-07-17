@@ -2,6 +2,44 @@
 
 @section('title', 'Double-N shop')
 
+@section('styles')
+    <style>
+        .marquee {
+            /* position: relative; */
+            width: 100%;
+            padding-top: 1px;
+            overflow: hidden;
+            white-space: nowrap;
+            /* background-color: #000000; */
+            animation: slide 30s linear infinite;
+        }
+
+        .discount-code {
+            display: inline-block;
+            padding: 10px;
+            margin: 0 100px;
+            color: darkcyan;
+        }
+
+
+        .row {
+            position: relative;
+            z-index: 1;
+        }
+
+
+        @keyframes slide {
+            0% {
+                transform: translateX(100%);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+@endsection
+
 @section('content')
     <!-- Cart Start -->
     <div class="container-fluid">
@@ -12,6 +50,13 @@
                     <span class="breadcrumb-item active">Giỏ hàng</span>
                 </nav>
             </div>
+        </div>
+        <div class="marquee">
+            @foreach ($discount_codes as $item)
+                <div class="discount-code">
+                    Nhập mã {{ $item->code }} để được giảm giá {{ $item->discount_amount }} %
+                </div>
+            @endforeach
         </div>
         @if (Cart::getTotalQuantity() != 0)
             <div class="row px-xl-5">
