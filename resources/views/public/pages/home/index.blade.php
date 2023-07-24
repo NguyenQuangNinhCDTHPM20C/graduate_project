@@ -71,7 +71,7 @@
             <div class="row px-xl-5 box-category">
                 <div class="col">
                     <div class="owl-carousel vendor-carousel bg-light bg-radius">
-                        @foreach ($products as $product)
+                        @foreach ($discount_product as $product)
                             <div class="bg-light mb-4 item-p bg-radius">
                                 <div class="bg-light mb-4 bg-radius">
                                     <div class="product-img position-relative overflow-hidden img-p align-items-center">
@@ -84,9 +84,9 @@
                                         <a class="h6 text-decoration-none text-truncate name-product"
                                             href="{{ route('product-detail', ['slug' => $product->slug]) }}">{{ $product->name }}</a>
                                         <div class="d-flex align-items-center justify-content-center mt-2">
-                                            <h5 style="color: #fd475a; font-size:0.7rem;">
+                                            <h5 style="color: #fd475a; font-size:1rem;">
                                                 {{ number_format($product->discount_price, 0, ',', '.') }}đ</h5>
-                                            <h6 class="text-muted ml-2"style="font-size:0.7em;">
+                                            <h6 class="text-muted ml-2"style="font-size:1em;">
                                                 <del>{{ number_format($product->selling_price, 0, ',', '.') }}đ</del>
                                             </h6>
                                         </div>

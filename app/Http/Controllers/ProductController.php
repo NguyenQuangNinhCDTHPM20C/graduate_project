@@ -41,7 +41,7 @@ class ProductController extends Controller
     public function create()
     {
         $brands = Brand::all();
-        $category = Category::where('type', '!=', 'blog')->where('status', 1)->get();
+        $category = Category::where('type', '!=', 'blog')->get();
         $sub_category = SubCategory::whereHas('category', function ($query) {
             $query->where('type', '!=','blog');
         })->where('status', 1)->get();
@@ -186,11 +186,11 @@ class ProductController extends Controller
     public function edit($slug)
     {
         $product = Product::where('slug', $slug)->first();
-        $category = Category::where('type', '!=', 'blog');
+        $category = Category::where('type', '!=', 'blog')->where('status', 1)->get();
         $sub_category = SubCategory::whereHas('category', function ($query) {
-            $query->where('type', 'blog');
+            $query->where('type', '!=', 'blog')->where('status', 1);
         })->get();
-        $brands = Brand::all();
+        $brands = Brand::get();
         $discount_percentage = (($product->selling_price - $product->discount_price) / $product->selling_price) * 100;
         $images = Image::where('entity_id', $product->id)->get();
         $is_laptop = Laptop::where('product_id', $product->id)->first();

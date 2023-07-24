@@ -100,8 +100,11 @@
                                     <div class="form-controls">
                                         <label>Mật khẩu mới: </label>
                                         <div class="controls">
-                                            <input type="password" name="password" id="PasswordHash"
-                                                autocomplete="new-password" place-horder="Mật khẩu mới">
+                                            <input type="password" name="password" placeholder="Nhập mật khẩu"
+                                                autocomplete="new-password"
+                                                pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&amp;])[A-Za-z\d@$!%*?&amp;]{8,}$"
+                                                title="Mật khẩu phải có ít nhất 8 ký tự, gồm chữ hoa, chữ thường, số và ký tự đặc biệt (@,$,!,%,*,?,&amp;)"
+                                                required="">
                                         </div>
                                     </div>
                                     <div class="form-controls">

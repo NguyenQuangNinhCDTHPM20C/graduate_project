@@ -31,13 +31,15 @@ class UserController extends Controller
         $products = Product::where('status', 1)->with('reviews')->paginate(10);
         $new_products = Product::where('created_at', '>=', Carbon::now()->subDays(7))->with('reviews')->get();
         $brands = Brand::all();
+        $discount_product = Product::where('selling_price', '!=', 0)->with('reviews')->paginate(10);
         $category_accessory = Category::where('type', 'accessory')->first();
         $accsessories = SubCategory::where('category_id', $category_accessory->id)->get();
          return view('public.pages.home.index', [
             'products' => $products,
             'accsessories' => $accsessories,
             'brands' => $brands,
-            'new_products' => $new_products
+            'new_products' => $new_products,
+            'discount_product' => $discount_product
         ]);
     }
     

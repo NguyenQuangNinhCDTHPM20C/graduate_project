@@ -19,7 +19,7 @@ class ImportInvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = ImportInvoice::get();
+        $invoices = ImportInvoice::orderBy('created_at', 'desc')->get();
         return view('admin.pages.import_invoice.index',compact('invoices'));
     }
 

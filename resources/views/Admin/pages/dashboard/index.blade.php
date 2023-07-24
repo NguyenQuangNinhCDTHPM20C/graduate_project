@@ -99,43 +99,6 @@
                     </div>
                 </div>
             </div>
-            <div class="card mb-0">
-                <div class="card-body">
-                    <h4 class="card-title">Sản phẩm mới bán được</h4>
-                    <div class="table-responsive dataview">
-                        <table class="table datatable ">
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Sản phẩm</th>
-                                    <th>Thương hiệu</th>
-                                    <th>Danh mục</th>
-                                    <th>Số lượng</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($new_invoices as $key => $item)
-                                    <tr>
-                                        <td><a href="javascript:void(0);">{{ optional($item->product)->code }}</a></td>
-                                        <td class="productimgname" style="max-width: 600px;">
-                                            <a class="product-img"
-                                                href="{{ route('product.detail', ['slug' => optional($item->product)->slug]) }}">
-                                                <img src="{{ $item->product->featured_image ? asset($item->product->featured_image->image_path) : '' }}"
-                                                    alt="{{ optional($item->product)->name }}">
-                                            </a>
-                                            <a class="name-p"
-                                                href="{{ route('product.detail', ['slug' => optional($item->product)->slug]) }}">{{ optional($item->product)->name }}</a>
-                                        </td>
-                                        <td>{{ optional($item->product->brand)->name }}</td>
-                                        <td>{{ optional($item->product->category)->name }}</td>
-                                        <td>{{ $item->quantity }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
             <div class="card mb-0 mt-5">
                 <div class="card-body">
                     <h4 class="card-title">Sản phẩm sắp hết hàng</h4>

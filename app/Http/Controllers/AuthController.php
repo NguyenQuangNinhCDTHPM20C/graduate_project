@@ -30,7 +30,7 @@ class AuthController extends Controller
         $account = Account::where('email', $request->email)->first();
         
         if ($account && Hash::check($request->password, $account->password)) {
-            if($account->role == 1 && $account->email_verified_at != null)
+            if($account->role == 1 && $account->email_verified_at != null && $account->status == 1)
              {
                 session(['account' => $account]);
                 session(['auth_check_admin'=>true]);
@@ -157,7 +157,7 @@ class AuthController extends Controller
         $account = Account::where('email', $request->email)->first();
         
         if ($account && Hash::check($request->password, $account->password)) {
-            if($account->role == 2 && $account->email_verified_at != null)
+            if($account->role == 2 && $account->email_verified_at != null && $account->status == 1)
              {
                 session(['account' => $account]);
                 session(['auth_check'=>true]);

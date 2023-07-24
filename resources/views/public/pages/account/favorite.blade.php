@@ -42,24 +42,30 @@
                                             </tr>
                                             @foreach ($favorites as $_favorite)
                                                 <tr>
-                                                    <td>{{ $loop->index }}</td>
-                                                    <td><img style="width: 50px;"
+                                                    <td class="text-center">{{ $loop->index }}</td>
+                                                    <td class="text-center"><img style="width: 50px;"
                                                             src="{{ asset($_favorite->product->featured_image->image_path) }}"
                                                             alt="{{ $_favorite->product->name }}">{{ $_favorite->product->name }}
                                                     </td>
-                                                    <td>{{ $_favorite->product->selling_price }}</td>
-                                                    <td>{{ $_favorite->product->discount_price }}</td>
-                                                    <form
-                                                        action="{{ route('account.favorite.delete', ['id' => $_favorite->id]) }}"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <td>
+                                                    <td class="text-center">
+                                                        {{ number_format($_favorite->product->selling_price, 0, ',', '.') }}đ
+                                                    </td>
+                                                    <td class="text-center">
+                                                        {{ number_format($_favorite->product->discount_price, 0, ',', '.') }}đ
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <form
+                                                            action="{{ route('account.favorite.delete', ['id' => $_favorite->id]) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <a href="{{ route('product-detail', ['slug' => optional($_favorite->product)->slug]) }}"
+                                                                class="btn btn-info bg-radius"><i
+                                                                    class="fal fa fa-eye"></i></a>
                                                             <button type="submit" class="btn btn-danger bg-radius"><i
                                                                     class="fa-regular fa-trash-can"></i></button>
-                                                        </td>
-                                                    </form>
-
+                                                        </form>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>

@@ -32,8 +32,8 @@
                             </div>
                         </div>
                         <div class="wordset">
-                            <a href="{{route('import-invoice.export')}}" data-bs-toggle="tooltip" data-bs-placement="top" title="excel"><img
-                                    src="{{ asset('images/excel.svg') }}" alt="img"></a>
+                            <a href="{{ route('import-invoice.export') }}" data-bs-toggle="tooltip" data-bs-placement="top"
+                                title="excel"><img src="{{ asset('images/excel.svg') }}" alt="img"></a>
                         </div>
                     </div>
 
@@ -104,7 +104,8 @@
                                                 href="{{ route('import-invoice.edit', ['code' => $_invoices->code]) }}">
                                                 <img src="{{ asset('images/edit.svg') }}" alt="img">
                                             </a>
-                                            <a href="{{route('import-invoice.pdf',['id' => $_invoices->id])}}" data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
+                                            <a href="{{ route('import-invoice.pdf', ['id' => $_invoices->id]) }}"
+                                                data-bs-toggle="tooltip" data-bs-placement="top" title="pdf"><img
                                                     src="{{ asset('images/pdf.svg') }}" alt="img"></a>
                                         </td>
                                     </tr>
@@ -114,7 +115,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 @stop

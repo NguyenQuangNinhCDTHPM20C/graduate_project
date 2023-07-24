@@ -348,7 +348,7 @@
                                                 <input type="hidden" name="product_id[]"
                                                     value="{{ $invoice_detail->product_id }}">
                                                 <input class="form-control" type="number" name="quantity[]"
-                                                    placeholder="Số lượng" required>
+                                                    placeholder="Số lượng" value="0" required>
                                             </td>
                                             <td style="padding: 10px;vertical-align: top; ">
                                                 {{ number_format($invoice_detail->price, 0, ',', '.') }}đ

@@ -21,7 +21,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::all();
+        $invoices = Invoice::orderBy('created_at', 'desc')->get();
         return view('admin.pages.invoice.invoice-list',compact('invoices'));
     }
 

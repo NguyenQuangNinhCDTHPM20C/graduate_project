@@ -46,8 +46,10 @@ class ReviewController extends Controller
 
         if (Session::has('account')) {
             $account_id = Session('account')->id;
-            $invoice = Invoice::where('account_id', $account_id)->where('status', 3)->first();
-
+            $invoice = Invoice::where('account_id', $account_id)
+            ->where('status', 3)
+            ->latest()
+            ->first(); 
             if ($invoice) {
                 $invoice_detail = InvoiceDetail::where('invoice_id', $invoice->id)->where('product_id', $product_id)->first();
                 if($invoice_detail){
